@@ -1,0 +1,118 @@
+<div class="centraletitolario">
+    <br />
+<div class="container">
+    <div class="formboxpanel">
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+           <div class="my-4">
+            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab" aria-controls="home" aria-selected="false">MODIFICA voce titolario</a>
+                </li>
+            </ul>
+            <form [formGroup]="form" >
+                <div class="row mt-5 align-items-center">
+                                       <div class="col">
+                        <div class="row align-items-center">
+                            <div class="col-md-7">
+                               </div>
+                        </div>
+                      
+                    </div>
+                </div>
+              
+                <hr class="my-4" />
+             
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="nome">Descrizione:</label>
+                        <input  [(ngModel)]="descrizione" formControlName="descrizione"  type="text" id="descrizione"  class="form-control"  required />
+                        <div *ngIf="form.controls['descrizione'].invalid && (form.controls['descrizione'].dirty || form.controls['descrizione'].touched)" class="alert alert-danger">
+                           La descrizione è obbligatoria
+                            <div *ngIf="form.controls['descrizione'].errors.required">
+                           
+                          </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="nome">Conservazione:</label>
+                <input  [(ngModel)]="conservazione" formControlName="conservazione"  type="text" id="conservazione"  class="form-control"  required />
+                <div *ngIf="form.controls['conservazione'].invalid && (form.controls['conservazione'].dirty || form.controls['conservazione'].touched)" class="alert alert-danger">
+                   La conservazione è obbligatoria
+                    <div *ngIf="form.controls['conservazione'].errors.required">
+                   
+                  </div>
+                </div>
+                </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="nome">Conservazione in Anni:</label>
+                <div class="form-group">
+                    <input  [(ngModel)]="anni" formControlName="anni"  type="number" min="0" id="anni"  class="form-control"  />
+
+                </div>
+                </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="nome">Cod1:</label>
+                <input  [(ngModel)]="cod1" formControlName="cod1"   type="number" min="0" id="cod1"  class="form-control"  required />
+                <div *ngIf="form.controls['cod1'].invalid && (form.controls['cod1'].dirty || form.controls['cod1'].touched)" class="alert alert-danger">
+                  Il cod1 è obbligatorio
+                    <div *ngIf="form.controls['cod1'].errors.required">
+                   
+                  </div>
+                </div>
+                </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="nome">Cod2:</label>
+                <input  [(ngModel)]="cod2" formControlName="cod2"   type="number" min="0" id="cod2"  class="form-control"  required />
+                <div *ngIf="form.controls['cod2'].invalid && (form.controls['cod2'].dirty || form.controls['cod2'].touched)" class="alert alert-danger">
+                  Il cod2 e è obbligatorio
+                    <div *ngIf="form.controls['cod2'].errors.required">
+                   
+                  </div>
+                </div>
+                </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="nome">Cod3:</label>
+                <input  [(ngModel)]="cod3" formControlName="cod3"  type="number" min="0"  id="cod3"  class="form-control"  required />
+                <div *ngIf="form.controls['cod32'].invalid && (form.controls['cod3'].dirty || form.controls['cod3'].touched)" class="alert alert-danger">
+                  Il cod3 è obbligatorio
+                    <div *ngIf="form.controls['cod3'].errors.required">
+                   
+                  </div>
+                </div>
+                </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                      <label for="nome">Note:</label>
+              <input  [(ngModel)]="note" formControlName="note"  type="number" min="0"  id="note"  class="form-control"  />
+          
+              </div>
+              </div>
+
+                <button type="Submit" class="btn btn-success" (click)="Trasmetti();">Trasmetti valori</button>
+           
+        </form>
+        <br /><br /><br /><br /><br /><br /><br /><br />
+           </div>
+        </div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+         </div>
+

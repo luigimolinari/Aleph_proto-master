@@ -1,0 +1,141 @@
+
+    <link rel="stylesheet" href="./proto-admin.component.html">
+    <div class="footer_splash"></div>
+    <video autoplay muted loop id="myVideo" style="width:100%">
+        <source src="assets/video/video_proto.mp4" type="video/mp4">
+        </video>
+
+            
+<div class="container bootstrap snippets bootdey" style="z-index:-1;">
+    <div class="row justify-content-center" style="   
+    margin-top:-50%;
+    bottom: 0;
+    left:0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    width: 100%;
+    padding: 40px;
+    overflow: auto;">
+
+		
+
+		<div class="panelContainer col-md-2 col-sm-6 col-xs-12">
+            <div class="panel panel-dark panel-colorful">
+                <div class="panel-body text-center">
+                	<p class="text-uppercase mar-btm text-sm">Gestione Operatori</p>
+                	<i class="fa fa-users fa-5x"><fa-icon [icon]="faUser"></fa-icon></i>
+                	<hr>
+                	<p class="h2 text-thin"></p>
+                	<small><button type="button" class="btn btn-outline-secondary" [routerLink]="['/operatori']" >Accedi</button></small>
+                </div>
+            </div>
+        </div>
+        <div class="panelContainer col-md-2 col-sm-6 col-xs-12">
+        	<div class="panel panel-danger panel-colorful">
+        		<div class="panel-body text-center">
+                    <p class="text-uppercase mar-btm text-sm">Gestione Rubriche</p>
+                   
+        			<i class="fa fa-comment fa-5x"><fa-icon [icon]="faAddressBook"></fa-icon></i>
+        			<hr>
+        			<p class="h2 text-thin"></p>
+					<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+						<mat-icon>more_vert</mat-icon>
+					  </button>
+					  <mat-menu #menu="matMenu">
+						<button [routerLink]="['/viewtiporubrica']" mat-menu-item>
+							<mat-icon>list_alt</mat-icon>
+						  <span>Tipologie Rubrica</span>
+						</button>
+						<button [routerLink]="['/rubricaview']" mat-menu-item>
+						<mat-icon>library_books</mat-icon>
+						  <span>Voci Rubrica</span>
+						</button>
+						<button [routerLink]="['/viewdestinatari']" mat-menu-item>
+							<mat-icon>perm_identity</mat-icon>
+							  <span>Destinatari Simbolici</span>
+							</button>
+					
+					  </mat-menu>
+        		</div>
+        	</div>
+        </div>
+        <div *ngIf="privilegio=='admin' || privilegio=='poweruserproto'" class="panelContainer col-md-2 col-sm-6 col-xs-12">
+        	<div class="panel panel-primary panel-colorful">
+        		<div class="panel-body text-center">
+        			<p class="text-uppercase mar-btm text-sm">Gestione Strutture</p>
+        			<i class="fa fa-shopping-cart fa-5x"><fa-icon [icon]="faCog"></fa-icon></i>
+        			<hr>
+        			<p class="h2 text-thin"></p>
+        			<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+						<mat-icon>more_vert</mat-icon>
+					  </button>
+					  <mat-menu #menu="matMenu">
+						<button [routerLink]="['/viewinbox']" mat-menu-item>
+							<mat-icon>inbox</mat-icon>
+						  <span>Inbox</span>
+						</button>
+						<button [routerLink]="['/viewmodalita']" mat-menu-item>
+						<mat-icon>network_wifi</mat-icon>
+						  <span>Modalità di trasmissione</span>
+						</button>
+						<button [routerLink]="['/viewprototipo']"  mat-menu-item>
+							<mat-icon>flip_to_front</mat-icon>
+						  <span>Tipologie</span>
+						</button>
+						<button [routerLink]="['/viewtipologiadocumentazione']"  mat-menu-item>
+							<mat-icon>book</mat-icon>
+						  <span>Tipologie documentali</span>
+						</button>
+						<button [routerLink]="['/viewserie']"  mat-menu-item>
+							<mat-icon>horizontal_split</mat-icon>
+						  <span>Serie</span>
+						</button>
+						<button [routerLink]="['/viewriservatezza']"  mat-menu-item>
+							<mat-icon>visibility_off</mat-icon>
+						  <span>Motivazioni restrizione</span>
+						</button>
+						<button [routerLink]="['/viewriservatezza']"  mat-menu-item>
+							<mat-icon>email</mat-icon>
+						  <span>Template mail e notifica</span>
+						</button>
+					  </mat-menu>
+        		</div>
+        	</div>
+        </div>
+		<!--div class="panelContainer col-md-2 col-sm-6 col-xs-12">
+        	<div class="panel panel-colorful panel-gruppifascicolo">
+        		<div class="panel-body text-center">
+        			<p class="text-uppercase mar-btm text-sm">Gestione Gruppi Fascicolo</p>
+        			<i class="fa fa-shopping-cart fa-5x"><fa-icon [icon]="faUsersCog"></fa-icon></i>
+        			<hr>
+        			<p class="h2 text-thin"></p>
+        			<small><button type="button" class="btn btn-gruppifascicolo" [routerLink]="['/gruppifascicolo']" >Accedi</button></small>
+        		</div>
+        	</div>
+        </div-->
+        <div class="panelContainer col-md-2 col-sm-6 col-xs-12">
+        	<div class="panel panel-info panel-colorful">
+        		<div class="panel-body text-center">
+        			<p class="text-uppercase mar-btm text-sm">Gestione Titolario</p>
+        			<i class="fa fa-dollar fa-5x"><fa-icon [icon]="faBook"></fa-icon></i>
+        			<hr>
+        			<p class="h2 text-thin"></p>
+        			<small><button type="button" class="btn btn-info" [routerLink]="['/viewtitolario']">Accedi</button></small>
+        		</div>
+        	</div>
+        </div>   
+
+		
+		<div class="panelContainer col-md-2 col-sm-6 col-xs-12">
+            <div class="panel panel-proto panel-colorful">
+                <div class="panel-body text-center">
+                	<p class="text-uppercase mar-btm text-sm">Protocolla</p>
+                	<i class="fa fa-users fa-5x"><fa-icon [icon]="faFingerprint"></fa-icon></i>
+                	<hr>
+                	<p class="h2 text-thin"></p>
+                	<small><button type="button" class="btn btn-outline-secondary" [routerLink]="['/addprotocollo']" >Accedi</button></small>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>

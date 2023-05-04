@@ -1,0 +1,46 @@
+.right{
+    text-align: right;
+}
+
+::ng-deep .mat-dialog-container{
+  background: linear-gradient(#f8f9fa38, #f8f9fad9),url(/../../../assets/img/bg30.jpg);
+   background-size: auto 100%;
+   background-position-y: 50%;
+}
+
+::ng-deep .mat-dialog-content{
+   background:transparent;
+}
+
+.headerMex{
+	color:#6c757d;
+	display: inline-block;
+}
+
+.mat-card{
+	margin-bottom:10px;
+	background:#f0f8ffa8;
+}
+.new_mex{
+	background-color: #ff4081;
+    color: #f8f9fa;
+    border-radius: 20px;
+    display: inline-block;
+    padding: 4px;
+}
+
+.gender_icon{
+	margin: auto;
+    margin-bottom: 20px;
+    margin-right: 10px;
+	}
+
+.writeMex{
+    color:#2196f3;
+    cursor: pointer;
+}
+
+.myTextArea,mat-form-field{
+    width: 100%;
+    /*border-color: white;*/
+}

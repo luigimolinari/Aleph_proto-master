@@ -1,0 +1,12 @@
+.loadingspinner_container{
+    position: fixed;
+    z-index: 2;
+    margin: auto;
+    left: 0;
+    width: 100vw;
+    text-align: center;
+}
+  
+.loadingspinner{
+   margin:auto;
+}

@@ -1,0 +1,114 @@
+<br />
+&nbsp;&nbsp;<button type="button" class="btn btn-warning" [routerLink]="['/documentiadd']"><fa-icon
+    [icon]="faFileUpload"></fa-icon> | CARICA nuovo tipo documentale</button> &nbsp;&nbsp;<button type="button"
+  class="btn btn-info" [routerLink]="['/documenticolladd']"><fa-icon [icon]="faFileWord"></fa-icon> | CREA nuovo tipo
+  documentale</button> <!-- <button type="button" class="btn btn-success btn-success-add"
+  [routerLink]="['/addspreadsheet']"><fa-icon [icon]="faFileExcel"></fa-icon> | CREA nuovo foglio di calcolo</button> -->
+
+<br /><br />
+
+<div class="mat-elevation-z8 tabContainer">
+  <br>
+  <div class="filterContainer col-md-6">
+    <mat-form-field>
+      <mat-label>Cerca</mat-label>
+      <input matInput (keyup)="applyFilter($event)" #input>
+    </mat-form-field>
+  </div>
+
+  <br>
+
+  <div class="tableContainer">
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
+
+      <ng-container matColumnDef="nome_doc" hidden>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Nome </mat-header-cell>
+        <mat-cell data-label="Nome:" *matCellDef="let element"> {{element.nome_doc}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="tipo_doc">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </mat-header-cell>
+        <mat-cell data-label="Tipo:" *matCellDef="let element">{{element.tipo_doc}} </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="modello">
+        <mat-header-cell *matHeaderCellDef> Modello </mat-header-cell>
+        <mat-cell data-label="Modello:" *matCellDef="let element">
+          <div *ngIf="element.collaborazione==NULL">Allegato</div>
+          <div *ngIf="element.collaborazione=='1'">Collaborazione testuale</div>
+          <div *ngIf="element.collaborazione=='2'">Collaborazione foglio di calcolo</div>
+        </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="azioni">
+        <mat-header-cell *matHeaderCellDef> Azioni </mat-header-cell>
+        <mat-cell data-label="Azioni:" *matCellDef="let element">
+          <div *ngIf="element.id_operatore != operatore && tipo_op == 'rup'">
+
+            &nbsp;
+            <button *ngIf="element.collaborazione=='1'" type="button" class="btn btn-azione btn-info"
+              [routerLink]="['/editor']" [queryParams]="{id:element.id, r:'1'}">
+              <fa-icon [icon]="faEye"></fa-icon>
+            </button>
+
+            <button *ngIf="element.modelli!= undefined && element.modelli.length!=0 && element.collaborazione!='1'"
+              type="button" class="btn btn-azione btn-download" mat-button [matMenuTriggerFor]="menu">
+              <fa-icon class="fa-lg" [icon]="faDownload"></fa-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item *ngFor="let model of element.modelli" (click)="downloadFile(model.info.percorso)"
+                [title]="model.info.nome">
+                {{model.info.nome}}
+              </button>
+            </mat-menu>
+
+          </div>
+
+          <div *ngIf="element.id_operatore == operatore || tipo_op != 'rup'">
+
+            <button type="button" class="btn btn-azione btn-success" mat-button [matMenuTriggerFor]="menu">
+              <fa-icon [icon]="faEdit"></fa-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item [routerLink]="['/documentiedit']"
+                [queryParams]="{id:element.id}">Informazioni</button>
+              <button *ngIf="element.collaborazione==NULL" mat-menu-item [routerLink]="['/modelliedit']"
+                [queryParams]="{id:element.id, operatore:element.id_operatore}">Modelli Allegati</button>
+              <button *ngIf="element.collaborazione=='1'" mat-menu-item [routerLink]="['/editor']"
+                [queryParams]="{id:element.id, operatore:element.id_operatore}">Modello in collaborazione</button>
+              <button *ngIf="element.collaborazione=='2'" mat-menu-item [routerLink]="['/spreadsheet']"
+                [queryParams]="{id:element.id, operatore:element.id_operatore}">Modello in collaborazione</button>
+            </mat-menu>
+            &nbsp;
+            <button type="button" class="btn btn-azione btn-danger" (click)="cancella(element.id, element.nome_doc);">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+      <mat-row [hidden]="row.selected" *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+
+    </table>
+  </div>
+
+  <mat-paginator [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
+
+
+</div>
+
+<br><br><br><br><br><br><br><br>
+
+
+<div class="footer_table_container">
+  <video autoplay muted loop id="VideoFooter" class="video-container_footer_table">
+    <source src="assets/video/footer.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div class="footer_small">
+  <img src="assets/img/logo_aleph_very_small.png" alt="logo aleph" />
+</div>

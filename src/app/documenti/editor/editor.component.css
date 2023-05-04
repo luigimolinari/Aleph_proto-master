@@ -1,0 +1,134 @@
+/**
+Giorgia
+.content_wrapper -> è stato introdotto al fine di modificare i margini laterali del documento, conservando tali modifiche nella stampa tramite jspdf
+                    è contenuto in .document-editor__editable-container
+.document-editor__editable-container ->  contenitore della parte editable
+.document-editor__editable -> ID = content; la pagina vera e propria
+.document-editor -> il div che comprende tutto l'editor, anche la toolbar
+.document-editor__toolbar -> toolbar
+*/
+.content_wrapper{
+	width: 793.706px;
+    min-height: 1122.52px;
+    margin:auto;
+	background:white;
+	/*margini di default*/
+
+    /*RESET*/
+	/*padding-left:40px;*/
+	/*padding-right:40px;*/
+}
+
+/*EDITOR -------------------------------------------------------------------------------*/
+.document-editor {
+    /*border: 1px solid var(--ck-color-base-border);*/
+    border-radius: var(--ck-border-radius);
+    /* Set vertical boundaries for the document editor. */
+    max-height:100%;
+    /* This element is a flex container for easier rendering. */
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+/*TOOLBAR ------------------------------------------------------------------------------*/
+.document-editor__toolbar {
+	
+	display:inline-block;
+	padding-left: 15px;
+	width: 100%;
+    /* Make sure the toolbar container is always above the editable. */
+    z-index: 1;
+    /* Create the illusion of the toolbar floating over the editable. */
+    box-shadow: 0 0 5px hsla( 0,0%,0%,.2 );
+    /* Use the CKEditor CSS variables to keep the UI consistent. */
+    border-bottom: 1px solid var(--ck-color-toolbar-border);
+}
+/* Adjust the look of the toolbar inside the container. */
+.document-editor__toolbar .ck-toolbar {
+    border: 0;
+    border-radius: 0;
+}
+
+/*PARTE EDITABILE (CONTENITORE) -------------------------------------------------------------*/
+
+/* Make the editable container look like the inside of a native word processor application. */
+.document-editor__editable-container {
+    /*padding: calc( 2 * var(--ck-spacing-large) );*/
+	padding:0px;
+    /*background: var(--ck-color-base-foreground);*/
+    background:#dee2e6;
+    /* Make it possible to scroll the "page" of the edited content. */
+    overflow-y: scroll;
+	position:relative!important;
+}
+
+#content {
+    background: white;
+    /* Set the dimensions of the "page". */
+    /* width: 15.8cm;
+    min-height: 21cm;*/
+	/* cm
+	width: 21cm;
+    min-height: 29.7cm;
+	*/
+	/* proporzioni px per formato a4*/
+	/*width: 793.706px;*/
+	width: auto;
+    min-height: 1122.52px; /*poco meno dell'effettivo a4 per non mostrare il divisore nel caso la seconda pagina non sia completata*/
+    /* Keep the "page" off the boundaries of the container. */
+    /*padding: 0.5cm 0.5cm 2cm;*/	
+	/* The "page" should cast a slight shadow (3D illusion). */
+    /*box-shadow: 0 0 5px hsla( 0,0%,0%,.1 );
+    border: 1px hsl( 0,0%,82.7% ) solid;
+    border-radius: var(--ck-border-radius);*/
+	box-shadow: none;
+    /*RESET - prima era a 1*/
+    border: 0px white;    
+    background: white;
+    /* Center the "page". */
+    /*RESET*/
+    /*margin: 0 auto;*/
+}
+
+/* il margine top applicato al primo paragrafo e i margini laterali applicati al content sono gestiti da ckeditor */
+
+/* CUSTOM */
+#page_label{
+	background: #6c757d36;
+    display: inline-block;
+    width: 19px;
+    padding-right: 5px;
+    color:#6c757d;
+}
+.p_divisor{
+	position:absolute;
+	color:gray;
+	background:#6c757d54;
+	/*centrale*/
+	left:0;
+	right:0;
+	margin:auto;
+	/**/
+	height:2px;
+	width:833.706px;	
+	z-index:1;text-align:right
+}
+
+
+.loadingspinner_container{
+    width: 100%;
+    position: absolute;
+    top:10%;
+    text-align: center;
+}
+  
+.loadingspinner{
+   margin:auto;
+}
+
+.ck.ck-editor__editable_inline {
+    padding:0!important;
+}
+div#content>p {
+   color:red!important;
+}

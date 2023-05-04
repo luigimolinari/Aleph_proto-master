@@ -1,0 +1,132 @@
+<div class="centralescanner">
+    <br>
+    <div class="col-md-12 example-button-container">
+        <!-- acquisizione da eseguire-->
+        <button *ngIf="!webcamImage" mat-fab color="warn" class="actionBtn" (click)="triggerSnapshot()"
+            [disabled]="!showWebcam" title="Scatta">
+            <mat-icon>camera</mat-icon>
+        </button>
+
+        &nbsp;
+
+        <button *ngIf="!webcamImage && showWebcam" mat-fab color="primary" (click)="toggleWebcam()"
+            title="Disattiva fotocamera">
+            <mat-icon><span class="material-icons-outlined">
+                    no_photography
+                </span></mat-icon>
+        </button>
+
+        &nbsp;
+
+        <button *ngIf="!webcamImage && !showWebcam" mat-fab color="primary" (click)="toggleWebcam()"
+            title="Abilita fotocamera">
+            <mat-icon><span class="material-icons-outlined">
+                    photo_camera
+                </span></mat-icon>
+        </button>
+
+        &nbsp;
+
+        <button *ngIf="!webcamImage" mat-fab color="accent" (click)="showNextWebcam(true);" title="Cambia fotocamera"
+            [disabled]="!multipleWebcamsAvailable">
+            <mat-icon>cameraswitch</mat-icon>
+        </button>
+
+
+        <!-- acquisizione eseguita-->
+        <button *ngIf="webcamImage" mat-fab clor="accent" (click)="new_snapshot()" title="Nuova acquisizione">
+            <mat-icon>add_a_photo</mat-icon>
+        </button>
+        &nbsp;
+        <button *ngIf="webcamImage" mat-fab class="rotate_icon" (click)="rotate_cropedImg()" title="Ruota">
+            <mat-icon>rotate_left</mat-icon>
+        </button>
+        &nbsp;
+        <button *ngIf="webcamImage" mat-fab class="send_icon" (click)="submit()" title="Invia">
+            <mat-icon>send</mat-icon>
+        </button>
+        &nbsp;
+
+    </div>
+
+    <br>
+
+    <div class="container">
+        <div class="formboxpanel">
+
+            <mat-icon *ngIf="!webcamImage && !showWebcam" class="no_camera_logo_container">
+                <span class="material-icons no_camera_logo">
+                    no_photography
+                </span>
+            </mat-icon>
+            <div *ngIf="!webcamImage && !showWebcam" class="centered_label">
+                <div>Fotocamera disattivata</div>
+            </div>
+
+
+            <div *ngIf="!webcamImage" class="webcam_container col-sm-12">
+                <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
+                    [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable"
+                    [videoOptions]="videoOptions" [imageQuality]="1" (cameraSwitched)="cameraWasSwitched($event)"
+                    (initError)="handleInitError($event)">
+                </webcam>
+            </div>
+
+
+
+            <div class="row snapshot_container" *ngIf="webcamImage">
+
+                <div class="snapshot col-md-6 col-sm-12">
+
+                    <image-cropper [imageBase64]="webcamImage.imageAsDataUrl" [maintainAspectRatio]="true"
+                        [aspectRatio]="3 /4" [resizeToHeight]="400" format="png" (imageCropped)="cropImg($event)"
+                        (imageLoaded)="imgLoad()" (cropperReady)="initCropper()" (loadImageFailed)="imgFailed()"
+                        [canvasRotation]="canvasRotation">
+                    </image-cropper>
+                </div>
+
+                <div class="editor-container col-md-6 col-sm-12">
+                    <h6 class="preview_label">Anteprima</h6>
+                    
+                    <img id="cropImgPreview" [src]="cropImgPreview" [style.filter]="'brightness('+img_brightness+') contrast('+img_contrast+') grayscale('+img_grayScale+')'" />
+                    
+                    <hr>
+                    
+                    <div class="row">
+                        <label id="img_brightness_label">Luminosità</label>
+                        <input id="img_brightness" type="range" [(ngModel)]="img_brightness"  step="0.1" min="0" max="2" > 
+                    </div>
+                    <div class="row">
+                        <label id="img_contrast_label">Contrasto</label>
+                        <input id="img_contrast" type="range" [(ngModel)]="img_contrast"  step="0.1" min="0" max="2" > 
+                    </div>
+                    <div class="row">
+                        <label id="img_grayScale_label">Scala di grigi</label>
+                        <input id="img_grayScale" type="range" [(ngModel)]="img_grayScale"  step="0.1" min="0" max="1" > 
+                    </div>
+                    
+                    <canvas id="myCanvas" hidden></canvas>
+
+                </div>
+
+            </div>
+
+            <div *ngIf="errors.length > 0">
+                <h4 >Messages:</h4>
+
+                <ul *ngFor="let error of errors">
+                    <li>{{error | json}}</li>
+                </ul>
+            </div>
+
+            <br />
+
+
+        </div>
+
+    </div>
+
+    <div class="footer_pages">
+        <img src='assets/img/logo_aleph_medium.png'>
+    </div>
+</div>

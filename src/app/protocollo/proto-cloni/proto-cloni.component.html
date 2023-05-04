@@ -1,0 +1,41 @@
+<div class="protobg">
+    <app-sidenav *ngIf="loggedIn" [id_user]="id_user" [mode]="mode" [open]="open"
+        (menuItemSelection)="test_event($event)" (fullStateEvent)="full_state_event($event)">
+    </app-sidenav>
+    <div
+        [ngClass]="{'large_margin': margin_class=='large_margin','medium_margin': margin_class=='medium_margin','small_margin': margin_class=='small_margin'}">
+        <div class="container">
+            <div class="formboxpanel">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+                        <div class="my-4">
+                            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab"
+                                        aria-controls="home" aria-selected="false">
+                                        Clona Protocollo
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <br><br><br><br>
+                <div class="negativemargin justify-content-center">
+                    <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+                        <app-aleph-table [tableData]="data" [tableColumns]="customersTableColumns"
+                            [listActions]="listActions" tableCase="general" [isFilterable]="true" [isPageable]="true"
+                            [paginationSizes]="[5,10]" [defaultPageSize]="5" y (viewAction)="viewMethod($event)">
+                        </app-aleph-table>
+                    </div>
+
+                </div>
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,122 @@
+table {
+    width: 100%;
+}
+
+.formboxpanel{
+    height:84vh;
+}
+
+.tabContainer{
+    margin-left: 15px;
+    margin-right: 15px;
+    background-color:#e3f2fdbf;
+}
+
+@media screen and (max-width: 960px) {
+
+    .form_img{
+        width: 100%;
+    }
+    .form_info{
+        margin-left: 0px;
+    }
+
+    mat-header-row{
+      display:none;
+    }
+  
+    mat-cell:first-of-type, mat-header-cell:first-of-type, mat-footer-cell:first-of-type {
+        padding-left: 0px;
+    }
+  
+    .mat-table {
+      border: 0;
+      vertical-align: middle
+    }
+  
+    .mat-table caption {
+      font-size: 1em;
+    }
+    
+    .mat-table .mat-header-cell {
+      
+      border: 10px solid;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+    
+    .mat-table .mat-row {
+      border-bottom: 5px solid #6c757d;
+      display: block;
+      text-align:right;
+    }
+    
+    .mat-table .mat-cell {
+      border-bottom: 1px solid #6c757d33;;
+      margin-left: 5%;
+    }
+    .mat-table .mat-cell:before {
+     
+      float: left;
+      text-transform: uppercase;
+      font-weight: normal;
+      
+      font-size: .85em;
+    }
+
+    .mat-table .mat-cell:last-child {
+      border-bottom: 0;
+    }
+
+      .mat-table .mat-cell:first-child {
+      margin-top: 4%;
+    }
+  }
+
+  .form_info{
+      vertical-align: middle;
+      display: inline-block;
+      margin-left: 15px;
+  }
+  .form_header, .form_legenda{
+      text-align: left;
+  }
+  .form_legenda{
+      font-size: 12px;
+  }
+  .form_img{
+      vertical-align: middle;
+      display: inline-block;
+  }
+
+  .mandatoryIcon{
+    color:#dc3545;
+  }
+
+  .validatorIcon{
+    color: darkgreen;
+  }
+
+  .dynamicFormIcon{
+    color:orange;
+}
+
+.opzione_tendina{
+  color: #495057!important;
+}
+
+.hand-cursor {
+  cursor: pointer;
+  color:rgb(65, 65, 255);
+}
+
+.hand-cursor2 {
+  cursor: pointer;
+  color:rgb(251, 251, 253);
+  vertical-align: bottom;
+  margin-top: 15px;
+}

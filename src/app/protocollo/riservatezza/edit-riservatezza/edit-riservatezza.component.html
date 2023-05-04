@@ -1,0 +1,64 @@
+<div class="centraleprototables">
+    <br />
+<div class="container">
+    <div class="formboxpanel">
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+           <div class="my-4">
+            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab" aria-controls="home" aria-selected="false">MODIFICA motivazione di riservatezza</a>
+                </li>
+            </ul>
+            <form  *ngFor="let group of miariservatezza" [formGroup]="form" >
+                <div class="row mt-5 align-items-center">
+                                       <div class="col">
+                        <div class="row align-items-center">
+                            <div class="col-md-7">
+                               </div>
+                        </div>
+                      
+                    </div>
+                </div>
+              
+                <hr class="my-4" />
+             
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="nome">Motivazione:</label>
+                        <input  [(ngModel)]="motivazione" formControlName="motivazione"  type="text" id="motivazione"  class="form-control"  required />
+                        <div *ngIf="form.controls['motivazione'].invalid && (form.controls['motivazione'].dirty || form.controls['motivazione'].touched)" class="alert alert-danger">
+                           La motivazione è obbligatoria
+                            <div *ngIf="form.controls['motivazione'].errors.required">
+                           
+                          </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="nome">Tipologia:</label>
+                        <select id="serie" class="form-control" [(ngModel)]="riservatezzatipo" formControlName="riservatezzatipo"  required>
+                            <option selected="selected">{{group.tipologia}}</option>
+                            <option>riservato</option>
+                            <option>ristretto</option>
+                             </select>
+                    </div>
+                </div>
+
+                <button type="Submit" class="btn btn-success" (click)="Trasmetti();">Trasmetti valori</button>
+           
+        </form>
+        <br /><br /><br /><br /><br /><br /><br /><br />
+           </div>
+        </div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+         </div>
+

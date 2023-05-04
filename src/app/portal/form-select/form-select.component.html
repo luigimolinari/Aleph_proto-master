@@ -1,0 +1,266 @@
+<div class="centraleformselect">
+  <br />
+  <div class="container">
+    <div class="formboxpanel">
+      <div class="central">
+      <mat-accordion class="accordion">
+          <mat-expansion-panel class="accordion" (opened)="panelOpenState = true"
+                               (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                  <mat-panel-title>
+                  <span class="material-icons">
+                      support_agent
+                      </span>
+                  </mat-panel-title>
+                  <mat-panel-description>
+                  
+                  </mat-panel-description>
+              </mat-expansion-panel-header>
+              <p>
+                  Adesso, per ogni campo select (a tendina), indica i valori predefiniti che vuoi appaiano alla selezione. Puoi indicare un massimo di 10 valori per ogni Select
+              </p>
+          </mat-expansion-panel>
+      </mat-accordion>
+      <br />
+      <div class="MobileContent">
+              
+      
+        <mat-label class="done"><img src="assets/img/step1off.png" />
+            Crea i campi
+          </mat-label>
+ 
+    <img src="assets/img/linea.png"/>
+    <img src="assets/img/step2on.png" />
+      Valorizza le Select
+   
+    <img src="assets/img/linea.png" />
+    <mat-label class="done"><img src="assets/img/step3off.png" /> 
+      Assegna il form
+    </mat-label>
+    <img src="assets/img/linea.png" />
+    <mat-label class="done">
+    <img src="assets/img/step4off.png" />
+        Termina
+    </mat-label>
+    
+</div>
+      <br />
+      <mat-progress-bar mode="determinate" value="60"></mat-progress-bar>
+                    <div class="row mt-5 align-items-center">
+                   
+              </div>
+            <div *ngFor="let selezione of selezioni">
+              <hr class="my-4" />
+              <div *ngIf="selezione.tipocampo1=='Select'">
+                <mat-card class="titolo">{{selezione.campo1}}</mat-card>
+              <mat-form-field  class="example-chip-list">
+                <mat-label>Valori della Select</mat-label>
+                <mat-chip-list #chipList aria-label="Valori della Select">
+                  <mat-chip *ngFor="let parola of parole" [selectable]="selectable"
+                           [removable]="removable" (removed)="remove(parola)">
+                    {{parola.name}}
+                    <mat-icon matChipRemove *ngIf="removable">cancella</mat-icon>
+                  </mat-chip>
+                  <input placeholder="Aggiungi valore e premi invio o TAB"
+                         [matChipInputFor]="chipList"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="addOnBlur"
+                         (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+              </mat-form-field>
+            </div>
+
+            <div *ngIf="selezione.tipocampo2=='Select'">
+              <mat-card class="titolo">{{selezione.campo2}}</mat-card>
+              <mat-form-field  class="example-chip-list">
+                <mat-label>Valori della Select</mat-label>
+                <mat-chip-list #chipList2 aria-label="Valori della Select">
+                  <mat-chip *ngFor="let parola2 of parole2" [selectable]="selectable"
+                           [removable]="removable" (removed)="remove2(parola2)">
+                    {{parola2.name2}}
+                    <mat-icon matChipRemove *ngIf="removable">cancella</mat-icon>
+                  </mat-chip>
+                  <input placeholder="Aggiungi valore e premi invio o TAB"
+                         [matChipInputFor]="chipList2"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="addOnBlur"
+                         (matChipInputTokenEnd)="add2($event)">
+                </mat-chip-list>
+              </mat-form-field>
+              </div>
+
+              <div *ngIf="selezione.tipocampo3=='Select'">
+                <mat-card class="titolo">{{selezione.campo3}}</mat-card>
+              <mat-form-field  class="example-chip-list">
+                <mat-label>Valori della Select</mat-label>
+                <mat-chip-list #chipList3 aria-label="Valori della Select">
+                  <mat-chip *ngFor="let parola3 of parole3" [selectable]="selectable"
+                           [removable]="removable" (removed)="remove3(parola3)">
+                    {{parola3.name3}}
+                    <mat-icon matChipRemove *ngIf="removable">cancella</mat-icon>
+                  </mat-chip>
+                  <input placeholder="Aggiungi valore e premi invio o TAB"
+                         [matChipInputFor]="chipList3"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="addOnBlur"
+                         (matChipInputTokenEnd)="add3($event)">
+                </mat-chip-list>
+              </mat-form-field>
+            </div>      
+
+            <div *ngIf="selezione.tipocampo4=='Select'">
+              <mat-card class="titolo">{{selezione.campo4}}</mat-card>
+              <mat-form-field  class="example-chip-list">
+                <mat-label>Valori della Select</mat-label>
+                <mat-chip-list #chipList4 aria-label="Valori della Select">
+                  <mat-chip *ngFor="let parola4 of parole4" [selectable]="selectable"
+                           [removable]="removable" (removed)="remove4(parola4)">
+                    {{parola4.name4}}
+                    <mat-icon matChipRemove *ngIf="removable">cancella</mat-icon>
+                  </mat-chip>
+                  <input placeholder="Aggiungi valore e premi invio o TAB"
+                         [matChipInputFor]="chipList4"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="addOnBlur"
+                         (matChipInputTokenEnd)="add4($event)">
+                </mat-chip-list>
+              </mat-form-field>
+                </div>
+
+                <div *ngIf="selezione.tipocampo5=='Select'">
+                  <mat-card class="titolo">{{selezione.campo5}}</mat-card>
+              <mat-form-field  class="example-chip-list">
+                <mat-label>Valori della Select</mat-label>
+                <mat-chip-list #chipList5 aria-label="Valori della Select">
+                  <mat-chip *ngFor="let parola5 of parole5" [selectable]="selectable"
+                           [removable]="removable" (removed)="remove5(parola5)">
+                    {{parola5.name5}}
+                    <mat-icon matChipRemove *ngIf="removable">cancella</mat-icon>
+                  </mat-chip>
+                  <input placeholder="Aggiungi valore e premi invio o TAB"
+                         [matChipInputFor]="chipList5"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="addOnBlur"
+                         (matChipInputTokenEnd)="add5($event)">
+                </mat-chip-list>
+              </mat-form-field>
+              </div>
+
+
+              <div *ngIf="selezione.tipocampo6=='Select'">
+                <mat-card class="titolo">{{selezione.campo6}}</mat-card>
+              <mat-form-field  class="example-chip-list">
+                <mat-label>Valori della Select</mat-label>
+                <mat-chip-list #chipList6 aria-label="Valori della Select">
+                  <mat-chip *ngFor="let parola6 of parole6" [selectable]="selectable"
+                           [removable]="removable" (removed)="remove6(parola6)">
+                    {{parola6.name6}}
+                    <mat-icon matChipRemove *ngIf="removable">cancella</mat-icon>
+                  </mat-chip>
+                  <input placeholder="Aggiungi valore e premi invio o TAB"
+                         [matChipInputFor]="chipList6"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="addOnBlur"
+                         (matChipInputTokenEnd)="add6($event)">
+                </mat-chip-list>
+              </mat-form-field>
+              </div>
+
+
+              <div *ngIf="selezione.tipocampo7=='Select'">
+                <mat-card class="titolo">{{selezione.campo7}}</mat-card>
+              <mat-form-field  class="example-chip-list">
+                <mat-label>Valori della Select</mat-label>
+                <mat-chip-list #chipList7 aria-label="Valori della Select">
+                  <mat-chip *ngFor="let parola7 of parole7" [selectable]="selectable"
+                           [removable]="removable" (removed)="remove7(parola7)">
+                    {{parola7.name7}}
+                    <mat-icon matChipRemove *ngIf="removable">cancella</mat-icon>
+                  </mat-chip>
+                  <input placeholder="Aggiungi valore e premi invio o TAB"
+                         [matChipInputFor]="chipList7"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="addOnBlur"
+                         (matChipInputTokenEnd)="add7($event)">
+                </mat-chip-list>
+              </mat-form-field>
+              </div>
+
+
+              <div *ngIf="selezione.tipocampo8=='Select'">
+                <mat-card class="titolo">{{selezione.campo8}}</mat-card>
+              <mat-form-field  class="example-chip-list">
+                <mat-label>Valori della Select</mat-label>
+                <mat-chip-list #chipList8 aria-label="Valori della Select">
+                  <mat-chip *ngFor="let parola8 of parole8" [selectable]="selectable"
+                           [removable]="removable" (removed)="remove8(parola8)">
+                    {{parola8.name8}}
+                    <mat-icon matChipRemove *ngIf="removable">cancella</mat-icon>
+                  </mat-chip>
+                  <input placeholder="Aggiungi valore e premi invio o TAB"
+                         [matChipInputFor]="chipList8"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="addOnBlur"
+                         (matChipInputTokenEnd)="add8($event)">
+                </mat-chip-list>
+              </mat-form-field>
+              </div>
+
+
+              <div *ngIf="selezione.tipocampo9=='Select'">
+                <mat-card class="titolo">{{selezione.campo9}}</mat-card>
+              <mat-form-field  class="example-chip-list">
+                <mat-label>Valori della Select</mat-label>
+                <mat-chip-list #chipList9 aria-label="Valori della Select">
+                  <mat-chip *ngFor="let parola9 of parole9" [selectable]="selectable"
+                           [removable]="removable" (removed)="remove9(parola9)">
+                    {{parola9.name9}}
+                    <mat-icon matChipRemove *ngIf="removable">cancella</mat-icon>
+                  </mat-chip>
+                  <input placeholder="Aggiungi valore e premi invio o TAB"
+                         [matChipInputFor]="chipList9"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="addOnBlur"
+                         (matChipInputTokenEnd)="add9($event)">
+                </mat-chip-list>
+              </mat-form-field>
+              </div>
+
+
+              <div *ngIf="selezione.tipocampo10=='Select'">
+                <mat-card class="titolo">{{selezione.campo10}}</mat-card>
+              <mat-form-field  class="example-chip-list">
+                <mat-label>Valori della Select</mat-label>
+                <mat-chip-list #chipList10 aria-label="Valori della Select">
+                  <mat-chip *ngFor="let parola10 of parole10" [selectable]="selectable"
+                           [removable]="removable" (removed)="remove10(parola10)">
+                    {{parola10.name10}}
+                    <mat-icon matChipRemove *ngIf="removable">cancella</mat-icon>
+                  </mat-chip>
+                  <input placeholder="Aggiungi valore e premi invio o TAB"
+                         [matChipInputFor]="chipList10"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="addOnBlur"
+                         (matChipInputTokenEnd)="add10($event)">
+                </mat-chip-list>
+              </mat-form-field>
+              </div>
+
+
+                <button class="btn btn-warning"  (click)="Trasmetti();">Salva</button>
+              </div>
+
+          </div>
+      </div>
+    </div>
+    </div>
+
+<!-- <div class="footer_table_container_small">
+  <video autoplay muted loop id="VideoFooter" class="video-container_footer_table">
+    <source src="assets/video/video_footer.mp4" type="video/mp4">
+  </video>
+</div>
+<div class="footer_table_small">
+  <h1>Aleph</h1>
+  <p> <img src='assets/img/logo_aleph_medium.png'></p>
+</div> -->

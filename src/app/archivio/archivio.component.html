@@ -1,0 +1,262 @@
+<video autoplay muted loop id="video_archivi" style="width:100%">
+  <source src="assets/video/video_archivi.mp4" type="video/mp4">
+</video>
+
+<div class="archivio_cnt">
+
+
+
+  <mat-sidenav-container>
+    <mat-sidenav class="side-nav mat-elevation-z8" #sidenav [mode]="mode" [(opened)]="open">
+      <mat-nav-list>
+
+        <div class="example-ripple-container mat-elevation-z4" *ngFor="let el of data_liv0" matRipple
+          [matRippleDisabled]="ripple_disabled" [matRippleRadius]="radius" (click)="expand_content(el.id,true)">
+          {{el.nome | titlecase}}
+        </div>
+
+        <div class="side-nav-footer">
+          <p> <img  src='assets/img/logo_aleph_medium.png'></p>
+        </div>
+
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content class="side-nav-content mat-elevation-z8">
+      <!-- <div style="height: 80vh;"> -->
+        <div class="my_content">
+        <div class="row" class="search-form" [ngClass]="{'increased_height': search_menu_state}">
+          <div class="responsive_toolbar" *ngIf="!(innerWidth>800)">
+            <mat-toolbar>
+              <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+                <mat-icon *ngIf="!sidenav.opened">
+                  menu
+                </mat-icon>
+                <mat-icon *ngIf="sidenav.opened">
+                  close
+                </mat-icon>
+              </button>
+            </mat-toolbar>
+          </div>
+          <div class="example-button-container">
+            <button class="search_menu" (click)="search_menu_control()">
+              <mat-icon>manage_search</mat-icon>
+            </button>
+          </div>
+          <form [formGroup]="fGroup" *ngIf="search_menu_state">
+            <mat-form-label class="search_label">
+              Cerca Documento
+            </mat-form-label>
+            <mat-form-field class="example-full-width">
+              <mat-label>per descrizione</mat-label>
+              <input matInput placeholder="Cerca.." [(ngModel)]="findDocDescr" formControlName="findDocDescr">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <mat-label>per indice</mat-label>
+              <input matInput placeholder="Cerca.." [(ngModel)]="findDocCod" formControlName="findDocCod">
+            </mat-form-field>
+            <button mat-icon-button (click)=cerca_doc(findDocDescr,findDocCod)>
+              <mat-icon>search</mat-icon>
+            </button>
+            <mat-form-label class="search_label">
+              Cerca Categoria
+            </mat-form-label>
+            <mat-form-field class="example-full-width">
+              <mat-label>per descrizione</mat-label>
+              <input matInput placeholder="Cerca.." [(ngModel)]="findCatDescr" formControlName="findCatDescr">
+            </mat-form-field>
+            <button mat-icon-button (click)=cerca_cat(findCatDescr,false)>
+              <mat-icon>search</mat-icon>
+            </button>
+          </form>
+        </div>
+        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl"
+          [ngClass]="{'reduced_height': (search_menu_state)}">
+          <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+            <div *ngIf="node.is_accessible != 0" class="row">
+              <button mat-icon-button disabled></button>
+              <span *ngIf="node.is_proc=='0'" class="material-icons folder-icon">
+                folder
+              </span>
+              <span *ngIf="node.is_proc!='0' && node.is_result == undefined" class="material-icons doc-icon">
+                description
+              </span>
+              <span *ngIf="node.is_proc!='0' && node.is_result != undefined" class="material-icons result-icon">
+                plagiarism
+              </span>
+              <div class="fascicolo_nome">
+                {{node.nome}}
+                <div [id]="'percorso'+node.item" class="path">
+                </div>
+              </div>
+              <div *ngIf="node.is_proc!='0'">
+                <span *ngIf="!expand_content_proc[node.item] || expand_content_proc[node.item] == undefined"
+                  class="material-icons expand_content_procedure-icon" (click)="contentProcedura(node.item)"
+                  title="Esplora Contenuto">
+                  format_list_bulleted
+                </span>
+                <span *ngIf="expand_content_proc[node.item]" class="material-icons expand_content_procedure-icon"
+                  (click)="contentProcedura(node.item)" title="Chiudi Contenuto">
+                  delete_sweep
+                </span>
+                <span class="material-icons visibility-icon" (click)="vaiAllaProcedura(node.is_proc)"
+                  title="Vai alla procedura">
+                  visibility
+                </span>
+              </div>
+            </div>
+            <div [id]="node.item" class="list_of_docs">
+              <div *ngIf="content_proc[node.item]!=undefined">
+                <div *ngIf="content_proc[node.item].length!=0">
+                  <span title="Ordina per nome"
+                    *ngIf="expand_content_proc[node.item]==true && order_alpha_content[node.item]=='asc' && content_proc[node.item].length>1"
+                    class='material-icons sortaction' (click)="sortAlphaDocs(node.item)">
+                    <fa-icon [icon]="faSortAlphaUp"></fa-icon>
+                  </span>
+                  <span title="Ordina per nome"
+                    *ngIf="expand_content_proc[node.item]==true && order_alpha_content[node.item]=='desc' && content_proc[node.item].length>1"
+                    class='material-icons sortaction' (click)="sortAlphaDocs(node.item)">
+                    <fa-icon [icon]="faSortAlphaDown"></fa-icon>
+                  </span>
+                  <span title="Ordina per data"
+                    *ngIf="expand_content_proc[node.item]==true && order_date_content[node.item]=='asc' && content_proc[node.item].length>1"
+                    class='material-icons sortaction' (click)="sortDateDocs(node.item)">
+                    <fa-icon [icon]="faLongArrowAltUp">
+                    </fa-icon>
+                    <fa-icon [icon]="faCalendar">
+                    </fa-icon>
+                  </span>
+                  <span title="Ordina per data"
+                    *ngIf="expand_content_proc[node.item]==true && order_date_content[node.item]=='desc' && content_proc[node.item].length>1"
+                    class='material-icons sortaction' (click)="sortDateDocs(node.item)">
+                    <fa-icon [icon]="faLongArrowAltDown">
+                    </fa-icon>
+                    <fa-icon [icon]="faCalendar">
+                    </fa-icon>
+                  </span>
+                  <div *ngFor="let doc of content_proc[node.item]">
+                    <li class='list_doc'>
+                      <span class='material-icons download_file' title='Scarica' (click)="downloadFile(doc.percorso)">
+                        file_download
+                      </span>
+                      <span class='material-icons info_file' title='Info' (click)="showInfo(doc.id)">
+                        info
+                      </span>
+                      <div class='contenuto_procedura' title='Vai al documento'
+                        (click)="goToDoc(doc.id_procedura,doc.id_workflow,doc.descrizione)">
+                        {{doc.descrizione}}
+                        <div *ngIf="expand_info_doc[doc.id]==true" class="doc_metainfo">
+                          <i>Data</i>: {{doc.giorno}} <br>
+                          <i>Indice</i>: {{doc.indice}} <br>
+                          <i>Note</i>: {{doc.note}} <br>
+                          <i>Versione</i>: {{doc.versione}}
+                        </div>
+                      </div>
+                    </li>
+                  </div>
+                </div>
+                <div *ngIf="content_proc[node.item].length==0 && expand_content_proc[node.item]==true">
+                  <i>Nessun documento presente</i>
+                </div>
+              </div>
+            </div>
+          </mat-tree-node>
+
+          <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+            <div *ngIf="node.is_accessible != 0" class="row">
+              <button mat-icon-button [attr.aria-label]="'toggle ' + node.filename" matTreeNodeToggle>
+                <mat-icon>
+                  {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                </mat-icon>
+              </button>
+              <span class="material-icons folder-icon">
+                folder
+              </span>
+              <div class="fascicolo_nome">
+                {{node.nome}}
+                <div [id]="'percorso'+node.item" class="path"></div>
+              </div>
+              <div *ngIf="node.is_proc!='0'">
+                <span *ngIf="!expand_content_proc[node.item]||expand_content_proc[node.item] == undefined"
+                  class="material-icons expand_content_procedure-icon" (click)="contentProcedura(node.item)"
+                  title="Esplora Contenuto">
+                  format_list_bulleted
+                </span>
+                <span *ngIf="expand_content_proc[node.item]" class="material-icons expand_content_procedure-icon"
+                  (click)="contentProcedura(node.item)" title="Chiudi Contenuto">
+                  delete_sweep
+                </span>
+                <span class="material-icons visibility-icon" (click)="vaiAllaProcedura(node.is_proc)"
+                  title="Vai alla procedura">
+                  visibility
+                </span>
+              </div>
+            </div>
+            <div [id]="node.item" class="list_of_docs">
+              <div *ngIf="node.is_proc!='0'">
+                <div *ngIf="content_proc[node.item]!=undefined">
+                  <div *ngIf="content_proc[node.item].length!=0">
+                    <span title="Ordina per nome"
+                      *ngIf="expand_content_proc[node.item]==true && order_alpha_content[node.item]=='asc' && content_proc[node.item].length>1"
+                      class='material-icons sortaction' (click)="sortAlphaDocs(node.item)">
+                      <fa-icon [icon]="faSortAlphaUp"></fa-icon>
+                    </span>
+                    <span title="Ordina per nome"
+                      *ngIf="expand_content_proc[node.item]==true && order_alpha_content[node.item]=='desc' && content_proc[node.item].length>1"
+                      class='material-icons sortaction' (click)="sortAlphaDocs(node.item)">
+                      <fa-icon [icon]="faSortAlphaDown"></fa-icon>
+                    </span>
+                    <span title="Ordina per data"
+                      *ngIf="expand_content_proc[node.item]==true && order_date_content[node.item]=='asc' && content_proc[node.item].length>1"
+                      class='material-icons sortaction' (click)="sortDateDocs(node.item)">
+                      <fa-icon [icon]="faLongArrowAltUp">
+                      </fa-icon>
+                      <fa-icon [icon]="faCalendar">
+                      </fa-icon>
+                    </span>
+                    <span title="Ordina per data"
+                      *ngIf="expand_content_proc[node.item]==true && order_date_content[node.item]=='desc' && content_proc[node.item].length>1"
+                      class='material-icons sortaction' (click)="sortDateDocs(node.item)">
+                      <fa-icon [icon]="faLongArrowAltDown">
+                      </fa-icon>
+                      <fa-icon [icon]="faCalendar">
+                      </fa-icon>
+                    </span>
+                    <div *ngFor="let doc of content_proc[node.item]">
+                      <li class='list_doc'>
+                        <span class='material-icons download_file' title='Scarica' (click)="downloadFile(doc.percorso)">
+                          file_download
+                        </span>
+                        <span class='material-icons info_file' title='Info' (click)="showInfo(doc.id)">
+                          info
+                        </span>
+                        <div class='contenuto_procedura' title='Vai al documento'
+                          (click)="goToDoc(doc.id_procedura,doc.id_workflow,doc.descrizione)">
+                          {{doc.descrizione}}
+                          <div *ngIf="expand_info_doc[doc.id]==true" class="doc_metainfo">
+                            <i>Data</i>: {{doc.giorno}} <br>
+                            <i>Indice</i>: {{doc.indice}} <br>
+                            <i>Note</i>: {{doc.note}} <br>
+                            <i>Versione</i>: {{doc.versione}}
+                          </div>
+                        </div>
+                      </li>
+                    </div>
+                  </div>
+                  <div *ngIf="content_proc[node.item].length==0 && expand_content_proc[node.item]==true">
+                    <i>Nessun documento presente</i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-tree-node>
+        </mat-tree>
+      </div>
+     <!--  <div _ngcontent-asy-c384="" class="footer_pages archivio_footer_pages"><img _ngcontent-asy-c384="" src="assets/img/logo_aleph_medium.png">
+      </div> -->
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+
+<div *ngIf="loading" class="loadingspinner_container">
+  <img class="loadingspinner" src="../assets/img/loadingspinner.gif">
+</div>

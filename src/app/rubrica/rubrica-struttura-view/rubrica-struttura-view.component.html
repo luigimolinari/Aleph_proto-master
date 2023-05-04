@@ -1,0 +1,46 @@
+<br />
+<br />
+<button type="button" class="btn btn-success btn-success-add" [routerLink]="['/rubricastrutturaadd']" [queryParams]="{id_azienda: id_azienda, tipo: tipo, IPA: IPA}">AGGIUNGI nuova struttura</button> &nbsp;
+<button type="button" class="btn btn-secondary" [routerLink]="['/rubricaview']" [queryParams]="{showaziende: 'si'}"> <fa-icon [icon]="faArrowLeft"></fa-icon>&nbsp;Indietro</button>
+<br /><br />
+<div class="titolo">
+<mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title><fa-icon [icon]="faLandmark"></fa-icon> &nbsp;
+        Strutture dell'azienda &nbsp;<strong>{{azienda}}</strong>
+      </mat-panel-title>
+      <mat-panel-description>
+         {{panelOpenState ? 'chiudi il dettaglio' : 'apri il dettaglio'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>sede: <strong>{{sede_azienda}}</strong>, partita iva/codice fiscale: <strong>{{piva_azienda}}</strong>, email: <strong>{{mail_azienda}}</strong></p>
+  </mat-expansion-panel>
+</mat-accordion>
+</div>
+<br />
+<app-aleph-table 
+        [tableData]="data" [tableColumns]="customersTableColumns" [listActions]="listActions"
+        tableCase="general"
+        [isFilterable]="true"
+        [isPageable]="true"
+        [paginationSizes]="[5,10]"
+        [defaultPageSize]="5"
+        (viewAction) = "viewMethod($event)"
+        (editAction) = "editMethod($event)"
+        (orgAction) = "orgMethod($event)"
+        (deleteAction) = "deleteMethod($event)"
+></app-aleph-table>
+
+<br><br><br><br><br><br><br><br>
+
+<div class="footer_table_container">
+  <video autoplay muted loop id="VideoFooter" class="video-container_footer_table">
+    <source src="assets/video/footer.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div class="footer_small">
+<img src="assets/img/logo_aleph_very_small.png" alt="logo aleph"/>
+  </div>

@@ -1,0 +1,112 @@
+<div class="centraleformselect">
+    <br />
+    <div class="container">
+        <div class="formboxpanelportal">
+            <div class="central">
+                <mat-accordion class="accordion">
+                    <mat-expansion-panel class="accordion" (opened)="panelOpenState = true"
+                        (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <span class="material-icons">
+                                    support_agent
+                                </span>
+                            </mat-panel-title>
+                            <mat-panel-description>
+
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <p>
+                            Indica il nome del campo, la sua tipologia e la sua eventuale obbligatorietà. 
+                            Nel caso di campi di tipo select definisci le opzioni che andranno a popolare il relativo
+                            manu a tendina.
+                        </p>
+                    </mat-expansion-panel>
+                </mat-accordion>
+
+                    <form [formGroup]="form" class="form_container">
+                    <div class="row mt-5 align-items-center">
+
+                    </div>
+
+                    <hr class="my-4" />
+
+                    <div class="form-row" id="1">
+                        <div class="form-group col-md-6">
+                            <label for="campo1">Nome CAMPO</label>
+                            <input formControlName="campo1" type="text" id="campo1"
+                                class="form-control" />
+                            <div *ngIf="form.controls['campo1'].invalid && (form.controls['campo1'].dirty || form.controls['campo1'].touched)"
+                                class="alert alert-danger">
+                                Inserire un formato valido
+                                <div *ngIf="form.controls['campo1'].errors.required">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="tipocampo1">Tipo CAMPO</label>
+                            <select id="tipocampo1" class="form-control"
+                                formControlName="tipocampo1" (change)="cambiotipo();">
+                                <option>Input testo</option>
+                                <option>Select</option>
+                                <option>Data</option>
+                                <option>SiNo</option>
+                                <option>File</option>
+                            </select>
+                            <div *ngIf="form.controls['tipocampo1'].invalid && (form.controls['tipocampo1'].dirty || form.controls['tipocampo1'].touched)"
+                                class="alert alert-danger">
+                                Selezionare un tipo
+                                <div *ngIf="form.controls['tipocampo1'].errors.required">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="obblicampo1">Obbligatorio</label>
+                            <select id="obblicampo1" class="form-control"
+                                formControlName="obblicampo1">
+                                <option selected>{{data.obbligatorio}}</option>
+                                <option>Si</option>
+                                <option>No</option>
+                            </select>
+                            <div *ngIf="form.controls['obblicampo1'].invalid && (form.controls['obblicampo1'].dirty || form.controls['obblicampo1'].touched)"
+                                class="alert alert-danger">
+                                Selezionare un'opzione'
+                                <div *ngIf="form.controls['obblicampo1'].errors.required">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-3" *ngIf="form.controls['tipocampo1'].value=='Input testo'">
+                            <label for="validator1">Validatore</label>
+                            <select id="validator1" class="form-control"
+                                formControlName="validator1">
+                                        <option value="">---</option>
+                                        <option value="CF">CF</option>
+                                        <option value="MAIL">E-mail</option>
+                                        <option value="NUM">Numerico</option>
+                            </select>                          
+                        </div>
+
+                        <div *ngIf="miotipo=='Select'" class="form-group col-md-6">
+                            <label for="opzionifield">Opzioni del campo</label>
+                            <mat-form-field class="example-chip-list">
+                                <mat-chip-list #chipList>
+                                    <mat-chip *ngFor="let opzione of opzioni" [selectable]="selectable"
+                                        [removable]="removable" (removed)="rimuoviOpzione(opzione)">
+                                        {{opzione}}
+                                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                    </mat-chip>
+                                    <input placeholder="Aggiungi opzione" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="aggiungiOpzione($event)">
+                                </mat-chip-list>
+                            </mat-form-field>
+                        </div>
+                    </div>
+               
+                    <button class="btn btn-success" (click)="Trasmetti();">Registra modifiche</button>
+                </form>
+            </div>
+            <button mat-raised-button class="ml-auto" (click)="closeDialog()">Chiudi la finestra</button>
+        </div>
+    </div>
+</div>

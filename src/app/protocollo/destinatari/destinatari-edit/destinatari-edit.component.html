@@ -1,0 +1,66 @@
+<div class="centraleprototables">
+    <br />
+<div class="container">
+    <div class="formboxpanel">
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+           <div class="my-4">
+            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab" aria-controls="home" aria-selected="false">MODIFICA Destinatario Simbolico</a>
+                </li>
+            </ul>
+            <form [formGroup]="form" >
+                <div class="row mt-5 align-items-center">
+                                       <div class="col">
+                        <div class="row align-items-center">
+                            <div class="col-md-7">
+                               </div>
+                        </div>
+                      
+                    </div>
+                </div>
+              
+                <hr class="my-4" />
+             
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="nome">Nome:</label>
+                        <input  [(ngModel)]="nome" formControlName="nome"  type="text" id="nome"  class="form-control"  required />
+                        <div *ngIf="form.controls['nome'].invalid && (form.controls['nome'].dirty || form.controls['nome'].touched)" class="alert alert-danger">
+                           Il nome è obbligatorio
+                            <div *ngIf="form.controls['nome'].errors.required">
+                           
+                          </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="nome">Descrizione:</label>
+                        <input  [(ngModel)]="descrizione" formControlName="descrizione"  type="text" id="descrizione"  class="form-control"  required />
+                        <div *ngIf="form.controls['descrizione'].invalid && (form.controls['descrizione'].dirty || form.controls['descrizione'].touched)" class="alert alert-danger">
+                           La descrizione è obbligatoria
+                            <div *ngIf="form.controls['descrizione'].errors.required">
+                           
+                          </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="Submit" class="btn btn-success" (click)="Trasmetti();">Trasmetti valori</button>
+           
+        </form>
+        <br /><br /><br /><br /><br /><br /><br /><br />
+           </div>
+        </div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+         </div>
+

@@ -1,0 +1,51 @@
+<form class="example-form" [formGroup]="form">
+  <br /><br />
+  &nbsp;&nbsp;
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-icon  matSuffix>event_seat</mat-icon>
+      <mat-label>Amministrazione</mat-label>
+      <input type="text" matInput [(ngModel)]="des_amm" formControlName="des_amm"  type="text" id="des_amm"  class="form-control" >
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-icon  matSuffix>label_important</mat-icon>
+          <mat-label>Codice amministrazione</mat-label>
+          <input type="text" matInput matInput [(ngModel)]="cod_amm" formControlName="cod_amm"  type="text" id="cod_amm"  class="form-control">
+            </mat-form-field>
+            &nbsp;
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-icon  matSuffix>event_seat</mat-icon>
+              <mat-label>AOO</mat-label>
+              <input type="text" matInput [(ngModel)]="des_aoo" formControlName="des_aoo"  type="text" id="des_aoo"  class="form-control" >
+                </mat-form-field>
+                &nbsp;
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-icon  matSuffix>label_important</mat-icon>
+                  <mat-label>Codice AOO</mat-label>
+                  <input type="text" matInput [(ngModel)]="cod_aoo" formControlName="cod_aoo"  type="text" id="cod_aoo"  class="form-control" >
+                    </mat-form-field>
+
+                       &nbsp;
+                      
+                     <button id="cerca" (click)="Cerca();"><mat-icon>search</mat-icon></button>
+  </form>
+
+  <app-aleph-table id="tabella"
+  [tableData]="data" [tableColumns]="customersTableColumns" [listActions]="listActions"
+  tableCase="general"
+  [isFilterable]="true"
+  [isPageable]="true"
+  [paginationSizes]="[5,10]"
+  [defaultPageSize]="5"
+></app-aleph-table>
+  <br><br><br><br><br><br><br><br>
+
+<div class="footer_table_container">
+  <video autoplay muted loop id="VideoFooter" class="video-container_footer_table">
+    <source src="assets/video/footer.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div class="footer_small">
+<img src="assets/img/logo_aleph_very_small.png" alt="logo aleph"/>
+  </div>

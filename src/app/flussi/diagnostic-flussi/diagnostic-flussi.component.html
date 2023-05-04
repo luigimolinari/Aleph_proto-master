@@ -1,0 +1,42 @@
+<div class="centralediagnostica">
+
+        <div class="container bootstrap snippets bootdey" style="z-index:-1;">
+            <div class="formboxpanel">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="panel panel-dark panel-colorful">
+                        <div class="panel-body text-center">
+                            <p class="text-uppercase mar-btm text-sm">Flussi</p>
+                            <i class="fa fa-users fa-3x"><fa-icon [icon]="faNetworkWired"></fa-icon></i>
+                            <hr>
+                            <p class="h2 text-thin"></p>
+                            <small><button type="button" class="btn btn-outline-secondary" [routerLink]="['/flussiadd']" >Inserisci</button></small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="panel panel-default panel-colorful {{showDoc}}">
+                        <div class="panel-body text-center">
+                            <i class="fa fa-arrow fa-3x"><fa-icon [icon]="faArrowDown"></fa-icon></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="panel panel-danger panel-colorful {{showDoc}}">
+                        <div class="panel-body text-center">
+                            <p class="text-uppercase mar-btm text-sm">Tipi documentale</p>
+                            <i class="fa fa-comment fa-3x"><fa-icon [icon]="faFileContract"></fa-icon></i>
+                            <hr>
+                            <p class="h2 text-thin"></p>
+                            <small><button type="button" class="btn btn-danger" disabled= {{showDoc}} [routerLink]="['/documenti']">Inserisci</button></small>
+                        </div>
+                    </div>
+                </div>            
+            </div>
+        </div>
+</div>
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+</div>

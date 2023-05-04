@@ -1,0 +1,107 @@
+:host ::ng-deep .p-organizationchart {
+    .p-person {
+        padding: 0;
+        border: 0 none;
+        min-width: 150px;
+    }
+
+    .node-header, .node-content {
+        padding: .5em .7rem;
+    }
+
+    .node-header {
+        background-color: #495ebb;
+        color: #ffffff;
+    }
+
+    .node-content{
+        text-align: center;
+        background-color: #6495edbf;
+        /*border: 1px solid #495ebb;*/
+        color:white;
+    }
+    .node-content.form{
+        background-color: lightseagreen;
+    }
+
+    .node-content img {
+        border-radius: 50%;
+    }
+
+    .department-cfo {
+        background-color: #7247bc;
+        color: #ffffff;
+    }
+
+    .department-coo {
+        background-color: #a534b6;
+        color: #ffffff;
+    }
+
+    .department-cto {
+        background-color: #e9286f;
+        color: #ffffff;
+    }
+    .panel {
+        box-shadow: 0 2px 0 rgba(0,0,0,0.05);
+        border-radius: 0;
+        border: 0;
+      
+      }
+      
+      .panel-dark.panel-colorful {
+        background-color: #3b4146;
+        border-color: #3b4146;
+        color: #fff;
+      }
+      
+      .panel-danger.panel-colorful {
+        background-color: #f76c51;
+        border-color: #f76c51;
+        color: #fff;
+      }
+      
+      .panel-primary.panel-colorful {
+        background-color: #5fa2dd;
+        border-color: #5fa2dd;
+        color: #fff;
+      }
+      
+      .panel-info.panel-colorful {
+        background-color: #4ebcda;
+        border-color: #4ebcda;
+        color: #fff;
+      }
+      
+      .panel-body {
+        padding: 25px 20px;
+      }
+      
+      .panel hr {
+        border-color: rgba(0,0,0,0.1);
+      }
+      
+      .mar-btm {
+        margin-bottom: 15px;
+      }
+      
+      h2, .h2 {
+        font-size: 28px;
+      }
+      
+      .small, small {
+        font-size: 85%;
+      }
+      
+      .text-sm {
+        font-size: .9em;
+      }
+      
+      .text-thin {
+        font-weight: 300;
+      }
+      
+      .text-semibold {
+        font-weight: 600;
+      }
+}

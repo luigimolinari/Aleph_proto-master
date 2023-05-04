@@ -1,0 +1,91 @@
+<div class="centraleform">
+    <br />
+    <div class="container">
+        <div class="formboxpanelportal">
+            <div class="central">
+                <br>
+                <div>
+                    <i class="fa fa-2x">
+                        <fa-icon [icon]="faCubes"></fa-icon>
+                    </i>
+                    &nbsp;&nbsp;Scegli il campo gateway
+                </div>    
+                <br /><br />
+                <button class="btn btn-light left" (click)="back();">Indietro</button>&nbsp;
+                <br /><br />
+                <mat-accordion class="accordion">
+                    <mat-expansion-panel class="accordion" (opened)="true"
+                        (closed)="false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <span class="material-icons">
+                                    support_agent
+                                </span>
+                            </mat-panel-title>
+                            <mat-panel-description>
+
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <p>
+                            Scelgi il campo che diventerà il punto gateway del flusso.
+                            Per i campi di tipo Input testo o Data dovrai specificare la condizione da valutare e che determinerà la diramazione del flusso in due diverse strade.
+                            Nel caso di campo Si-No, il flusso si dirama sempre in due strade, a seconda che il campo gateway abbia valore 'Si' o 'No'.
+                            Nel caso di campo Select, il flusso si dirama in tante strade quante sono le opzioni definite per il menu a tendina.
+                        </p>
+                    </mat-expansion-panel>
+                </mat-accordion>
+                <br />
+
+                <div *ngIf="update == 1">
+                    Attenzione! Un gateway è già stato definito per questo form.
+                    <br>
+                    <b>Campo</b>: {{gateway_field}}
+                    <br>
+                    <b>Condizione</b>: {{gateway_condition}}
+                    
+                </div>
+                
+                <br>
+    
+                <div *ngFor="let item of fields" matRipple class="example-ripple-container mat-elevation-z4 col-md-6"
+                    [ngClass]="{'ripple_selected': item.id == id_selected}"
+                    (click)="scegli(item.id, item.nome, item.tipo);">
+                    <span *ngIf="item.id == gateway_id" span class="material-icons dynamicForm">
+                        dynamic_form
+                    </span>
+                    {{item.nome}}
+    
+                </div>
+                <br /><br />
+                <mat-card *ngIf="tipo_selected != 'Select' && tipo_selected != 'Si-No' && tipo_selected !=''"> <mat-chip-list>SE
+    
+                    <mat-chip color="accent" selected>{{nome_selected}}</mat-chip> è </mat-chip-list><br />
+    
+                    <select id="condizione" class="form-control" [(ngModel)] = "condizione">
+                        <option label="uguale a" selected="selected">equal-notequal</option>
+                        <option label="inferiore a">lower</option>
+                        <option label="superiore a">higher</option>
+                    </select>
+                    <br />
+                    <label for="valore">Valore:</label>
+    
+                    <input *ngIf="tipo_selected=='Input testo'" type="text" id="valore" class="form-control"  [(ngModel)] = "valore" required />
+                    <input *ngIf="tipo_selected=='Data'" type="date" id="valore" class="form-control" [(ngModel)] = "valore" required />
+    
+                    <br><br>
+    
+                </mat-card>
+                
+                <br>
+                <div class="center" *ngIf="tipo_selected !='' && update == 0">
+                    <button class="btn btn-success" (click)="submit()">Registra gateway</button>
+                </div>
+                <div class="center" *ngIf="tipo_selected !='' && update == 1">
+                    <button class="btn btn-success" (click)="submit()">Modifica gateway</button>
+                </div>
+                <br><br><br><br><br>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="centralerubrica">
+<br />
+<div class="container">
+    <div class="formboxpanel">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+                <div class="my-4">
+                    <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab"
+                                aria-controls="home" aria-selected="false">MODIFICA contatto</a>
+                        </li>
+                    </ul>
+                    <form [formGroup]="form">
+                        <div class="row mt-5 align-items-center">
+                            <div class="col">
+                                <div class="row align-items-center">
+                                    <div class="col-md-7">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <hr class="my-4" />
+                        <fa-icon [icon]="faEdit"></fa-icon>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="tipo_contatto">Tipo contatto:</label>
+                                <input [(ngModel)]="tipo_contatto" placeholder="PEC, mail, ..." formControlName="tipo_contatto" type="text" id="tipo_contatto"
+                                    class="form-control" required />
+                                <div *ngIf="form.controls['tipo_contatto'].invalid && (form.controls['tipo_contatto'].dirty || form.controls['tipo_contatto'].touched)"
+                                    class="alert alert-danger">
+                                    Il tipo contatto è obbligatorio
+                                    <div *ngIf="form.controls['tipo_contatto'].errors.required">
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="form-group col-md-6">
+                                <label for="descrizione">Descrizione:</label>
+                                <input [(ngModel)]="descrizione" formControlName="descrizione" type="text"
+                                    id="descrizione" class="form-control" required />
+                                <div *ngIf="form.controls['descrizione'].invalid && (form.controls['descrizione'].dirty || form.controls['descrizione'].touched)"
+                                    class="alert alert-danger">
+                                    La descrizione è obbligatoria
+                                    <div *ngIf="form.controls['descrizione'].errors.required">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="Submit" class="btn btn-success" (click)="Trasmetti();">Trasmetti
+                            </button>
+
+                    </form>
+                    <br />
+                    <button _ngcontent-ajd-c474="" (click)="back();" class="btn btn-warning">Indietro</button>&nbsp;
+                    <br /><br /><br /><br /><br /><br /><br /><br />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="footer_pages">
+<img src='assets/img/logo_aleph_medium.png'>
+</div>

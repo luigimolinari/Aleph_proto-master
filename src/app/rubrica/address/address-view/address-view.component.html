@@ -1,0 +1,69 @@
+<br />
+<button type="button" class="btn btn-success btn-success-add" [routerLink]="['/addressadd']" [queryParams]="{id_rubrica:id_rubrica}">Aggiungi indirizzo</button>
+<button type="button" class="btn btn-primary" [routerLink]="['/contactview']" [queryParams]="{id_rubrica:id_rubrica}">Vai ai contatti</button>
+<button type="button" class="btn btn-danger" [routerLink]="['/rubricaview']">Torna alla rubrica</button>
+<br /><br />
+
+
+    <div class="user_info"><span class="material-icons person-material-icon">
+        person_outline
+        </span> 
+        Indirizzi di {{nome}} {{cognome}}
+    </div>
+    <br />
+    <table class="example-full-width" cellspacing="0">
+        <tr>
+            <td>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Stato</mat-label>
+                    <input matInput [(ngModel)] = "stato_input">
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Provincia</mat-label>
+                    <input matInput [(ngModel)] = "provincia_input">
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Comune</mat-label>
+                    <input matInput [(ngModel)] = "comune_input">
+                </mat-form-field>
+            </td>
+                     
+            <td class="td-button-container">
+                <div class="example-button-container">
+                    <button class="search_button" mat-fab  color="info" aria-label="Cerca" (click)="search()">
+                    <mat-icon>search</mat-icon>
+                    </button>
+                </div> 
+            </td>
+        </tr>
+    </table>
+
+    <app-aleph-table 
+                [tableData]="data" [tableColumns]="customersTableColumns" [listActions]="listActions"              
+                tableCase="general"
+                [isFilterable]="true"
+                [isPageable]="true"
+                [paginationSizes]="[5,10]"
+                [defaultPageSize]="5"
+                (editAction)    = "editMethod($event)"
+                (deleteAction)  = "deleteMethod($event)"
+    ></app-aleph-table>
+<br />
+<button _ngcontent-ajd-c474="" (click)="back();" class="btn btn-warning">Indietro</button>&nbsp;
+<br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
+
+<div class="footer_table_container">
+  <video autoplay muted loop id="VideoFooter" class="video-container_footer_table">
+    <source src="assets/video/footer.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div class="footer_small">
+<img src="assets/img/logo_aleph_very_small.png" alt="logo aleph"/>
+  </div>
+

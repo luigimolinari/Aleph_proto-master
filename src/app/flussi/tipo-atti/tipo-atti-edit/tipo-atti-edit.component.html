@@ -1,0 +1,96 @@
+<div class="centraletipoatti">
+    <!--da sostituire-->
+    <br />
+    <div class="container">
+        <div class="formboxpanel">
+
+            <mat-horizontal-stepper #stepper class="stepper">
+
+                <mat-step label="Flusso">
+                    <form><br /><br />
+                        <ng-template matStepLabel>Flusso</ng-template>
+                        <!--mat-form-field rimuovo-->
+                        <mat-label>Seleziona il flusso</mat-label>
+
+                        <input matInput type="text" name="flusso" placeholder="Cerca il flusso per descrizione"
+                            [formControl]="flusso" [matAutocomplete]="autoFlusso" class="form-control"
+                            aria-readonly="true" (keydown)="ControlFlusso(0)">
+                        <mat-autocomplete #autoFlusso="matAutocomplete">
+                            <mat-option *ngFor="let flusso of filteredFlussi | async" [value]="flusso"
+                                (click)="ControlFlusso(1)">
+                                {{flusso}}
+                            </mat-option>
+                        </mat-autocomplete>
+                        <!--/mat-form-field--><br />
+                        <hr class="my-4" />
+                        <div>
+                            <button mat-button matStepperNext class="btn btn-success"
+                                [disabled]="!validoFlusso">Successivo</button>
+                        </div>
+                    </form>
+
+                    <br /><br /><br /><br /> <br /><br /><br /><br />
+                </mat-step>
+
+                <mat-step label="Natura">
+                    <form [formGroup]="secondFormGroup"><br /><br />
+                        <ng-template matStepLabel>Natura</ng-template>  
+                        <label>Natura dell'atto</label>                        
+                        <input placeholder="Inserire la natura del tipo atto" formControlName="natura"
+                            class="form-control" required>
+                        <br />
+                        <hr class="my-4" />
+                        <div>
+                            <button mat-button matStepperPrevious class="btn btn-success">Precedente</button>&nbsp;
+                            <button mat-button matStepperNext class="btn btn-success">Successivo</button>
+                        </div>
+                    </form>
+                    <div>
+
+
+                    </div>
+                    <br /><br /><br /><br /> <br /><br /><br /><br>
+                </mat-step>
+
+                <mat-step [stepControl]="thirdFormGroup" label="Azienda">
+                    <form><br /><br />
+                        
+                        <label>Seleziona l'azienda</label>
+
+                        <input type="text" name="azienda" placeholder="Cerca l'azienda per nome"
+                            [formControl]="azienda" [matAutocomplete]="autoAzienda" class="form-control"
+                            aria-readonly="true" (keydown)="ControlAzienda(0,'')">
+                        <mat-autocomplete #autoAzienda="matAutocomplete">
+                            <mat-option *ngFor="let azienda of filteredAziende | async" [value]="azienda"
+                                (click)="ControlAzienda(1,azienda)">
+                                {{azienda}}
+                            </mat-option>
+                        </mat-autocomplete><br />
+                        
+                        
+                        <label *ngIf="showStrutture">Seleziona la struttura</label>
+                        <select *ngIf="showStrutture" 
+                         id="struttura" name="struttura" class="form-control" [formControl]="struttura"
+                                required>
+                                <option >----</option>
+                                <option *ngFor="let item of lista_strutture" [value]="item">{{item}}</option>
+                        </select>                     
+                        
+                        <hr class="my-4" />
+                        <div>
+                            <button mat-button matStepperPrevious class="btn btn-success">Precedente</button>&nbsp;
+                            <button [disabled]="!validoAzienda" mat-button class="btn btn-warning" (click)="trasmetti()">Registra</button>
+                        </div>
+                    </form>
+                    <br /><br /><br /><br /> <br /><br /><br /><br>
+                </mat-step>
+
+            </mat-horizontal-stepper>
+
+
+        </div>
+    </div>
+</div>
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+</div>

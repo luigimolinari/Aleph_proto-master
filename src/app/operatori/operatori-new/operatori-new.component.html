@@ -1,0 +1,180 @@
+
+<div class="centraleoperatorinew">
+<div class="formbox"><div class="formpanel">
+    <div class="form-group" name="" >    <br /><button type="button" class="btn btn-primary"> Nuovo Operatore 
+      <span class="badge badge-light"> <img src="assets/img/user.png"></span>
+    </button><br/><br />
+
+    <div *ngIf='tipoalert'class="alert alert-success">
+      <strong> Inserimento correttamente effettuato </strong>
+    </div>
+    <div *ngIf='tipoalertdanger'class="alert alert-danger">
+      <strong> Attenzione! Inserimento NON effettuato </strong>
+    </div>
+    <div *ngIf='tipoalertuncomplete'class="alert alert-warning">
+      <strong> Attenzione! Non hai inserito tutti i campi </strong>
+    </div>
+   
+        <form  [formGroup]="OperatoreForm" name="OperatoreForm"  (ngSubmit)=inserisci(); novalidate>
+          
+
+          
+          <label>nome</label>
+        <input type="text" class="form-control" [(ngModel)]="nome" formControlName="nome" placeholder="Nome"  required>
+        
+        <div *ngIf="OperatoreForm.controls['nome'].invalid && (OperatoreForm.controls['nome'].dirty || OperatoreForm.controls['nome'].touched)" class="alert alert-danger">
+          <div *ngIf="OperatoreForm.controls['nome'].errors.required">
+          Il nome è obbligatorio
+        </div>
+      </div>
+  
+      <label>cognome</label>
+        <input type="text" class="form-control" [(ngModel)]="cognome" formControlName="cognome" placeholder="cognome" required>
+        <div *ngIf="OperatoreForm.controls['cognome'].invalid && (OperatoreForm.controls['cognome'].dirty || OperatoreForm.controls['cognome'].touched)" class="alert alert-danger">
+          <div *ngIf="OperatoreForm.controls['cognome'].errors.required">
+          Il cognome è obbligatorio
+        </div>
+        </div>
+
+                 
+        <label>CF</label>
+        <input type="text" class="form-control" [(ngModel)]="cf" formControlName="cf" placeholder="CF"  required>
+        
+        <div *ngIf="OperatoreForm.controls['cf'].invalid && (OperatoreForm.controls['cf'].dirty || OperatoreForm.controls['cf'].touched)" class="alert alert-danger">
+          <div *ngIf="OperatoreForm.controls['cf'].errors.required">
+          Il CF è obbligatorio
+        </div>
+      </div>
+  
+      <label>data di nascita</label>
+        <input type="text" class="form-control" [(ngModel)]="data_nascita" formControlName="data_nascita" placeholder="data_nascita" required>
+        <div *ngIf="OperatoreForm.controls['data_nascita'].invalid && (OperatoreForm.controls['data_nascita'].dirty || OperatoreForm.controls['data_nascita'].touched)" class="alert alert-danger">
+          <div *ngIf="OperatoreForm.controls['data_nascita'].errors.required">
+           La data di nascita è obbligatoria
+        </div>
+        </div>
+
+
+
+        <div class="row">
+          <div class="col">
+        <label>luogo di nascita</label>
+        <input type="text" class="form-control" [(ngModel)]="luogo_nascita" formControlName="luogo_nascita" placeholder="luogo di nascita"  required>
+        
+        <div *ngIf="OperatoreForm.controls['luogo_nascita'].invalid && (OperatoreForm.controls['luogo_nascita'].dirty || OperatoreForm.controls['luogo_nascita'].touched)" class="alert alert-danger">
+          <div *ngIf="OperatoreForm.controls['luogo_nascita'].errors.required">
+          Il luogo di nascita è obbligatorio
+        </div>
+      </div>
+  </div>  <div class="col">
+      <label>provincia nascita</label>
+        <input type="text" class="form-control" [(ngModel)]="prov_nascita" formControlName="prov_nascita" placeholder="prov nascita" required>
+        <div *ngIf="OperatoreForm.controls['prov_nascita'].invalid && (OperatoreForm.controls['prov_nascita'].dirty || OperatoreForm.controls['prov_nascita'].touched)" class="alert alert-danger">
+          <div *ngIf="OperatoreForm.controls['prov_nascita'].errors.required">
+           La provincia di nascita è obbligatoria
+        </div>
+        </div></div></div>
+
+        <label>indirizzo residenza</label>
+        <input type="text" class="form-control" [(ngModel)]="indirizzo_residenza" formControlName="indirizzo_residenza" placeholder="indirizzo residenza" required>
+        <div *ngIf="OperatoreForm.controls['indirizzo_residenza'].invalid && (OperatoreForm.controls['indirizzo_residenza'].dirty || OperatoreForm.controls['indirizzo_residenza'].touched)" class="alert alert-danger">
+          <div *ngIf="OperatoreForm.controls['indirizzo_residenza'].errors.required">
+  L'indirizzo di residenza è obbligatorio
+        </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col">
+        <label>comune di residenza</label>
+        <input type="text" class="form-control" [(ngModel)]="comune_residenza" formControlName="comune_residenza" placeholder="comune di residenza"  required>
+        
+        <div *ngIf="OperatoreForm.controls['comune_residenza'].invalid && (OperatoreForm.controls['comune_residenza'].dirty || OperatoreForm.controls['comune_residenza'].touched)" class="alert alert-danger">
+          <div *ngIf="OperatoreForm.controls['comune_residenza'].errors.required">
+          Il comune di residenza è obbligatorio
+        </div>
+      </div>
+  </div>  <div class="col">
+      <label>provincia residenza</label>
+        <input type="text" class="form-control" [(ngModel)]="prov_residenza" formControlName="prov_residenza" placeholder="prov residenza" required>
+        <div *ngIf="OperatoreForm.controls['prov_residenza'].invalid && (OperatoreForm.controls['prov_residenza'].dirty || OperatoreForm.controls['prov_residenza'].touched)" class="alert alert-danger">
+          <div *ngIf="OperatoreForm.controls['prov_residenza'].errors.required">
+           La provincia di residenza è obbligatoria
+        </div>
+        </div></div></div>
+
+        <div class="row">
+          <div class="col">
+        <label>tipo</label>
+        <input type="text" class="form-control" [(ngModel)]="tipo" formControlName="tipo" placeholder="tipo"  required>
+        
+        <div *ngIf="OperatoreForm.controls['tipo'].invalid && (OperatoreForm.controls['tipo'].dirty || OperatoreForm.controls['tipo'].touched)" class="alert alert-danger">
+          <div *ngIf="OperatoreForm.controls['tipo'].errors.required">
+          Il tipo utente è obbligatorio
+        </div>
+      </div>
+  </div>  <div class="col">
+      <label>ruolo</label>
+        <input type="text" class="form-control" [(ngModel)]="ruolo" formControlName="ruolo" placeholder="ruolo" required>
+        <div *ngIf="OperatoreForm.controls['ruolo'].invalid && (OperatoreForm.controls['ruolo'].dirty || OperatoreForm.controls['ruolo'].touched)" class="alert alert-danger">
+          <div *ngIf="OperatoreForm.controls['ruolo'].errors.required">
+        Il ruolo utente è obbligatorio
+        </div>
+        </div></div></div>
+
+        <label>profilo</label>
+        <input type="text" class="form-control" [(ngModel)]="profilo" formControlName="profilo" placeholder="profilo" required>
+        <div *ngIf="OperatoreForm.controls['profilo'].invalid && (OperatoreForm.controls['profilo'].dirty || OperatoreForm.controls['profilo'].touched)" class="alert alert-danger">
+          <div *ngIf="OperatoreForm.controls['profilo'].errors.required">
+ Il profilo è obbligatorio
+        </div>
+        </div>
+        <div class="row">
+          <div class="col">
+        <label>user</label>
+        <input type="text" class="form-control" [(ngModel)]="user" formControlName="user" placeholder="username"  required>
+        
+        <div *ngIf="OperatoreForm.controls['user'].invalid && (OperatoreForm.controls['user'].dirty || OperatoreForm.controls['user'].touched)" class="alert alert-danger">
+          <div *ngIf="OperatoreForm.controls['user'].errors.required">
+          Il nome utente è obbligatorio
+        </div>
+      </div>
+  </div>  <div class="col">
+      <label>azienda</label>
+        <input type="text" class="form-control" [(ngModel)]="azienda" formControlName="azienda" placeholder="azienda" required>
+        <div *ngIf="OperatoreForm.controls['azienda'].invalid && (OperatoreForm.controls['azienda'].dirty || OperatoreForm.controls['azienda'].touched)" class="alert alert-danger">
+          <div *ngIf="OperatoreForm.controls['azienda'].errors.required">
+       L'azienda utente è obbligatoria
+        </div>
+        </div></div></div>
+    
+        <div class="row">
+          <div class="col">
+        <label>email</label>
+        <input type="text" class="form-control" [(ngModel)]="email" formControlName="email" placeholder="email"  required>
+        
+        <div *ngIf="OperatoreForm.controls['email'].invalid && (OperatoreForm.controls['email'].dirty || OperatoreForm.controls['email'].touched)" class="alert alert-danger">
+          <div *ngIf="OperatoreForm.controls['email'].errors.required">
+          L'email è obbligatoria
+        </div>
+      </div>
+  </div>  <div class="col">
+      <label>telefono</label>
+        <input type="text" class="form-control" [(ngModel)]="telefono" formControlName="telefono" placeholder="telefono" required>
+        <div *ngIf="OperatoreForm.controls['telefono'].invalid && (OperatoreForm.controls['telefono'].dirty || OperatoreForm.controls['telefono'].touched)" class="alert alert-danger">
+          <div *ngIf="OperatoreForm.controls['telefono'].errors.required">
+       Il telefono utente è obbligatorio
+        </div>
+        </div></div></div>
+    
+    
+        <br />
+        <button type="submit"  class="btn btn-primary btn-lg btn-block">
+        Registra Operatore</button>
+      
+    </form></div></div></div></div>
+    <div class="footer_pages">
+<img src='assets/img/logo_aleph_medium.png'>
+     </div>
+
+    

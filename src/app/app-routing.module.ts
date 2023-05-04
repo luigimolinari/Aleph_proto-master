@@ -1,0 +1,387 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
+import { OperatoriComponent } from './operatori/operatori.component';
+import { BackgroundComponent } from './background/background.component';
+import { OperatoriNewComponent } from './operatori/operatori-new/operatori-new.component';
+import { AmministrazioneComponent } from './amministrazione/amministrazione.component';
+import { OperatoreViewComponent } from './operatori/operatore-view/operatore-view.component';
+import { OperatoreEditComponent } from './operatori/operatore-edit/operatore-edit.component';
+import { AddoperatoreComponent } from './operatori/addoperatore/addoperatore.component';
+import { AziendeComponent } from './strutture/aziende/aziende.component';
+import { AziendaEditComponent } from './strutture/azienda-edit/azienda-edit.component';
+import { AziendaViewComponent } from './strutture/azienda-view/azienda-view.component';
+import { TipiComponent } from './strutture/tipi/tipi.component';
+import { TipiEditComponent } from './strutture/tipi-edit/tipi-edit.component';
+import { AddTipoComponent } from './strutture/add-tipo/add-tipo.component';
+import { AddAziendaComponent } from './strutture/add-azienda/add-azienda.component';
+import { TipoGruppoComponent } from './strutture/tipo-gruppo/tipo-gruppo.component';
+import { AddTipogruppoComponent } from './strutture/add-tipogruppo/add-tipogruppo.component';
+import { TipoGruppoEditComponent } from './strutture/tipo-gruppo-edit/tipo-gruppo-edit.component';
+import { FlussiComponent } from './flussi/flussi/flussi.component';
+import { FlussiViewComponent } from './flussi/flussi-view/flussi-view.component';
+import { FlussiAddComponent } from './flussi/flussi-add/flussi-add.component';
+import { FlussiEditComponent } from './flussi/flussi-edit/flussi-edit.component';
+import { ViewGruppiPraticaComponent } from './flussi/view-gruppi-pratica/view-gruppi-pratica.component';
+import { DocumentiFlussoComponent } from './flussi/documenti-flusso/documenti-flusso.component';
+import { DocumentiComponent } from './flussi/documenti/documenti.component';
+import { DocumentiAddComponent } from './flussi/documenti-add/documenti-add.component';
+import { DocumentiEditComponent } from './flussi/documenti-edit/documenti-edit.component';
+import { DiagnosticComponent } from './strutture/diagnostic/diagnostic.component';
+import { DocumentiSelectComponent } from './flussi/documenti-select/documenti-select.component';
+import { FlussiSelectComponent } from './flussi/flussi-select/flussi-select.component';
+import { AddDocumentoComponent } from './flussi/add-documento/add-documento.component';
+import { WorkflowAddComponent } from './flussi/workflow-add/workflow-add.component';
+import { DiagnosticFlussiComponent } from './flussi/diagnostic-flussi/diagnostic-flussi.component';
+import { ProcedureComponent } from './procedure/procedure/procedure.component';
+import { AddProceduraComponent } from './procedure/add-procedura/add-procedura.component';
+import { RupSelectComponent } from './procedure/rup-select/rup-select.component';
+import { DescrizioneComponent } from './procedure/descrizione/descrizione.component';
+import { ProcedureViewComponent } from './procedure/procedure-view/procedure-view.component';
+import { FlussoViewComponent } from './flussi/flusso-view/flusso-view.component';
+import { GruppiComponent } from './procedure/gruppi/gruppi.component';
+import { GruppiAddComponent } from './procedure/gruppi-add/gruppi-add.component';
+import { GruppiEditComponent } from './procedure/gruppi-edit/gruppi-edit.component';
+import { AddStrutturaComponent } from './strutture/add-struttura/add-struttura.component';
+import { StruttureComponent } from './strutture/strutture/strutture.component';
+import { StrutturaViewComponent } from './strutture/struttura-view/struttura-view.component';
+import { StrutturaEditComponent } from './strutture/struttura-edit/struttura-edit.component';
+import { ProceduraSelectComponent } from './procedure/visibilita/procedura-select/procedura-select.component';
+import { DocumentoflussoSelectComponent } from './procedure/visibilita/documentoflusso-select/documentoflusso-select.component';
+import { VisibilitaAddComponent } from './procedure/visibilita/visibilita-add/visibilita-add.component';
+import { ProcedureAttiveComponent } from './operativita/procedure-attive/procedure-attive.component';
+import { WorkflowNewProceduraComponent } from './operativita/workflow-new-procedura/workflow-new-procedura.component';
+import { DocumentiViewComponent } from './operativita/documenti-view/documenti-view.component';
+import { EditDocumentoComponent } from './operativita/edit-documento/edit-documento.component';
+import { ViewDocumentoComponent } from './operativita/view-documento/view-documento.component';
+import { OrganigrammaComponent } from './strutture/organigramma/organigramma.component';
+import { FirmaComponent } from './operativita/firma/firma.component';
+import { EditValidazioneComponent } from './operativita/edit-validazione/edit-validazione.component';
+import { TipoAttiComponent } from './flussi/tipo-atti/tipo-atti.component';
+import { TipoAttiAddComponent } from './flussi/tipo-atti/tipo-atti-add/tipo-atti-add.component';
+import { SchedulerComponent } from './scheduler/scheduler/scheduler.component';
+import { AddScheduleComponent } from './scheduler/add-schedule/add-schedule.component';
+import { EditorComponent } from './documenti/editor/editor.component';
+/* import { TestImapComponent } from './test-imap/test-imap.component'; */
+import { GruppiOperatoreComponent } from './procedure/gruppi-operatore/gruppi-operatore.component';
+import { ModelliEditComponent } from './flussi/modelli-edit/modelli-edit.component';
+import { AddFormComponent } from './portal/add-form/add-form.component';
+import { DocumentiCollAddComponent } from './flussi/documenti-coll-add/documenti-coll-add.component';
+import { FormSelectComponent } from './portal/form-select/form-select.component';
+import { EditModelloComponent } from './operativita/edit-modello/edit-modello.component';
+import { FormObbligatoriComponent } from './portal/form-obbligatori/form-obbligatori.component';
+import { FormTerminaComponent } from './portal/form-termina/form-termina.component';
+import { FormsComponent } from './portal/forms/forms.component';
+import { FormGatewayComponent } from './portal/form-gateway/form-gateway.component';
+import { FormAssignGatewayComponent } from './portal/form-assign-gateway/form-assign-gateway.component';
+import { FormAssignGatewaySelectComponent } from './portal/form-assign-gateway-select/form-assign-gateway-select.component';
+import { PortalFormComponent } from './portal/users/portal-form/portal-form.component';
+import { UserformsComponent } from './portal/users/userforms/userforms.component';
+import { PortalDispatcherComponent } from './portal/users/portal-dispatcher/portal-dispatcher.component';
+import { UserRequestComponent } from './portal/users/user-request/user-request.component';
+import { FascicoliComponent } from './procedure/fascicoli/fascicoli.component';
+import { FascicoliViewComponent } from './procedure/fascicoli/fascicoli-view/fascicoli-view.component';
+import { FascicoliAddComponent } from './procedure/fascicoli/fascicoli-add/fascicoli-add.component';
+import { FascicoliEditComponent } from './procedure/fascicoli/fascicoli-edit/fascicoli-edit.component';
+import { ArchivioComponent } from './archivio/archivio.component';
+import { WorkflowProceduraComponent } from './operativita/workflow-procedura/workflow-procedura.component';
+import { GruppiProceduraComponent } from './procedure/gruppi-procedura/gruppi-procedura.component';
+import { GruppiFascicoliComponent } from './procedure/gruppi-fascicoli/gruppi-fascicoli.component';
+import { UserRequestViewComponent } from './portal/users/user-request-view/user-request-view.component';
+import { UserRequestDeletedComponent } from './portal/users/user-request-deleted/user-request-deleted.component';
+import { AddSpreadsheetComponent } from './documenti/spreadsheet/add-spreadsheet/add-spreadsheet.component';
+import { SpreadsheetComponent } from './documenti/spreadsheet/spreadsheet/spreadsheet.component';
+import { ExcelViewerComponent } from './documenti/spreadsheet/excel-viewer/excel-viewer.component';
+import { FormsSelectComponent } from './flussi/forms-select/forms-select.component';
+import { SpreadsheetDocComponent } from './documenti/spreadsheet/spreadsheet-doc/spreadsheet-doc.component';
+import { EditSpreadsheetComponent } from './documenti/spreadsheet/edit-spreadsheet/edit-spreadsheet.component';
+import { GruppoLavoroPraticaComponent } from './flussi/gruppo-lavoro-pratica/gruppo-lavoro-pratica.component';
+import { GruppoValidazionePraticaComponent } from './flussi/gruppo-validazione-pratica/gruppo-validazione-pratica.component';
+import { WorkflowCAddComponent } from './flussi/workflow-c-add/workflow-c-add.component';
+import { GestioneScrivaniaComponent } from './operativita/gestione-scrivania/gestione-scrivania.component';
+import { ViewFormComponent } from './portal/view-form/view-form.component';
+import { WorkflowPraticaComponent } from './operativita/pratica/workflow-pratica/workflow-pratica.component';
+import { AddDocumentoPraticaComponent } from './operativita/pratica/add-documento-pratica/add-documento-pratica.component';
+import { EditDocumentoPraticaComponent } from './operativita/pratica/edit-documento-pratica/edit-documento-pratica.component';
+import { WebcamTestComponent } from './webcam-test/webcam-test.component';
+import { ScanComponent } from './scan/scan.component';
+import { ScanTestComponent } from './scan-test/scan-test.component';
+import { PraticaRequestComponent } from './portal/users/pratica-request/pratica-request.component';
+import { ResolveScreenComponent } from './template/resolve-screen/resolve-screen.component';
+import { EditFieldComponent } from './portal/edit-field/edit-field.component';
+import { AddFieldComponent } from './portal/add-field/add-field.component';
+//Silex webbuilder
+import { WebBuilderComponent } from './web-builder/web-builder.component';
+
+
+//videoconferenza
+import { VideoConfComponent } from './video-conf/video-conf.component';
+
+//protocollo
+import { ProtoAdminComponent } from './protocollo/proto-admin/proto-admin.component';
+import { ViewInboxComponent } from './protocollo/view-inbox/view-inbox.component';
+import { ViewInboxDeletedComponent } from './protocollo/view-inbox-deleted/view-inbox-deleted.component';
+import { AddInboxComponent } from './protocollo/add-inbox/add-inbox.component';
+import { EditInboxComponent } from './protocollo/edit-inbox/edit-inbox.component';
+import { ViewModalitaComponent } from './protocollo/modalita_trasmissione/view-modalita/view-modalita.component';
+import { ViewModalitaDeletedComponent } from './protocollo/modalita_trasmissione/view-modalita-deleted/view-modalita-deleted.component';
+import { AddModalitaComponent } from './protocollo/modalita_trasmissione/add-modalita/add-modalita.component';
+import { EditModalitaComponent } from './protocollo/modalita_trasmissione/edit-modalita/edit-modalita.component';
+import { IpaViewComponent } from './protocollo/ipa/ipa-view/ipa-view.component';
+import { ViewProtoTipoComponent } from './protocollo/proto_tipo/view-proto-tipo/view-proto-tipo.component';
+import { ViewProtoTipoDeletedComponent } from './protocollo/proto_tipo/view-proto-tipo-deleted/view-proto-tipo-deleted.component';
+import { AddProtoTipoComponent } from './protocollo/proto_tipo/add-proto-tipo/add-proto-tipo.component';
+import { EditProtoTipoComponent } from './protocollo/proto_tipo/edit-proto-tipo/edit-proto-tipo.component';
+import { ViewSerieComponent } from './protocollo/serie/view-serie/view-serie.component';
+import { ViewSerieDeletedComponent } from './protocollo/serie/view-serie-deleted/view-serie-deleted.component';
+import { AddSerieComponent } from './protocollo/serie/add-serie/add-serie.component';
+import { EditSerieComponent } from './protocollo/serie/edit-serie/edit-serie.component';
+import { ViewTipologiaDocumentazioneComponent } from './protocollo/tipologia_documentazione/view-tipologia-documentazione/view-tipologia-documentazione.component';
+import { ViewTipologiaDocumentazioneDeletedComponent } from './protocollo/tipologia_documentazione/view-tipologia-documentazione-deleted/view-tipologia-documentazione-deleted.component';
+import { AddTipologiaDocumentazioneComponent } from './protocollo/tipologia_documentazione/add-tipologia-documentazione/add-tipologia-documentazione.component';
+import { EditTipologiaDocumentazioneComponent } from './protocollo/tipologia_documentazione/edit-tipologia-documentazione/edit-tipologia-documentazione.component';
+import { AddTitolarioComponent } from './protocollo/titolario/add-titolario/add-titolario.component';
+import { ViewTitolarioComponent } from './protocollo/titolario/view-titolario/view-titolario.component';
+import { ViewTitolarioDeletedComponent } from './protocollo/titolario/view-titolario-deleted/view-titolario-deleted.component';
+import { EditTitolarioComponent } from './protocollo/titolario/edit-titolario/edit-titolario.component';
+import { ViewTipoRubricaComponent } from './protocollo/rubrica/view-tipo-rubrica/view-tipo-rubrica.component';
+import { ViewTipoRubricaDeletedComponent } from './protocollo/rubrica/view-tipo-rubrica-deleted/view-tipo-rubrica-deleted.component';
+import { AddTipoRubricaComponent } from './protocollo/rubrica/add-tipo-rubrica/add-tipo-rubrica.component';
+import { EditTipoRubricaComponent } from './protocollo/rubrica/edit-tipo-rubrica/edit-tipo-rubrica.component';
+import { AddProtocolloComponent } from './protocollo/protocollo/add-protocollo/add-protocollo.component';
+import { AddressViewComponent } from './rubrica/address/address-view/address-view.component';
+import { AddressEditComponent } from './rubrica/address/address-edit/address-edit.component';
+import { AddressAddComponent } from './rubrica/address/address-add/address-add.component';
+import { ContactAddComponent } from './rubrica/contact/contact-add/contact-add.component';
+import { ContactEditComponent } from './rubrica/contact/contact-edit/contact-edit.component';
+import { ContactViewComponent } from './rubrica/contact/contact-view/contact-view.component';
+import { RubricaAddComponent } from './rubrica/rubrica-add/rubrica-add.component';
+import { RubricaViewComponent } from './rubrica/rubrica-view/rubrica-view.component';
+import { RubricaAziendaAddComponent } from './rubrica/rubrica-azienda-add/rubrica-azienda-add.component';
+import { RubricaDispatcher1Component } from './rubrica/rubrica-dispatcher1/rubrica-dispatcher1.component';
+import { RubricaDispatcher2Component } from './rubrica/rubrica-dispatcher2/rubrica-dispatcher2.component';
+import { RubricaEditComponent } from './rubrica/rubrica-edit/rubrica-edit.component';
+import { RubricaAziendaEditComponent } from './rubrica/rubrica-azienda-edit/rubrica-azienda-edit.component';
+import { EtichetteComponent } from './protocollo/etichette/etichette.component';
+import { ViewRiservatezzaComponent } from './protocollo/riservatezza/view-riservatezza/view-riservatezza.component';
+import { ViewRiservatezzaDeletedComponent } from './protocollo/riservatezza/view-riservatezza-deleted/view-riservatezza-deleted.component';
+import { AddRiservatezzaComponent } from './protocollo/riservatezza/add-riservatezza/add-riservatezza.component';
+import { EditRiservatezzaComponent } from './protocollo/riservatezza/edit-riservatezza/edit-riservatezza.component';
+import { ViewDestinatariComponent } from './protocollo/destinatari/view-destinatari/view-destinatari.component';
+import { ViewDestinatariDeletedComponent } from './protocollo/destinatari/view-destinatari-deleted/view-destinatari-deleted.component';
+import { DestinatariEditComponent } from './protocollo/destinatari/destinatari-edit/destinatari-edit.component';
+import { DestinatariAddComponent } from './protocollo/destinatari/destinatari-add/destinatari-add.component';
+import { ProtoScanComponent } from './protocollo/proto-scan/proto-scan.component';
+import { RubricaStrutturaAddComponent } from './rubrica/rubrica-struttura-add/rubrica-struttura-add.component';
+import { RubricaStrutturaViewComponent } from './rubrica/rubrica-struttura-view/rubrica-struttura-view.component';
+import { RubricaStrutturaEditComponent } from './rubrica/rubrica-struttura-edit/rubrica-struttura-edit.component';
+import { StrutturaCompleteViewComponent } from './rubrica/struttura-complete-view/struttura-complete-view.component';
+import { RubricaItemViewComponent } from './rubrica/rubrica-item-view/rubrica-item-view.component';
+import { RubricaAziendaItemViewComponent } from './rubrica/rubrica-azienda-item-view/rubrica-azienda-item-view.component';
+import { RubricaPersoneViewComponent } from './rubrica/rubrica-persone-view/rubrica-persone-view.component';
+import { ProtoCloniComponent } from './protocollo/proto-cloni/proto-cloni.component';
+import { ProtocolliViewComponent } from './protocollo/protocollo/protocolli-view/protocolli-view.component';
+import { ProtocolloViewComponent } from './protocollo/protocollo/protocollo-view/protocollo-view.component';
+import { ProtoPecComponent } from './pec/proto-pec/proto-pec.component';
+import { WritePecComponent } from './pec/write-pec/write-pec.component';
+import { FormAddComponent } from './portal/form-add/form-add.component';
+import { FormViewComponent } from './portal/form-view/form-view.component';
+import { FormGatewayAssignComponent } from './portal/form-gateway-assign/form-gateway-assign.component';
+import { TempiFlussoComponent } from './flussi/tempi-flusso/tempi-flusso.component';
+
+const routes: Routes = [
+  { path: 'login', component: LoginComponent },
+  { path: 'logout', component: LogoutComponent },
+  { path: 'operatori', component: OperatoriComponent },
+  { path: 'background', component: BackgroundComponent },
+  { path: 'operatorinew', component: OperatoriNewComponent },
+  { path: 'amministrazione', component: AmministrazioneComponent },
+  { path: 'operatoreview', component: OperatoreViewComponent },
+  { path: 'operatoreedit', component: OperatoreEditComponent },
+  { path: 'addoperatore', component: AddoperatoreComponent },
+  { path: 'aziende', component: AziendeComponent },
+  { path: 'aziendaedit', component: AziendaEditComponent },
+  { path: 'aziendaview', component: AziendaViewComponent },
+  { path: 'tipi', component: TipiComponent },
+  { path: 'tipoedit', component: TipiEditComponent },
+  { path: 'addtipo', component: AddTipoComponent },
+  { path: 'addazienda', component: AddAziendaComponent },
+  { path: 'tipogruppo', component: TipoGruppoComponent },
+  { path: 'addtipogruppo', component: AddTipogruppoComponent },
+  { path: 'tipogruppoedit', component: TipoGruppoEditComponent },
+  { path: 'flussi', component: FlussiComponent },
+  { path: 'flussiview', component: FlussiViewComponent },
+  { path: 'flussiadd', component: FlussiAddComponent },
+  { path: 'flussiedit', component: FlussiEditComponent },
+  { path: 'documentiflusso', component: DocumentiFlussoComponent },
+  { path: 'documenti', component: DocumentiComponent },
+  { path: 'documentiadd', component: DocumentiAddComponent },
+  { path: 'documentiedit', component: DocumentiEditComponent },
+  { path: 'diagnostic', component: DiagnosticComponent },
+  { path: 'documentiselect', component: DocumentiSelectComponent },
+  { path: 'flussiselect', component: FlussiSelectComponent },
+  { path: 'adddocumento', component: AddDocumentoComponent },
+  { path: 'workflowadd', component: WorkflowAddComponent },
+  { path: 'diagnosticFlussi', component: DiagnosticFlussiComponent },
+  { path: 'procedure', component: ProcedureComponent },
+  { path: 'addprocedura', component: AddProceduraComponent },
+  { path: 'rupselect', component: RupSelectComponent },
+  { path: 'descrizione', component: DescrizioneComponent },
+  { path: 'procedureview', component: ProcedureViewComponent },
+  { path: 'flussoview', component: FlussoViewComponent },
+  { path: 'gruppi', component: GruppiComponent },
+  { path: 'gruppiadd', component: GruppiAddComponent },
+  { path: 'gruppiedit', component: GruppiEditComponent },
+  { path: 'addstruttura', component: AddStrutturaComponent },
+  { path: 'strutture', component: StruttureComponent },
+  { path: 'strutturaview', component: StrutturaViewComponent },
+  { path: 'strutturaedit', component: StrutturaEditComponent },
+  { path: 'proceduraselect', component: ProceduraSelectComponent },
+  { path: 'documentoflussoselect', component: DocumentoflussoSelectComponent },
+  { path: 'visibilitaadd', component: VisibilitaAddComponent },
+  { path: 'procedureattive', component: ProcedureAttiveComponent },
+  { path: 'workflownewprocedura', component: WorkflowNewProceduraComponent },
+  { path: 'workflowprocedura', component: WorkflowProceduraComponent },
+  { path: 'documentiview', component: DocumentiViewComponent },
+  { path: 'editdocumento', component: EditDocumentoComponent },
+  { path: 'viewdocumento', component: ViewDocumentoComponent },
+  { path: 'organigramma', component: OrganigrammaComponent },
+  { path: 'firma', component: FirmaComponent },
+  { path: 'editvalidazione', component: EditValidazioneComponent },
+  { path: 'tipoatti', component: TipoAttiComponent },
+  { path: 'tipoattiadd', component: TipoAttiAddComponent },
+  { path: 'scheduler', component: SchedulerComponent },
+  { path: 'addschedule', component: AddScheduleComponent },
+  { path: 'editor', component: EditorComponent },
+/*   { path: 'testimap', component: TestImapComponent }, */
+  { path: 'protopec', component: ProtoPecComponent},
+  { path: 'writepec', component: WritePecComponent},
+  { path: 'gruppioperatore', component: GruppiOperatoreComponent },
+  { path: 'modelliedit', component: ModelliEditComponent },
+  /* { path: 'addform', component: AddFormComponent }, */
+  { path: 'documenticolladd', component: DocumentiCollAddComponent },
+  { path: 'formselect', component: FormSelectComponent },
+  { path: 'editmodello', component: EditModelloComponent },
+  { path: 'formobbligatori', component: FormObbligatoriComponent },
+  { path: 'formtermina', component: FormTerminaComponent },
+  { path: 'forms', component: FormsComponent },
+  /* { path: 'formgateway', component: FormGatewayComponent }, */
+  { path: 'formgateway', component: FormGatewayAssignComponent },
+  { path: 'formassigngateway', component: FormAssignGatewayComponent },
+  { path: 'formassignselectgateway', component: FormAssignGatewaySelectComponent },
+  { path: 'userportalform', component: PortalFormComponent },
+  { path: 'userforms', component: UserformsComponent },
+  { path: 'portaldispatcher', component: PortalDispatcherComponent },
+  { path: 'userrequest', component: UserRequestComponent },
+  { path: 'fascicoli', component: FascicoliComponent },
+  { path: 'fascicoliadd', component: FascicoliAddComponent },
+  { path: 'fascicoliedit', component: FascicoliEditComponent },
+  { path: 'fascicoliview', component: FascicoliViewComponent },
+  { path: 'archivio', component: ArchivioComponent },
+  { path: 'gruppifascicoli', component: GruppiFascicoliComponent },
+  { path: 'gruppiprocedura', component: GruppiProceduraComponent },
+  { path: 'userrequestview', component: UserRequestViewComponent },
+  { path: 'userrequestdeleted', component: UserRequestDeletedComponent },
+  { path: 'addspreadsheet', component: AddSpreadsheetComponent },
+  { path: 'spreadsheet', component: SpreadsheetComponent },
+  { path: 'excelviewer', component: ExcelViewerComponent },
+  { path: 'formsselect', component: FormsSelectComponent },
+  { path: 'spreadsheetdoc', component: SpreadsheetDocComponent },
+  { path: 'editspreadsheet', component: EditSpreadsheetComponent },
+  { path: 'viewgruppipratica', component: ViewGruppiPraticaComponent },
+  { path: 'gruppolavoropratica', component: GruppoLavoroPraticaComponent },
+  { path: 'gruppovalidazionepratica', component: GruppoValidazionePraticaComponent },
+  { path: 'gestionescrivania', component: GestioneScrivaniaComponent },
+  /* { path: 'viewform', component: ViewFormComponent }, */
+  { path: 'formview', component: FormViewComponent },
+  { path: 'workflowpratica', component: WorkflowPraticaComponent },
+  { path: 'adddocumentopratica', component: AddDocumentoPraticaComponent },
+  { path: 'editdocumentopratica', component: EditDocumentoPraticaComponent },
+  { path: 'scan', component: ScanComponent },
+  { path: 'scantest', component: ScanTestComponent },
+  { path: 'webcamtest', component: WebcamTestComponent },
+  { path: 'workflowcomplex', component: WorkflowCAddComponent },
+  { path: 'workflowcadd', component: WorkflowCAddComponent },
+  { path: 'praticarequest', component: PraticaRequestComponent },
+  { path: 'resolvescreen', component: ResolveScreenComponent },
+  { path: 'addform', component: FormAddComponent },
+  { path: 'editfield', component: EditFieldComponent },
+  { path: 'addfield', component: AddFieldComponent },
+  //Silex web builder
+  { path: 'webbuilder', component: WebBuilderComponent },
+  //videoconferenza
+  { path: 'videoconf', component: VideoConfComponent },
+  { path: 'tempiflusso', component: TempiFlussoComponent},
+  //protocollo
+  { path: 'protoadmin', component: ProtoAdminComponent },
+  { path: 'viewinbox', component: ViewInboxComponent },
+  { path: 'viewinboxdeleted', component: ViewInboxDeletedComponent },
+  { path: 'addinbox', component: AddInboxComponent },
+  { path: 'editinbox', component: EditInboxComponent },
+  { path: 'viewmodalita', component: ViewModalitaComponent },
+  { path: 'viewmodalitadeleted', component: ViewModalitaDeletedComponent },
+  { path: 'addmodalita', component: AddModalitaComponent },
+  { path: 'editmodalita', component: EditModalitaComponent },
+  { path: 'ipaview', component: IpaViewComponent },
+  { path: 'viewprototipo', component: ViewProtoTipoComponent },
+  { path: 'viewprototipodeleted', component: ViewProtoTipoDeletedComponent },
+  { path: 'addprototipo', component: AddProtoTipoComponent },
+  { path: 'editprototipo', component: EditProtoTipoComponent },
+  { path: 'viewserie', component: ViewSerieComponent },
+  { path: 'viewseriedeleted', component: ViewSerieDeletedComponent },
+  { path: 'addserie', component: AddSerieComponent },
+  { path: 'editserie', component: EditSerieComponent },
+  { path: 'viewtipologiadocumentazione', component: ViewTipologiaDocumentazioneComponent },
+  { path: 'viewtipologiadocumentazionedeleted', component: ViewTipologiaDocumentazioneDeletedComponent },
+  { path: 'addtipologiadocumentazione', component: AddTipologiaDocumentazioneComponent },
+  { path: 'edittipologiadocumentazione', component: EditTipologiaDocumentazioneComponent },
+  { path: 'viewtitolario', component: ViewTitolarioComponent },
+  { path: 'viewtitolariodeleted', component: ViewTitolarioDeletedComponent },
+  { path: 'addtitolario', component: AddTitolarioComponent },
+  { path: 'edittitolario', component: EditTitolarioComponent },
+  { path: 'viewtiporubrica', component: ViewTipoRubricaComponent },
+  { path: 'addtiporubrica', component: AddTipoRubricaComponent },
+  { path: 'viewtiporubricadeleted', component: ViewTipoRubricaDeletedComponent },
+  { path: 'edittiporubrica', component: EditTipoRubricaComponent },
+  { path: 'addprotocollo', component: AddProtocolloComponent },
+  { path: 'addressview', component: AddressViewComponent },
+  { path: 'addressadd', component: AddressAddComponent },
+  { path: 'addressedit', component: AddressEditComponent },
+  { path: 'contactview', component: ContactViewComponent },
+  { path: 'contactadd', component: ContactAddComponent },
+  { path: 'contactedit', component: ContactEditComponent },
+  { path: 'rubricaadd', component: RubricaAddComponent },
+  { path: 'rubricaview', component: RubricaViewComponent },
+  { path: 'rubricaaziendaadd', component: RubricaAziendaAddComponent },
+  { path: 'rubricadispatcher1', component: RubricaDispatcher1Component },
+  { path: 'rubricadispatcher2', component: RubricaDispatcher2Component },
+  { path: 'rubricaedit', component: RubricaEditComponent },
+  { path: 'rubricaaziendaedit', component: RubricaAziendaEditComponent },
+  { path: 'etichette', component: EtichetteComponent },
+  { path: 'viewriservatezza', component: ViewRiservatezzaComponent },
+  { path: 'viewriservatezzadeleted', component: ViewRiservatezzaDeletedComponent },
+  { path: 'addriservatezza', component: AddRiservatezzaComponent },
+  { path: 'editriservatezza', component: EditRiservatezzaComponent },
+  { path: 'adddestinatari', component: DestinatariAddComponent },
+  { path: 'viewdestinatari', component: ViewDestinatariComponent },
+  { path: 'viewdestinatarideleted', component: ViewDestinatariDeletedComponent },
+  { path: 'editdestinatari', component: DestinatariEditComponent },
+  { path: 'protoscan', component: ProtoScanComponent },
+  { path: 'rubricastrutturaadd', component: RubricaStrutturaAddComponent },
+  { path: 'rubricastrutturaview', component: RubricaStrutturaViewComponent },
+  { path: 'rubricastrutturaedit', component: RubricaStrutturaEditComponent },
+  { path: 'strutturacompleteview', component: StrutturaCompleteViewComponent },
+  { path: 'rubricaitemview', component: RubricaItemViewComponent },
+  { path: 'rubricaaziendaitemview', component: RubricaAziendaItemViewComponent },
+  { path: 'rubricapersoneview', component: RubricaPersoneViewComponent },
+  { path: 'protocloni', component: ProtoCloniComponent },
+  { path: 'protocolliview', component: ProtocolliViewComponent },
+  { path: 'protocolloview', component: ProtocolloViewComponent },
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

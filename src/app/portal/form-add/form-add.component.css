@@ -1,0 +1,50 @@
+  body{
+    color: #192633;
+    background-color: #f4f6f9;
+  }
+
+  .container{
+    height: 100%;
+    width: 100%;
+  
+  }
+  .form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #f04f04;
+    background-color: #ffffff;
+    background-clip: padding-box;
+    border: 1px solid #eef0f3;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+
+  .central{
+    background:#ffffffee;
+    padding: 20px;
+  }
+  
+  .example-chip-list {
+    width: 100%;
+    color: rgb(5, 0, 0);
+  }
+  
+  .icon_delete_item{
+    vertical-align: bottom;
+  }
+  .btn_delete_item{
+    height: 100%;
+  }
+  .btn_delete_item:focus,.btn_add_item:focus {outline:0;}
+  .boxthumbs {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  .immagine{
+    padding: 3px;
+  }

@@ -1,0 +1,155 @@
+<div class="centralevisibilita"><br />
+  <div class="container">
+    <div class="formboxpanel">
+
+      <!--guida-->
+      <mat-accordion class="accordion">
+        <mat-expansion-panel class="accordion" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <span class="material-icons">
+                support_agent
+              </span>
+            </mat-panel-title>
+            <mat-panel-description>
+
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p> Ora, per ogni gruppo operativo sulla procedura selezionata
+            <i class="fa fa-users fa-x">
+              <fa-icon [icon]="faBriefcase"></fa-icon>
+            </i>
+            , puoi definire i privilegi di lettura, scrittura o modifica relativamente al documento selezionato
+            <i class="fa fa-comment fa-x">
+              <fa-icon [icon]="faFileContract"></fa-icon>
+            </i>
+          </p>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <br />
+
+      <div class="MobileContent">
+        <mat-label class="done">
+          <img src="assets/img/step1off.png" /> Scegli la procedura
+        </mat-label>&nbsp;&nbsp;
+        <img src="assets/img/linea.png" />
+        <mat-label class="done">
+          <img src="assets/img/step2off.png" /> Scegli il documento
+        </mat-label>&nbsp;&nbsp;
+        <img src="assets/img/linea.png" />
+        <img src="assets/img/step3on.png" />Assegna Privilegi
+        &nbsp;
+      </div><br />
+
+      <mat-progress-bar mode="determinate" value="85"></mat-progress-bar> <br /><br /><br />
+
+      <mat-card>
+        <i class="fa fa-users fa-2x">
+          <fa-icon [icon]="faBriefcase"></fa-icon>
+        </i>
+        &nbsp;&nbsp;{{selectedProcedura}}
+        &nbsp;&nbsp;<i class="fa fa-comment fa-2x">
+          <fa-icon [icon]="faFileContract"></fa-icon>
+        </i>
+        &nbsp;&nbsp;{{selectedDoc}}
+
+      </mat-card>
+
+      <br /><br />
+
+      <!--table-->
+      <div class="tableContainer">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+          <div class="col-md-6 col-xs-12">
+            <ng-container matColumnDef="nome_gruppo">
+              <th mat-header-cell *matHeaderCellDef> Gruppo </th>
+              <td mat-cell *matCellDef="let group"> {{group.nome}} </td>
+            </ng-container>
+          </div>
+
+          <div class="col-md-6 col-xs-12">
+            <ng-container matColumnDef="privilegi">
+              <th mat-header-cell *matHeaderCellDef> Privilegi </th>
+
+              <td mat-cell *matCellDef="let group">
+
+                <div *ngIf="group.privilegi!=NULL">
+
+
+                  <div class="edit" *ngIf="group.enableEdit==0">
+                    {{privilegiLabel(group.privilegi)}}
+                  </div>
+
+
+                  <button *ngIf="group.enableEdit==0 && group.enableUpdate==1" mat-button class="btn"
+                    (click)="controlState(group.id,1)">
+                    <span class="material-icons">
+                      create
+                    </span>
+                  </button>
+
+                  <button *ngIf="group.enableUpdate==0" mat-button class="btn" (click)="mexAlert()">
+                    <span class="material-icons">
+                      create
+                    </span>
+                  </button>
+
+
+
+                  <div class="edit" *ngIf="group.enableEdit==1">
+                    <mat-form-field appearance="fill" class="my-mat-form-field">
+                      <mat-label>Privilegi</mat-label>
+                      <mat-select [(ngModel)]="group.privilegi" (selectionChange)="controlState(group.id,0)">
+                        <mat-option *ngFor="let privilegio of privilegiOptions" [value]="privilegio.value">
+                          {{privilegio.viewValue}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                </div>
+
+                <div class="edit" *ngIf="group.privilegi==NULL && group.enableEdit==1">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Assegna Privilegi</mat-label>
+                    <mat-select [(ngModel)]="group.privilegi" (selectionChange)="controlState(group.id,0)">
+                      <mat-option *ngFor="let p of privilegiOptions" [value]="p.value">
+                        {{p.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </td>
+            </ng-container>
+          </div>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+      </div>
+
+      <br /><br /><br />
+
+      <button mat-button class="btn btn-warning" [routerLink]="['/documentoflussoselect']"
+        [queryParams]="{procedura:procedura, documento_flusso:documento_flusso}">
+        <span class="material-icons">arrow_back</span>
+        Indietro
+      </button>&nbsp;
+      <button mat-button class="btn btn-success" (click)="trasmetti()">Salva
+        <span class="material-icons">
+          save
+        </span>
+      </button>
+
+
+      <br /><br /><br /><br /><br /><br /><br /><br />
+    </div>
+  </div>
+</div>
+
+<div class="footer_pages">
+  <img src='assets/img/logo_aleph_medium.png'>
+</div>

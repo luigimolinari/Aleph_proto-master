@@ -1,0 +1,117 @@
+<div class="centralestrutture">
+    <br />
+<div class="container">
+    <div class="formboxpanel">
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+           <div class="my-4">
+            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab" aria-controls="home" aria-selected="false">Struttura</a>
+                </li>
+            </ul>
+            <form *ngFor="let group of miastruttura" [formGroup]="form" >
+                <div class="row mt-5 align-items-center">
+                     
+                    <div class="col">
+                        <div class="row align-items-center">
+                            <div class="col-md-7">
+                                <h4 class="mb-1">{{group.nome}}</h4>
+                               </div>
+                        </div>
+                      
+                    </div>
+                </div>
+                
+              
+                <hr class="my-4" />
+                   <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="nome">Nome</label>
+                        <input  [(ngModel)]="nome" formControlName="nome"  type="text" id="nome"  class="form-control"  readonly />
+      
+                    </div>
+
+                   
+
+
+                    <div class="form-group col-md-6">
+                        <label for="cognome">Azienda</label>
+                        <input  [(ngModel)]="azienda" formControlName="azienda"  type="text" id="azienda"  class="form-control"  readonly />
+                       
+                       </div>
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <label for="cf">CC</label>
+                    <input type="text"  [(ngModel)]="ccosto" formControlName="ccosto" class="form-control" id="ccosto" readonly />
+                  
+                </div>
+
+
+                <div class="form-group">
+                    <label for="cf">Sede</label>
+                <input type="text"  [(ngModel)]="sede" formControlName="sede" class="form-control" id="sede" readonly />
+                
+            </div>
+
+            <div class="form-group">
+                <label for="cf">COD_AOO</label>
+            <input type="text" [(ngModel)]="AOO" formControlName="AOO" class="form-control" id="AOO"  readonly />
+            
+        </div>
+
+            <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="cf">PEC</label>
+            <input type="text"  [(ngModel)]="pec" formControlName="pec" class="form-control" id="pec" readonly />
+            
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="cf">email</label>
+        <input type="text"  [(ngModel)]="email" formControlName="email" class="form-control" id="email" readonly />
+        
+    </div>
+</div>
+
+    <div class="form-group">
+        <label for="cf">Telefono</label>
+    <input type="text"  [(ngModel)]="telefono" formControlName="telefono" class="form-control" id="telefono" />
+    
+</div>
+
+
+
+<div class="form-group">
+    <label for="cf">Responsabile</label>
+    <input type="text"  [(ngModel)]="idResponsabiless" formControlName="idResponsabiless" class="form-control" id="idResponsabiless" readonly />
+
+</div>
+
+                
+                <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="livello">Livello</label>
+                    <input type="text"  [(ngModel)]="livello" formControlName="livello" class="form-control" id="livello" readonly />
+                </div>
+                
+                
+</div>
+               
+           
+        </form>
+           </div>
+        </div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+         </div>
+

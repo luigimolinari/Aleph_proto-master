@@ -1,0 +1,56 @@
+<br><br><br>
+
+<div class="title-table">Pratiche
+    <h6>Cerca tutte le pratiche a cui hai lavorato o che hai validato</h6>
+</div>
+<br>
+<table class="example-full-width" cellspacing="0">
+    <tr>
+        <td>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Nome pratica</mat-label>
+                <input matInput [(ngModel)] = "nome_pratica_input">
+            </mat-form-field>
+        </td>
+        <td>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Flusso</mat-label>
+                <input matInput [(ngModel)] = "nome_flusso_input">
+            </mat-form-field>
+        </td>
+        <td>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Stato</mat-label>
+                <mat-select [(ngModel)] = "stato_input"> 
+                    <mat-option value="In corso">In corso</mat-option>
+                    <mat-option value="Terminata">Terminata</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </td>
+        <td class="td-button-container">
+            <div class="example-button-container">
+                <button class="search_button" mat-fab aria-label="Cerca" (click)="search()">
+                  <mat-icon>search</mat-icon>
+                </button>
+            </div> 
+        </td>
+    </tr>
+</table>
+
+
+<app-aleph-table [tableData]="data" [tableColumns]="customersTableColumns" [listActions]="listActions"
+    tableCase="general" [isFilterable]="false" [isPageable]="true" [paginationSizes]="[5,10]"
+    (viewAction)="viewMethod($event)" (deleteAction)="deleteMethod($event)" [defaultPageSize]="5">
+</app-aleph-table>
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
+<div class="footer_table_container">
+  <video autoplay muted loop id="VideoFooter" class="video-container_footer_table">
+    <source src="assets/video/footer.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div class="footer_small">
+<img src="assets/img/logo_aleph_very_small.png" alt="logo aleph"/>
+  </div>

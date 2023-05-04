@@ -1,0 +1,55 @@
+.example-card {
+    max-width: 300px;
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+  
+  .exmpale-header-image {
+    background-image: url('/src/assets/img_portal/img1small.jpg');
+    background-size: cover;
+  }
+
+  .example-ripple-container {
+    cursor: pointer;
+    text-align: center;
+    background-color:#6495edeb;
+    color:white;
+    width: 252px;
+    height: auto;
+    display: inline-block;
+    margin-left:10px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;
+    padding-top: 5vh;
+  }
+  
+  .ripple_container{
+    /*background-color:rgba(0, 0, 0, 0.5);*/
+    margin-right:50px;
+    margin-left:50px;
+    text-align: center;
+    
+  }
+  
+  .rightText{
+    text-align: right;
+    padding-right: 10px;
+    font-size: 14px;
+  }
+  
+  .leftText{
+    text-align: left;
+    padding-left: 10px;
+    opacity: 0.5;
+  }
+  
+  .customOpacity{
+    opacity: 0.5;
+  }
+  
+  
+  

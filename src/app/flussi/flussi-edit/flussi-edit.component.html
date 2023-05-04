@@ -1,0 +1,117 @@
+<div class="centraleflussi">
+    <br />
+    <div class="container">
+        <div class="formboxpanel">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+                    <div class="my-4">
+                        <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab"
+                                    aria-controls="home" aria-selected="false">MODIFICA Flusso</a>
+                            </li>
+                        </ul>
+                        <form *ngFor="let group of flussi" [formGroup]="form">
+                            <div class="row mt-5 align-items-center">
+                                <div class="col">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-7">
+                                            <h4 class="mb-1">{{group.nome_flusso}}</h4>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <hr class="my-4" />
+                            <fa-icon [icon]="faEdit"></fa-icon>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="nome">Nome:</label>
+                                    <input formControlName="nome" type="text" class="form-control" required />
+                                    <div *ngIf="form.controls['nome'].invalid && (form.controls['nome'].dirty || form.controls['nome'].touched)"
+                                        class="alert alert-danger">
+                                        Il nome è obbligatorio
+                                        <div *ngIf="form.controls['nome'].errors.required">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="form-group col-md-6">
+                                    <label for="proprietario">Proprietario:</label>
+                                    <input formControlName="proprietario" type="text" class="form-control" required />
+                                    <div *ngIf="form.controls['proprietario'].invalid && (form.controls['proprietario'].dirty || form.controls['proprietario'].touched)"
+                                        class="alert alert-danger">
+                                        Il proprietario è obbligatorio
+                                        <div *ngIf="form.controls['proprietario'].errors.required">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="attivo">Attivo:</label>
+                                    <select id="attivo" class="form-control" formControlName="attivo">
+                                        <!--option  label="{{group.attivo==0?'No':'Si'}}" [selected]="true">{{group.attivo}}</option-->
+
+                                        <option label="Si">1</option>
+                                        <option label="No">0</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group col-md-6">
+                                    <label for="tipo">Tipo:</label>
+                                    <input type="text" id="tipo" class="form-control" formControlName="tipo" disabled>
+                                </div>
+
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="categoria">Categoria:</label>
+                                    <input formControlName="categoria" type="text" class="form-control" required />
+                                    <div *ngIf="form.controls['categoria'].invalid && (form.controls['categoria'].dirty || form.controls['categoria'].touched)"
+                                        class="alert alert-danger">
+                                        La categoria è obbligatoria
+                                        <div *ngIf="form.controls['categoria'].errors.required">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="descrizione">Descrizione:</label>
+                                    <input formControlName="descrizione" type="text" class="form-control" required />
+                                    <div *ngIf="form.controls['descrizione'].invalid && (form.controls['descrizione'].dirty || form.controls['descrizione'].touched)"
+                                        class="alert alert-danger">
+                                        La descrizione è obbligatoria
+                                        <div *ngIf="form.controls['descrizione'].errors.required">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <button type="Submit" class="btn btn-success" (click)="Trasmetti();">Trasmetti
+                                modifiche</button>
+
+                        </form>
+                        <br /><br /><br /><br /><br /><br /><br /><br />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+</div>

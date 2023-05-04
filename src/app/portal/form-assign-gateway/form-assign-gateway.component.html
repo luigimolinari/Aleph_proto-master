@@ -1,0 +1,53 @@
+<div class="centraleformselect"><br /><br />
+    <div class="container">
+      <div class="formboxpanel"  *ngFor="let item of form">
+
+
+        <div>
+            <i class="fa fa-2x"><fa-icon [icon]="faCubes"></fa-icon></i>
+            &nbsp;&nbsp;Scegli il campo gateway
+        </div>
+
+        <br  /><br />
+      
+        <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab" aria-controls="home" aria-selected="false">
+                    {{item.nome}}  </a>
+            </li>
+        </ul>
+              <br  /><br />
+        <mat-card> <mat-chip-list aria-label="Fish selection">SE
+          
+        <mat-chip color="accent" selected>{{nome_campo}}</mat-chip>  è   </mat-chip-list><br />  
+        <form [formGroup]="inform">
+         <select id="condizione" class="form-control"  [(ngModel)]="condizione" formControlName="condizione"  >
+          <option label="uguale a" selected="selected">equal-notequal</option>
+          <option label="inferiore a">lower</option>
+          <option label="superiore a">higher</option>
+       </select>
+<br />
+<label for="valore">Valore:</label>
+<input *ngIf="tipo_campo=='input testo'"  [(ngModel)]="valore" formControlName="valore"  type="text" id="valore"  class="form-control"  required />
+<input *ngIf="tipo_campo=='Data'"  [(ngModel)]="valore" formControlName="valore"  type="date" id="valore"  class="form-control"  required />
+<div *ngIf="inform.controls['valore'].invalid && (inform.controls['valore'].dirty || inform.controls['valore'].touched)" class="alert alert-danger">
+    Il valore di riferimento è obbligatorio
+    <div *ngIf="inform.controls['valore'].errors.required">
+  </div>
+</div>
+<br />
+<button type="Submit" class="btn btn-success" (click)="Trasmetti();">Trasmetti condizione</button>
+</form>
+</mat-card>
+      </div>
+    </div>
+</div>
+<div class="footer_table_container_small">
+    <video autoplay muted loop id="VideoFooter" class="video-container_footer_table">
+      <source src="assets/video/video_footer.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="footer_table_small">
+    <h1>Aleph</h1>
+    <p> <img src='assets/img/logo_aleph_medium.png'></p>
+  </div>

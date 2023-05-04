@@ -1,0 +1,187 @@
+<div class="centraleworkflow">
+    <br />
+    <div class="container">
+        <div class="formboxpanel">
+
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+
+                    <br />
+                    <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab"
+                                aria-controls="home" aria-selected="false">
+                                Documenti caricati
+                            </a>
+                        </li>
+                    </ul>
+                    <br />
+                    <button mat-button class="btn btn-back" (click)="back()">
+                        <span class="material-icons">
+                            arrow_back
+                        </span>
+                    </button>
+
+                    <div class="form_container">
+                        <form [formGroup]="fGroup">
+                            <mat-form-field class="example-full-width">
+                                <mat-label style="color:white">Cerca documento per descrizione</mat-label>
+                                <input matInput placeholder="Cerca.." formControlName="findDoc"
+                                (change)="cerca_doc(fGroup.controls.findDoc.value)">
+                            </mat-form-field>
+                            <!--button mat-icon-button (click)=cerca_doc(findDoc)>
+                            <mat-icon>search</mat-icon>
+                            </button-->
+                        </form>
+                    </div>
+
+                    <span title="Ordina per data" *ngIf="sorting=='asc'" class='sortaction' (click)="sort_doc()">
+                        <fa-icon [icon]="faLongArrowAltUp">
+                        </fa-icon>
+                        <fa-icon [icon]="faCalendar">
+                        </fa-icon>
+                      </span>
+                    <span title="Ordina per data" *ngIf="sorting=='desc'" class='sortaction' (click)="sort_doc()">
+                        <fa-icon [icon]="faLongArrowAltDown">
+                        </fa-icon>
+                        <fa-icon [icon]="faCalendar">
+                        </fa-icon>
+                    </span>
+                   
+                </div>
+            </div>
+
+            <div class="wrapper" *ngFor="let item of dati_filtered">
+                <div matRipple class="example-ripple-container mat-elevation-z4 documentiCard"
+                    [ngClass]="{'ripple-disabled': (item.elimina==1)}">
+
+                    <div class="right" *ngIf="item.elimina!=1 && item.signRequired==1">
+                        <mat-checkbox class="example-margin"
+                            (change)="toSign(item.id,item.percorso,item.percorso_firmato,$event.checked)">
+                        </mat-checkbox>
+                    </div>
+
+                    <div class="col-md-12 col-xs-12">
+                        <p [ngClass]="{'del': (item.elimina==1)}">
+                            <label>Codice documento: </label>&nbsp;{{item.id}}
+                        </p>
+                        <p [ngClass]="{'del': (item.elimina==1)}">
+                            <label>Descrizione: </label>&nbsp;{{item.descrizione}}
+                        </p>
+                        <p *ngIf="item.indice!=null && item.indice!=''" [ngClass]="{'del': (item.elimina==1)}">
+                            <label>Indice: </label>&nbsp;{{item.indice}}
+                        </p>
+                        <h6 [ngClass]="{'del': (item.elimina==1)}">
+                            <label>Note: </label>&nbsp;{{item.note}}
+                        </h6>
+                        <h6 [ngClass]="{'del': (item.elimina==1)}">
+                            <label>Data: </label>&nbsp;{{item.giorno}}
+                        </h6>
+                    </div>
+
+                    <div class="right">
+                        <button type="button" class="btn btn-trasparent" [routerLink]="['/viewdocumento']"
+                            [queryParams]="{id:item.id,gruppo:gruppo,p:privilegi,pratica:pratica}">
+                            <fa-icon class="fa-lg" [icon]="faEye"></fa-icon>&nbsp; Dettagli
+                        </button>
+
+                        <button type="button" class="btn btn-trasparent" mat-button [matMenuTriggerFor]="menuDownload">
+                            <fa-icon class="fa-lg" [icon]="faDownload"></fa-icon>&nbsp; Scarica
+                        </button>
+                        <mat-menu id="matmenuDownload" class="matmenu" #menuDownload="matMenu">
+                            <button mat-menu-item (click)="downloadFile(item.percorso)">Originale</button>
+                            <button
+                                *ngIf="item.elimina != 1 && item.percorso_firmato != null && item.percorso_firmato != ''"
+                                mat-menu-item (click)="downloadFile(item.percorso_firmato)">Firmato
+                                (.p7m)</button>
+                        </mat-menu>
+
+                        <button *ngIf="item.elimina!=1" type="button" class="btn btn-trasparent"
+                            (click)="invia_pec(item.id)">
+                            <fa-icon class="fa-lg" [icon]="faShare"></fa-icon>&nbsp; Invia PEC
+                        </button>
+
+                        <button *ngIf="item.elimina!=1 && privilegi>2" type="button" class="btn btn-trasparent"
+                            (click)="annulla(item.id)">
+                            <fa-icon class="fa-lg" [icon]="faTrash"></fa-icon>&nbsp; Annulla
+                        </button>
+
+                        <button *ngIf="item.elimina!=1 && privilegi>2" type="button" class="btn btn-trasparent"
+                            mat-button [matMenuTriggerFor]="menu">
+                            <fa-icon class="fa-lg" [icon]="faEdit"></fa-icon>&nbsp; Modifica
+                        </button>
+                        <mat-menu class="matmenu" #menu="matMenu">
+                            <button mat-menu-item (click)="edit_doc(item.id)">Documento</button>
+                            <button *ngIf="pratica == undefined" mat-menu-item [routerLink]="['/editvalidazione']"
+                                [queryParams]="{id:item.id}">Regole Validazione</button>
+                            <!-- <button *ngIf="item.testo!='' && item.testo!=null && item.categoria!='2'" mat-menu-item
+                                [routerLink]="['/editmodello']" [queryParams]="{id:item.id}">Testo in
+                                collaborazione</button> -->
+                                <button *ngIf="item.testo!='' && item.testo!=null && item.categoria!='2'" mat-menu-item
+                               (click)="getValueWithPromise_doc(item.id, item.id_procedura);">Testo in
+                                collaborazione</button>
+                            <button *ngIf="item.testo!='' && item.testo!=null && item.categoria=='2'" mat-menu-item
+                               (click)="getValueWithPromise(item.id, item.id_procedura);">Spreadsheet in
+                                collaborazione</button>
+                        </mat-menu>
+
+                        <button *ngIf="item.elimina!=1 && item.signRequired==1" type="button" class="btn btn-trasparent"
+                            (click)="firmaSingle(item.id,item.percorso,item.percorso_firmato)">
+                            <fa-icon class="fa-lg" [icon]="faSignature"></fa-icon>&nbsp; Firma
+                        </button>
+                    </div>
+
+                </div>
+
+                <p class="conditional-br">
+
+                <div class="hide-card-cell">
+                    <div *ngIf="item.elimina==1 || !item.firma_isreq">&nbsp;</div>
+                    <div *ngIf="item.elimina!=1 && item.firma_isreq">
+                        <div *ngIf="item.firmatariShow" mat-button class="btn btn-hide-card"
+                            (click)="hideCard(item.id)">-
+                        </div>
+                        <div *ngIf="!item.firmatariShow" mat-button class="btn btn-hide-card"
+                            (click)="hideCard(item.id)">+</div>
+                    </div>
+                </div>
+
+
+                <div *ngIf="item.elimina!=1 && item.tosign==1 && (item.firma_isreq && item.firmatariShow)" matRipple
+                    class="example-ripple-container firmatariCard mat-elevation-z4">
+                    <div *ngFor="let op of item.firmatari">
+                        <div *ngIf="op.firmato == 1" class="signedOp">
+                            <div *ngIf="op.ordine!='0'" class="orderIcon signed">
+                                {{op.ordine}}</div>
+                            <fa-icon class="fa-md" [icon]="faSignature"></fa-icon>&nbsp; {{op.cognome}}
+                            {{op.nome}}
+                        </div>
+                        <div *ngIf="op.firmato == 0" class="toSignOp">
+                            <div *ngIf="op.ordine!='0'" class="orderIcon toSign">
+                                {{op.ordine}}</div>
+                            <fa-icon class="fa-md" [icon]="faPen"></fa-icon>&nbsp; {{op.cognome}} {{op.nome}}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <br /><br />
+
+            <button *ngIf="isSelected" type="button" class="btn btn-success signAll" (click)="firmaAll()">Firma
+                tutti i
+                documenti selezionati
+            </button>
+
+            <br /><br /><br /><br /><br /><br />
+        </div>
+    </div>
+</div>
+
+<div *ngIf="loading" class="loadingspinner_container">
+    <img class="loadingspinner" src="../assets/img/loadingspinner.gif">
+</div>
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+</div>

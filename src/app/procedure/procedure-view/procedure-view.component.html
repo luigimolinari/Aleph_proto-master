@@ -1,0 +1,210 @@
+<br />
+<button type="button" class="btn btn-success btn-success-add" [routerLink]="['/addprocedura']">CREA nuova
+  procedura</button> &nbsp;
+<br /><br />
+
+<div class="mat-elevation-z8 tabContainer">
+  <br>
+  <div class="filterContainer col-md-6">
+    <mat-form-field>
+      <mat-label>Cerca</mat-label>
+      <input matInput (keyup)="applyFilter($event)" #input>
+    </mat-form-field>
+  </div>
+
+  <br>
+
+  <div class="tableContainer">
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
+
+      <ng-container matColumnDef="nome_procedura" hidden>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Nome Procedura</mat-header-cell>
+        <mat-cell data-label="Nome Procedura:" *matCellDef="let element">
+          <div *ngIf="element.cancella==1 && cambianome!=element.id" style="text-decoration: line-through;">
+            {{element.nome_procedura}} <fa-icon [icon]="faEdit" (click)="editanome(element.id);"></fa-icon>
+          </div>
+          <div *ngIf="element.cancella==0 && cambianome!=element.id">{{element.nome_procedura}} <fa-icon [icon]="faEdit"
+              (click)="editanome(element.id);"></fa-icon>
+          </div>
+          <div *ngIf="cambianome==element.id">
+            <form [formGroup]="form"><input [(ngModel)]="nome_procedura" formControlName="nome_procedura" type="text"
+                id="nome_procedura" class="form-control"><button type="button" class="btn btn-success"
+                (click)="modificanome(element.id);">
+                <fa-icon [icon]="faSave"></fa-icon>
+              </button>&nbsp;<button type="button" class="btn btn-warning" (click)="annulla(element.id);">
+                <fa-icon [icon]="faBackspace"></fa-icon>
+              </button></form>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="data_creazione">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Data</mat-header-cell>
+        <mat-cell data-label="Data:" *matCellDef="let element">
+          <div *ngIf="element.cancella==1" style="text-decoration: line-through;">{{element.data_creazione}}</div>
+          <div *ngIf="element.cancella==0">{{element.data_creazione}}</div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="id_flusso">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Flusso</mat-header-cell>
+        <mat-cell data-label="Flusso:" *matCellDef="let element">
+          <div *ngIf="element.cancella==1" style="text-decoration: line-through;">{{element.id_flusso}}</div>
+          <div *ngIf="element.cancella==0">{{element.id_flusso}}</div>
+        </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="id_rup">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> RUP </mat-header-cell>
+        <mat-cell data-label="RUP:" *matCellDef="let element">
+          <div *ngIf="element.cancella==1 && cambiarup!=element.id" style="text-decoration: line-through;">
+            {{element.id_rup}} <fa-icon [icon]="faEdit" (click)="editarup(element.id);"></fa-icon>
+          </div>
+          <div *ngIf="element.cancella==0 && cambiarup!=element.id">{{element.id_rup}} <fa-icon [icon]="faEdit"
+              (click)="editarup(element.id);"></fa-icon>
+          </div>
+          <div *ngIf="cambiarup==element.id">
+
+            <form>
+              <input type="text" name="rup" #rup placeholder="Scegli CF RUP" aria-label="Number"
+                [formControl]="nome_rup" [matAutocomplete]="auto" class="form-control" (keypress)="SetControl(0)">
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option" (click)="SetControl(1);">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+              <button type="button" class="btn btn-success" disabled={{valido}}
+                (click)="modificarup(element.id, rup.value);">
+                <fa-icon [icon]="faSave"></fa-icon>
+              </button>
+              &nbsp;<button type="button" class="btn btn-warning" (click)="annulla(element.id);">
+                <fa-icon [icon]="faBackspace"></fa-icon>
+              </button>
+            </form>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="operatore">
+        <mat-header-cell *matHeaderCellDef> Operatore </mat-header-cell>
+        <mat-cell data-label="Operatore:" *matCellDef="let element">
+          <div *ngIf="element.cancella==1" style="text-decoration: line-through;">{{element.nome}} {{element.cognome}}
+          </div>
+          <div *ngIf="element.cancella==0">{{element.nome}} {{element.cognome}}</div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="azienda" hidden>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Azienda</mat-header-cell>
+        <mat-cell data-label="Azienda:" *matCellDef="let element">
+          <div *ngIf="element.cancella==1 && cambiazienda!=element.id" style="text-decoration: line-through;">
+            {{element.nome_azienda}} <fa-icon [icon]="faEdit" (click)="editazienda(element.id);"></fa-icon>
+          </div>
+          <div *ngIf="element.cancella==0 && cambiazienda!=element.id">{{element.nome_azienda}} <fa-icon [icon]="faEdit"
+              (click)="editazienda(element.id);"></fa-icon>
+          </div>
+          <div *ngIf="cambiazienda==element.id">
+            <form [formGroup]="form_azienda">
+              <select id="azienda" class="form-control"  [(ngModel)]="azienda" formControlName="azienda"  >
+                <option></option>
+                <option *ngFor="let az of aziende"  label="{{az.nome}}">{{az.id}}</option>               
+              </select>
+                <button type="button" class="btn btn-success"
+                (click)="modificazienda(element.id);">
+                <fa-icon [icon]="faSave"></fa-icon>
+              </button>&nbsp;<button type="button" class="btn btn-warning" (click)="annulla(element.id);">
+                <fa-icon [icon]="faBackspace"></fa-icon>
+              </button></form>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="accesso" hidden>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Accesso</mat-header-cell>
+        <mat-cell data-label="Accesso:" *matCellDef="let element">
+          <div *ngIf="element.cancella==1 && cambiaccesso!=element.id" style="text-decoration: line-through;">
+            {{element.accesso}} <fa-icon [icon]="faEdit" (click)="editaccesso(element.id);"></fa-icon>
+          </div>
+          <div *ngIf="element.cancella==0 && cambiaccesso!=element.id">{{element.accesso}} <fa-icon [icon]="faEdit"
+              (click)="editaccesso(element.id);"></fa-icon>
+          </div>
+          <div *ngIf="cambiaccesso==element.id">
+            <form [formGroup]="form_accesso">
+              <select [(ngModel)]="accesso" formControlName="accesso"
+                  id="accesso" class="form-control">
+                  <option label="Pubblico">Pubblico</option>
+                  <option label="Privato">Privato</option>
+               </select>
+                <button type="button" class="btn btn-success"
+                (click)="modificaccesso(element.id);">
+                <fa-icon [icon]="faSave"></fa-icon>
+              </button>&nbsp;<button type="button" class="btn btn-warning" (click)="annulla(element.id);">
+                <fa-icon [icon]="faBackspace"></fa-icon>
+              </button></form>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="fascicolo">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Fascicolo</mat-header-cell>
+        <mat-cell data-label="Fascicolo:" *matCellDef="let element">
+          <div *ngIf="element.cancella==1" style="text-decoration: line-through;">{{element.id_fascicolo}}
+          </div>
+          <div *ngIf="element.cancella==0">{{element.id_fascicolo}} &nbsp;
+            <fa-icon *ngIf="element.id_fascicolo!=null" [icon]="faEye"
+            [routerLink]="['/fascicoliview']"
+            [queryParams]="{id:element.id_fascicolo}"></fa-icon>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="stato">
+        <mat-header-cell *matHeaderCellDef> Stato </mat-header-cell>
+        <mat-cell data-label="Stato:" *matCellDef="let element">
+          <div *ngIf="element.goal==0 && element.cancella==1" style="text-decoration: line-through;">aperta</div>
+          <div *ngIf="element.goal==0 && element.cancella==0">aperta</div>
+          <div *ngIf="element.goal==1 && element.cancella==1" style="text-decoration: line-through;">chiusa</div>
+          <div *ngIf="element.goal==1 && element.cancella==0">chiusa</div>
+        </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="azioni">
+        <mat-header-cell *matHeaderCellDef> Azioni </mat-header-cell>
+        <mat-cell data-label="Azioni:" *matCellDef="let element">
+          <button *ngIf="element.goal==0 && element.cancella==0" type="button" class="btn btn-danger"
+            (click)="cancella(element.id, element.nome_procedura);">
+            <fa-icon [icon]="faTrash"></fa-icon>
+          </button>
+          <button *ngIf="element.cancella==1" type="button" class="btn btn-info"
+            (click)="restore(element.id, element.nome_procedura);">
+            <fa-icon [icon]="faTrashRestore"></fa-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+      <mat-row [hidden]="row.selected" *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+
+    </table>
+  </div>
+
+  <mat-paginator [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
+
+
+</div>
+
+
+<br><br><br><br><br><br><br><br>
+
+
+<div class="footer_table_container">
+  <video autoplay muted loop id="VideoFooter" class="video-container_footer_table">
+    <source src="assets/video/footer.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div class="footer_small">
+<img src="assets/img/logo_aleph_very_small.png" alt="logo aleph"/>
+  </div>

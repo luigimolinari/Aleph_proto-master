@@ -1,0 +1,442 @@
+<!-- da codice luigi alephdesk - userprofile -->
+<div class="protobg">
+  <br> <br>
+  <div class="filter_container">
+    <br>
+    <div class="col-md-12"><button class="btn btn-light btn-back" (click)="back()">Indietro</button></div>
+    <br><br><br>
+    <div class="main-content">
+      <div class="container-fluid">
+        <div class="row">
+          <br>
+          <div *ngIf="card_proto=='visibile'" class="col-md-8" id="card_proto">
+            <div *ngFor="let proto of dataproto" class="card">
+              <div class="card-header card-header-info">
+                <!-- <img src="./assets/img/logo_aleph_small.png" alt="logo" /> -->
+                <h4 class="card-title small_text">Oggetto: {{proto.oggetto}}</h4>
+                <p class="card-category">Protocollo n. {{proto.numero}}</p>
+              </div>
+
+              <div class="card-body">
+                <form>
+
+                  <div class="row">
+                    <div class="col-md-3">
+                      <mat-form-field class="example-full-width"><label> <i class="material-icons"
+                            data-notify="icon">aspect_ratio
+                          </i> Flusso: </label>
+                        <input matInput value={{proto.flusso}} readonly="readonly">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                      <mat-form-field class="example-full-width"><label><i class="material-icons"
+                            data-notify="icon">input</i> Tipologia: </label>
+                        <input matInput name="data_arrivo" value={{proto.tipologia}} readonly="readonly">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                      <mat-form-field class="example-full-width"><label> <i class="material-icons"
+                            data-notify="icon">inbox</i> Inbox: </label>
+                        <input matInput value={{proto.inbox}} readonly="readonly">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                      <mat-form-field class="example-full-width"><label><i class="material-icons"
+                            data-notify="icon">class</i> Serie: </label>
+                        <input matInput name="data_arrivo" value={{proto.serie}} readonly="readonly">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <mat-form-field class="example-full-width"><label> <i class="material-icons"
+                            data-notify="icon">format_list_numbered</i> Numero: </label>
+                        <input matInput value={{proto.numero}} readonly="readonly">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                      <mat-form-field class="example-full-width"><label> <i class="material-icons"
+                            data-notify="icon">today</i> Data: </label>
+                        <input matInput value={{proto.giorno}} readonly="readonly">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                      <mat-form-field class="example-full-width"><label><i class="material-icons"
+                            data-notify="icon">access_time</i> Ora: </label>
+                        <input matInput name="data_arrivo" value={{proto.ora}} readonly="readonly">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <mat-form-field class="example-full-width"><label><i class="material-icons"
+                            data-notify="icon">subject</i> Oggetto: </label>
+                        <strong><input matInput value={{proto.oggetto}} readonly="readonly"></strong>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <mat-form-field class="example-full-width"><label><i class="material-icons"
+                            data-notify="icon">description</i> Descrizione: </label>
+                        <textarea matInput value={{proto.descrizione}} readonly="readonly"></textarea>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <hr>
+                  <div *ngIf="flusso=='Ingresso'">
+                    <div *ngFor="let corrispondente of datacorrispondenti" class="row">
+                      <div class="col-md-6">
+                        <mat-form-field class="example-full-width"><label><i class="material-icons"
+                              data-notify="icon">people</i> Mittente: </label>
+                          <strong><input matInput name="denominazione" value="{{corrispondente.denominazione}}"
+                              readonly="readonly"></strong>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-6">
+                        <mat-form-field class="example-full-width"><label><i class="material-icons"
+                              data-notify="icon">my_location</i> Indirizzo: </label>
+                          <input matInput name="denominazione" value={{corrispondente.indirizzo}} readonly="readonly">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-12">
+                        <mat-form-field class="example-full-width"><label><i class="material-icons"
+                              data-notify="icon">contact_mail</i> Contatti: </label>
+                          <input matInput name="denominazione" value={{corrispondente.contatti}} readonly="readonly">
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <hr>
+                    <div *ngFor="let corrispondenteinterno of datacorrispondentiinterni" class="row">
+                      <div class="col-md-12">
+                        <mat-form-field class="example-full-width"><label><i class="material-icons"
+                              data-notify="icon">people_outline</i> Destinatario: </label>
+                          <strong><input matInput name="denominazione" value="{{corrispondenteinterno.denominazione}}"
+                              readonly="readonly"></strong>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-12">
+                        <mat-form-field class="example-full-width"><label><i class="material-icons"
+                              data-notify="icon">contact_mail</i> Contatti: </label>
+                          <input matInput name="denominazione" value={{corrispondenteinterno.contatti}}
+                            readonly="readonly">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <hr>
+                    <div *ngFor="let assegnatario of datacorrispondentiassegnatari" class="row">
+                      <div class="col-md-12">
+                        <mat-form-field class="example-full-width"><label><i class="material-icons"
+                              data-notify="icon">work</i> Assegnatario: </label>
+                          <strong><input matInput name="denominazione" value="{{assegnatario.denominazione}}"
+                              readonly="readonly"></strong>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-12">
+                        <mat-form-field class="example-full-width"><label><i class="material-icons"
+                              data-notify="icon">contact_mail</i> Contatti: </label>
+                          <input matInput name="denominazione" value={{assegnatario.contatti}} readonly="readonly">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <hr>
+                    <div *ngIf="ccpresenti=='si'">
+                      <div *ngFor="let copiaconoscenza of datacorrispondenticopiac" class="row">
+                        <div class="col-md-12">
+                          <mat-form-field class="example-full-width"><label><i class="material-icons"
+                                data-notify="icon">content_copy</i> In copia: </label>
+                            <strong><input matInput name="denominazione" value="{{copiaconoscenza.denominazione}}"
+                                readonly="readonly"></strong>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-12">
+                          <mat-form-field class="example-full-width"><label><i class="material-icons"
+                                data-notify="icon">contact_mail</i> Contatti: </label>
+                            <input matInput name="denominazione" value={{copiaconoscenza.contatti}} readonly="readonly">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+                  <div *ngIf="flusso=='Uscita'">
+                    <div *ngFor="let corrispondente of datacorrispondenti" class="row">
+                      <div class="col-md-6">
+                        <mat-form-field class="example-full-width"><label><i class="material-icons"
+                              data-notify="icon">people</i> Destinatario: </label>
+                          <strong><input matInput name="denominazione" value="{{corrispondente.denominazione}}"
+                              readonly="readonly"></strong>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-6">
+                        <mat-form-field class="example-full-width"><label><i class="material-icons"
+                              data-notify="icon">my_location</i> Indirizzo: </label>
+                          <input matInput name="denominazione" value={{corrispondente.indirizzo}} readonly="readonly">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-12">
+                        <mat-form-field class="example-full-width"><label><i class="material-icons"
+                              data-notify="icon">contact_mail</i> Contatti: </label>
+                          <input matInput name="denominazione" value={{corrispondente.contatti}} readonly="readonly">
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <hr>
+                    <div *ngFor="let corrispondenteinterno of datacorrispondentiinterni" class="row">
+                      <div class="col-md-12">
+                        <mat-form-field class="example-full-width"><label><i class="material-icons"
+                              data-notify="icon">people_outline</i> Mittente: </label>
+                          <strong><input matInput name="denominazione" value="{{corrispondenteinterno.denominazione}}"
+                              readonly="readonly"></strong>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-12">
+                        <mat-form-field class="example-full-width"><label><i class="material-icons"
+                              data-notify="icon">contact_mail</i> Contatti: </label>
+                          <input matInput name="denominazione" value={{corrispondenteinterno.contatti}}
+                            readonly="readonly">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <hr>
+                    <div *ngFor="let assegnatario of datacorrispondentiassegnatari" class="row">
+                      <div class="col-md-12">
+                        <mat-form-field class="example-full-width"><label><i class="material-icons"
+                              data-notify="icon">work</i> Assegnatario: </label>
+                          <strong><input matInput name="denominazione" value="{{assegnatario.denominazione}}"
+                              readonly="readonly"></strong>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-12">
+                        <mat-form-field class="example-full-width"><label><i class="material-icons"
+                              data-notify="icon">contact_mail</i> Contatti: </label>
+                          <input matInput name="denominazione" value={{assegnatario.contatti}} readonly="readonly">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <hr>
+                    <div *ngIf="ccpresenti=='si'">
+                      <div *ngFor="let copiaconoscenza of datacorrispondenticopiac" class="row">
+                        <div class="col-md-12">
+                          <mat-form-field class="example-full-width"><label><i class="material-icons"
+                                data-notify="icon">content_copy</i> In copia: </label>
+                            <strong><input matInput name="denominazione" value="{{copiaconoscenza.denominazione}}"
+                                readonly="readonly"></strong>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-12">
+                          <mat-form-field class="example-full-width"><label><i class="material-icons"
+                                data-notify="icon">contact_mail</i> Contatti: </label>
+                            <input matInput name="denominazione" value={{copiaconoscenza.contatti}} readonly="readonly">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+
+
+                  <div *ngIf="flusso=='Interno'">
+                    <div *ngFor="let corrispondente of datacorrispondenti" class="row">
+                      <div class="col-md-6">
+                        <mat-form-field class="example-full-width"><label><i class="material-icons"
+                              data-notify="icon">people</i> Destinatario: </label>
+                          <strong><input matInput name="denominazione" value="{{corrispondente.denominazione}}"
+                              readonly="readonly"></strong>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-6">
+                        <mat-form-field class="example-full-width"><label><i class="material-icons"
+                              data-notify="icon">my_location</i> Indirizzo: </label>
+                          <input matInput name="denominazione" value={{corrispondente.indirizzo}} readonly="readonly">
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-12">
+                        <mat-form-field class="example-full-width"><label><i class="material-icons"
+                              data-notify="icon">contact_mail</i> Contatti: </label>
+                          <input matInput name="denominazione" value={{corrispondente.contatti}} readonly="readonly">
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <hr>
+                    <div *ngFor="let corrispondenteinterno of datacorrispondentiinterni" class="row">
+                      <div class="col-md-12">
+                        <mat-form-field class="example-full-width"><label><i class="material-icons"
+                              data-notify="icon">people_outline</i> Mittente: </label>
+                          <strong><input matInput name="denominazione" value="{{corrispondenteinterno.denominazione}}"
+                              readonly="readonly"></strong>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-12">
+                        <mat-form-field class="example-full-width"><label><i class="material-icons"
+                              data-notify="icon">contact_mail</i> Contatti: </label>
+                          <input matInput name="denominazione" value={{corrispondenteinterno.contatti}}
+                            readonly="readonly">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <hr>
+                    <div *ngFor="let assegnatario of datacorrispondentiassegnatari" class="row">
+                      <div class="col-md-12">
+                        <mat-form-field class="example-full-width"><label><i class="material-icons"
+                              data-notify="icon">work</i> Assegnatario: </label>
+                          <strong><input matInput name="denominazione" value="{{assegnatario.denominazione}}"
+                              readonly="readonly"></strong>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-12">
+                        <mat-form-field class="example-full-width"><label><i class="material-icons"
+                              data-notify="icon">contact_mail</i> Contatti: </label>
+                          <input matInput name="denominazione" value={{assegnatario.contatti}} readonly="readonly">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <hr>
+                    <div *ngIf="ccpresenti=='si'">
+                      <div *ngFor="let copiaconoscenza of datacorrispondenticopiac" class="row">
+                        <div class="col-md-12">
+                          <mat-form-field class="example-full-width"><label><i class="material-icons"
+                                data-notify="icon">content_copy</i> In copia: </label>
+                            <strong><input matInput name="denominazione" value="{{copiaconoscenza.denominazione}}"
+                                readonly="readonly"></strong>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-12">
+                          <mat-form-field class="example-full-width"><label><i class="material-icons"
+                                data-notify="icon">contact_mail</i> Contatti: </label>
+                            <input matInput name="denominazione" value={{copiaconoscenza.contatti}} readonly="readonly">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <hr>
+
+
+                  <div class="row">
+                    <div class="col-md-3">
+                      <mat-form-field class="example-full-width"><label> <i class="material-icons"
+                            data-notify="icon">receipt
+                          </i> Protocollo Mittente: </label>
+                        <input matInput name="prot_mittente" value={{proto.prot_mittente}} readonly="readonly">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                      <mat-form-field class="example-full-width"><label><i class="material-icons"
+                            data-notify="icon">date_range</i> Data prot. Mittente: </label>
+                        <input matInput name="data_prot_mitt" value={{proto.data_prot_mitt}} readonly="readonly">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                      <mat-form-field class="example-full-width"><label> <i class="material-icons"
+                            data-notify="icon">pages</i> Numero Allegati: </label>
+                        <input matInput name="n_allegati" value={{proto.n_allegati}} readonly="readonly">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                      <mat-form-field class="example-full-width"><label><i class="material-icons"
+                            data-notify="icon">pages</i> Descrizione Allegati: </label>
+                        <input matInput name="desc_allegati" value={{proto.desc_allegati}} readonly="readonly">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <mat-form-field class="example-full-width"><label> <i class="material-icons"
+                            data-notify="icon">dvr
+                          </i> Classificazione: </label>
+                        <input matInput name="id_titolario" id="id_titolario" value={{proto.id_titolario}}
+                          readonly="readonly">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-9">
+                      <mat-form-field class="example-full-width"><label><i class="material-icons"
+                            data-notify="icon">create</i> Note: </label>
+                        <input matInput name="note" value={{proto.note}} readonly="readonly">
+                      </mat-form-field>
+                    </div>
+
+                  </div>
+                </form>
+
+
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="col-md-4">
+            <div class="card-profile">
+              <div class="card-avatar">
+                <img class="img img-avatar" src="./assets/img/bg18.jpg" />
+              </div>
+              <div class="card-body">
+
+                <h4 class="card-title small_text">Documenti</h4>
+                <!--  <span *ngIf="card_proto=='nascosta'">
+                  <a href="http://172.29.10.206/app_service/pdfv2/web/doc.pdf" target="right_side"
+                    class="btn btn-warning btn-round" (click)="Rientra();"><i class="material-icons"
+                      data-notify="icon">arrow_back</i></a>
+                </span> -->
+                <table class="col-md-12">
+                  <tr *ngFor="let doc of datadocs">
+                    <td>
+                      <img class="img docext" src="./assets/img/file_icons/{{doc.estensione_icon}}.png" />
+                    </td>
+                    <td>
+                      {{doc.nome}}</td>
+                    <td> <a
+                       class="btn btn-info btn-round" (click)="downloadFile(doc.token)"> <i class="material-icons"
+                          data-notify="icon">cloud_download</i>
+                        Scarica</a></td>
+                    <!-- <td> <input type="hidden" id="miotoken" name="miotoken" value={{doc.token}}> <a
+                        href="http://172.29.10.206/app_service/pdfv2/web/viewer.php?token={{token_doc}}"
+                        target="right_side" class="btn btn-info btn-round" (click)='Mostrapdf(doc.token)'><i
+                          class="material-icons" data-notify="icon">open_in_browser</i> Apri</a></td> -->
+                  </tr>
+                </table>
+                <br>
+               <!--  <span>
+                  <a href="javascript:void(0)" class="btn btn-warning btn-round" (click)='Scarica()'><i
+                      class="material-icons" data-notify="icon">playlist_add</i> Comprimi gli allegati</a>
+                </span> -->
+                <span *ngIf="zip=='no'">
+                  <a href="javascript:void(0)" class="btn btn-warning btn-round" (click)='Scarica()'><i
+                      class="material-icons" data-notify="icon">playlist_add</i> Comprimi gli allegati</a>
+                </span>
+
+               <span *ngIf="zip=='si'">
+                  <a href="http://172.29.10.206/app_service/{{urlzip}}" class="btn btn-warning btn-round"
+                    (click)='Scarica()'><i class="material-icons" data-notify="icon">cloud_download</i>
+                    Scarica
+                    gli allegati</a>
+                </span>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+    <br>
+  </div>
+  <br><br><br>
+</div>

@@ -1,0 +1,17 @@
+    <br /> <br /><br /> 
+    <div class="ripple_container">
+        <br />
+            <div matRipple *ngFor="let item of data" class=" example-ripple-container mat-elevation-z4" [style.background-color]="bkgColor[item.ruolo]"
+                 [routerLink]="['/workflowprocedura']" [queryParams]="{procedura:item.id, gruppo:item.id_gruppo}">
+                <h5 [title]="item.nome_procedura.toUpperCase()">{{item.nome_procedura.toUpperCase()}}</h5>
+                <h6>{{item.data_creazione}}</h6>
+                <br>
+                <h6>{{item.nome_gruppo.toUpperCase()}}</h6>
+                <br>
+                <p class ="customOpacity">___________</p>
+                <br>
+                <p class="rightText"><i class="fa"><fa-icon [icon]="faUser"></fa-icon></i>&nbsp;{{item.ruolo.toUpperCase()}}</p>
+                <p class="leftText"><img src="assets/img/logo_aleph.png" width="30" height="30" alt="Aleph"></p>
+            </div>
+            <br /> <br />
+    </div>

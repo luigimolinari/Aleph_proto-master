@@ -1,0 +1,66 @@
+<div class="centralerubrica">
+    <br />
+    <div class="container">
+        <div class="formboxpanel">
+            <div class="central">
+
+                <br /><br><br><br><br>
+                <div class="ripple_container">
+                    <div *ngIf = "isAzienda==1" matRipple class=" example-ripple-container user mat-elevation-z4"
+                    [routerLink]="['/rubricaadd']" [queryParams]="{tipo:tipo, azienda: new_id}">
+                    <span class="material-icons">
+                        person
+                    </span>
+                    <br>
+                    <p class ="customOpacity">___________</p>
+                    <h6>Registra una persona dell'azienda</h6>
+                    <br>
+                   
+                    </div>
+
+                    <div *ngIf = "isAzienda==0" matRipple class=" example-ripple-container contact mat-elevation-z4"
+                    [routerLink]="['/contactadd']" [queryParams]="{id_rubrica:new_id}">
+                    <span class="material-icons">
+                        contact_mail
+                    </span>
+                    <br>
+                    <p class ="customOpacity">___________</p>
+                    <h6>Registra un contatto</h6>
+                    <br>
+                    
+                    </div>
+
+                    <div *ngIf = "isAzienda==0" matRipple class=" example-ripple-container address mat-elevation-z4"
+                    [routerLink]="['/addressadd']" [queryParams]="{id_rubrica:new_id}">
+                    <span class="material-icons">
+                        location_on
+                    </span>
+                    <br>
+                    <p class ="customOpacity">___________</p>
+                    <h6>Registra un indirizzo</h6>
+                    <br>
+                   
+                    </div>
+
+                    <div matRipple class=" example-ripple-container home mat-elevation-z4"
+                    [routerLink]="['/rubricaview']">
+                    <span class="material-icons">
+                        home
+                    </span>
+                    <br>
+                    <p class ="customOpacity">___________</p>
+                    <h6>Torna alla rubrica</h6>
+                    <br>
+                    
+                    </div>
+                </div>
+           
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+</div>

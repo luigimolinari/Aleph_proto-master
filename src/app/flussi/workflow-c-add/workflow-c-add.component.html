@@ -1,0 +1,226 @@
+<div class="centraleworkflow">
+    <br />
+    <div class="container">
+        <div class="formboxpanel">
+            <mat-accordion class="accordion">
+                <mat-expansion-panel class="accordion" (opened)="panelOpenState = true"
+                    (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <span class="material-icons">
+                                support_agent
+                            </span>
+                        </mat-panel-title>
+                        <mat-panel-description>
+
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <p> Adesso dobbiamo costruire il workflow, a partire dai documenti che abbiamo scelto.
+                        Ogni workflow è composto da diversi step.
+                        Ogni step è costituito da una certa tipologia documentale o da un certo form, tra quelli scelti
+                        al passo precedente.
+                        Ogni step può essere facoltativo, obbligatorio o milestone; un form gateway è sempre milestone.
+                        Per ogni step deve essere definito lo step successivo (o gli step successivi, nel caso di un
+                        form di tipo gateway).
+                        Quando hai terminato clicca sul pulsante verde per terminare.
+                    </p>
+                </mat-expansion-panel>
+            </mat-accordion>
+            <br />
+            <div class="MobileContent">
+                <mat-label class="done">
+                    <div class="step_icon step_off">1</div> Scegli il flusso &nbsp;<div class="line-wrapper">
+                        <hr>
+                    </div>&nbsp;
+                </mat-label>&nbsp;
+                <mat-label class="done">
+                    <div class="step_icon step_off">2</div> Scegli i documenti
+                </mat-label>&nbsp;
+                &nbsp;<div class="line-wrapper">
+                    <hr>
+                </div>&nbsp;
+                <mat-label class="done">
+                    <div class="step_icon step_off">3</div> Scegli i form
+                </mat-label>
+                &nbsp;<div class="line-wrapper">
+                    <hr>
+                </div>&nbsp;
+
+                <div class="step_icon step_on">4</div> Workflow
+
+                &nbsp;<div class="line-wrapper">
+                    <hr>
+                </div>&nbsp;
+                <mat-label class="done">
+                    <div class="step_icon step_off">5</div> Termina
+                </mat-label>
+            </div>
+            <br />
+            <mat-progress-bar mode="determinate" value="75"></mat-progress-bar> <br /><br /><br />
+
+            <!-------------------------------------------------------------------------------------->
+
+            <p-toast [style]="{marginTop: '80px'}"></p-toast>
+            <p-organizationChart [value]="steps" selectionMode="single" styleClass="company">
+                <ng-template let-node pTemplate="person">
+                    <!--div class="node-header p-corner-top">{{node.label}}</div-->
+                    <div class="node-content {{node.tipo}}">
+                        <div class="head">{{node.id}}</div>
+                        <!--div>{{node.title}}</div-->
+                        <hr class="hr_in_chart">
+                        <div *ngIf="node.isoption" class="option">({{node.opzione}})
+                        </div>
+
+                        <div class="right">
+                            <img class="icon-img"> <span *ngIf="node.mandatory"
+                                class="icon-span material-icons mandatoryIcon">report</span>
+                            <img class="icon-img"> <span *ngIf="node.milestone"
+                                class="icon-span material-icons milestoneIcon">lock</span>
+                        </div>
+                        <div *ngIf="node.isgateway">
+                            <img class="icon-img">
+                            <span class="icon-span material-icons diamond"><span
+                                    class="icon-span material-icons dynamicFormIcon">dynamic_form</span></span>
+                        </div>
+
+                        <div class="right">
+                            <img class="icon-img"> <span *ngIf="foglie.indexOf(node.id)!=-1 && !node.isoption"
+                                class="icon-span material-icons deleteIcon"
+                                (click)="removeNode(node.id, node.padre)">delete</span>
+                        </div>
+
+                        <br>
+                    </div>
+                </ng-template>
+            </p-organizationChart>
+
+            <div class="col-md-12 col-sm-12">
+                <div *ngFor = "let d of mancanti_doc" class="card doc_card"> {{d}}</div>
+                <div *ngFor = "let f of mancanti_form" class="card form_card"> {{f}}</div>
+            </div>
+            <br>
+
+            <form [formGroup]="step_form">
+                <div *ngIf="!root_defined" class="col-md-12 col-sm-12">
+                    <mat-checkbox value="true" class="example-checkbox" (click)="check_root()">
+                        Primo Step del Workflow
+                    </mat-checkbox>
+                </div>
+                <div>
+                    <div class="col-md-6 col-sm-12 form-ctrl">
+                        <label>Tipo</label>
+                        <select type="text" [formControl]="tipo" class="form-control" (change)="onChangeType()">
+                            <option value="doc">Documento</option>
+                            <option value="form">Form</option>
+                        </select>
+                    </div>
+                    <div *ngIf="step_form.controls.tipo.value=='doc'" class="col-md-6 col-sm-12 form-ctrl">
+                        <label>Scegli Documento</label>
+
+                        <input placeholder="Cerca documento..." #docInput [formControl]="documento"
+                            [matAutocomplete]="auto" class="form-control" (keydown)="SetControlSelected(false)">
+
+                        <mat-autocomplete #auto>
+                            <mat-option *ngFor="let thisdoc of filteredDocs | async" [value]="thisdoc"
+                                (click)="SetControlSelected(true)">
+                                {{thisdoc}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </div>
+                    <div *ngIf="step_form.controls.tipo.value=='form'" class="col-md-6 col-sm-12 form-ctrl">
+                        <label>Scegli Form</label>
+                        <input placeholder="Cerca form..." #formInput [formControl]="form" autocomplete="off"
+                            [matAutocomplete]="auto_form" class="form-control" (keydown)="SetControlSelected(false)">
+
+                        <mat-autocomplete #auto_form (optionSelected)="formSelection($event,i)">
+                            <mat-option *ngFor="let thisform of filteredForms | async" [value]="thisform"
+                                (click)="SetControlSelected(true)">
+                                {{thisform}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </div>
+                </div>
+
+
+                <br>
+                <div class="col-md-12 col-sm-12">
+                    <mat-checkbox *ngIf="step_form.controls.tipo.value=='form' && enable_gateway"
+                        class="example-checkbox" [formControl]="is_gateway" (ngModelChange)="onChangeGateway($event)">
+                        <span class="material-icons dynamicFormIconOriginal">
+                            dynamic_form
+                        </span>
+                        Gateway
+                    </mat-checkbox>
+
+                    <mat-checkbox class="example-checkbox" [formControl]="milestone"
+                        [disabled]="step_form.controls.is_gateway.value==true"
+                        (ngModelChange)="onChangeMilestone($event)">
+                        <span class="material-icons milestoneIcon">
+                            lock
+                        </span>
+                        Milestone
+                    </mat-checkbox>
+
+                    <mat-checkbox class="example-checkbox" [formControl]="mandatory"
+                        [disabled]="step_form.controls.is_gateway.value==true || step_form.controls.milestone.value==true">
+                        <span class="material-icons mandatoryIcon">
+                            report
+                        </span>
+                        Obbligatorio
+                    </mat-checkbox>
+
+                </div>
+                <div>
+
+                    <div *ngIf="!step_form.controls.is_gateway.value && step_form.controls.tipo.value!=''"
+                        class="col-md-12 col-sm-12 form-ctrl">
+                        <label>Next</label>
+                        <input placeholder="Cerca..." [formControl]="next_step" [matAutocomplete]="auto_next_nogateway"
+                            class="form-control" (keydown)="SetControlSelectedNext(false)">
+
+                        <mat-autocomplete #auto_next_nogateway="matAutocomplete">
+                            <mat-option *ngFor="let el of filteredNext | async" [value]="el" (click)="SetControlSelectedNext(true)">
+                                {{el}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </div>
+
+                    <div *ngIf="step_form.controls.is_gateway.value && step_form.controls.tipo.value!=''"
+                        class="col-md-6 col-sm-12 form-ctrl">
+                        <label>Next</label>
+                        <div *ngFor="let next_item of nexts().controls; let j=index">
+                            <label>Caso: {{j+1}})
+                                {{next_item.controls.field_name.value}}
+                                {{next_item.controls.condition_trnsl.value}}
+                                {{next_item.controls.valore.value}}
+                            </label>
+
+                            <input 
+                                [formControl]="step_form.controls.next_isgateway.controls[j].controls.next_step_gateway"
+                                [matAutocomplete]="auto_all" class="form-control" (keydown)="$event.preventDefault();">
+
+                            <mat-autocomplete #auto_all>
+                                <mat-option *ngFor="let el of allslist" [value]="el" (click)="count_next()">
+                                    {{el}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <br>
+            <div class="col-md-12 col-sm-12 center_btn">
+                <button [disabled] = "!this.valido_add" class='btn btn-info col-md-4 col-sm-12' (click)="add_step()">Aggiungi al grafico</button>
+                <button class='btn btn-danger col-md-4 col-sm-12' (click)="reset_grafico()">Resetta e
+                    ricomincia</button>
+                <button [disabled] = "!this.valido_submit" class='btn btn-success col-md-4 col-sm-12' (click)="submit()">Salva Workflow</button>
+            </div>
+
+            <!-------------------------------------------------------------------------------------->
+            <br>
+
+
+
+        </div>
+    </div>
+</div>

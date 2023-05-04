@@ -1,0 +1,30 @@
+<div class="form-group" name="">
+  <form [formGroup]="LogForm" novalidate>
+    <div *ngIf='loginOk == false'><img src="assets/img/warning_small.png">Attenzione, login errato </div>
+    <input type="text" class="form-control" formControlName="user" placeholder="Nome Utente" required>
+
+    <div
+      *ngIf="LogForm.controls['user'].invalid && (LogForm.controls['user'].dirty || LogForm.controls['user'].touched)"
+      class="alert alert-danger">
+      <div *ngIf="LogForm.controls['user'].errors.required">
+        Il nome utente è obbligatorio
+      </div>
+    </div>&nbsp; | &nbsp;
+    <input type="password" class="form-control" formControlName="pass" placeholder="Password" required> &nbsp;
+    <div
+      *ngIf="LogForm.controls['pass'].invalid && (LogForm.controls['pass'].dirty || LogForm.controls['pass'].touched)"
+      class="alert alert-danger">
+      <div *ngIf="LogForm.controls['pass'].errors.required">
+        La password è obbligatoria
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success" (click)="recupera();">
+      <fa-icon [icon]="faIdCardAlt"></fa-icon> LogIn
+    </button>
+
+  </form>
+</div>
+<div *ngIf="!ready" class="loadingspinner_container">
+  <img class="loadingspinner" src="assets/img/loadingspinner.gif">
+</div>

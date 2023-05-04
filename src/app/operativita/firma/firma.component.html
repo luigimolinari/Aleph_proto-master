@@ -1,0 +1,59 @@
+<div class="centralefirma">
+
+    <br />
+
+    <div class="container">
+        <div class="formboxpanel">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+                    <div class="my-4">
+                        <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab"
+                                    aria-controls="home" aria-selected="false">Firma</a>
+                            </li>
+                        </ul>
+
+                        <form [formGroup]="form">
+
+                            <div class="form-group">
+                                <label for="passw">Password</label>
+                                <input type="password" [(ngModel)]="passw" formControlName="passw" id="passw"
+                                    class="form-control" required />
+                                <div *ngIf="form.controls['passw'].invalid && (form.controls['passw'].dirty || form.controls['passw'].touched)"
+                                    class="alert alert-danger">
+                                    La password è obbligatoria
+                                    <div *ngIf="form.controls['passw'].errors.required">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="otp">OTP</label>
+                                <input type="text" [(ngModel)]="otp" formControlName="otp" class="form-control" id="otp"
+                                    required />
+                                <div *ngIf="form.controls['otp'].invalid && (form.controls['otp'].dirty || form.controls['otp'].touched)"
+                                    class="alert alert-danger">
+                                    OTP è obbligatorio
+                                    <div *ngIf="form.controls['otp'].errors.required">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="Submit" class="btn btn-success" (click)="Trasmetti();">Trasmetti</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+</div>
+
+<div *ngIf="loading" class="loadingspinner_container">
+    <img class="loadingspinner" src="../assets/img/loadingspinner.gif">
+</div>

@@ -1,0 +1,128 @@
+<div class="centraleform">
+
+    <div [hidden]="!isDataLoaded" class="container">
+        <div class="formboxpanel">
+
+            <div>
+                <button class="btn btn-light" (click)="back();">Indietro</button>&nbsp;
+            </div>
+            <br>
+
+            <mat-card class='col-md-12'>
+                <img class="form_img" *ngIf="form_immagine!='' && form_immagine!=null"
+                    src="assets/img_portal/{{form_immagine}}_head.jpg">
+                <div class="form_info">
+                    <div class="form_header">{{form_header}}</div>
+                    <br>
+                    <div class="form_legenda">{{form_legenda}}</div>
+                </div>
+            </mat-card>
+
+            <br>
+
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                <!-- NOME CAMPO -->
+                <ng-container matColumnDef="field">
+                    <mat-header-cell *matHeaderCellDef>Nome Campo</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.field}} </mat-cell>
+                </ng-container>
+
+                <!-- TIPO CAMPO -->
+                <ng-container matColumnDef="type">
+                    <mat-header-cell *matHeaderCellDef>Tipo Campo</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.type}}
+                        &nbsp;
+                        <button *ngIf="element.type=='Select'" mat-icon-button [matMenuTriggerFor]="menu" title="Opzioni">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+
+                        <mat-menu #menu="matMenu">
+                            <button class="opzione_tendina" *ngFor="let option of element.options" mat-menu-item
+                                disabled>
+                                <span>{{option}}</span>
+                            </button>
+                        </mat-menu>
+
+                    </mat-cell>
+                </ng-container>
+
+                <!-- PROPRIETA CAMPO -->
+                <ng-container matColumnDef="proprieta">
+                    <mat-header-cell *matHeaderCellDef>Proprietà </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <span *ngIf="element.mandatory=='1'" class="material-icons mandatoryIcon" title="Obbligatorio">
+                            report
+                        </span>
+                        <span *ngIf="element.validator=='CF'" class="material-icons validatorIcon" title="Validatore - CF">
+                            admin_panel_settings
+                        </span>
+                        <span *ngIf="element.validator=='NUM'" class="material-icons validatorIcon" title="Validatore - Numero">
+                            123
+                        </span>
+                        <span *ngIf="element.validator=='MAIL'" class="material-icons validatorIcon" title="Validatore - E-mail">
+                            alternate_email
+                        </span>
+
+                        <button *ngIf="element.id==gateway_field" mat-icon-button [matMenuTriggerFor]="menu_gateway">
+                            <mat-icon class="material-icons dynamicFormIcon" title="Gateway">dynamic_form</mat-icon>
+                        </button>
+
+                        <mat-menu #menu_gateway="matMenu">
+                            <div *ngIf="element.type != 'Select'">
+                                <button class="opzione_tendina" mat-menu-item disabled>
+                                    <span>{{gateway_condition}}</span>
+                                </button>
+                            </div>
+                            <div *ngIf="element.type == 'Select'">
+                                <button class="opzione_tendina" *ngFor="let option of element.options" mat-menu-item
+                                    disabled>
+                                    <span>{{gateway_condition}} {{option}}</span>
+                                </button>
+                            </div>
+                        </mat-menu>
+
+
+                    </mat-cell>
+                </ng-container>
+
+                <!-- MODIFICA CAMPO -->
+                <ng-container matColumnDef="modifica">
+                    <mat-header-cell *matHeaderCellDef>Modifica</mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <mat-icon *ngIf="element.id==gateway_field && form_modificabile==1" title="Modifica"
+                            (click)="openAlert('edit',element.id,element.type,element.field,element.mandatory,element.validator,element.options, true)"
+                            class="hand-cursor">lock
+                        </mat-icon>
+                        <mat-icon *ngIf="element.id!=gateway_field && form_modificabile==1" title="Modifica"
+                            (click)="openDialog(element.id,element.type, element.field, element.mandatory, element.validator, element.options, false)"
+                            class="hand-cursor">edit
+                        </mat-icon>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- ELIMINA CAMPO -->
+                <ng-container matColumnDef="elimina"> <mat-header-cell *matHeaderCellDef>Elimina</mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <mat-icon *ngIf="element.id==gateway_field && form_modificabile==1" title="Elimina"
+                            (click)="openAlert('delete',element.id,element.type,element.field,element.mandatory,element.validator,element.options, true)"
+                            class="hand-cursor">lock
+                        </mat-icon>
+                        <mat-icon *ngIf="element.id!=gateway_field && form_modificabile==1" title="Elimina" 
+                            (click)="Delete(element.id)" 
+                            class="hand-cursor">delete
+                        </mat-icon>
+                    </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </table>
+            <mat-icon class="hand-cursor2" (click)="openDialogAdd()">add</mat-icon> Aggiungi campo
+        </div>
+
+    </div>
+</div>
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+</div>

@@ -1,0 +1,228 @@
+.container{
+    height: 100%;
+    width: 100%;
+}
+
+.form-ctrl{
+    display:inline-block;
+}
+.step_container{
+    border: 1px solid gray;
+    margin-bottom: 10px;
+}
+
+.dynamicFormIconOriginal{
+    color:orange;
+}
+
+.example-checkbox {
+    margin: 6px 12px 6px 0;
+}
+
+.mat-checkbox-label{
+    color:white;
+}
+
+.btn{
+    margin-bottom: 10px;
+}
+
+.accordion {
+    background-color: rgb(235, 235, 134);
+      }
+      
+.MobileContent {
+
+    display:flex;
+    text-align: "center";
+
+}
+
+@media screen and (max-width: 768px) {
+
+.MobileContent {
+
+    display: none;
+    text-align:center;
+}
+
+}
+  /** Styles to make the demo look better. */
+  .example-ripple-checkbox {
+    margin: 6px 12px 6px 0;
+    font-size: small;
+    padding-top: 20px;
+  }
+ 
+  .mandatoryIcon{
+    color:#dc3545;
+    vertical-align: middle;
+  }
+
+  .milestoneIcon{
+    color:blue;
+    vertical-align: middle;
+  }
+
+  .dynamicFormIcon{
+    color:white; 
+    position: absolute;
+    margin-top: 21px;
+    margin-left: -10px;
+    vertical-align: middle;
+  }
+
+  .center {
+    position: absolute;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+  .done {
+     color:rgb(124, 122, 122);
+      }
+
+
+   
+   @media screen and (max-width: 768px) {
+   
+    .MobileContent {
+    
+        display: none;
+        text-align:center;
+    }
+   
+   }
+
+
+   .icon-img, .icon-span::before {
+    font: normal normal normal 14px/1 "FontAwesome";
+    display: inline-block;
+    color: #5fa2dd;
+  }
+  
+  .icon-img::before, .icon-span::before {
+      font-size: 1em;
+      position: relative;
+      top: -1px;
+  }
+  
+  img.icon-img { display: none; }
+
+  .right{
+    text-align:right;
+  }
+
+  .diamond{
+      width: 0;
+      height: 0;
+      border: 40px solid transparent;
+      border-bottom-color: orange;
+      position: relative;
+      top: -40px;
+  }
+  .diamond:after {
+      content: '';
+      position: absolute;
+      left: -40px;
+      top: 40px;
+      width: 0;
+      height: 0;
+      border: 40px solid transparent;
+      border-top-color: orange;
+  }
+
+  .option{
+    font-size:13px;
+    font-style: italic;
+  }
+
+  .head{
+    font-weight:500;
+  }
+
+  .showLegend{
+    cursor:pointer;
+  }
+
+.diamondLegend{
+    border: 15px solid transparent;
+    border-bottom-color: orange;
+    width: 0;
+    height: 0;
+    position: relative;
+    top: -15px;
+    margin-top: 5px;
+    vertical-align: bottom;
+}
+.diamondLegend:after {   
+    left: -15px;
+    top: 15px;  
+    border: 15px solid transparent;
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top-color: orange;
+}
+.dynamicFormIconLegend{
+  font-size:15px;
+  margin-top: 6px;
+  margin-left: -7px;
+}
+
+hr.divLegend{
+  background-color: #ffffff4d;
+}
+
+.deleteIcon{
+  color: darkslategray;
+}
+
+.center{
+  margin:auto;
+  width: 80%;
+}
+
+.step_icon{
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  text-align: center;
+  color:white;
+  display:inline-block;
+ }
+ .step_on{
+  background: #3f51b5;
+ }
+ .step_off{
+  background: rgb(122, 122, 122);
+ }
+
+ .line-wrapper{
+  width: 100px;
+  vertical-align: middle;
+  display: inline-block;
+  margin: auto;
+ }
+
+ hr{
+   border-color:rgb(122, 122, 122);
+ }
+
+ .card{
+    color: #ffffff;
+    margin: 2px;
+    width: auto;
+    display: inline-block;
+    padding: 10px;
+    font-family: sans-serif;
+    border-radius: 20px;
+ }
+ .doc_card{
+    background-color: #8bb0f29c;
+ }
+ .form_card{
+    background-color: #20b2aaa1;
+ }

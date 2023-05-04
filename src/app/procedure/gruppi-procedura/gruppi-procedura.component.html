@@ -1,0 +1,116 @@
+<div class="centraleprocedura">
+    <br />
+    <!--div *ngIf="isDataLoaded" class="container"-->
+    <div [hidden]="!isDataLoaded" class="container">
+
+        <div class="formboxpanel">
+            <div class="mat-elevation-z8 tabContainer">
+                <br><br>
+                <mat-label class="col-md-12">Gruppo: {{id_gruppo}}</mat-label>
+                <br>
+                <div class="col-md-12">
+                    <mat-label>Procedure selezionate:</mat-label>
+                </div>
+                <div class="col-md-12 my_chips_wrapper">
+                    <mat-chip-list aria-label="Fish selection">
+                        <mat-chip *ngFor="let procedura of selectedProcedure" [selectable]="selectable"
+                            [removable]="(tipo_op == 'admin' || tipo_op == 'poweruser' || ID == removeControl1[procedura] || ID==removeControl2[procedura]) && removable[procedura]==1"
+                            (removed)="remove(procedura)">
+                            {{procedura}}
+                            <mat-icon matChipRemove
+                                *ngIf="(tipo_op == 'admin' || tipo_op == 'poweruser' || ID==removeControl1[procedura] || ID==removeControl2[procedura]) && removable[procedura]==1">
+                                cancel</mat-icon>
+                        </mat-chip>
+                    </mat-chip-list>
+                </div>
+
+                <br><br>
+
+                <div class="filterContainer col-md-6">
+                    <mat-form-field>
+                        <mat-label>Cerca</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" #input>
+                    </mat-form-field>
+                </div>
+
+                <br>
+                <div class="tableContainer">
+                    <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
+
+                        <ng-container matColumnDef="id" hidden>
+                            <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+                            <mat-cell data-label="ID:" *matCellDef="let element"> {{element.id}} </mat-cell>
+                        </ng-container>
+
+
+                        <ng-container matColumnDef="nome">
+                            <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+                            <mat-cell data-label="Nome:" *matCellDef="let element"> {{element.nome_procedura}}
+                            </mat-cell>
+                        </ng-container>
+
+
+                        <ng-container matColumnDef="data">
+                            <mat-header-cell *matHeaderCellDef> Data </mat-header-cell>
+                            <mat-cell data-label="Data:" *matCellDef="let element"> {{element.data_creazione}}
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="rup">
+                            <mat-header-cell *matHeaderCellDef> Rup </mat-header-cell>
+                            <mat-cell data-label="Rup:" *matCellDef="let element">{{element.id_rup}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="azienda">
+                            <mat-header-cell *matHeaderCellDef> Azienda </mat-header-cell>
+                            <mat-cell data-label="Azienda:" *matCellDef="let element">{{element.nome_azienda}}
+                            </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="accesso">
+                            <mat-header-cell *matHeaderCellDef> Accesso </mat-header-cell>
+                            <mat-cell data-label="Accesso:" *matCellDef="let element">{{element.accesso}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="azione">
+                            <mat-header-cell *matHeaderCellDef> Seleziona </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                                <mat-checkbox class="row checkbox_el" [(ngModel)]="element.selected"
+                                    [ngModelOptions]="{standalone: true}" [disabled]="removable[element.id+'*'+element.nome_procedura]==0"
+                                    (change)="selectProcedura($event.checked,element.id,element.nome_procedura,element.id_operatore,element.id_rup)">
+                                </mat-checkbox>
+
+                            </mat-cell>
+                        </ng-container>
+
+
+                        <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+                        <mat-row [ngClass]="{'delete_item': row.selected}"
+                            *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+
+                    </table>
+                </div>
+
+                <mat-paginator [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
+
+                <br><br>
+                <button mat-button class="btn btn-light center" [routerLink]="['/gruppi']">Indietro 
+                </button>
+                <button mat-button class="btn btn-success center" (click)="trasmetti()">Salva
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<br><br><br>
+
+<div *ngIf="loading" class="loadingspinner_container">
+    <img class="loadingspinner" src="../assets/img/loadingspinner.gif">
+</div>
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+</div>

@@ -1,0 +1,5 @@
+USER PORTAL:
+
+- aggiungere controllo al momento della creazione guidata del form sul nome della tabella se già esistente; OK
+- nella creazione dei campi rendere obbligatoria la compilazione del campo precedente;
+- dare possibilità di annullare un form;

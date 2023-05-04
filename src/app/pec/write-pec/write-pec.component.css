@@ -1,0 +1,70 @@
+.container {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.formboxpanel {
+    height: 80vh;
+}
+
+.downloadAttachment {
+    text-decoration: underline;
+    color: cornflowerblue;
+}
+
+.senderContainer {
+    margin-left: 15px;
+    margin-right: 15px;
+    background-color: white;
+}
+
+input {
+    color: black;
+    margin-right: 15px;
+}
+
+.formContainer {
+    padding: 50px;
+}
+
+.example-chip-list {
+    width: 100%;
+}
+
+.my-textarea {
+    min-height: 250px;
+    color: black;
+}
+
+.material-icon-delete {
+    color: orangered;
+}
+
+.list-container {
+    border-left: azure;
+    border-left: solid;
+    color: #000000b0;
+}
+
+.row,
+.btn-sender {
+    margin-left: 15px;
+}
+
+.send_icon {
+    background-color: lightseagreen;
+}
+
+.right {
+    text-align: right;
+}
+
+.close-icon {
+    color: #dc3545;
+    cursor: pointer;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}

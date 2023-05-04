@@ -1,0 +1,139 @@
+<div class="centralerubrica">
+    <br />
+    <div class="container">
+        <div class="formboxpanel">
+            <div class="central">
+
+                <br />
+                <ul _ngcontent-ajd-c288="" id="myTab" role="tablist" class="nav nav-tabs mb-4">
+                    <li _ngcontent-ajd-c288="" class="nav-item"><a _ngcontent-ajd-c288="" id="home-tab"
+                            data-toggle="tab" href="" role="tab" aria-controls="home" aria-selected="false"
+                            class="nav-link active">Modifica indirizzo</a></li>
+                </ul>
+                <div *ngIf="caricato=='si'">
+                <form class="my_form" [formGroup]="form">
+
+
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Toponimo</mat-label>
+                        <mat-select formControlName="toponimo" >
+                            <mat-option value="Via">Via</mat-option>
+                            <mat-option value="Piazza">Piazza</mat-option>
+                            <mat-option value="Viale">Viale</mat-option>
+                            <mat-option value="Calata">Calata</mat-option>
+                            <mat-option value="Calle">Calle</mat-option>
+                            <mat-option value="Campo">Campo</mat-option>
+                            <mat-option value="Corte">Corte</mat-option>
+                            <mat-option value="Circonvallazione">Circonvallazione</mat-option>
+                            <mat-option value="Darsena">Darsena</mat-option>
+                            <mat-option value="Fondaco">Fondaco</mat-option>
+                            <mat-option value="Località">Località</mat-option>
+                            <mat-option value="Lungomare">Lungomare</mat-option>
+                            <mat-option value="Rio">Rio</mat-option>
+                            <mat-option value="Salita">Salita</mat-option>
+                            <mat-option value="Strada">Strada</mat-option>
+                            <mat-option value="Stretto">Stretto</mat-option>
+                            <mat-option value="Traversa">Traversa</mat-option>
+                            <mat-option value="Vicolo">Vicolo</mat-option>
+                            <mat-option value="Zona industriale">Zona industriale</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width" appearance="fill" required>
+                        <mat-label>Indirizzo</mat-label>
+                        <input matInput formControlName="sede">
+                    </mat-form-field>
+<div>
+                    <mat-form-field class="smallfield" appearance="fill" required>
+                        <mat-label>Civico</mat-label>
+                        <input matInput formControlName="civico">
+                    </mat-form-field>
+                    &nbsp;
+                    <mat-form-field class="smallfield" appearance="fill" required>
+                        <mat-label>CAP</mat-label>
+                        <input matInput formControlName="cap">
+                    </mat-form-field>
+                    &nbsp;
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Comune</mat-label>
+                        <input type="text"
+                               placeholder="Comune"
+                               aria-label="Comune"
+                               matInput
+                               [formControl]="comune"
+                               [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)='metticap($event.option.value)'>
+                          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{option}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                    &nbsp;
+                    <mat-form-field class="smallfield" appearance="fill" required>
+                        <mat-label>Provincia</mat-label>
+                        <input matInput formControlName="provincia">
+                    </mat-form-field>&nbsp;</div>
+
+                    <mat-form-field class="example-full-width" appearance="fill" >
+                        <mat-label>Stato</mat-label>
+                        <mat-select formControlName="nazione" [(value)]="selected">
+                            <mat-option *ngFor="let nazione of datanazioni" value={{nazione.nome_stati}}>
+                              {{nazione.nome_stati}}
+                            </mat-option>
+                          </mat-select>
+                    </mat-form-field>
+
+
+                    <mat-form-field  appearance="fill" required>
+                        <mat-label>Telefono1</mat-label>
+                        <input matInput formControlName="telefono1">
+                    </mat-form-field>&nbsp;
+
+                    <mat-form-field  appearance="fill" required>
+                        <mat-label>Telefono2</mat-label>
+                        <input matInput formControlName="telefono2">
+                    </mat-form-field>&nbsp;
+
+                    <mat-form-field  appearance="fill" required>
+                        <mat-label>Telefono3</mat-label>
+                        <input matInput formControlName="telefono3">
+                    </mat-form-field>&nbsp;
+
+                    <mat-form-field  appearance="fill" required>
+                        <mat-label>Telefono4</mat-label>
+                        <input matInput formControlName="telefono4">
+                    </mat-form-field>&nbsp;
+
+                    <mat-form-field  appearance="fill" required>
+                        <mat-label>Telefono5</mat-label>
+                        <input matInput formControlName="telefono5">
+                    </mat-form-field>
+
+                    <mat-form-field  appearance="fill" required>
+                        <mat-label>Posizione</mat-label>
+                        <input matInput formControlName="posizione">
+                    </mat-form-field>
+
+                   
+                   
+                </form>
+
+                <button _ngcontent-ajd-c474="" (click)="back();" class="btn btn-gray">Indietro</button>&nbsp;
+                <button class="btn btn-warning" (click)="Trasmetti();">Salva</button> <br /><br /> <br /><br />
+                <br /><br />
+
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+    </div>
+
+    <div class="footer_small">
+        <img src="assets/img/logo_aleph_very_small.png" alt="logo aleph"/>
+          </div>
+        

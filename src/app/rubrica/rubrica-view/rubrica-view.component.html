@@ -1,0 +1,127 @@
+<br />
+<button type="button" class="btn btn-success btn-success-add" [routerLink]="['/rubricadispatcher1']" >Aggiungi alla rubrica</button>
+<button *ngIf="showAziende" type="button" class="btn btn-warning" (click)="view_contatti()" >Elenco contatti</button>
+<button *ngIf="!showAziende" type="button" class="btn btn-warning" (click)="view_aziende()" >Elenco aziende</button> &nbsp;
+<br /><br />
+
+<mat-form-field class="simple_input" appearance="fill">
+    <mat-label>Tipo</mat-label>
+    <mat-select [(ngModel)] = "tipo_selected" (selectionChange)="scelta_tipo()"> 
+        <mat-option value="ente">Enti Pubblici</mat-option>  
+        <mat-option *ngFor = "let tipo of tipi" [value]="tipo.id">{{tipo.tipo}}</mat-option>      
+    </mat-select>
+</mat-form-field>
+<div >
+    <table *ngIf = "!showAziende" class="example-full-width" cellspacing="0">
+        <tr>
+            <td>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Nome</mat-label>
+                    <input matInput [(ngModel)] = "nome_input">
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Cognome</mat-label>
+                    <input matInput [(ngModel)] = "cognome_input">
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>CF</mat-label>
+                    <input matInput [(ngModel)] = "cf_input">
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Azienda</mat-label>
+                    <input matInput [(ngModel)] = "azienda_input">
+                </mat-form-field>
+            </td>
+            <td class="td-button-container">
+                <div class="example-button-container">
+                    <button class="search_button" mat-fab  color="info" aria-label="Cerca" (click)="search()">
+                    <mat-icon>search</mat-icon>
+                    </button>
+                </div> 
+            </td>
+        </tr>
+    </table>
+
+    <app-aleph-table *ngIf = "!showAziende"
+                [tableData]="data" [tableColumns]="customersTableColumns" [listActions]="listActions"
+                tableCase="rubrica-view"
+                [isFilterable]="false"
+                [isPageable]="true"
+                [paginationSizes]="[5,10]"
+                [defaultPageSize]="5"
+                (viewAction)    = "viewMethod($event)"
+                (addressAction) = "addressMethod($event)"
+                (contactAction) = "contactMethod($event)"
+                (editAction)    = "editMethod($event)"
+                (deleteAction)  = "deleteMethod($event)"
+    ></app-aleph-table>
+
+
+    <table *ngIf = "showAziende" class="example-full-width" cellspacing="0">
+        <tr>
+            <td>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Denominazione</mat-label>
+                    <input matInput [(ngModel)] = "denominazione_input">
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>PIVA</mat-label>
+                    <input matInput [(ngModel)] = "piva_input">
+                </mat-form-field>
+            </td>
+            <td>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Sede</mat-label>
+                    <input matInput [(ngModel)] = "sede_input">
+                </mat-form-field>
+            </td>           
+            <td class="td-button-container">
+                <div class="example-button-container">
+                    <button class="search_button" mat-fab  color="info" aria-label="Cerca" (click)="search_aziende()">
+                    <mat-icon>search</mat-icon>
+                    </button>
+                </div> 
+            </td>
+        </tr>
+    </table>
+
+    <app-aleph-table *ngIf = "showAziende"
+                [tableData]="data_aziende" [tableColumns]="customersTableColumnsAziende" [listActions]="listActionsAziende"
+                tableCase="rubrica-view-aziende"
+                [isFilterable]="false"
+                [isPageable]="true"
+                [paginationSizes]="[5,10]"
+                [defaultPageSize]="5"          
+                (viewAction)    = "viewAziendaMethod($event)" 
+                (editAction)    = "editAziendeMethod($event)"
+                (deleteAction)  = "deleteAziendeMethod($event)"
+                (struttureAction)  = "struttureMethod($event)"
+                (personeAction)  = "personeMethod($event)"
+    ></app-aleph-table>
+
+
+</div>
+<br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br>
+
+<div class="footer_table_container">
+  <video autoplay muted loop id="VideoFooter" class="video-container_footer_table">
+    <source src="assets/video/footer.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div class="footer_small">
+<img src="assets/img/logo_aleph_very_small.png" alt="logo aleph"/>
+  </div>
+
+
+
+

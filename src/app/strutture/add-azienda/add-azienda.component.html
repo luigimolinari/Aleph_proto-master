@@ -1,0 +1,210 @@
+<div class="centraleaziende">
+    <br />
+<div class="container">
+    <div class="formboxpanel">
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+           <div class="my-4">
+            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab" aria-controls="home" aria-selected="false">AGGIUNGI Azienda</a>
+                </li>
+            </ul>
+            <div *ngIf="caricato!='si'" class="center">caricamento codici IPA <div style="width: 150px; height: 150px; text-align: center;">
+                <div class="loading loading--full-height"></div>
+            </div></div>
+            <form *ngIf="caricato=='si'" [formGroup]="form" >
+                <div class="row mt-5 align-items-center">
+                     
+                </div>
+              
+                <hr class="my-4" />
+               
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="nome">Nome*</label>
+                        <input formControlName="nome"  type="text" id="nome"  class="form-control"  required />
+                        <div *ngIf="form.controls['nome'].invalid && (form.controls['nome'].dirty || form.controls['nome'].touched)" class="alert alert-danger">
+                            Il nome è obbligatorio
+                            <div *ngIf="form.controls['nome'].errors.required">
+                           
+                          </div>
+                        </div>
+                    </div>
+</div>
+               
+
+<div class="form-row">
+    <div class="form-group col-md-12">
+      <label for="toponimo">Toponimo*</label>
+      <select formControlName="toponimo" id="toponimo" class="form-control">
+      <option value="Via">Via</option>
+      <option value="Piazza">Piazza</option>
+      <option value="Viale">Viale</option>
+      <option value="Calata">Calata</option>
+      <option value="Calle">Calle</option>
+      <option value="Campo">Campo</option>
+      <option value="Corte">Corte</option>
+      <option value="Circonvallazione">Circonvallazione</option>
+      <option value="Darsena">Darsena</option>
+      <option value="Fondaco">Fondaco</option>
+      <option value="Località">Località</option>
+      <option value="Lungomare">Lungomare</option>
+      <option value="Rio">Rio</option>
+      <option value="Salita">Salita</option>
+      <option value="Strada">Strada</option>
+      <option value="Stretto">Stretto</option>
+      <option value="Traversa">Traversa</option>
+      <option value="Vicolo">Vicolo</option>
+      <option value="Zona industriale">Zona industriale</option>
+      </select>
+    </div>
+  </div>
+
+
+
+
+<div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="sede">Sede*</label>
+                        <input type="text"  formControlName="sede"  id="sede" class="form-control"  required />
+                        <div *ngIf="form.controls['sede'].invalid && (form.controls['sede'].dirty || form.controls['sede'].touched)" class="alert alert-danger">
+                            La sede è obbligatoria
+                            <div *ngIf="form.controls['sede'].errors.required">
+                            </div>
+                        </div>
+                 </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="comune">Comune*</label>
+                <input type="text"
+                #comunescelta
+                placeholder="Cerca il Comune"
+                [formControl]="controlcomuni"
+                [(ngModel)]="comune" 
+                [matAutocomplete]="autocomune"
+                formControlName="comune"
+                class="form-control"
+                aria-readonly="true"
+                >
+                <mat-autocomplete #autocomune="matAutocomplete">
+                <mat-option *ngFor="let comu of filteredComuni | async" [value]="comu" class="form-control">
+                {{comu}}
+                </mat-option>
+                </mat-autocomplete>
+                </div>
+
+                
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <label for="cap">CAP*</label>
+        <input type="text"  formControlName="cap"  id="cap" class="form-control"  required />
+        <div *ngIf="form.controls['cap'].invalid && (form.controls['cap'].dirty || form.controls['cap'].touched)" class="alert alert-danger">
+            Il CAP è obbligatorio
+            <div *ngIf="form.controls['cap'].errors.required">
+            </div>
+        </div>
+ </div>
+ <div class="form-group col-md-6">
+    <label for="cap">Provincia*</label>
+    <input type="text"  formControlName="provincia"  id="provincia" class="form-control"  required />
+    <div *ngIf="form.controls['provincia'].invalid && (form.controls['provincia'].dirty || form.controls['provincia'].touched)" class="alert alert-danger">
+        La provincia è obbligatoria
+        <div *ngIf="form.controls['provincia'].errors.required">
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+<div class="form-group">
+    <label for="cf">Nazione*</label>
+<input type="text"
+#nazionescelta
+placeholder="Cerca lo Stato"
+[formControl]="control"
+[(ngModel)]="Nazione" 
+[matAutocomplete]="auto"
+formControlName="Nazione"
+class="form-control"
+aria-readonly="true"
+>
+<mat-autocomplete #auto="matAutocomplete">
+<mat-option *ngFor="let nazione of filteredNazioni | async" [value]="nazione" class="form-control">
+{{nazione}}
+</mat-option>
+</mat-autocomplete>
+</div>
+
+<div class="form-row">
+                <div class="form-group col-md-6" >
+                    <label for="piva">P.IVA*</label>
+                    <input type="text" formControlName="piva" class="form-control" id="piva" required />
+                    <div *ngIf="form.controls['piva'].invalid && (form.controls['piva'].dirty || form.controls['piva'].touched)" class="alert alert-danger">
+                        La P.IVA è obbligatoria (max 16 caratteri)
+                        <div *ngIf="form.controls['piva'].errors.required">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="cf">Telefono</label>
+                    <input type="text"   formControlName="telefono" class="form-control" id="telefono" />
+                
+                </div>
+</div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="pec">PEC</label>
+                        <input  formControlName="pec"  type="text" id="pec"  class="form-control"  />
+                        <div *ngIf="form.controls['pec'].invalid && (form.controls['pec'].dirty || form.controls['pec'].touched)" class="alert alert-danger">                       
+                            Inserire un formato e-mail  valido
+                        </div>
+                    </div>
+
+                   
+
+
+                    <div class="form-group col-md-6">
+                        <label for="mail">Mail</label>
+                        <input type="text"  formControlName="mail"  id="mail" class="form-control" />
+                        <div *ngIf="form.controls['mail'].invalid && (form.controls['mail'].dirty || form.controls['mail'].touched)" class="alert alert-danger">                       
+                            Inserire un formato e-mail valido
+                        </div>
+                 </div>
+                </div>
+
+                <div class="form-row">
+                    
+                    <label for="cerca_ipa" class="cerca_ipa_label">Cerca su IPA*</label>                               
+                        <input matInput formControlName="cerca_ipa" id="cerca_ipa" class="cerca_ipa" />
+                    &nbsp; <button type="button" class="btn btn-primary" (click)="cercaIPA();">
+                        <fa-icon [icon]="faSearch"></fa-icon>
+                  </button>
+                </div> 
+                <br />
+                    <div *ngIf="risultati=='si'" class="form-row">
+                        <label for="codice_ipa" class="cerca_ipa_label">Codice IPA</label>
+                        <select formControlName="codice_ipa" id="codice_ipa" class="trova_ipa">
+                     <option *ngFor="let ipa of dataipadesc" label="{{ipa.des_amm}} {{ipa.cod_amm}}" value={{ipa.cod_amm}}>{{ipa.cod_amm}}</option>
+                     <option value=" "> </option>
+                        </select> &nbsp; <button type="button" class="btn btn-warning" (click)="cercaDESC();">
+                            <fa-icon [icon]="faShareSquare"></fa-icon>
+                      </button>
+                </div><br />
+                <button type="Submit" class="btn btn-success" (click)="Trasmetti();">Registra azienda</button>
+           
+        </form>
+           </div>
+        </div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+         </div>
+

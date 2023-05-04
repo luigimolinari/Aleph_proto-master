@@ -1,0 +1,175 @@
+<div class="centraleoperatorinew">
+
+    <br />
+
+    <div class="container">
+        <div class="formboxpanel">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+                    <div class="my-4">
+                        <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab"
+                                    aria-controls="home" aria-selected="false">Modifica documento</a>
+                            </li>
+                        </ul>
+
+                        <form [formGroup]="form">
+
+                            <div *ngIf="testo == '' || testo == null" class="form-group">
+                                <label for="file" class="btn btn-light btn-fileUpload">
+                                    <span class="fas fa-folder-open">
+                                        <fa-icon [icon]="faFolderOpen"></fa-icon>
+                                    </span>
+                                    Sostituisci
+                                </label>
+                                <div class="fileName" *ngIf="file!=undefined">{{file.name}}</div>
+                                <div class="fileName" *ngIf="file==undefined"></div>
+                                <input hidden type="file" id="file" name="file" (change)="onFileSelect($event)"
+                                    class="form-control" />
+                            </div>
+
+                            <div class="form-row">
+
+                                <div class="form-group col-md-4">
+                                    <label for="workflow">ID workflow</label>
+                                    <input disabled [(ngModel)]="workflow" formControlName="workflow" type="text" id="workflow"
+                                        class="form-control" required />
+                                    <div *ngIf="form.controls['workflow'].invalid && (form.controls['workflow'].dirty || form.controls['workflow'].touched)"
+                                        class="alert alert-danger">
+                                        Il workflow è obbligatorio
+                                        <div *ngIf="form.controls['workflow'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label for="procedura">ID procedura</label>
+                                    <input disabled type="text" [(ngModel)]="procedura" formControlName="procedura"
+                                        class="form-control" id="procedura" required />
+                                    <div *ngIf="form.controls['procedura'].invalid && (form.controls['procedura'].dirty || form.controls['procedura'].touched)"
+                                        class="alert alert-danger">
+                                        La procedura è obbligatoria
+                                        <div *ngIf="form.controls['procedura'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label for="operatore">ID operatore</label>
+                                    <input disabled type="text" [(ngModel)]="operatore" formControlName="operatore"
+                                        id="operatore" class="form-control" required />
+                                    <div *ngIf="form.controls['operatore'].invalid && (form.controls['operatore'].dirty || form.controls['operatore'].touched)"
+                                        class="alert alert-danger">
+                                        L'operatore è obbligatorio
+                                        <div *ngIf="form.controls['operatore'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="descrizione">Descrizione</label>
+                                <input type="text" [(ngModel)]="descrizione" formControlName="descrizione"
+                                    class="form-control" id="descrizione" required />
+                                <div *ngIf="form.controls['descrizione'].invalid && (form.controls['descrizione'].dirty || form.controls['descrizione'].touched)"
+                                    class="alert alert-danger">
+                                    La descrizione è obbligatoria
+                                    <div *ngIf="form.controls['descrizione'].errors.required">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="versione">Versione</label>
+                                <input disabled type="text" [(ngModel)]="versione" formControlName="versione"
+                                    class="form-control" id="versione" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="note">Note</label>
+                                <input type="text" class="form-control" [(ngModel)]="note" formControlName="note"
+                                    id="note" />
+                            </div>
+
+                            <!--div class="form-group">
+                                <label for="firmato">Firmato</label>
+                                <select id="firmato" class="form-control" [(ngModel)]="firmato"
+                                    formControlName="firmato" required>
+                                    <option label="Si">1</option>
+                                    <option label="No">0</option>
+                                </select>
+                                <div *ngIf="form.controls['firmato'].invalid && (form.controls['firmato'].dirty || form.controls['firmato'].touched)"
+                                    class="alert alert-danger">
+                                    Firmato è obbligatorio
+                                    <div *ngIf="form.controls['firmato'].errors.required">
+                                    </div>
+                                </div>
+                            </div-->
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="giorno">Giorno</label>
+                                    <input disabled ="true" type="date" class="form-control" [(ngModel)]="giorno"
+                                        formControlName="giorno" id="giorno" required />
+                                    <div *ngIf="form.controls['giorno'].invalid && (form.controls['giorno'].dirty || form.controls['giorno'].touched)"
+                                        class="alert alert-danger">
+                                        Il giorno è obbligatorio
+                                        <div *ngIf="form.controls['giorno'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="ora">Ora</label>
+                                    <input disabled ="true" type="time" class="form-control" [(ngModel)]="ora" formControlName="ora"
+                                        id="ora" required />
+                                    <div *ngIf="form.controls['ora'].invalid && (form.controls['ora'].dirty || form.controls['ora'].touched)"
+                                        class="alert alert-danger">
+                                        L'ora è obbligatoria
+                                        <div *ngIf="form.controls['ora'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--div class="form-group">
+                                <label for="elimina">Elimina</label>
+                                <input type="text" class="form-control" [(ngModel)]="elimina" formControlName="elimina" id="elimina"   />
+                                
+                            </div-->
+
+                            <!--div class="form-row">
+                                <div disabled class="form-group col-md-6">
+                                    <label for="documento_padre">Documento padre</label>
+                                    <input type="text" class="form-control" [(ngModel)]="documento_padre" formControlName="documento_padre" id="documento_padre"   />
+                                           
+                                </div>
+                                
+                                <div class="form-group col-md-6">
+                                    <label for="fascicolo">Fascicolo</label>
+                                    <select id="fascicolo" class="form-control" [(ngModel)]="fascicolo"
+                                        formControlName="fascicolo">
+                                        <option >----</option>
+                                        <option *ngFor="let item of listFascicolo" [value]="item.id">{{item.id}}</option>
+                                    </select>   
+                                </div>
+                            </div-->
+
+                            <button type="Submit" class="btn btn-success" (click)="Trasmetti();">Trasmetti
+                                modifiche</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+</div>

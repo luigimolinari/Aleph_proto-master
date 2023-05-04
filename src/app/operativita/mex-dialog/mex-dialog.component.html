@@ -1,0 +1,73 @@
+<div mat-dialog-content>
+
+    <div class="right">
+        <span class="material-icons writeMex" (click)="enable_textarea = !enable_textarea" title="scrivi messaggio">
+            edit
+        </span>
+    </div>
+    <!--textarea class="myTextArea" *ngIf="enable_textarea" [(ngModel)]="myText"></textarea-->
+    <div *ngIf="enable_textarea">
+        <form class="example-form">
+            <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Messaggio</mat-label>
+            <textarea matInput #message maxlength="256" placeholder=""></textarea>
+            </mat-form-field>
+        </form>
+
+        <form class="example-form">
+            <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Tipologia</mat-label>
+            <input matInput #type_mex  maxlength="256" placeholder="">
+            </mat-form-field>
+        </form>
+
+        <div class="right">
+            <span class="material-icons writeMex" (click)="inviaMex(message,type_mex)" title="invia">
+                send
+            </span>
+        </div>
+    </div>  
+    <hr>
+    
+    <div *ngIf="data.data!= null && data.data.length!=0">
+        <div *ngIf="last_otherOp>last_read || (last_read==0 && last_otherOp!=0)" class="right">
+            <button class="btn btn-success" type="button" (click)="aggiorna()">
+                Segna come letti
+                <span class="material-icons">
+                    mark_email_read
+                </span>
+            </button>
+        </div>
+        <br>
+
+
+        <mat-card *ngFor="let e of data.data">
+
+            <img *ngIf="e.sesso == 'F'" class="gender_icon" src="../../../assets/img/user_female.png" />
+            <img *ngIf="e.sesso == 'M'" class="gender_icon" src="../../../assets/img/user_male.png" />
+            <img *ngIf="e.sesso != 'F' && e.sesso != 'M'" class="gender_icon"
+                src="../../../assets/img/user_neutro.png" />
+
+            <h6 class="headerMex">
+                Da: {{e.cognome}} {{e.nome}} [{{e.giorno}} {{e.ora}}] <mat-chip
+                    *ngIf="e.id>last_read && e.id_operatore != operatore" class="new_mex" color="accent">Nuovo
+                </mat-chip>
+                <br>
+                Tipo: {{e.tipo}}
+                <br>
+            </h6>
+            <br>
+            {{e.testo}}
+            <br>
+
+        </mat-card>
+    </div>
+
+    <div *ngIf="data.data== null || data.data.length==0">
+        Nessun messaggio
+    </div>
+
+
+
+
+</div>

@@ -1,0 +1,227 @@
+<div class="mat-elevation-z8 tabContainer">
+  <ng-container>
+    <!-- Filter -->
+    <ng-container *ngIf="isFilterable" [matColumnDef]="this.rowActionIcon">
+      <br>
+      <div class="filterContainer col-md-6">
+        <mat-form-field>
+          <mat-label>Cerca</mat-label>
+          <input matInput (keyup)="applyFilter($event)">
+        </mat-form-field>
+      </div>
+    </ng-container>
+    <br>
+    <div class="tableContainer">
+      <!-- Table -->
+      <table mat-table [dataSource]="tableDataSource" matSort (matSortChange)="sortTable($event)">
+
+        <ng-container *ngFor="let tableColumn of tableColumns" [matColumnDef]="tableColumn.name">
+          <!-- if sortable column header -->
+          <ng-container *ngIf="tableColumn.isSortable; else notSortable">
+            <mat-header-cell *matHeaderCellDef [mat-sort-header]="tableColumn.name"
+              [arrowPosition]="tableColumn.position === 'right' ? 'before' : 'after'">
+              {{tableColumn.name}}
+            </mat-header-cell>
+          </ng-container>
+          <!-- else not sortable -->
+          <ng-template #notSortable>
+            <mat-header-cell mat-header-cell *matHeaderCellDef>
+              {{tableColumn.name}}
+            </mat-header-cell>
+          </ng-template>
+          <!-- column data -->
+          <mat-cell [data-label]="tableColumn.dataKey" *matCellDef="let element">
+            <div class="span_container" *ngIf="tableColumn.dataKey!='azioni'" >
+              <span *ngIf="tableCase == 'deleted'" style="text-decoration: line-through;">
+              {{element[tableColumn.dataKey]}}
+            </span>
+            <span *ngIf="tableCase != 'deleted'">
+              {{element[tableColumn.dataKey]}}
+            </span>
+            </div>
+            <div *ngIf="tableColumn.dataKey=='azioni'">
+              <div *ngIf="tableCase == 'general'">
+                <button *ngIf="listActions.view" type="button" class="btn btn-primary"
+                  (click)="emitViewAction(element)">
+                  <fa-icon [icon]="faEye"></fa-icon>
+                </button>
+                <button *ngIf="listActions.edit" type="button" class="btn btn-success"
+                  (click)="emitEditAction(element)">
+                  <fa-icon [icon]="faEdit"></fa-icon>
+                </button>
+                <button *ngIf="listActions.org" type="button" class="btn btn-warning" (click)="emitOrgAction(element)">
+                  <fa-icon [icon]="faSitemap"></fa-icon>
+                </button>
+                <button *ngIf="listActions.delete" type="button" class="btn btn-danger"
+                  (click)="emitDeleteAction(element)">
+                  <fa-icon [icon]="faTrash"></fa-icon>
+                </button>
+                <button *ngIf="listActions.groupsProc" type="button" class="btn btn-warning"
+                  (click)="emitGroupsProcAction(element)">
+                  <fa-icon [icon]="faBriefcase"></fa-icon>
+                </button>
+                <button *ngIf="listActions.groupsFasc" type="button" class="btn btn-info"
+                  (click)="emitGroupsFascAction(element)">
+                  <fa-icon [icon]="faFolderOpen"></fa-icon>
+                </button>
+                 <!--operatori associabili solo ai gruppi dinamici-->
+                 <button *ngIf="listActions.groupsOp &&element.statico!=1" type="button" class="btn btn-primary"
+                 (click)="emitGroupsOpAction(element)">
+                 <fa-icon [icon]="faUserPlus"></fa-icon>
+               </button>
+                <button *ngIf="listActions.createform " type="button" class="btn btn-warning"
+                  (click)="emitGroupsOpAction(element)">
+                  <fa-icon [icon]="faThumbsUp"></fa-icon>
+                </button>
+
+
+                <button *ngIf="listActions.restoreform " type="button" class="btn btn-warning"
+                  (click)="emitRestoreformAction(element)">
+                  <fa-icon [icon]="faRecycle"></fa-icon>
+                </button>
+
+
+              </div>
+
+              <div *ngIf="tableCase == 'deleted'">
+                <button *ngIf="listActions.view" type="button" class="btn btn-primary"
+                  (click)="emitViewAction(element)">
+                  <fa-icon [icon]="faEye"></fa-icon>
+                </button>
+                <button *ngIf="listActions.edit" type="button" class="btn btn-success"
+                  (click)="emitEditAction(element)">
+                  <fa-icon [icon]="faEdit"></fa-icon>
+                </button>
+                <button *ngIf="listActions.org" type="button" class="btn btn-warning" (click)="emitOrgAction(element)">
+                  <fa-icon [icon]="faSitemap"></fa-icon>
+                </button>
+                <button *ngIf="listActions.delete" type="button" class="btn btn-danger"
+                  (click)="emitDeleteAction(element)">
+                  <fa-icon [icon]="faTrash"></fa-icon>
+                </button>
+                <button *ngIf="listActions.groupsProc" type="button" class="btn btn-warning"
+                  (click)="emitGroupsProcAction(element)">
+                  <fa-icon [icon]="faBriefcase"></fa-icon>
+                </button>
+                <button *ngIf="listActions.groupsFasc" type="button" class="btn btn-info"
+                  (click)="emitGroupsFascAction(element)">
+                  <fa-icon [icon]="faFolderOpen"></fa-icon>
+                </button>
+                 <!--operatori associabili solo ai gruppi dinamici-->
+                 <button *ngIf="listActions.groupsOp &&element.statico!=1" type="button" class="btn btn-primary"
+                 (click)="emitGroupsOpAction(element)">
+                 <fa-icon [icon]="faUserPlus"></fa-icon>
+               </button>
+                <button *ngIf="listActions.createform " type="button" class="btn btn-warning"
+                  (click)="emitGroupsOpAction(element)">
+                  <fa-icon [icon]="faThumbsUp"></fa-icon>
+                </button>
+
+
+                <button *ngIf="listActions.restoreform " type="button" class="btn btn-warning"
+                  (click)="emitRestoreformAction(element)">
+                  <fa-icon [icon]="faRecycle"></fa-icon>
+                </button>
+
+
+              </div>
+
+              <!-- specific scenarios -->
+
+              <div *ngIf="tableCase == 'rubrica-view'">
+               
+                <button *ngIf="listActions.view" type="button" class="btn btn-primary"
+                (click)="emitViewAction(element)">
+                <fa-icon [icon]="faEye"></fa-icon>
+              </button>
+                <button type="button" class="btn btn-success">
+                  <fa-icon [icon]="faEdit" (click)="emitEditAction(element)"></fa-icon>
+                </button>
+                <button type="button" class="btn btn-danger">
+                  <fa-icon [icon]="faTrash" (click)="emitDeleteAction(element)"></fa-icon>
+                </button>
+               
+              </div>
+
+              <div *ngIf="tableCase == 'rubrica-view-aziende'">
+                <button *ngIf="listActions.view" type="button" class="btn btn-primary"
+                (click)="emitViewAziendaAction(element)">
+                <fa-icon [icon]="faEye"></fa-icon>
+                </button>              
+                <button type="button" class="btn btn-success">
+                  <fa-icon [icon]="faEdit" (click)="emitEditAction(element)"></fa-icon>
+                </button>
+                <button type="button" class="btn btn-warning">
+                  <fa-icon [icon]="faSitemap" (click)="emitStruttureAction(element)"></fa-icon>
+                </button>
+                <button type="button" class="btn btn-warning">
+                  <fa-icon [icon]="faUsers" (click)="emitPersoneAction(element)"></fa-icon>
+                </button>
+                <button type="button" class="btn btn-danger">
+                  <fa-icon [icon]="faTrash" (click)="emitDeleteAction(element)"></fa-icon>
+                </button>
+              </div>
+
+              <div *ngIf="tableCase == 'flussi-view'">
+                <!-- available: esiste un workflow associato -->
+                <button *ngIf="element.available==1" type="button" class="btn btn-primary">
+                  <fa-icon [icon]="faEye" (click)="emitViewAction(element)"></fa-icon><!-- vedo il workflow associato al flusso -->
+                </button>
+                <button *ngIf="element.available==1 && element.blocked==0" type="button" class="btn btn-info"><!-- modifico il workflow associato -->
+                  <fa-icon [icon]="faList" (click)="emitWorkflowAction(element)"></fa-icon>
+                </button>
+                <button type="button" class="btn btn-success"><!-- edit metainfo - sempre possibile -->
+                  <fa-icon [icon]="faEdit" (click)="emitEditAction(element)"></fa-icon>
+                </button>
+                <button type="button" class="btn btn-info"><!-- edit metainfo - sempre possibile -->
+                  <fa-icon [icon]="faClock" (click)="emitTempiAction(element)"></fa-icon>
+                </button>
+                <button *ngIf="element.available==0" type="button" class="btn btn-danger"><!-- se non esiste un workflow associato (non esisterà neanche la procedura) -->
+                  <fa-icon [icon]="faTrash" (click)="emitDeleteAction(element)"></fa-icon>
+                </button>
+              </div>
+
+
+              <div *ngIf="tableCase == 'forms'">
+                <button *ngIf="listActions.view" type="button" class="btn btn-primary" [title] = "titleActions.view"
+                  (click)="emitViewAction(element)">
+                  <fa-icon [icon]="faEye"></fa-icon>
+                </button>
+                <button *ngIf="listActions.edit" type="button" class="btn btn-success" [title] = "titleActions.edit"
+                  (click)="emitEditAction(element)">
+                  <fa-icon [icon]="faCode"></fa-icon>
+                </button>              
+                <button *ngIf="listActions.delete" type="button" class="btn btn-danger" [title] = "titleActions.delete"
+                  (click)="emitDeleteAction(element)">
+                  <fa-icon [icon]="faTrash"></fa-icon>
+                </button>
+                <button *ngIf="listActions.gatewayform" type="button" class="btn btn-success" [title] = "titleActions.gatewayform"
+                  (click)="emitGatewayformAction(element)">
+                  <fa-icon [icon]="faCubes"></fa-icon>
+                </button>
+
+                <button *ngIf="listActions.createform && element.attivo=='0'" type="button" class="btn btn-warning" [title] = "titleActions.createform"
+                  (click)="emitCreateformAction(element)">
+                  <fa-icon [icon]="faThumbsUp"></fa-icon>
+                </button>
+                <button *ngIf="listActions.uncreateform && element.attivo=='1'" type="button" class="btn btn-danger" [title] = "titleActions.uncreateform"
+                  (click)="emitUnCreateformAction(element)">
+                  <fa-icon [icon]="faThumbsDown"></fa-icon>
+                </button>
+              </div>
+
+
+            </div>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <mat-paginator *ngIf="isPageable" [pageSizeOptions]="paginationSizes" [pageSize]="defaultPageSize"
+      showFirstLastButtons>
+    </mat-paginator>
+  </ng-container>
+</div>

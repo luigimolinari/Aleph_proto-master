@@ -1,0 +1,91 @@
+
+  body{
+    color: #00060c;
+    background-color: #f4f6f9;
+  }
+  .container{
+    height: 100%;
+    width: 100%;
+  
+  }
+  
+  .form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #00070c;
+    background-color: #ffffff;
+    background-clip: padding-box;
+    border: 1px solid #eef0f3;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+
+  .central{
+    background:#ffffffee;
+    padding: 20px;
+    height: 100%;
+  }
+
+  .my_form{
+    display: grid;
+  }
+  .my_label{
+      color:black;
+  }
+  .simple_input{
+      width: 100%;
+  }
+
+  .mat-form-field-wrapper {
+    padding-right: 0px;
+  }
+
+  input{
+    color:black;
+  }
+
+  .btn-gray{
+    background-color: lightgray;
+  }
+
+  .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: white;
+    background-color: darkcyan;
+    border-color: darkcyan;
+  }
+
+  .smallfield {
+    width: 20%;
+  }
+
+  .cerca_ipa {
+    background-color: #ffffff;
+    color: rgb(47, 46, 48);
+    font-style: italic;
+    width: 91%;
+    margin-left:0.25em;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.trova_ipa {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    width: 91%;
+    margin-left:0.25em;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.cerca_ipa_label {
+    margin-left:0.25em;
+}
+
+.example-full-width_cerca{
+  width: 91%;
+}

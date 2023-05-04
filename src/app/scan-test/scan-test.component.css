@@ -1,0 +1,42 @@
+.selFile{
+    width: 100%;
+}
+.example-button-row {
+    display: table-cell;
+    width: 490px;
+  }
+  
+  .example-button-row .mat-button-base {
+    margin: 8px 8px 8px 0;
+  }
+  
+  .example-flex-container {
+    display: flex;
+ 
+    flex-wrap: wrap;
+  }
+  
+  .example-button-container {
+    display: flex;
+   
+    width: 120px;
+  }
+
+  .formboxpanel{
+      height: 60vh;
+      overflow: auto;
+  }
+
+  .row{
+      margin: auto;
+      width: 80%;
+  }
+
+  .delete_el{
+    cursor: pointer;
+    color: crimson;
+  }
+
+  .right{
+    text-align: right;
+  }

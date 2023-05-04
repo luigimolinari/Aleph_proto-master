@@ -1,0 +1,28 @@
+
+<br />
+<button type="button" class="btn btn-success btn-success-add" [routerLink]="['/addriservatezza']" >AGGIUNGI nuova motivazione</button> &nbsp; 
+<button type="button" class="btn btn-info btn-info-add" [routerLink]="['/viewriservatezzadeleted']" >Vai a motivazioni disattive</button> &nbsp;<br />
+<br /><br />
+
+<app-aleph-table 
+			        [tableData]="data" [tableColumns]="customersTableColumns" [listActions]="listActions"
+              tableCase="general"
+              [isFilterable]="true"
+              [isPageable]="true"
+              [paginationSizes]="[5,10]"
+              [defaultPageSize]="5"
+              (editAction) = "editMethod($event)"
+              (deleteAction) = "deleteMethod($event)"
+></app-aleph-table>
+  
+<br><br><br><br><br><br><br><br>
+
+<div class="footer_table_container">
+  <video autoplay muted loop id="VideoFooter" class="video-container_footer_table">
+    <source src="assets/video/footer.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div class="footer_small">
+<img src="assets/img/logo_aleph_very_small.png" alt="logo aleph"/>
+  </div>

@@ -1,0 +1,27 @@
+.example-ripple-container {
+    cursor: pointer;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+    width: 70%;
+    height: auto;
+    background-color:cornflowerblue;
+    color: white;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;
+    display: inline-block;
+  }
+  .ripple_selected{
+    background-color:green;
+  }
+  .central{
+    background:#ffffffee;
+    padding: 20px;
+  }
+  .dynamicForm{
+    vertical-align: bottom;
+  }

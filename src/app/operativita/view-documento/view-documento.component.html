@@ -1,0 +1,218 @@
+<div class="centraleoperatorinew">
+
+    <br />
+
+    <div class="container">
+        <div class="formboxpanel">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+                    <br />
+                    <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab"
+                                aria-controls="home" aria-selected="false">
+                                Documento
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="my-4">
+                        <br>
+                        <button mat-button class="btn btn-back" (click)="back()">
+                            <span class="material-icons">
+                                arrow_back
+                            </span>
+                        </button>
+                        <br> <br>
+
+                        <mat-tab-group mat-align-tabs="start" (selectedTabChange)="tabChanged($event)">
+                            <mat-tab label="Dettagli">
+                                <br>
+                            </mat-tab>
+
+                            <mat-tab *ngIf="categoria=='1'" label="Testo">
+                                <br>
+                            </mat-tab>
+                        </mat-tab-group>
+
+                        <form *ngIf="tab_selected==0 " [formGroup]="form">
+
+                            <div class="form-row">
+
+                                <div class="form-group col-md-6">
+                                    <label for="workflow">ID workflow</label>
+                                    <input formControlName="workflow" type="text"
+                                        id="workflow" class="form-control" required />
+                                    <div *ngIf="form.controls['workflow'].invalid && (form.controls['workflow'].dirty || form.controls['workflow'].touched)"
+                                        class="alert alert-danger">
+                                        Il workflow è obbligatorio
+                                        <div *ngIf="form.controls['workflow'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="operatore">ID operatore</label>
+                                    <input type="text" formControlName="operatore"
+                                        id="operatore" class="form-control" required />
+                                    <div *ngIf="form.controls['operatore'].invalid && (form.controls['operatore'].dirty || form.controls['operatore'].touched)"
+                                        class="alert alert-danger">
+                                        L'operatore è obbligatorio
+                                        <div *ngIf="form.controls['operatore'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="descrizione">Descrizione</label>
+                                <input type="text" formControlName="descrizione"
+                                    class="form-control" id="descrizione" required />
+                                <div *ngIf="form.controls['descrizione'].invalid && (form.controls['descrizione'].dirty || form.controls['descrizione'].touched)"
+                                    class="alert alert-danger">
+                                    La descrizione è obbligatoria
+                                    <div *ngIf="form.controls['descrizione'].errors.required">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="versione">Versione</label>
+                                <input type="text" formControlName="versione"
+                                    class="form-control" id="versione" required />
+                                <div *ngIf="form.controls['versione'].invalid && (form.controls['versione'].dirty || form.controls['versione'].touched)"
+                                    class="alert alert-danger">
+                                    La versione è obbligatoria
+                                    <div *ngIf="form.controls['versione'].errors.required">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="note">Note</label>
+                                <input type="text" class="form-control"
+                                    formControlName="note" id="note" />
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="giorno">Giorno</label>
+                                    <input type="date" class="form-control"
+                                        formControlName="giorno" id="giorno" required />
+                                    <div *ngIf="form.controls['giorno'].invalid && (form.controls['giorno'].dirty || form.controls['giorno'].touched)"
+                                        class="alert alert-danger">
+                                        Il giorno è obbligatorio
+                                        <div *ngIf="form.controls['giorno'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="ora">Ora</label>
+                                    <input type="time" class="form-control"
+                                        formControlName="ora" id="ora" required />
+                                    <div *ngIf="form.controls['ora'].invalid && (form.controls['ora'].dirty || form.controls['ora'].touched)"
+                                        class="alert alert-danger">
+                                        L'ora è obbligatoria
+                                        <div *ngIf="form.controls['ora'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="documento_padre">ID doc padre</label>
+                                    <input type="text"
+                                        formControlName="documento_padre" class="form-control" id="documento_padre" />
+                                </div>
+                                <div *ngIf = "pratica==undefined" class="form-group col-md-6">
+                                    <label for="procedura">ID procedura</label>
+                                    <input type="text" formControlName="procedura"
+                                        class="form-control" id="procedura" required />
+                                    <div *ngIf="form.controls['procedura'].invalid && (form.controls['procedura'].dirty || form.controls['procedura'].touched)"
+                                        class="alert alert-danger">
+                                        La procedura è obbligatoria
+                                        <div *ngIf="form.controls['procedura'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf = "pratica!=undefined" class="form-group col-md-6">
+                                    <label for="pratica">ID pratica</label>
+                                    <input type="text" formControlName="pratica"
+                                        class="form-control" id="pratica" required />
+                                    <div *ngIf="form.controls['pratica'].invalid && (form.controls['pratica'].dirty || form.controls['pratica'].touched)"
+                                        class="alert alert-danger">
+                                        La pratica è obbligatoria
+                                        <div *ngIf="form.controls['pratica'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--div class="form-group col-md-4">
+                                    <label for="fascicolo">ID fascicolo</label>
+                                    <input type="text" class="form-control"
+                                        formControlName="fascicolo" id="fascicolo" required />
+                                </div-->
+                            </div>
+
+                            <div *ngIf="validazione!=0">
+
+                                <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                                </ul>
+                                <div *ngIf = "pratica==undefined">
+
+                                    <div class="form-group">
+                                        <label for="note">Gruppo di validazione</label>
+                                        <input type="text" class="form-control"
+                                            formControlName="nome_gruppo" id="nome_gruppo" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="note">Firmatari</label>
+                                        <div *ngFor="let op of firmatari">
+                                            <input disabled type="text" class="form-control" id="nome_gruppo"
+                                                [value]="(op.ordine!='0' ? op.ordine+') ' : '')+op.cognome.toUpperCase()+' '+op.nome.toUpperCase()">
+                                            <br>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div *ngIf = "pratica!=undefined">
+
+                                    
+                                    <label for="note">Firmatari del gruppo di lavoro</label>
+                                       
+
+                                    <div class="form-group">
+                                        <label for="note">Firmatari</label>
+                                        <div *ngFor="let op of firmatari">
+                                            <input disabled type="text" class="form-control" id="nome_gruppo"
+                                                [value]="(op.ordine!='0' ? op.ordine+') ' : '')+op.cognome.toUpperCase()+' '+op.nome.toUpperCase()">
+                                            <br>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="e_container">
+                <app-editor *ngIf="tab_selected==1" [doc_id]="id" doc_read="true" invisibleToolbar="true"
+                    short_template="true"></app-editor>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+</div>

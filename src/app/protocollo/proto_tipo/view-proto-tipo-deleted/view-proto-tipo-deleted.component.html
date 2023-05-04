@@ -1,0 +1,26 @@
+
+<br />
+&nbsp;&nbsp;<button type="button" class="btn btn-warning btn-success-warning" [routerLink]="['/viewprototipo']" >Vai a Tipologie di protocollo</button> &nbsp;
+<br /><br />
+
+<app-aleph-table 
+			        [tableData]="data" [tableColumns]="customersTableColumns" [listActions]="listActions"
+              tableCase="deleted"
+              [isFilterable]="true"
+              [isPageable]="true"
+              [paginationSizes]="[5,10]"
+              [defaultPageSize]="5"
+              (restoreFormAction) = "restoreFormMethod($event)"
+></app-aleph-table>
+  
+<br><br><br><br><br><br><br><br>
+
+<div class="footer_table_container">
+  <video autoplay muted loop id="VideoFooter" class="video-container_footer_table">
+    <source src="assets/video/footer.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div class="footer_small">
+<img src="assets/img/logo_aleph_very_small.png" alt="logo aleph"/>
+  </div>

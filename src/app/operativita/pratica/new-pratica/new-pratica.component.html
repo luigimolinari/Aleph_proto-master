@@ -1,0 +1,18 @@
+<br /> <br /><br /> 
+<div class="ripple_container" [style.marginLeft]="marginLeft">
+    <br />
+        <div matRipple *ngFor="let form of data" class=" example-ripple-container mat-elevation-z4"
+             [routerLink]="['/praticarequest']" [queryParams]="{id_form:form.id_form, nome_tab:form.nome_tab, id_flusso: form.id_flusso}">
+             <h6><img class="logo_form" src="assets/img_portal/{{form.immagine}}_head.jpg"></h6>
+             <h5>{{form.header}}</h5>
+             <h6>{{form.legenda}}</h6>
+             <br>
+             <h6>Flusso: {{form.nome_flusso}}</h6>
+             <br>
+             <p class ="customOpacity">___________</p>
+             <br>
+             <p class="leftText"><img src="assets/img/logo_aleph.png" width="30" height="30" alt="Aleph"></p>
+        </div>
+        <br /> <br />
+
+</div>

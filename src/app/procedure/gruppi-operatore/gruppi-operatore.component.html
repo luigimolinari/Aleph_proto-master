@@ -1,0 +1,109 @@
+<div class="centralegruppiprocedure">
+    <br />
+    <!--div *ngIf="isDataLoaded" class="container"-->
+    <div [hidden]="!isDataLoaded" class="container">
+    
+        <div class="formboxpanel">
+            <div class="mat-elevation-z8 tabContainer">
+                <br><br>
+				<mat-label class="col-md-12">Gruppo: {{id_gruppo}}</mat-label>
+				<br>
+				<div class="col-md-12">
+                    <mat-label>Operatori selezionati:</mat-label>
+                </div>
+                <div class="col-md-12 my_chips_wrapper">
+					<mat-chip-list aria-label="Fish selection">
+						<mat-chip *ngFor="let operator of selectedOperators" 
+							[selectable]="selectable" 
+							[removable]="tipo_op == 'admin' || tipo_op == 'poweruser' || id_azienda == removeControl[operator]"
+							(removed)="remove(operator)">
+							{{operator}}
+							<mat-icon matChipRemove *ngIf="tipo_op == 'admin' || tipo_op == 'poweruser' || id_azienda==removeControl[operator]">cancel</mat-icon>
+						</mat-chip>
+					</mat-chip-list>
+				</div>
+    
+                <br><br>
+    
+                <div class="filterContainer col-md-6">
+                    <mat-form-field>
+                        <mat-label>Cerca</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" #input>
+                    </mat-form-field>
+                </div>
+    
+                <br>
+                <div class="tableContainer">
+                    <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
+
+                        <ng-container matColumnDef="id" hidden>
+                            <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+                            <mat-cell  data-label="ID:" *matCellDef="let element"> {{element.id}} </mat-cell>
+                        </ng-container>
+                        
+                        <ng-container matColumnDef="cognome">
+                            <mat-header-cell *matHeaderCellDef> Cognome </mat-header-cell>
+                            <mat-cell  data-label="Cognome:" *matCellDef="let element">{{element.cognome}} </mat-cell>
+                        </ng-container>
+
+
+                        <ng-container matColumnDef="nome">
+                            <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+                            <mat-cell  data-label="Nome:" *matCellDef="let element"> {{element.nome}} </mat-cell>
+                        </ng-container>
+
+
+                        <ng-container matColumnDef="codfisc">
+                            <mat-header-cell *matHeaderCellDef> CF </mat-header-cell>
+                            <mat-cell  data-label="CF:" *matCellDef="let element"> {{element.CF}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="azienda">
+                            <mat-header-cell *matHeaderCellDef> Azienda </mat-header-cell>
+                            <mat-cell  data-label="Azienda:" *matCellDef="let element">{{element.nome_azienda}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="azione">
+                            <mat-header-cell *matHeaderCellDef> Seleziona </mat-header-cell>
+                            <mat-cell *matCellDef="let element">
+                               
+                                    <mat-form-field>
+                                        <mat-label>Ruolo</mat-label>
+                                        <input autocomplete="off" matInput #input [disabled] = "element.selected" [value]="element.selected ? element.ruolo_nel_gruppo : ''">
+                                    </mat-form-field>
+                                    <br><br>
+                                    <mat-checkbox class="row"  [(ngModel)]="element.selected" [ngModelOptions]="{standalone: true}"  [disabled] = "input.value?.length==0"
+                                        (change)="selectOperator($event.checked,element.id,element.nome,element.cognome,element.id_azienda,input.value)">
+                                    </mat-checkbox>
+                               
+                            </mat-cell>
+                        </ng-container>
+
+
+                        <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+                        <mat-row [ngClass]="{'delete_item': row.selected}" *matRowDef="let row; columns: columnsToDisplay;"></mat-row>
+
+                    </table>
+                </div>
+
+                <mat-paginator [pageSizeOptions]="[5, 10]" showFirstLastButtons></mat-paginator>
+               
+                <br><br>
+                <button mat-button class="btn btn-success center" (click)="trasmetti()">Salva 
+                </button>
+                
+            </div>
+           
+        </div>
+    </div>
+</div>
+
+<br><br><br>
+
+<div *ngIf="loading" class="loadingspinner_container">
+    <img class="loadingspinner" src="../assets/img/loadingspinner.gif">
+</div>
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+</div>

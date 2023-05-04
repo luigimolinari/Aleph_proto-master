@@ -1,0 +1,134 @@
+<div class="centraleoperatorinew">
+    <br />
+<div class="container">
+    <div class="formboxpanel">
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+           <div class="my-4">
+            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab" aria-controls="home" aria-selected="false">Operatore</a>
+                </li>
+            </ul>
+            <form *ngFor="let group of user">
+                <div class="row mt-5 align-items-center">
+                    <div class="col-md-3 text-center mb-5">
+                        <div class="avatar avatar-xl">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="..." class="avatar-img rounded-circle" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row align-items-center">
+                            <div class="col-md-7">
+                                <h4 class="mb-1">{{group.cognome}}, {{group.nome}}</h4>
+                                <p class="small mb-3"><span class="badge badge-dark">{{group.profilo}} {{group.ruolo}}</span></p>
+                            </div>
+                        </div>
+                      
+                    </div>
+                </div>
+              
+                <hr class="my-4" />
+                <fa-icon [icon]="faUser"></fa-icon>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="firstname">Nome</label>
+                        <input type="text" id="nome" class="form-control" placeholder="{{group.nome}}" readonly />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="lastname">Cognome</label>
+                        <input type="text" id="cognome" class="form-control" placeholder="{{group.cognome}}" readonly />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail4">CF</label>
+                    <input type="email" class="form-control" id="cf" placeholder="{{group.CF}}" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress5">Luogo Nascita</label>
+                    <input type="text" class="form-control" id="luogo_nascita" placeholder="{{group.luogo_nascita}}"  readonly/>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputCompany5">Data di Nascita</label>
+                        <input type="text" class="form-control" id="data_nascita" placeholder="{{group.data_nascita}}" readonly />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputState5">Sesso</label>
+                        <input type="text" class="form-control" id="sesso" placeholder="{{group.sesso}}"  readonly />
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputZip5">Prov
+                             Nascita</label>
+                        <input type="text" class="form-control" id="prov_nascita" placeholder="{{group.prov_nascita}}" readonly />
+                    </div>
+                </div>
+                <hr class="my-4" />
+                <fa-icon [icon]="faHouseUser"></fa-icon>
+                <div class="form-group">
+                    <label for="inputAddress5">Indirizzo residenza</label>
+                    <input type="text" class="form-control" id="indirizzo_residenza" placeholder="{{group.indirizzo_residenza}}" readonly />
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputCompany5">Comune Residenza</label>
+                        <input type="text" class="form-control" id="comune_residenza" placeholder="{{group.comune_residenza}}" readonly />
+                    </div>
+                        <div class="form-group col-md-6">
+                        <label for="inputZip5">Prov
+                             Residenza</label>
+                        <input type="text" class="form-control" id="prov_residenza" placeholder="{{group.prov_residenza}}" readonly  />
+                    </div>
+                </div>
+                <hr class="my-4" />
+                <fa-icon [icon]="faBuilding"></fa-icon>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputCompany5">User</label>
+                        <input type="text" class="form-control" id="user" placeholder="{{group.user}}" readonly />
+                    </div>
+                        <div class="form-group col-md-6">
+                        <label for="inputZip5">Prov
+                             Tipo</label>
+                        <input type="text" class="form-control" id="tipo" placeholder="{{group.tipo}}" readonly  />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputCompany5">Ruolo</label>
+                        <input type="text" class="form-control" id="ruolo" placeholder="{{group.ruolo}}" readonly />
+                    </div>
+                        <div class="form-group col-md-6">
+                        <label for="inputZip5">Profilo</label>
+                        <input type="text" class="form-control" id="prov_residenza" placeholder="{{group.profilo}}" readonly  />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress5">Azienda</label>
+                    <input type="text" class="form-control" id="azienda" placeholder="{{group.id_azienda}}" readonly />
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress5">Struttura</label>
+                    <input type="text" class="form-control" id="struttura" placeholder="{{group.id_struttura}}" readonly />
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputCompany5">Email</label>
+                        <input type="text" class="form-control" id="email" placeholder="{{group.email}}" readonly />
+                    </div>
+                        <div class="form-group col-md-6">
+                        <label for="inputZip5">Telefono</label>
+                        <input type="text" class="form-control" id="telefono" placeholder="{{group.telefono}}" readonly  />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+         </div>
+

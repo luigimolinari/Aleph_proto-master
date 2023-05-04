@@ -1,0 +1,110 @@
+<div class="centraleworkflow"><br /><br />
+    <div class="container">
+        <div class="formboxpanel">
+            <div>
+                <i class="fa fa-2x">
+                    <fa-icon [icon]="faNetworkWired"></fa-icon>
+                </i>
+                &nbsp;&nbsp;Flusso: {{nome_flusso}}
+            </div>
+
+            <br /><br />
+
+            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab" aria-controls="home"
+                        aria-selected="false">
+                        Workflow
+                    </a>
+                </li>
+            </ul>
+            <button mat-button class="btn btn-back" (click)="back()">
+                <span class="material-icons">
+                    arrow_back
+                </span>
+            </button>
+            <br><br>
+              
+            <div *ngIf="showModal">
+                <div class="modal">
+                  <div class="modal-body">
+                    <mat-card *ngIf="showModal" class="card-style">
+                      <mat-card-title><img src="assets/img/logo_aleph_very_small.png" alt="logo_aleph" /></mat-card-title>
+                      <hr />
+                      {{label_nodo}}:{{nome_nodo}}
+                      <mat-slider min="0" max="100000" step="1000" tickInterval="10000" thumbLabel>
+                      </mat-slider>
+                    </mat-card>
+                    <div *ngIf="nodopadre?.children">
+                      <ng-container *ngTemplateOutlet="childrenTemplate; context: { $implicit: nodopadre.children }"></ng-container>
+                      <ng-template #childrenTemplate let-children>
+
+                        <div *ngFor="let child of children" >
+                            <br />
+                            <mat-card class="card-style-child" [ngClass]="{'selected': child === selectedChild}" (click)="selectedChild = child; selectedChildId = child.id">
+                                {{child.id}}: {{child.title}}
+                              </mat-card>
+      
+                          <ng-container *ngTemplateOutlet="childrenTemplate; context: { $implicit: child.children }"></ng-container>
+                        </div>
+                      </ng-template>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button mat-button class="btn btn-close" (click)="closeModal()">Chiudi</button>
+                  </div>
+                </div>
+              </div>
+        
+            <br /><br />
+        
+
+            <p-organizationChart [value]="steps" selectionMode="single" [(selection)]="selectedNode"
+                (onNodeSelect)="onNodeSelect($event)" styleClass="company">
+                <ng-template let-node pTemplate="person">
+                    <!--div class="node-header p-corner-top">{{node.label}}</div-->
+                    <div class="node-content {{node.label}}" (click)="toggleModal(node.id, node.title, node.label)">
+                        <div class="head">{{node.label}} - {{node.ref}}</div> 
+                        <div>{{node.title}}</div>
+                        <hr>
+                        <div *ngIf="node.isoption" class="option">({{node.field}} {{node.condizione}} {{node.valore}})
+                        </div>
+        
+                        <div class="right">
+                            <img class="icon-img"> <span *ngIf="node.mandatory=='1'"
+                                class="icon-span material-icons mandatoryIcon">report</span>
+                            <img class="icon-img"> <span *ngIf="node.milestone=='1'"
+                                class="icon-span material-icons milestoneIcon">lock</span>
+                        </div>
+                        <div *ngIf="node.isgateway=='1'">
+                            <img class="icon-img">
+                            <span class="icon-span material-icons diamond"><span
+                                    class="icon-span material-icons dynamicFormIcon">dynamic_form</span></span>
+                        </div>
+                        <br>
+                        <!--blocked != 1-->
+                        <span *ngIf="tipo=='pratica'" class="material-icons btn_icon"
+                            title="Gruppo di lavoro" (click)="go_to_gruppodilavoro(node.id, node.label)">
+                            people
+                        </span>&nbsp;
+                        <span *ngIf="tipo=='pratica' && node.is_root!=1" class="material-icons btn_icon"
+                            title="Gruppo di validazione" (click)="go_to_gruppodivalidazione(node,node.id, node.label)">
+                            admin_panel_settings
+                        </span>
+                      
+                        <br *ngIf="tipo=='pratica'"><br *ngIf="tipo=='pratica'">
+        
+                    </div>
+        
+                </ng-template>
+                <ng-template let-node pTemplate="department">
+                    {{node.label}}
+                </ng-template>
+            </p-organizationChart>
+            <br><br>
+        </div>
+    </div>
+</div>
+<!-- <div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+</div> -->

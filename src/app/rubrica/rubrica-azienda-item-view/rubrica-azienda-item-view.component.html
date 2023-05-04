@@ -1,0 +1,242 @@
+<div class="centralerubrica">
+    <br />
+    <div class="container">
+        <div class="formboxpanel">
+            <div class="central">
+                <br />
+               
+                <ul *ngIf="ente=='no'" _ngcontent-ajd-c288="" id="myTab" role="tablist" class="nav nav-tabs mb-4">
+                    <li _ngcontent-ajd-c288="" class="nav-item"><a _ngcontent-ajd-c288="" id="home-tab"
+                            data-toggle="tab" href="" role="tab" aria-controls="home" aria-selected="false"
+                            class="nav-link active">Visualizza azienda</a></li>
+                </ul>
+                <ul *ngIf="ente=='si'" _ngcontent-ajd-c288="" id="myTab" role="tablist" class="nav nav-tabs mb-4">
+                    <li _ngcontent-ajd-c288="" class="nav-item"><a _ngcontent-ajd-c288="" id="home-tab"
+                            data-toggle="tab" href="" role="tab" aria-controls="home" aria-selected="false"
+                            class="nav-link active">Visualizza ente pubblico</a></li>
+                </ul>
+                <form class="my_form" [formGroup]="form">
+
+                    <mat-form-field class="example-full-width" appearance="fill" required>
+                        <mat-label>Denominazione</mat-label>
+                        <input matInput [(ngModel)]="denominazione"  formControlName="denominazione">
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width" appearance="fill" required>
+                        <mat-label>PIVA</mat-label>
+                        <input matInput [(ngModel)]="piva" formControlName="piva">
+                    </mat-form-field>
+
+                                 
+                        <mat-form-field *ngIf="ente=='si'" class="example-full-width" appearance="fill" required>
+                            <mat-label>Codice IPA</mat-label>
+                            <input matInput [(ngModel)]="codice_ipa" formControlName="codice_ipa">
+                        </mat-form-field>
+                            
+                            
+
+                    <mat-form-field class="example-full-width" appearance="fill" required>
+                        <mat-label>Sede</mat-label>
+                        <input matInput [(ngModel)]="sede" formControlName="sede">
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width" appearance="fill" required>
+                        <mat-label>Email</mat-label>
+                        <input matInput [(ngModel)]="email" formControlName="email">
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width" appearance="fill" required>
+                      <mat-label>PEC</mat-label>
+                      <input matInput [(ngModel)]="pec" formControlName="pec">
+                  </mat-form-field>
+
+                </form>
+
+                <div *ngIf="indirizzi" class="sezione"> 
+                    <hr class="separatore" />  
+                    <fa-icon [icon]="faAddressBook"></fa-icon> Indirizzi<br />
+                </div>
+                <div *ngFor="let indirizzo of indirizzi" class="sezione">
+                  <mat-form-field>
+                    <mat-label>Toponimo</mat-label>
+                    <input matInput value={{indirizzo.toponimo}}>
+                  </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Indirizzo</mat-label>
+                        <input matInput value={{indirizzo.indirizzo}}>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>CAP</mat-label>
+                        <input matInput value={{indirizzo.CAP}}>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Comune</mat-label>
+                        <input matInput value={{indirizzo.comune}}>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Provincia</mat-label>
+                        <input matInput value={{indirizzo.provincia}}>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Stato</mat-label>
+                        <input matInput value={{indirizzo.stato}}>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Posizione</mat-label>
+                        <input matInput value={{indirizzo.posizione}}>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Telefono1  <fa-icon [icon]="faPhone"></fa-icon></mat-label>
+                        <input matInput value={{indirizzo.tel1}}>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Telefono2 <fa-icon [icon]="faPhone"></fa-icon></mat-label>
+                        <input matInput value={{indirizzo.tel2}}>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Telefono3 <fa-icon [icon]="faPhone"></fa-icon></mat-label>
+                        <input matInput value={{indirizzo.tel3}}>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Telefono4 <fa-icon [icon]="faPhone"></fa-icon></mat-label>
+                        <input matInput value={{indirizzo.tel4}}>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Telefono5 <fa-icon [icon]="faPhone"></fa-icon></mat-label>
+                        <input matInput value={{indirizzo.tel5}}>
+                      </mat-form-field>
+                    </div>
+                    <br />
+                    <div  *ngIf="contatti">
+                        <hr class="separatore" />
+                        <div class="sezione"> <fa-icon [icon]="faAddressBook"></fa-icon> Contatti</div>     
+                        <div *ngFor="let contatto of contatti"> 
+                            <mat-form-field>
+                                <mat-label>Tipo contatto </mat-label>
+                                <input matInput value={{contatto.tipo_contatto}}>
+                              </mat-form-field>
+                              <mat-form-field>
+                                <mat-label>Tipo contatto </mat-label>
+                                <input matInput value={{contatto.descrizione}}>
+                              </mat-form-field>
+                        <br />
+                    </div>
+                </div>
+                <div *ngIf="datapersoneaz" class="sezione"> 
+                    <hr class="separatore" />  
+                    <fa-icon [icon]="faIdCard"></fa-icon> Persone<br />
+                </div>
+                <div *ngFor="let operatore of datapersoneaz" class="sezione">
+                        <mat-form-field>
+                            <mat-label>Nome</mat-label>
+                            <input matInput value={{operatore.nome}}>
+                          </mat-form-field>
+                          <mat-form-field>
+                            <mat-label>Cognome</mat-label>
+                            <input matInput value={{operatore.cognome}}>
+                          </mat-form-field>
+                          <mat-form-field>
+                            <mat-label>Codice Fiscale</mat-label>
+                            <input matInput value={{operatore.CF}}>
+                          </mat-form-field>
+                          <div *ngIf="operatore.rappresentante_legale==1">
+                            <mat-form-field>
+                                <mat-label>Rappresentante Legale</mat-label>
+                                <input matInput value="si">
+                              </mat-form-field><br />
+                            </div>&nbsp;
+                            <button type="button" class="btn btn-primary"
+                              (click)="viewPersona(operatore.id)">
+                              <fa-icon [icon]="faEye"></fa-icon>
+                              </button>    
+                            <br />
+                </div>
+                <div *ngIf="datapersoneaz" class="sezione"> 
+                    <hr class="separatore" />  
+                </div>
+                <div *ngFor="let struttura of datastrutture">
+                <mat-accordion>
+                    <mat-expansion-panel (opened)="panelOpenState = true"
+                                       (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title><fa-icon [icon]="faBuilding"></fa-icon> &nbsp;
+                        <strong>{{struttura.nome}}</strong>
+                      </mat-panel-title>
+                      <mat-panel-description>
+                         {{panelOpenState ? 'chiudi il dettaglio' : 'apri il dettaglio'}}
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <fa-icon [icon]="faBuilding"></fa-icon> Struttura<br />
+                    <mat-form-field>
+                        <mat-label>Denominazione</mat-label>
+                        <input matInput value={{struttura.nome}}>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Sede</mat-label>
+                        <input matInput value={{struttura.sede}}>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Email</mat-label>
+                        <input matInput value={{struttura.email}}>
+                      </mat-form-field>
+                      <mat-form-field>
+                      <mat-label>PEC</mat-label>
+                      <input matInput value={{struttura.PEC}}>
+                    </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Telefono</mat-label>
+                        <input matInput value={{struttura.telefono}}>
+                      </mat-form-field>
+                      <mat-form-field>
+                      <mat-label>Telefono 2</mat-label>
+                      <input matInput value={{struttura.telefono2}}>
+                    </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Responsabile</mat-label>
+                        <input matInput value={{struttura.responsabile}}>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Cod OU</mat-label>
+                        <input matInput value={{struttura.cod_AOO}}>
+                      </mat-form-field>
+                      <div *ngIf="allpersonest">
+                        <hr class="separatore" />  
+                    </div>
+                      <div *ngFor="let persona of allpersonest">
+                        <span *ngIf="persona.id_struttura==struttura.id">
+                            <fa-icon [icon]="faIdCard"></fa-icon>  Persona<br />   
+                            <mat-form-field>
+                                <mat-label>Nome</mat-label>
+                                <input matInput value={{persona.nome}}>
+                              </mat-form-field>
+                              <mat-form-field>
+                                <mat-label>Cognome</mat-label>
+                                <input matInput value={{persona.cognome}}>
+                              </mat-form-field>
+                              <mat-form-field>
+                                <mat-label>Codice Fiscale</mat-label>
+                                <input matInput value={{persona.CF}}>
+                              </mat-form-field>  &nbsp;<button type="button" class="btn btn-primary"
+                              (click)="viewPersona(persona.id)">
+                              <fa-icon [icon]="faEye"></fa-icon>
+                              </button>       
+                    </span>
+                    </div>
+                  </mat-expansion-panel>
+                </mat-accordion>
+                <br />
+            </div>
+                <button _ngcontent-ajd-c474="" (click)="back();" class="btn btn-gray">Indietro</button>&nbsp;
+               
+                <br /><br />
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+    </div>

@@ -1,0 +1,60 @@
+<div class="centraledocumenti">
+  <br />
+  <div class="container">
+    <div class="formboxpanel">
+
+          <form [formGroup]="thirdFormGroup">
+            <br /><br />
+			<div class="row">
+				<div class="col list-container">
+					Modelli caricati
+					<mat-card *ngFor="let e of originalModel; let i = index">
+					  <span class="material-icons material-icon-delete" type="button" (click)="deleteElFromOriginalList(i,e.id,e.keyName)">
+						delete
+					  </span>&nbsp;
+            <span class="material-icons material-icon-download" type="button" (click)="downloadFile(e.percorso)">
+              download
+            </span>&nbsp;
+					  {{e.keyName}}
+					</mat-card>
+				</div>				
+			</div>
+			<br /><br />
+            <div class="row">
+              <div class="form-group col-2">
+                <label for="file" class="btn btn-light btn-fileUpload">
+                  <span class="fas fa-folder-open">
+                    <fa-icon [icon]="faFolderOpen"></fa-icon>
+                  </span>
+                  Carica Nuovi
+                </label>
+                <input hidden type="file" id="file" name="file" (change)="onFileSelect($event)" class="form-control" multiple/>
+
+              </div>
+              <div class="col list-container">
+                Nuovi modelli
+                <mat-card *ngFor="let e of fileCollection; let i = index">
+                  <span class="material-icons material-icon-delete" type="button" (click)="deleteElFromList(i,e.keyName)">
+                    delete
+                  </span>&nbsp;
+                  {{e.keyName}}
+                </mat-card>
+              </div>
+            </div>
+
+            <br />
+            <hr class="my-4" />
+            <div>
+              <button *ngIf="fileCollection.length!=0" mat-button class="btn btn-warning" (click)="verifica()">Registra nuovi modelli</button>
+            </div>
+          </form>
+
+          <br /><br /><br /><br />
+          <br /><br /><br /><br />
+    </div>
+  </div>
+</div>
+
+<div class="footer_pages">
+  <img src='assets/img/logo_aleph_medium.png'>
+</div>

@@ -1,0 +1,209 @@
+<div class="centraleworkflow">
+    <br />
+    <div class="container">
+        <div class="formboxpanel">
+
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+
+                    <br />
+                    <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab"
+                                aria-controls="home" aria-selected="false">
+                                Workflow
+                            </a>
+                        </li>
+                    </ul>
+                    <br />
+
+                   <!--  <span class="material-icons material-icons-mex" (click)="apriDialog()">
+                        mail
+                    </span> -->
+
+                    <br /><br />
+                    <div *ngFor="let item of dati">
+
+                        <mat-card class="example-ripple-container mat-elevation-z4"
+                            [ngClass]="{'disabledRipple': (item.posizione>position && position!=0),'formRipple':item.id_form!=''}">
+                            <div class="stato_label" *ngIf="item.id_form=='' && item.validazione != 0">
+                                Stato: {{item.stato_label}}
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-xs-12">
+                                    <span *ngIf="item.obbligatorio==1" class="material-icons mandatoryIcon">
+                                        error
+                                    </span>
+
+                                    <span *ngIf="item.milestone==1" class="material-icons milestoneIcon">
+                                        lock
+                                    </span>
+                                </div>
+                            </div>
+                            <!--[ngClass]="{'docStepIcon': (item.id_doc!=''),'formStepIcon':(item.id_form!=''&&item.isgateway!=1),'gatewayStepIcon':(item.id_form!=''&&item.isgateway==1)}"-->
+                            <div class="centered col-md-12 col-xs-12">
+                                <div *ngIf="item.posizione < position+1 || position == 0 && item.id_doc!=''"
+                                    class="stepIcon" [ngClass]="{'docStepIcon': (item.id_doc!='')}">{{item.numero}}
+                                </div>
+                                &nbsp;
+                                {{item.nome_doc}}
+                            </div>
+
+                            <div class="right" *ngIf="item.posizione < position+1 || position == 0">
+
+                                <!-- accedi ai documenti -->
+
+                                <button *ngIf="item.numero>0" type="button" class="btn btn-trasparent"
+                                    (click)="viewDocs(item.id, item.privilegi)">
+                                    <fa-icon class="fa-lg" [icon]="faEye"></fa-icon>
+                                </button>
+
+                                <!-- ------ -->
+
+                                <!-- compila form -->
+
+                                <!-- primo step solo in lettura -->
+                                <button *ngIf="item.id_form!='' && (item.privilegi == 1 || item.posizione == 1)" type="button"
+                                    class="btn btn-trasparent" (click)="compilaForm(item.id_form,1)">
+                                    <fa-icon class="fa-lg" [icon]="faEye"></fa-icon>
+                                </button>
+
+                                <button *ngIf="item.id_form!='' && item.privilegi>1 " type="button"
+                                    class="btn btn-trasparent" (click)="compilaForm(item.id_form,item.privilegi)">
+                                    <fa-icon class="fa-lg" [icon]="faPen"></fa-icon>
+                                </button>
+
+                                <!-- ------ -->
+
+                                <!--item.modelli[0]== undefined: non sono stati definiti modelli per questo step di workflow-->
+                                <button *ngIf="item.id_form=='' && item.privilegi>1 && item.modelli[0]== undefined"
+                                    type="button" class="btn btn-trasparent" (click)="addDoc(item.id)">
+                                    <fa-icon class="fa-lg" [icon]="faUpload"></fa-icon>
+                                </button>
+                                <!--categoria==0: modello = allegato-->
+                                <button
+                                    *ngIf="item.id_form=='' && item.privilegi>1 && item.modelli[0]!= undefined && item.modelli[0].info.categoria==0"
+                                    type="button" class="btn btn-trasparent" (click)="addDoc(item.id)">
+                                    <fa-icon class="fa-lg" [icon]="faUpload"></fa-icon>
+                                </button>
+                                <!--categoria==1: modello = testo in collaborazione-->
+                                <button
+                                    *ngIf="item.id_form=='' && item.privilegi>1 && item.modelli[0]!= undefined && item.modelli[0].info.categoria==1"
+                                    type="button" class="btn btn-trasparent"
+                                    (click)="addDocColl(item.id,item.id_documento_flusso,1)">
+                                    <fa-icon class="fa-lg" [icon]="faUpload"></fa-icon>
+                                </button>
+
+                                <!--categoria==2: modello = spreadsheet in collaborazione-->
+                                <button
+                                    *ngIf="item.id_form=='' && item.privilegi>1 && item.modelli[0]!= undefined && item.modelli[0].info.categoria==2"
+                                    type="button" class="btn btn-trasparent"
+                                    (click)="addDocColl(item.id,item.id_documento_flusso,2)">
+                                    <fa-icon class="fa-lg" [icon]="faUpload"></fa-icon>
+                                </button>
+
+
+                                <!-- non è previsto l'accesso in sola lettura ai modelli spreadsheet -->
+                                <button *ngIf="item.modelli.length!=0 && item.modelli[0].info.categoria!=2"
+                                    type="button" class="btn btn-trasparent" mat-button [matMenuTriggerFor]="menu">
+                                    <fa-icon class="fa-lg" [icon]="faDownload"></fa-icon> Modelli
+                                </button>
+
+                                <mat-menu #menu="matMenu">
+                                    <div *ngFor="let model of item.modelli">
+                                        <!--categoria==0: modello = allegato-->
+                                        <button mat-menu-item *ngIf="model.info.categoria==0"
+                                            (click)="downloadFile(model.info.percorso)" [title]="model.info.nome">
+                                            {{model.info.nome}}
+                                        </button>
+                                        <!--categoria==1: modello = testo in collaborazione-->
+                                        <button mat-menu-item *ngIf="model.info.categoria==1"
+                                            (click)="openEditor(item.id_documento_flusso,1)" [title]="model.info.nome">
+                                            {{model.info.nome}}
+                                        </button>
+                                        <!--categoria==2: modello = spreadsheet in collaborazione-->
+                                        <!-- <button mat-menu-item *ngIf="model.info.categoria==2"
+                                          (click)="openEditor(item.id_documento_flusso,2)" [title]="model.info.nome">
+                                          {{model.info.nome}}
+                                      </button> -->
+                                    </div>
+                                </mat-menu>
+
+                            </div>
+
+                            <!-- stato -->
+
+                            <div class="alert-mex" *ngIf="item.io == 0 && item.numero != 0">
+                                <fa-icon class="fa-md alert-mex" [icon]="faThumbtack"></fa-icon> &nbsp; Hai dei
+                                documenti da firmare!
+                            </div>
+
+                            <!-- <br> -->
+
+                            <div class="state-mex" *ngIf="item.completato == 0 && item.numero != 0">
+                                <fa-icon class="fa-md state-mex" [icon]="faThumbtack"></fa-icon> &nbsp; Non tutti gli
+                                operatori hanno
+                                completato il processo di firma
+                            </div>
+
+                            <button *ngIf="item.privilegi>0 && item.numero != 0 && item.completato == 1  && item.stato == 'lavorazione' && gruppo == 'lavoro'" type="button"
+                                class="btn btn-trasparent btn-chiedi-validazione" (click)="chiedi_validazione(item.id,item.id_flusso)">
+                                <span class="material-icons">
+                                    admin_panel_settings 
+                                </span> Sottoponi a Validazione
+                            </button>
+
+                            <button *ngIf="item.privilegi>0 && item.numero != 0 && item.completato == 1  && item.stato == 'rigettato' && gruppo == 'lavoro'" type="button"
+                                class="btn btn-trasparent btn-chiedi-validazione" (click)="chiedi_validazione(item.id,item.id_flusso)">
+                                <span class="material-icons">
+                                    admin_panel_settings 
+                                </span> Sottoponi a Nuova Validazione
+                            </button>
+
+                            <div class="row" *ngIf = "item.io_validato == 0">
+                                <button *ngIf="item.numero != 0  && item.stato == 'attesa' && gruppo == 'validazione'" type="button"
+                                    class="btn btn-trasparent btn-rigetta" (click)="rigetta(item.id,item.id_flusso)">
+                                    <span class="material-icons">
+                                        thumb_down
+                                    </span> Rigetta
+                                </button>
+                                <button *ngIf="item.numero != 0 && item.completato == 1  && item.stato == 'attesa' && gruppo == 'validazione'" type="button"
+                                    class="btn btn-trasparent btn-valida" (click)="valida(item.id,item.id_flusso)">
+                                    <span class="material-icons">
+                                        thumb_up
+                                    </span> Valida
+                                </button>
+                            </div>
+                            <div *ngIf = "item.io_validato == 1">
+                                Hai validato questo step!
+                            </div>
+
+                            <button *ngIf="all_completed  && all_validated && item.ultimo == 1 && item.numero != 0" type="button"
+                                class="btn btn-trasparent btn-termina" (click)="termina()">
+                                <span class="material-icons">
+                                    flag
+                                </span> Termina pratica
+                            </button>
+
+                            <img class="form_img" *ngIf="item.id_form!='' && item.immagine!=''"
+                                src="assets/img_portal/{{item.immagine}}_head.jpg">
+
+                        </mat-card>
+
+                    </div>
+                    <br /><br />
+
+                    <br /><br /><br /><br /><br /><br />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="loading" class="loadingspinner_container">
+    <img class="loadingspinner" src="../assets/img/loadingspinner.gif">
+</div>
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+</div>

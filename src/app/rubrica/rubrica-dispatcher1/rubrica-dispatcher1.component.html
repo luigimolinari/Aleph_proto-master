@@ -1,0 +1,56 @@
+<div class="centralerubrica">
+    <br />
+    <div class="container">
+        <div class="formboxpanel">
+            <div class="central">
+
+                <br />
+                <ul _ngcontent-ajd-c288="" id="myTab" role="tablist" class="nav nav-tabs mb-4">
+                    <li _ngcontent-ajd-c288="" class="nav-item"><a _ngcontent-ajd-c288="" id="home-tab"
+                            data-toggle="tab" href="" role="tab" aria-controls="home" aria-selected="false"
+                            class="nav-link active">Aggiungi in rubrica</a></li>
+                </ul>
+                <div *ngIf="Tipocampo=='no'">
+                <mat-form-field class="simple_input" appearance="fill" id="tipologia">
+                    <mat-label>Tipo</mat-label>
+                    <mat-select [(ngModel)]="tipo_selected" required>
+                        <mat-option value="ente">enti</mat-option>
+                        <mat-option *ngFor="let tipo of tipi" [value]="tipo.id">{{tipo.tipo}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+                <div class="my_label">
+                    Vuoi aggiungere:
+                </div>
+                <br>
+                <form class="my_form" [formGroup]="form">
+                  
+                    <label class="my_label">
+                        <input type="radio" value="2" formControlName="isAzienda" required (click)="Tipologia('si');">
+                        <span>&nbsp; Ente Pubblico</span>
+                    </label>
+                
+                    <label class="my_label">
+                        <input type="radio" value="1" formControlName="isAzienda" required  (click)="Tipologia('no');">
+                        <span>&nbsp; Azienda</span>
+                    </label>
+                    <label class="my_label">
+                        <input type="radio" value="0" formControlName="isAzienda" required  (click)="Tipologia('no');">
+                        <span>&nbsp; Persona Fisica</span>
+                    </label>
+                </form>
+                <button _ngcontent-ajd-c474="" (click)="back();" class="btn btn-gray">Indietro</button>&nbsp;
+                <button class="btn btn-warning" (click)="Trasmetti();">Prosegui</button> <br /><br /> <br /><br />
+                <br /><br />
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+    </div>

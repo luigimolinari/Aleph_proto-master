@@ -1,0 +1,480 @@
+<div class="centraleformselect">
+    <br />
+    <div class="container">
+        <div class="formboxpanelportal">
+            <div class="central">
+                <mat-accordion class="accordion">
+                    <mat-expansion-panel class="accordion" (opened)="panelOpenState = true"
+                        (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <span class="material-icons">
+                                    support_agent
+                                </span>
+                            </mat-panel-title>
+                            <mat-panel-description>
+
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <p>
+                            Costruisci il tuo form indicando il nome del campo, la sua tipologia (campo di testo o menù
+                            a tendina) e la sua eventuale obbligatorietà. Puoi gestire fino ad un massimo di 10 campi.
+                            Nelle fasi successive potrai specificare i valori delle tendine.
+                        </p>
+                    </mat-expansion-panel>
+                </mat-accordion>
+                <br />
+                <div class="MobileContent">
+
+                    <img src="assets/img/step1on.png" />
+                    Crea i campi
+
+                    <img src="assets/img/linea.png" />
+                    <mat-label class="done"><img src="assets/img/step2off.png" />
+                        Valorizza le Select
+                    </mat-label>
+                    <img src="assets/img/linea.png" />
+                    <mat-label class="done"><img src="assets/img/step3off.png" />
+                        Assegna il form
+                    </mat-label>
+                    <img src="assets/img/linea.png" />
+                    <mat-label class="done">
+                        <img src="assets/img/step4off.png" />
+                        Termina
+                    </mat-label>
+
+                </div>
+                <br />
+                <mat-progress-bar mode="determinate" value="20"></mat-progress-bar>
+                <div class="row mt-5 align-items-center">
+
+                </div>
+
+                <form [formGroup]="form" class="form_container">
+                    <div class="row mt-5 align-items-center">
+
+                    </div>
+
+                    <hr class="my-4" />
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nome">Nome form</label>
+                            <input formControlName="nome" type="text" id="nome" class="form-control"
+                                required />
+                            <div *ngIf="form.controls['nome'].invalid && (form.controls['nome'].dirty || form.controls['nome'].touched)"
+                                class="alert alert-danger">
+                                Il nome è obbligatorio
+                                <div *ngIf="form.controls['nome'].errors.required">
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="form-group col-md-6">
+                            <label for="azienda">Azienda</label>
+                            <select id="azienda" class="form-control" formControlName="azienda">
+                                <option></option>
+                                <option *ngFor="let azienda of aziende" label="{{azienda.nome}}">{{azienda.id}}</option>
+                            </select>
+                            <div *ngIf="form.controls['azienda'].invalid && (form.controls['azienda'].dirty || form.controls['azienda'].touched)"
+                                class="alert alert-danger">
+                                L'azienda è obbligatoria
+                                <div *ngIf="form.controls['azienda'].errors.required">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="flusso">Flusso</label>
+                        <select id="flusso" class="form-control" formControlName="flusso">
+                            <option></option>
+                            <option *ngFor="let flusso of flussi" label="{{flusso.nome_flusso}}">{{flusso.id}}</option>
+                        </select>
+                        <div *ngIf="form.controls['flusso'].invalid && (form.controls['flusso'].dirty || form.controls['flusso'].touched)"
+                            class="alert alert-danger">
+                            Il flusso è obbligatorio
+                            <div *ngIf="form.controls['flusso'].errors.required">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row" id="1">
+                        <div class="form-group col-md-6">
+                            <label for="campo1">CAMPO 1</label>
+                            <input formControlName="campo1" type="text" id="campo1"
+                                class="form-control" />
+                            <div *ngIf="form.controls['campo1'].invalid && (form.controls['campo1'].dirty || form.controls['campo1'].touched)"
+                                class="alert alert-danger">
+                                Inserire un formato valido
+                                <div *ngIf="form.controls['campo1'].errors.required">
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+
+
+
+                        <div class="form-group col-md-3">
+                            <label for="tipocampo1">Tipo CAMPO 1</label>
+                            <select id="tipocampo1" class="form-control"
+                                formControlName="tipocampo1">
+                                <option>Input testo</option>
+                                <option>Select</option>
+                                <option>Data</option>
+                                <option>SiNo</option>
+                            </select>
+                            <div *ngIf="form.controls['tipocampo1'].invalid && (form.controls['tipocampo1'].dirty || form.controls['tipocampo1'].touched)"
+                                class="alert alert-danger">
+                                Selezionare un tipo
+                                <div *ngIf="form.controls['tipocampo1'].errors.required">
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group col-md-3">
+                            <label for="obblicampo1">Obbligatorio <fa-icon *ngIf="pl1=='si'" [icon]="faPlusSquare"
+                                    (click)="accendi('el2')"></fa-icon> </label>
+                            <select id="obblicampo1" class="form-control"
+                                formControlName="obblicampo1">
+                                <option>Si</option>
+                                <option>No</option>
+                            </select>
+                            <div *ngIf="form.controls['obblicampo1'].invalid && (form.controls['obblicampo1'].dirty || form.controls['obblicampo1'].touched)"
+                                class="alert alert-danger">
+                                Selezionare un'opzione'
+                                <div *ngIf="form.controls['obblicampo1'].errors.required">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div *ngIf="el2=='si'" class="form-row" id="el2" style="display:compact">
+                        <div class="form-group col-md-6">
+                            <label for="campo2">CAMPO 2</label>
+                            <input formControlName="campo2" type="text" id="campo2"
+                                class="form-control" />
+                        </div>
+
+
+
+
+
+
+                        <div class="form-group col-md-3">
+                            <label for="tipocampo2">Tipo CAMPO 2</label>
+                            <select id="tipocampo2" class="form-control" 
+                                formControlName="tipocampo2">
+                                <option>Input testo</option>
+                                <option>Select</option>
+                                <option>Data</option>
+                                <option>SiNo</option>
+                            </select>
+                        </div>
+
+
+                        <div class="form-group col-md-3">
+                            <label for="obblicampo2">Obbligatorio <fa-icon [icon]="faMinusSquare" *ngIf="el3=='no'"
+                                    (click)="spengi('el2')"></fa-icon>&nbsp;<fa-icon *ngIf="pl2=='si'"
+                                    [icon]="faPlusSquare" (click)="accendi('el3')"></fa-icon></label>
+                            <select id="obblicampo2" class="form-control"
+                                formControlName="obblicampo2">
+                                <option>Si</option>
+                                <option>No</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div *ngIf="el3=='si'" class="form-row" id="el3" style="display:compact">
+                        <div class="form-group col-md-6">
+                            <label for="campo3">CAMPO 3</label>
+                            <input formControlName="campo3" type="text" id="campo3"
+                                class="form-control" />
+                        </div>
+
+
+                        <div class="form-group col-md-3">
+                            <label for="tipocampo3">Tipo CAMPO 3</label>
+                            <select id="tipocampo3" class="form-control"
+                                formControlName="tipocampo3">
+                                <option>Input testo</option>
+                                <option>Select</option>
+                                <option>Data</option>
+                                <option>SiNo</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="obblicampo3">Obbligatorio <fa-icon [icon]="faMinusSquare" *ngIf="el4=='no'"
+                                    (click)="spengi('el3')"></fa-icon>&nbsp;<fa-icon *ngIf="pl3=='si'"
+                                    [icon]="faPlusSquare" (click)="accendi('el4')"></fa-icon></label>
+                            <select id="obblicampo3" class="form-control"
+                                formControlName="obblicampo3">
+                                <option>Si</option>
+                                <option>No</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div *ngIf="el4=='si'" class="form-row" id="el4" style="display:compact">
+                        <div class="form-group col-md-6">
+                            <label for="campo4">CAMPO 4</label>
+                            <input formControlName="campo4" type="text" id="campo4"
+                                class="form-control" />
+                        </div>
+
+
+                        <div class="form-group col-md-3">
+                            <label for="tipocampo4">Tipo CAMPO 4</label>
+                            <select id="tipocampo4" class="form-control"
+                                formControlName="tipocampo4">
+                                <option>Input testo</option>
+                                <option>Select</option>
+                                <option>Data</option>
+                                <option>SiNo</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="obblicampo4">Obbligatorio <fa-icon [icon]="faMinusSquare" *ngIf="el5=='no'"
+                                    (click)="spengi('el4')"></fa-icon>&nbsp;<fa-icon *ngIf="pl4=='si'"
+                                    [icon]="faPlusSquare" (click)="accendi('el5')"></fa-icon></label>
+                            <select id="obblicampo4" class="form-control"
+                                formControlName="obblicampo4">
+                                <option>Si</option>
+                                <option>No</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div *ngIf="el5=='si'" class="form-row" id="el5" style="display:compact">
+                        <div class="form-group col-md-6">
+                            <label for="campo5">CAMPO 5</label>
+                            <input formControlName="campo5" type="text" id="campo5"
+                                class="form-control" />
+                        </div>
+
+
+                        <div class="form-group col-md-3">
+                            <label for="tipocampo5">Tipo CAMPO 5</label>
+                            <select id="tipocampo5" class="form-control"
+                                formControlName="tipocampo5">
+                                <option>Input testo</option>
+                                <option>Select</option>
+                                <option>Data</option>
+                                <option>SiNo</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="obblicampo5">Obbligatorio <fa-icon [icon]="faMinusSquare" *ngIf="el6=='no'"
+                                    (click)="spengi('el5')"></fa-icon>&nbsp;<fa-icon *ngIf="pl5=='si'"
+                                    [icon]="faPlusSquare" (click)="accendi('el6')"></fa-icon></label>
+                            <select id="obblicampo5" class="form-control"
+                                formControlName="obblicampo5">
+                                <option>Si</option>
+                                <option>No</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div *ngIf="el6=='si'" class="form-row" id="el6" style="display:compact">
+                        <div class="form-group col-md-6">
+                            <label for="campo6">CAMPO 6</label>
+                            <input formControlName="campo6" type="text" id="campo6"
+                                class="form-control" />
+
+                        </div>
+
+
+                        <div class="form-group col-md-3">
+                            <label for="tipocampo6">Tipo CAMPO 6</label>
+                            <select id="tipocampo6" class="form-control"
+                                formControlName="tipocampo6">
+                                <option>Input testo</option>
+                                <option>Select</option>
+                                <option>Data</option>
+                                <option>SiNo</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="obblicampo6">Obbligatorio <fa-icon [icon]="faMinusSquare" *ngIf="el7=='no'"
+                                    (click)="spengi('el6')"></fa-icon>&nbsp;<fa-icon *ngIf="pl6=='si'"
+                                    [icon]="faPlusSquare" (click)="accendi('el7')"></fa-icon></label>
+                            <select id="obblicampo6" class="form-control"
+                                formControlName="obblicampo6">
+                                <option>Si</option>
+                                <option>No</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div *ngIf="el7=='si'" class="form-row" id="el7" style="display:compact">
+                        <div class="form-group col-md-6">
+                            <label for="campo7">CAMPO 7</label>
+                            <input formControlName="campo7" type="text" id="campo7"
+                                class="form-control" />
+                        </div>
+
+
+
+                        <div class="form-group col-md-3">
+                            <label for="tipocampo7">Tipo CAMPO 7</label>
+                            <select id="tipocampo7" class="form-control"
+                                formControlName="tipocampo7">
+                                <option>Input testo</option>
+                                <option>Select</option>
+                                <option>Data</option>
+                                <option>SiNo</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="obblicampo7">Obbligatorio <fa-icon [icon]="faMinusSquare" *ngIf="el8=='no'"
+                                    (click)="spengi('el7')"></fa-icon>&nbsp;<fa-icon *ngIf="pl7=='si'"
+                                    [icon]="faPlusSquare" (click)="accendi('el8')"></fa-icon></label>
+                            <select id="obblicampo7" class="form-control"
+                                formControlName="obblicampo7">
+                                <option>Si</option>
+                                <option>No</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div *ngIf="el8=='si'" class="form-row" id="el8" style="display:compact">
+                        <div class="form-group col-md-6">
+                            <label for="campo8">CAMPO 8</label>
+                            <input formControlName="campo8" type="text" id="campo8"
+                                class="form-control" />
+                        </div>
+
+
+
+
+                        <div class="form-group col-md-3">
+                            <label for="tipocampo8">Tipo CAMPO 8</label>
+                            <select id="tipocampo8" class="form-control"
+                                formControlName="tipocampo8">
+                                <option>Input testo</option>
+                                <option>Select</option>
+                                <option>Data</option>
+                                <option>SiNo</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="obblicampo8">Obbligatorio <fa-icon [icon]="faMinusSquare" *ngIf="el9=='no'"
+                                    (click)="spengi('el8')"></fa-icon>&nbsp;<fa-icon *ngIf="pl8=='si'"
+                                    [icon]="faPlusSquare" (click)="accendi('el9')"></fa-icon></label>
+                            <select id="obblicampo8" class="form-control"
+                                formControlName="obblicampo8">
+                                <option>Si</option>
+                                <option>No</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div *ngIf="el9=='si'" class="form-row" id="el9" style="display:compact">
+                        <div class="form-group col-md-6">
+                            <label for="campo9">CAMPO 9</label>
+                            <input formControlName="campo9" type="text" id="campo9"
+                                class="form-control" />
+                        </div>
+
+
+
+
+                        <div class="form-group col-md-3">
+                            <label for="tipocampo9">Tipo CAMPO 9</label>
+                            <select id="tipocampo9" class="form-control"
+                                formControlName="tipocampo9">
+                                <option>Input testo</option>
+                                <option>Select</option>
+                                <option>Data</option>
+                                <option>SiNo</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="obblicampo9">Obbligatorio <fa-icon [icon]="faMinusSquare" *ngIf="el10=='no'"
+                                    (click)="spengi('el9')"></fa-icon> &nbsp;<fa-icon *ngIf="pl9=='si'"
+                                    [icon]="faPlusSquare" (click)="accendi('el10')"></fa-icon></label>
+                            <select id="obblicampo9" class="form-control"
+                                formControlName="obblicampo9">
+                                <option>Si</option>
+                                <option>No</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div *ngIf="el10=='si'" class="form-row" id="el10" style="display:compact">
+                        <div class="form-group col-md-6">
+                            <label for="campo10">CAMPO 10</label>
+                            <input formControlName="campo10" type="text" id="campo10"
+                                class="form-control" />
+                        </div>
+
+
+
+
+                        <div class="form-group col-md-3">
+                            <label for="tipocampo10">Tipo CAMPO 10</label>
+                            <select id="tipocampo10" class="form-control"
+                                formControlName="tipocampo10">
+                                <option>Input testo</option>
+                                <option>Select</option>
+                                <option>Data</option>
+                                <option>SiNo</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="obblicampo10">Obbligatorio <fa-icon [icon]="faMinusSquare" (click)="spengi('el0')">
+                                </fa-icon></label>
+                            <select id="obblicampo10" class="form-control"
+                                formControlName="obblicampo10">
+                                <option>Si</option>
+                                <option>No</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+
+                    <button class="btn btn-success" (click)="Trasmetti();">Registra form e
+                        prosegui</button>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="footer_table_container_small">
+    <video autoplay muted loop id="VideoFooter" class="video-container_footer_table">
+        <source src="assets/video/video_footer.mp4" type="video/mp4">
+    </video>
+</div>
+<div class="footer_table_small">
+    <h1>Aleph</h1>
+    <p> <img src='assets/img/logo_aleph_medium.png'></p>
+</div> -->

@@ -1,0 +1,158 @@
+<div class="centraleaziende">
+    <br />
+    <div class="container">
+        <div class="formboxpanel">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+                    <div class="my-4">
+                        <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab"
+                                    aria-controls="home" aria-selected="false">MODIFICA Fascicolo</a>
+                            </li>
+                        </ul>
+                        <form [formGroup]="form">
+                            <div class="row mt-5 align-items-center">
+
+                            </div>
+
+                            <hr class="my-4" />
+
+                            <div class="form-group">
+                                <label for="nome">Nome</label>
+                                <input [(ngModel)]="nome" formControlName="nome" type="text" id="nome"
+                                    class="form-control" required />
+                                <div *ngIf="form.controls['nome'].invalid && (form.controls['nome'].dirty || form.controls['nome'].touched)"
+                                    class="alert alert-danger">
+                                    Il nome è obbligatorio
+                                    <div *ngIf="form.controls['nome'].errors.required">
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="accesso">Accesso</label>
+                                    <select disabled id="accesso" class="form-control" [(ngModel)]="accesso"
+                                        formControlName="accesso"  (change)="Control()" required>
+                                        <option label="Pubblico">Pubblico</option>
+                                        <option label="Privato">Privato</option>
+                                    </select>
+                                    <div *ngIf="form.controls['accesso'].invalid && (form.controls['accesso'].dirty || form.controls['accesso'].touched)"
+                                        class="alert alert-danger">
+                                        Campo obbligatorio
+                                        <div *ngIf="form.controls['accesso'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="pubblicato">Pubblicato</label>
+                                    <select id="pubblicato" class="form-control" [(ngModel)]="pubblicato"
+                                        formControlName="pubblicato" required>
+                                        <option label="Si">1</option>
+                                        <option label="No">0</option>
+                                    </select>
+                                    <div *ngIf="form.controls['pubblicato'].invalid && (form.controls['pubblicato'].dirty || form.controls['pubblicato'].touched)"
+                                        class="alert alert-danger">
+                                        Campo obbligatorio
+                                        <div *ngIf="form.controls['pubblicato'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group" hidden>
+                                <label for="id_operatore">Operatore</label>
+                                <input type="text" [(ngModel)]="id_operatore" formControlName="id_operatore"
+                                    id="id_operatore" class="form-control" />
+                                <div *ngIf="form.controls['id_operatore'].invalid && (form.controls['id_operatore'].dirty || form.controls['id_operatore'].touched)"
+                                    class="alert alert-danger">
+                                    Campo obbligatorio
+                                </div>
+                            </div>
+
+
+                            <div class="form-group" >
+                                <label for="id_azienda">Azienda</label>
+                                <select disabled id="id_azienda" class="form-control" [(ngModel)]="id_azienda"
+                                    formControlName="id_azienda" (change)="Control()">
+                                    <option></option>
+                                    <option *ngFor="let azienda of aziende" label="{{azienda.nome}}">
+                                        {{azienda.id}}
+                                    </option>
+                                </select>
+                                <div *ngIf="form.controls['id_azienda'].invalid && (form.controls['id_azienda'].dirty || form.controls['id_azienda'].touched)"
+                                    class="alert alert-danger">
+                                    Campo obbligatorio</div>
+                            </div>
+
+                            <mat-checkbox [disabled]="true" [(ngModel)]="control_padre" [ngModelOptions]="{standalone: true}"
+                                (change)="resetField($event.checked,'id_fascicolo_padre')">Contenuto in</mat-checkbox>
+
+
+                            <div class="form-group">
+
+                                <input disabled type="text" name="id_fascicolo_padre" #padre 
+                                    [ngClass]="{'control-disabled': !control_padre}"
+                                    [readonly]="!control_padre"
+                                    placeholder="Cerca il fascicolo per descrizione" [formControl]="id_fascicolo_padre"
+                                    [matAutocomplete]="auto" class="form-control" aria-readonly="true"
+                                    (keypress)="SetControlPadre(0)">
+                                <mat-autocomplete #auto="matAutocomplete">
+                                    <mat-option *ngFor="let fascicolo of filteredFascicoli | async" [value]="fascicolo"
+                                        (click)="SetControlPadre(1);">
+                                        {{fascicolo}}
+                                    </mat-option>
+                                </mat-autocomplete><br />
+                            </div>
+
+                            <mat-checkbox [(ngModel)]="control_procedura" [ngModelOptions]="{standalone: true}"
+                                (change)="resetField($event.checked,'id_procedura')">Associato alla procedura</mat-checkbox>
+
+
+                            <div class="form-group">
+                                <input matInput type="text" name="proc" placeholder="Cerca la procedura per descrizione"
+                                [ngClass]="{'control-disabled': !control_procedura}"
+                                [readonly]="!control_procedura" [formControl]="id_procedura"
+                                    [matAutocomplete]="autoProc" class="form-control" aria-readonly="true"
+                                    (keydown)="SetControlProc(0)">
+                                <mat-autocomplete #autoProc="matAutocomplete">
+                                    <mat-option *ngFor="let procedura of filteredProcedure | async" [value]="procedura"
+                                        (click)="SetControlProc(1)">
+                                        {{procedura}}
+                                    </mat-option>
+                                </mat-autocomplete><br />
+                            </div>
+
+                            <hr>
+                            <div *ngIf = "accesso == 'Privato'" class="form-group">
+                                <label> Gruppi abilitati all'accesso al fascicolo</label>
+                                <div *ngFor="let g of gruppi">
+                                    <fa-icon [icon]="faEdit" class="col-md-1 faEditIcon" [routerLink]="['/gruppifascicoli']" [queryParams]="{id_gruppo:g.id}"></fa-icon>
+                                    <input type="text"
+                                    [readonly]="true"
+                                    class="form-control form-control-gruppi col-md-11 col-sm-12" [value]="g.id+'*'+g.nome">
+                                    
+                                </div>                          
+                            </div>
+
+                            <button type="Submit" class="btn btn-success" (click)="Trasmetti();">Registra
+                                modifiche</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+</div>

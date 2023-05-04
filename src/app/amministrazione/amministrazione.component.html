@@ -1,0 +1,87 @@
+
+    <link rel="stylesheet" href="./amministrazione.component.css">
+	
+	<div class="footer_splash">
+	</div>
+	
+    <video autoplay muted loop id="myVideo" style="width:100%">
+        <source src="assets/video/video_admin.mp4" type="video/mp4">
+    </video>
+
+            
+<div class="container bootstrap snippets bootdey" style="z-index:-1;">
+    <div class="row" style="  
+    margin-top:-50%;
+    bottom: 0;
+    left:0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    width: 100%;
+    padding: 40px;
+    overflow: auto;">
+
+		
+		<div *ngIf="diagnosticStateOp=='disabled'" class="col-md-12 col-sm-12 col-xs-12 text-center" >								
+			<div class="panel panel-colorful warningMex">
+				<i class="fa fa-comment fa-2x"><fa-icon [icon]="faExclamationTriangle"></fa-icon></i>
+				Attenzione: per aggiungere un nuovo operatore è necessario inserire tipo operatore e azienda
+				<small><button type="button" class="btn btn-diagnostic" [Link]="['/diagnostic']">Clicca qui</button></small>
+			</div>
+		</div>
+
+		<div *ngIf="diagnosticStateStruttura=='disabled'" class="col-md-12 col-sm-12 col-xs-12 text-center" >								
+			<div class="panel panel-colorful warningMex">
+				<i class="fa fa-comment fa-2x"><fa-icon [icon]="faExclamationTriangle"></fa-icon></i>
+				Attenzione: per aggiungere un nuovo operatore è necessario inserire tipo operatore e azienda
+				<small><button type="button" class="btn btn-diagnostic" [routerLink]="['/diagnostic']">Clicca qui</button></small>
+			</div>
+		</div>
+
+		<div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="panel panel-dark panel-colorful">
+                <div class="panel-body text-center">
+                	<p class="text-uppercase mar-btm text-sm">Gestione Tipologie</p>
+                	<i class="fa fa-users fa-5x"><fa-icon [icon]="faIdCardAlt"></fa-icon></i>
+                	<hr>
+                	<p class="h2 text-thin"></p>
+                	<small><button type="button" class="btn btn-outline-secondary" [routerLink]="['/tipi']" >Accedi</button></small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+        	<div class="panel panel-danger panel-colorful">
+        		<div class="panel-body text-center">
+                    <p class="text-uppercase mar-btm text-sm">Gestione Aziende</p>
+                   
+        			<i class="fa fa-comment fa-5x"><fa-icon [icon]="faBuilding"></fa-icon></i>
+        			<hr>
+        			<p class="h2 text-thin"></p>
+        			<small><button type="button" class="btn btn-danger" [routerLink]="['/aziende']">Accedi</button></small>
+        		</div>
+        	</div>
+        </div>
+		<div class="col-md-3 col-sm-6 col-xs-12">
+        	<div class="panel panel-info panel-colorful">
+        		<div class="panel-body text-center">
+        			<p class="text-uppercase mar-btm text-sm">Gestione Strutture</p>
+        			<i class="fa fa-dollar fa-5x"><fa-icon [icon]="faLaptopHouse"></fa-icon></i>
+        			<hr>
+        			<p class="h2 text-thin"></p>
+        			<small><button type="button" class="btn btn-info" [routerLink]="['/strutture']" [disabled] = "diagnosticStateStruttura">Accedi</button></small>
+        		</div>
+        	</div>
+        </div>   
+        <div class="col-md-3 col-sm-6 col-xs-12">
+        	<div class="panel panel-primary panel-colorful">
+        		<div class="panel-body text-center">
+        			<p class="text-uppercase mar-btm text-sm">Gestione Operatori</p>
+        			<i class="fa fa-shopping-cart fa-5x"><fa-icon [icon]="faUsers"></fa-icon></i>
+        			<hr>
+        			<p class="h2 text-thin"></p>
+        			<small><button type="button" class="btn btn-primary" [routerLink]="['/operatori']" [disabled] = "diagnosticStateOp">Accedi</button></small>
+        		</div>
+        	</div>
+        </div>
+        
+	</div>
+</div>

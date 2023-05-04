@@ -1,0 +1,38 @@
+<br />
+<button type="button" class="btn btn-success" [routerLink]="['/addtipo']" >CREA nuovo tipo operatori</button> &nbsp;
+<br /><br /><br />
+<table class="table table-striped table-bordered table-sm row-border hover" id="tipi" style="overflow: auto; width: 100%">
+    <thead>
+      <tr>
+        <th>Tipo</th>
+        <th>Privilegi</th>
+        <th>Attivo</th>
+        <th>Azioni</th>
+      </tr>
+    </thead>
+    <tbody>
+     <tr *ngFor="let group of data">
+           <td>{{group.tipo}}</td>
+           <td>{{group.accesso}}</td>
+           <td>{{group.attivo}}</td>
+           <td>
+            <button type="button" class="btn btn-success" [routerLink]="['/tipoedit']" [queryParams]="{id:group.id}"><fa-icon [icon]="faEdit"></fa-icon></button> &nbsp;
+            <button type="button" class="btn btn-danger" (click)="cancella(group.id, group.tipo);"><fa-icon [icon]="faTrash"></fa-icon></button>
+           </td>
+
+       </tr>
+    </tbody>
+  </table>
+<div class="footer_table_container">
+  <video autoplay muted loop id="VideoFooter" class="video-container_footer_table">
+    <source src="assets/video/footer.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div class="footer_small">
+<img src="assets/img/logo_aleph_very_small.png" alt="logo aleph"/>
+  </div>
+<div class="footer_table">
+  <h1>Aleph</h1>
+  <p> <img src='assets/img/logo_aleph_medium.png'></p>
+  </div>

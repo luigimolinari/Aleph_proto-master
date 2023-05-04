@@ -1,0 +1,238 @@
+<div class="centralestrutture">
+    <br />
+<div class="container">
+    <div class="formboxpanel">
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+           <div class="my-4">
+            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab" aria-controls="home" aria-selected="false">AGGIUNGI Struttura</a>
+                </li>
+            </ul>
+            <form [formGroup]="form" >
+                <div class="row mt-5 align-items-center">
+                     
+                </div>
+              
+                <hr class="my-4" />
+                   <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="nome">Nome</label>
+                        <input  [(ngModel)]="nome" formControlName="nome"  type="text" id="nome"  class="form-control"  required />
+                        <div *ngIf="form.controls['nome'].invalid && (form.controls['nome'].dirty || form.controls['nome'].touched)" class="alert alert-danger">
+                            Il nome è obbligatorio
+                            <div *ngIf="form.controls['nome'].errors.required">
+                           
+                          </div>
+                        </div>
+                    </div>
+
+                   
+
+
+                    <div class="form-group col-md-6">
+                        <label for="cognome">Azienda</label>
+                        <select id="azienda" class="form-control"   formControlName="azienda"  #scegliazienda  (change)='CambiaAzienda(scegliazienda.value); level.selectedIndex=0;'>
+                            <option selected="selected"></option>
+                            <option *ngFor="let azienda of data"  label="{{azienda.nome}}">{{azienda.id}}</option>
+                            </select>
+                       </div>
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <label for="cf">CC</label>
+                    <input type="text"  [(ngModel)]="ccosto" formControlName="ccosto" class="form-control" id="ccosto" />
+                  
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                      <label for="toponimo">Toponimo*</label>
+                      <select formControlName="toponimo" id="toponimo" class="form-control">
+                      <option value="Via">Via</option>
+                      <option value="Piazza">Piazza</option>
+                      <option value="Viale">Viale</option>
+                      <option value="Calata">Calata</option>
+                      <option value="Calle">Calle</option>
+                      <option value="Campo">Campo</option>
+                      <option value="Corte">Corte</option>
+                      <option value="Circonvallazione">Circonvallazione</option>
+                      <option value="Darsena">Darsena</option>
+                      <option value="Fondaco">Fondaco</option>
+                      <option value="Località">Località</option>
+                      <option value="Lungomare">Lungomare</option>
+                      <option value="Rio">Rio</option>
+                      <option value="Salita">Salita</option>
+                      <option value="Strada">Strada</option>
+                      <option value="Stretto">Stretto</option>
+                      <option value="Traversa">Traversa</option>
+                      <option value="Vicolo">Vicolo</option>
+                      <option value="Zona industriale">Zona industriale</option>
+                      </select>
+                    </div>
+                  </div>
+
+                <div class="form-group">
+                    <label for="cf">Sede</label>
+                <input type="text"  [(ngModel)]="sede" formControlName="sede" class="form-control" id="sede" />
+                
+            </div>           
+
+            <div class="form-group">
+                <label for="comune">Comune*</label>
+            <input type="text"
+            #comunescelta
+            placeholder="Cerca il Comune"
+            [formControl]="controlcomuni"
+            [(ngModel)]="comune" 
+            [matAutocomplete]="autocomune"
+            formControlName="comune"
+            class="form-control"
+            aria-readonly="true"
+            >
+            <mat-autocomplete #autocomune="matAutocomplete">
+            <mat-option *ngFor="let comu of filteredComuni | async" [value]="comu" class="form-control">
+            {{comu}}
+            </mat-option>
+            </mat-autocomplete>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="cap">CAP*</label>
+                    <input type="text"  formControlName="cap"  id="cap" class="form-control"  required />
+                    <div *ngIf="form.controls['cap'].invalid && (form.controls['cap'].dirty || form.controls['cap'].touched)" class="alert alert-danger">
+                        Il CAP è obbligatorio
+                        <div *ngIf="form.controls['cap'].errors.required">
+                        </div>
+                    </div>
+             </div>
+             <div class="form-group col-md-6">
+                <label for="cap">Provincia*</label>
+                <input type="text"  formControlName="provincia"  id="provincia" class="form-control"  required />
+                <div *ngIf="form.controls['provincia'].invalid && (form.controls['provincia'].dirty || form.controls['provincia'].touched)" class="alert alert-danger">
+                    La provincia è obbligatoria
+                    <div *ngIf="form.controls['provincia'].errors.required">
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <div class="form-group">
+                <label for="cf">Nazione*</label>
+            <input type="text"
+            #nazionescelta
+            placeholder="Cerca lo Stato"
+            [formControl]="controlnazioni"
+            [(ngModel)]="Nazione" 
+            [matAutocomplete]="autonazione"
+            formControlName="Nazione"
+            class="form-control"
+            aria-readonly="true"
+            >
+            <mat-autocomplete #autonazione="matAutocomplete">
+            <mat-option *ngFor="let nazione of filteredNazioni | async" [value]="nazione" class="form-control">
+            {{nazione}}
+            </mat-option>
+            </mat-autocomplete>
+            </div>
+
+            <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="cf">PEC</label>
+            <input type="text"  [(ngModel)]="pec" formControlName="pec" class="form-control" id="pec" />
+            
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="cf">email</label>
+        <input type="text"  [(ngModel)]="email" formControlName="email" class="form-control" id="email" />
+        
+    </div>
+</div>
+
+    
+
+<div class="form-row">
+   
+    <div class="form-group col-md-12">
+        <label for="cod_ipa">Codice OU  &nbsp;<button type="button" class="btn btn-warning" (click)="PopolaOU();" >
+            <fa-icon [icon]="faShareSquare"></fa-icon>
+      </button></label>
+        <select id="cod_ipa" class="form-control"  [(ngModel)]="cod_ipa" formControlName="cod_ipa" (change)="PulisciCampi();"  #sceglicod_ipa>
+            <option selected="selected"></option>
+            <option *ngFor="let aoo of dataaoo"  label="{{aoo.des_ou}}">{{aoo.cod_uni_ou}}</option>
+            </select>
+           
+       </div>
+
+
+    <div class="form-group col-md-12">
+        <label for="cf">Telefono</label>
+        <input type="text"  [(ngModel)]="telefono" formControlName="telefono" class="form-control" id="telefono" />
+        <div *ngIf="form.controls['telefono'].invalid && (form.controls['telefono'].dirty || form.controls['telefono'].touched)" class="alert alert-danger">
+            Inserire un numero valido (max 15 cifre)</div>
+    </div>
+</div>
+
+
+
+<div class="form-group">
+    <label for="cf">Responsabile</label>
+<input type="text"
+#idResp
+placeholder="Cerca il responsabile per nome, cognome o CF"
+[formControl]="control"
+[(ngModel)]="idResponsabiless" 
+[matAutocomplete]="auto"
+formControlName="idResponsabiless"
+class="form-control"
+aria-readonly="true"
+>
+<mat-autocomplete #auto="matAutocomplete">
+<mat-option *ngFor="let resp of filteredResponsabili | async" [value]="resp">
+{{resp}}
+</mat-option>
+</mat-autocomplete>
+</div>
+
+                
+                <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="livello">Livello</label>
+                   <select id="livello" class="form-control"  [(ngModel)]="livello" #level formControlName="livello" (change)="cambialivello(level.value, scegliazienda.value)">
+                    <option selected="selected"></option>
+                    <option *ngFor="let level of datilivello" label="{{level.livello}}">{{level.livello}}</option>
+                                    </select>
+                </div>
+                
+                <div class="form-group" style.display={{mioLivello}}>
+                    <label for="cf">Struttura padre</label>
+                    <select id="strutturapadre" class="form-control"  [(ngModel)]="strutturapadre" formControlName="strutturapadre">
+                        <option selected="selected"></option>
+                        <option *ngFor="let strpad of datistr"  label="{{strpad.nome}}">{{strpad.id}}</option>
+                        </select>
+                
+            </div>
+            
+            
+                
+</div>
+                <button type="Submit" class="btn btn-success" (click)="Trasmetti();">Registra struttura</button>
+           
+        </form>
+           </div>
+        </div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+         </div>
+

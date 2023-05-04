@@ -1,0 +1,228 @@
+<div class="row text-center">
+  <div class="col-md-4">
+    <div class="btn-group">
+      <div
+        class="btn btn-primary"
+        mwlCalendarPreviousView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="closeOpenMonthViewDay()"
+      >
+        Precedente
+      </div>
+      <div
+        class="btn btn-outline-secondary"
+        mwlCalendarToday
+        [(viewDate)]="viewDate"
+      >
+        Oggi
+      </div>
+      <div
+        class="btn btn-primary"
+        mwlCalendarNextView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="closeOpenMonthViewDay()"
+      >
+        Successivo
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'it' }}</h3>
+  </div>
+  <div class="col-md-4">
+    <div class="btn-group">
+      <div
+        class="btn btn-primary"
+        (click)="setView(CalendarView.Month)"
+        [class.active]="view === CalendarView.Month"
+      >
+        Mese
+      </div>
+      <div
+        class="btn btn-primary"
+        (click)="setView(CalendarView.Week)"
+        [class.active]="view === CalendarView.Week"
+      >
+        Settimana
+      </div>
+      <div
+        class="btn btn-primary"
+        (click)="setView(CalendarView.Day)"
+        [class.active]="view === CalendarView.Day"
+      >
+        Giorno
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<div [ngSwitch]="view">
+  <mwl-calendar-month-view
+    *ngSwitchCase="CalendarView.Month"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    [locale]="locale"
+    [activeDayIsOpen]="activeDayIsOpen"
+    (dayClicked)="dayClicked($event.day)"
+    (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event)"
+  >
+  </mwl-calendar-month-view>
+  <mwl-calendar-week-view
+    *ngSwitchCase="CalendarView.Week"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    [locale]="locale"
+    (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event)"
+  >
+  </mwl-calendar-week-view>
+  <mwl-calendar-day-view
+    *ngSwitchCase="CalendarView.Day"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    [locale]="locale"
+    (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event)"
+  >
+  </mwl-calendar-day-view>
+</div>
+
+<!-- Everything you see below is just for the demo, you don't need to include it in your app -->
+
+<br /><br /><br />
+
+<h3>
+ Appuntamenti
+  <button class="btn btn-primary float-right"  [routerLink]="['/addschedule']">
+    Aggiungi nuovo
+  </button>
+  <div class="clearfix"></div>
+</h3>
+
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>TItolo</th>
+        <th>Colore principale</th>
+        <th>Colore secondario</th>
+        <th>Inizio</th>
+        <th>Termine</th>
+        <th>Cancella</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let event of events">
+        <td>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="event.title"
+            (keyup)="refresh.next()"
+          />
+        </td>
+        <td>
+          <input
+            type="color"
+            [(ngModel)]="event.color.primary"
+            (change)="refresh.next()"
+          />
+        </td>
+        <td>
+          <input
+            type="color"
+            [(ngModel)]="event.color.secondary"
+            (change)="refresh.next()"
+          />
+        </td>
+        <td>
+          <input
+            class="form-control"
+            type="text"
+            mwlFlatpickr
+            #mwlFlatpickr
+            [(ngModel)]="event.start"
+            (ngModelChange)="refresh.next()"
+            [altInput]="true"
+            [convertModelValue]="true"
+            [enableTime]="true"
+            [enableDate]="true"
+            [options]="luigi"
+            dateFormat="Y-m-dTH:i"
+            altFormat="F j, Y H:i"
+            placeholder="Non settato"
+          />
+        </td>
+        <td>
+          <input
+            class="form-control"
+            type="text"
+            mwlFlatpickr
+            #mwlFlatpickr
+            [(ngModel)]="event.end"
+            (ngModelChange)="refresh.next()"
+            [altInput]="true"
+            [convertModelValue]="true"
+            [enableTime]="true"
+            [enableDate]="true"
+            [options]="luigi"
+            dateFormat="Y-m-dTH:i"
+            altFormat="F j, Y H:i"
+            placeholder="Non settato"
+          />
+        </td>
+        <td>
+         <button class="btn btn-danger" (click)="deleteEvent(event, event.id)">
+            Cancella
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #modalContent let-close="close">
+  <div class="modal-header">
+    <h5 class="modal-title">Gestione appuntamento</h5>
+    <button type="button" class="close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <fa-icon [icon]="faCalendarDay"></fa-icon>
+      <pre>{{ modalData?.event.start }}<br />{{ modalData?.event.end }}</pre>
+    </div>
+    <div>
+      <fa-icon [icon]="faClipboardCheck"></fa-icon>
+      <pre>{{ modalData?.event.title }}</pre>
+          </div>
+
+          <div>
+            <fa-icon [icon]="faFolder"></fa-icon>
+            <pre>{{ modalData?.event.procedura }}</pre>
+                </div>
+                <div>
+                 
+                  <pre><div *ngIf="modalData?.event.notifica==1"><fa-icon [icon]="faUserClock"></fa-icon> Gruppo invitato</div>
+                    <div *ngIf="modalData?.event.mail==1"><fa-icon [icon]="faAt"></fa-icon> Notifica mail attiva</div>
+                    <div *ngIf="modalData?.event.sms==1"><fa-icon [icon]="faMobileAlt"></fa-icon> Notifica sms attiva</div></pre>
+                      </div>
+
+  </div>
+  <div class="modal-footer">
+    
+  
+    <button type="button" class="btn btn-outline-secondary" (click)="close()">
+      OK
+    </button>
+  </div>
+</ng-template>
+

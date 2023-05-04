@@ -1,0 +1,141 @@
+/************************/
+
+table {
+  width: 100%;
+  background-color:#e3f2fd36 
+}
+
+.formboxpanel{
+  height:84vh;
+}
+
+.tabContainer{
+	margin-left: 15px;
+	margin-right: 15px;
+	background-color:#e3f2fdbf;
+}
+
+.filterContainer{
+	padding-right:15px;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+input{
+	color:black;
+  margin-right:15px;
+  background-color: transparent;
+}
+
+
+.example-chip-list {
+    width: 100%;
+  }
+  
+.center {
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+  
+mat-label,.mat-label{
+	  color:black;
+}
+
+.mat-chip{
+    background-color: lightseagreen;
+    color: white;
+    height: auto;
+}
+.mat-chip:hover,.mat-chip:active,.mat-chip:focus{
+  background-color: rgb(25, 124, 119);
+  color: white;
+}
+
+mat-paginator{
+    background-color:#e3f2fd91;
+}
+
+
+.loadingspinner_container{
+    width: 100%;
+    position: absolute;
+    top:30%;
+    text-align: center;
+}
+  
+.loadingspinner{
+   margin:auto;
+}
+
+
+   @media screen and (max-width: 960px) {
+
+  mat-header-row{
+    display:none;
+  }
+
+  mat-cell:first-of-type, mat-header-cell:first-of-type, mat-footer-cell:first-of-type {
+      padding-left: 0px;
+  }
+
+  .mat-table {
+    border: 0;
+    vertical-align: middle
+  }
+
+  .mat-table caption {
+    font-size: 1em;
+  }
+  
+  
+  .mat-table .mat-header-cell {
+    
+    border: 10px solid;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  .mat-table .mat-row {
+    border-bottom: 5px solid #6c757d;
+    display: block;
+    text-align:right;
+  }
+  
+  .mat-table .mat-cell {
+    border-bottom: 1px solid #6c757d33;;
+    margin-left: 5%;
+  }
+  .mat-table .mat-cell:before {
+   
+    /*content: attr(aria-label); 
+    content: attr(data-label);*/
+    float: left;
+    text-transform: uppercase;
+    font-weight: normal;
+    
+    font-size: .85em;
+  }
+  .mat-table .mat-cell:last-child {
+    border-bottom: 0;
+  }
+    .mat-table .mat-cell:first-child {
+    margin-top: 4%;
+  }
+}
+
+.delete_item{
+  background: #008b8b47;
+}
+
+.my_chips_wrapper{
+  max-height: 150px;
+  overflow-y: auto;
+}

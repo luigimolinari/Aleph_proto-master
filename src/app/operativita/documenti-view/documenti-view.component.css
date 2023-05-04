@@ -1,0 +1,258 @@
+.wrapper{
+  max-width:65%;
+  overflow: auto;
+  margin:auto;
+  margin-bottom: 10px;
+}
+
+.example-ripple-container {
+ 
+  display: table-cell; 
+  min-height: 180px;
+  padding: 20px;
+  text-align: left;
+  height: auto;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+  color: #e9ecef;
+  background: linear-gradient(#3e598ad6, #6495edf5), url(/../../../assets/img/bg26.jpg);
+  background-size: 100% auto;
+  background-position-y: 50%;
+}
+
+.ripple-disabled{
+  background: linear-gradient(#94999e, #6c757dd4), url(/../../../assets/img/bg26.jpg);
+  background-size: 100% auto;
+  background-position-y: 50%;
+}
+
+.documentiCard{
+  min-width: 150px;
+  width:100%;
+}
+
+.firmatariCard{
+  width:200px;
+  min-width:200px;
+  background:#e3f2fdd6;
+}
+
+.conditional-br{
+  display:none;
+}
+
+
+@media screen and (max-width: 768px) {
+  .example-ripple-container{
+    background-size: 100% 100%;
+    }
+    .signAll,.signAll:hover,.signAll:focus,.signAll:active{
+    margin-left:0%;
+    max-width:200px;
+  }
+  .conditional-br{
+    display:block;
+    margin: 0px;
+    margin-top: 2px;
+  }
+  .firmatariCard{
+    width:150px;
+    background:#e3f2fdd6;
+  }
+
+}
+
+
+  .center {
+    position: absolute;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+  .accordion {
+    background-color: rgb(235, 235, 134);
+      }
+
+  .done {
+     color:rgb(124, 122, 122);
+      }
+
+
+   .right{
+       text-align:right;
+       margin-top:5px;
+       margin-bottom:5px;
+   }
+
+   .btn-trasparent{
+       background: transparent;
+   }
+
+   button{
+       color:white;
+   }
+
+   button:hover,button:focus,button:active{
+    color:rgb(221, 219, 219);
+   }
+
+   button:hover,button:focus,button:active{
+    border-color:trasparent;
+   }
+
+   .signAll,.signAll:hover,.signAll:focus,.signAll:active{
+    color:white;
+    margin-left:17.5%;
+   }
+
+
+   .matBadge{
+       margin-right: 2vw;
+       margin-top:10px;
+   }
+
+
+
+.disabledRipple{
+        background-color: #d3d3d382;
+        color: #343a40c7;
+}
+
+.container{
+    height:100vh;
+}
+
+label{
+    margin-bottom: 0px;
+    /*color:#6c757d;*/
+    color:#ffe007d1
+}
+
+.example-section {
+  margin: 12px 0;
+}
+
+.example-margin {
+  margin: 0 12px;
+}
+
+.del{
+  text-decoration: line-through;
+}
+
+::ng-deep.mat-menu-content{
+  background-color: cornflowerblue;
+}
+
+.mat-menu-item{
+   outline:none;
+}
+.mat-menu-item:hover,.mat-menu-item:focus{ 
+  color: white;
+}
+
+.btn-back.btn-back:hover,.btn-back:active,.btn-back:focus{
+  border: hidden;
+  outline:0;
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.685);
+}
+.btn-back{
+  margin-left: 0px;
+  border: hidden;
+  background-color: transparent;
+  min-width:50px; 
+  border-radius: 50%;
+  padding: 0px;
+  margin: 0px;
+  width: 50px;
+  min-width: 50px;
+}
+
+.material-icons{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #6495eda1;
+    color: white;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.hide-card-cell{
+  display: table-cell;
+  vertical-align: top;
+}
+
+.btn-hide-card{
+  border: hidden;
+  background-color: #e3f2fdd6;
+  width: 25px;
+  height: 25px;
+  min-width: 25px; 
+  border-radius: 50%;
+  padding: 0px;
+  margin: 0px;
+  min-width: 25px;
+  text-align: center;
+  color:#6c757dbf;
+  
+}
+
+.orderIcon{
+  display: inline-block;
+  color:#f8f9fa;
+  text-align: center;
+  width: 25px;
+  height: 25px;
+  min-width: 25px; 
+  border-radius: 50%;
+  margin-bottom: 2px;
+  margin-right: 5px;
+}
+.orderIcon.toSign{
+  background-color:#6c757dbf;
+}
+.orderIcon.signed{
+  background-color:rgb(26, 160, 66);
+}
+.toSignOp{
+  color:#6c757dbf;
+}
+.signedOp{
+  color:rgb(26, 160, 66);
+}
+::ng-deep .mat-button-wrapper{
+	font-size:16px;
+}
+
+.form_container{
+  margin-top:10px;
+}
+
+.mat-form-field {
+  width: 50%;
+}
+
+.mat-form-field-underline{background-color:white!important;}
+
+
+.loadingspinner_container{
+  width: 100%;
+  position: absolute;
+  top:30%;
+  text-align: center;
+}
+
+.loadingspinner{
+ margin:auto;
+}
+
+.sortaction{
+  color: white;cursor: pointer;font-size: 15px;
+}

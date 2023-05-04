@@ -1,0 +1,69 @@
+<div class="centraleaziende">
+  <br />
+  <div class="container">
+      <div class="formboxpanel">
+          <div class="row justify-content-center">
+              <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+
+                  <div class="my-4">
+
+                    <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab" aria-controls="home" aria-selected="false">MODIFICA Tipologia Documento</a>
+                        </li>
+                    </ul>
+
+                    <form *ngFor="let group of documenti" [formGroup]="form" >
+                      <div class="row mt-5 align-items-center">
+                          <div class="col">
+                              <div class="row align-items-center">
+                                  <div class="col-md-7">
+                                      <h4 class="mb-1">{{group.nome_doc}}</h4>
+                                  </div>
+                              </div>
+                          </div>
+                     </div>
+              
+                     <hr class="my-4" />
+                     
+                     <fa-icon [icon]="faEdit"></fa-icon>
+                
+                     <div class="form-row">
+                         <div class="form-group col-md-6">
+                             <label for="nome">Nome documento</label>
+                             <input  [(ngModel)]="nome" formControlName="nome"  type="text" id="nome"  class="form-control"  required />
+                        <div *ngIf="form.controls['nome'].invalid && (form.controls['nome'].dirty || form.controls['nome'].touched)" class="alert alert-danger">
+                            Il nome documento è obbligatorio
+                            <div *ngIf="form.controls['nome'].errors.required">
+                           
+                          </div>
+                        </div>
+                    </div>
+
+                   
+
+
+                    <div class="form-group col-md-6">
+                        <label for="cognome">Tipo documento</label>
+                        <input type="text"  [(ngModel)]="tipo" formControlName="tipo"  id="tipo" class="form-control"  required />
+                        <div *ngIf="form.controls['tipo'].invalid && (form.controls['tipo'].dirty || form.controls['tipo'].touched)" class="alert alert-danger">
+                           Il tipo documento è obbligatorio
+                            <div *ngIf="form.controls['tipo'].errors.required">
+                            </div>
+                        </div>
+                 </div>
+                </div>
+                <button type="Submit" class="btn btn-success" (click)="Trasmetti();">Trasmetti modifiche</button>
+           
+        </form>
+           </div>
+        </div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+         </div>
+

@@ -1,0 +1,77 @@
+<div class="centralemail">
+    <br />
+    <div class="container">
+  
+        <div class="formboxpanel">
+
+            <div class="senderContainer">
+                <div class="formContainer">
+                  <div class="right">
+                    <span class="material-icons close-icon" (click)="close_sender()">
+                      close
+                    </span>
+                  </div>
+                  <button mat-fab class="send_icon" (click)="send_mail()" title="Invia">
+                    <mat-icon>send</mat-icon>
+                  </button>
+                  <br><br>
+                  <form [formGroup]="myForm">
+        
+                    <!-- oggetto -->
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Oggetto</mat-label>
+                      <input matInput formControlName="object" [(ngModel)]="object">
+                    </mat-form-field>
+        
+                    <!-- destinatari -->
+                    <mat-form-field class="example-chip-list" appearance="fill">
+                      <mat-label>Destinatari</mat-label>
+                      <mat-chip-list #chipList aria-label="Destinatari">
+                        <mat-chip *ngFor="let ad of to_address" [removable]="removable" (removed)="remove(ad)">
+                          {{ad}}
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input #toAddressInput [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+                      </mat-chip-list>
+                    </mat-form-field>
+        
+                    <!-- testo -->
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>Messaggio</mat-label>
+                      <textarea matInput class="my-textarea" placeholder="" formControlName="body"
+                        [(ngModel)]="body"></textarea>
+                    </mat-form-field>
+        
+                    <!-- allegati -->
+                    <div class="row">
+                      <div class="form-group">
+                        <label for="file" class="btn btn-light btn-fileUpload">
+                          <span class="fas fa-folder-open">
+                            <fa-icon [icon]="faFolderOpen"></fa-icon>
+                          </span>
+                          Allega
+                        </label>
+                        <input hidden type="file" id="file" name="file" (change)="onFileSelect($event)" class="form-control"
+                          multiple />
+        
+                      </div>
+                      <div class="col list-container">
+                        Lista file caricati
+                        <mat-card *ngFor="let e of fileCollection; let i = index">
+                          <span class="material-icons material-icon-delete" type="button"
+                            (click)="deleteElFromList(i)">
+                            delete
+                          </span>&nbsp;
+                          {{e.keyName}}
+                        </mat-card>
+                      </div>
+                    </div>
+        
+                  </form>
+                </div>
+              </div>
+
+        </div>
+    </div>
+</div>

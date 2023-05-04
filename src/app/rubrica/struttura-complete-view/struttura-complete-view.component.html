@@ -1,0 +1,72 @@
+<div class="centralerubrica">
+    <br />
+    <div class="container">
+        <div class="formboxpanel">
+            <div class="central">
+
+                <br />
+                <ul _ngcontent-ajd-c288="" id="myTab" role="tablist" class="nav nav-tabs mb-4">
+                    <li _ngcontent-ajd-c288="" class="nav-item"><a _ngcontent-ajd-c288="" id="home-tab"
+                            data-toggle="tab" href="" role="tab" aria-controls="home" aria-selected="false"
+                            class="nav-link active">Visualizza struttura</a></li>
+                </ul>
+
+                <form class="my_form" [formGroup]="form">
+
+                  
+
+                    <mat-form-field class="example-full-width" appearance="fill" >
+                        <mat-label>Denominazione</mat-label>
+                        <input matInput formControlName="denominazione" readonly>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width" appearance="fill" >
+                        <mat-label>Sede</mat-label>
+                        <input matInput formControlName="sede" readonly>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width" appearance="fill" >
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="email" readonly>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width" appearance="fill" >
+                        <mat-label>PEC</mat-label>
+                        <input matInput formControlName="pec" readonly>
+                    </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill" >
+            <mat-label>Codice OU</mat-label>
+            <input matInput formControlName="codice_ipa" readonly>
+        </mat-form-field>
+
+
+                    <mat-form-field class="example-full-width" appearance="fill" >
+                        <mat-label>Responsabile</mat-label>
+                        <input matInput formControlName="responsabile" readonly>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width" appearance="fill" >
+                        <mat-label>Telefono</mat-label>
+                        <input matInput formControlName="telefono" readonly>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" appearance="fill" >
+                        <mat-label>Telefono 2</mat-label>
+                        <input matInput formControlName="telefono2" readonly>
+                    </mat-form-field>
+                </form>
+
+                <button _ngcontent-ajd-c474="" (click)="back();" class="btn btn-gray">Indietro</button>&nbsp;
+                
+                <br /><br />
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+    </div>

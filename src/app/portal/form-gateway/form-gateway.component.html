@@ -1,0 +1,384 @@
+<div class="centraleformselect"><br /><br />
+    <div class="container">
+        <div class="formboxpanel" *ngFor="let item of form">
+
+
+            <div>
+                <i class="fa fa-2x">
+                    <fa-icon [icon]="faCubes"></fa-icon>
+                </i>
+                &nbsp;&nbsp;Scegli il campo gateway
+            </div>
+
+            <br /><br />
+
+            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab" aria-controls="home"
+                        aria-selected="false">
+                        {{item.nome}} </a>
+                </li>
+            </ul>
+            <br /><br />
+            <div *ngIf="item.tipocampo1=='Select'" matRipple class="example-ripple-select mat-elevation-z4"
+                (click)="scegli('1', 'select');">
+                <span *ngIf="1 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo1}}
+
+            </div>
+            <div *ngIf="item.tipocampo1=='Input testo'" matRipple class="example-ripple-container mat-elevation-z4"
+                (click)="scegli('1', 'input');">
+                <span *ngIf="1 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo1}}
+
+            </div>
+            <div *ngIf="item.tipocampo1=='SiNo'" matRipple class="example-ripple-container mat-elevation-z4"
+                (click)="scegli('1', 'truefalse');">
+                <span *ngIf="1 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo1}}
+
+            </div>
+            <div *ngIf="item.tipocampo1=='Data'" matRipple class="example-ripple-container mat-elevation-z4"
+                (click)="scegli('1', 'Data');">
+                <span *ngIf="1 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo1}}
+
+            </div>
+            <br />
+            <div *ngIf="item.campo2!='' && item.tipocampo2=='Select'" matRipple
+                class="example-ripple-select mat-elevation-z4" (click)="scegli('2', 'select');">
+                <span *ngIf="'2' == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo2}}
+
+            </div>
+
+            <div *ngIf="item.campo2!='' && item.tipocampo2=='Input testo'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('2', 'input' );">
+                <span *ngIf="'2' == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo2}}
+
+            </div>
+            <div *ngIf="item.campo2!='' && item.tipocampo2=='SiNo'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('2', 'truefalse');">
+                <span *ngIf="'2' == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo2}}
+
+            </div>
+            <div *ngIf="item.campo2!='' && item.tipocampo2=='Data'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('2', 'Data');">
+                <span *ngIf="'2' == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo2}}
+
+            </div>
+            <br />
+
+            <div *ngIf="item.campo3!='' && item.tipocampo3=='Select'" matRipple
+                class="example-ripple-select mat-elevation-z4" (click)="scegli('3', 'select');">
+                <span *ngIf="3 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo3}}
+
+            </div>
+
+            <div *ngIf="item.campo3!='' && item.tipocampo3=='Input testo'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('3', 'input');">
+                <span *ngIf="3 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo3}}
+
+            </div>
+            <div *ngIf="item.campo3!='' && item.tipocampo3=='SiNo'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('3', 'truefalse');">
+                <span *ngIf="3 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo3}}
+
+            </div>
+
+            <div *ngIf="item.campo3!='' && item.tipocampo3=='Data'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('3', 'Data');">
+                <span *ngIf="3 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo3}}
+
+            </div>
+            <br />
+            <div *ngIf="item.campo4!='' && item.tipocampo4=='Select'" matRipple
+                class="example-ripple-select mat-elevation-z4" (click)="scegli('4', 'select');">
+                <span *ngIf="4 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo4}}
+
+            </div>
+
+            <div *ngIf="item.campo4!='' && item.tipocampo4=='Input testo'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('4', 'input');">
+                <span *ngIf="4 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo4}}
+
+            </div>
+            <div *ngIf="item.campo4!='' && item.tipocampo4=='SiNo'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('4', 'truefalse');">
+                <span *ngIf="4 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo4}}
+
+            </div>
+            <div *ngIf="item.campo4!='' && item.tipocampo4=='Data'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('4', 'Data');">
+                <span *ngIf="4 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo4}}
+
+            </div>
+            <br />
+
+            <div *ngIf="item.campo5!='' && item.tipocampo5=='Select'" matRipple
+                class="example-ripple-select mat-elevation-z4" (click)="scegli('5', 'select');">
+                <span *ngIf="5 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo5}}
+
+            </div>
+
+            <div *ngIf="item.campo5!='' && item.tipocampo5=='Input testo'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('5', 'input');">
+                <span *ngIf="5 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo5}}
+
+            </div>
+            <div *ngIf="item.campo5!='' && item.tipocampo5=='SiNo'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('5', 'truefalse');">
+                <span *ngIf="5 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo5}}
+
+            </div>
+            <div *ngIf="item.campo5!='' && item.tipocampo5=='Data'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('5', 'Data');">
+                <span *ngIf="5 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo5}}
+
+            </div>
+            <br />
+
+            <div *ngIf="item.campo6!='' && item.tipocampo6=='Select'" matRipple
+                class="example-ripple-select mat-elevation-z4" (click)="scegli('6', 'select');">
+                <span *ngIf="6 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo6}}
+
+            </div>
+
+            <div *ngIf="item.campo6!='' && item.tipocampo6=='Input testo'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('6', 'input');">
+                <span *ngIf="6 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo6}}
+
+            </div>
+            <div *ngIf="item.campo6!='' && item.tipocampo6=='SiNo'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('6', 'truefalse');">
+                <span *ngIf="6 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo6}}
+
+            </div>
+            <div *ngIf="item.campo6!='' && item.tipocampo6=='Data'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('6', 'Data');">
+                <span *ngIf="6 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo6}}
+
+            </div>
+            <br />
+
+
+            <div *ngIf="item.campo7!='' && item.tipocampo7=='Select'" matRipple
+                class="example-ripple-select mat-elevation-z4" (click)="scegli('7', 'select');">
+                <span *ngIf="7 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo7}}
+
+            </div>
+
+            <div *ngIf="item.campo7!='' && item.tipocampo7=='Input testo'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('7', 'input');">
+                <span *ngIf="7 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo7}}
+
+            </div>
+            <div *ngIf="item.campo7!='' && item.tipocampo7=='SiNo'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('7', 'truefalse');">
+                <span *ngIf="7 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo7}}
+
+            </div>
+            <div *ngIf="item.campo7!='' && item.tipocampo7=='Data'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('7', 'Data');">
+                <span *ngIf="7 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo7}}
+
+            </div>
+            <br />
+
+
+            <div *ngIf="item.campo8!='' && item.tipocampo8=='Select'" matRipple
+                class="example-ripple-select mat-elevation-z4" (click)="scegli('8', 'select');">
+                <span *ngIf="8 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo8}}
+
+            </div>
+
+            <div *ngIf="item.campo8!='' && item.tipocampo8=='Input testo'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('8', 'input');">
+                <span *ngIf="8 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo8}}
+
+            </div>
+            <div *ngIf="item.campo8!='' && item.tipocampo8=='SiNo'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('8', 'truefalse');">
+                <span *ngIf="8 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo8}}
+
+            </div>
+            <div *ngIf="item.campo8!='' && item.tipocampo8=='Data'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('8', 'Data');">
+                <span *ngIf="8 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo8}}
+
+            </div>
+            <br />
+
+            <div *ngIf="item.campo9!='' && item.tipocampo9=='Select'" matRipple
+                class="example-ripple-select mat-elevation-z4" (click)="scegli('9', 'select');">
+                <span *ngIf="9 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo9}}
+
+            </div>
+
+            <div *ngIf="item.campo9!='' && item.tipocampo9=='Input testo'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('9', 'input');">
+                <span *ngIf="9 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo9}}
+
+            </div>
+            <div *ngIf="item.campo9!='' && item.tipocampo9=='SiNo'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('9', 'truefalse');">
+                <span *ngIf="9 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo9}}
+
+            </div>
+            <div *ngIf="item.campo9!='' && item.tipocampo9=='Data'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('9', 'Data');">
+                <span *ngIf="9 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo9}}
+
+            </div>
+            <br />
+            <div *ngIf="item.campo10!='' && item.tipocampo10=='Select'" matRipple
+                class="example-ripple-select mat-elevation-z4" (click)="scegli('10', 'select');">
+                <span *ngIf="10 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo10}}
+
+            </div>
+
+            <div *ngIf="item.campo10!='' && item.tipocampo10=='Input testo'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('10', 'input');">
+                <span *ngIf="10 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo10}}
+
+            </div>
+            <div *ngIf="item.campo10!='' && item.tipocampo10=='SiNo'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('10', 'truefalse');">
+                <span *ngIf="10 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo10}}
+
+            </div>
+
+            <div *ngIf="item.campo10!='' && item.tipocampo10=='Data'" matRipple
+                class="example-ripple-container mat-elevation-z4" (click)="scegli('10', 'Data');">
+                <span *ngIf="10 == gateway" span class="material-icons dynamicForm">
+                    dynamic_form
+                </span>
+                {{item.campo10}}
+
+            </div>
+            <br /><br />
+
+        </div>
+    </div>
+</div>
+<div class="footer_table_container_small">
+    <video autoplay muted loop id="VideoFooter" class="video-container_footer_table">
+        <source src="assets/video/video_footer.mp4" type="video/mp4">
+    </video>
+</div>
+<div class="footer_table_small">
+    <h1>Aleph</h1>
+    <p> <img src='assets/img/logo_aleph_medium.png'></p>
+</div>

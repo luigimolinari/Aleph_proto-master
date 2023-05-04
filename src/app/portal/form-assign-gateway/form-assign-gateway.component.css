@@ -1,0 +1,120 @@
+.example-ripple-container {
+    cursor: pointer;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+    width: 70%;
+    height: auto;
+    background-color:cornflowerblue;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .example-ripple-container:nth-child(even) {
+    background-color:cornflowerblue;
+  }
+
+ 
+  /** Styles to make the demo look better. */
+  .example-ripple-checkbox {
+    margin: 6px 12px 6px 0;
+    font-size: small;
+    padding-top: 20px;
+  }
+
+  .example-ripple-select {
+    cursor: pointer;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+    width: 70%;
+    height: auto;
+    background-color:rgb(52, 138, 75);
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;  }
+ 
+
+
+    .example-ripple-condition {
+      cursor: pointer;
+      margin: auto;
+      padding: 2px;
+      text-align: center;
+      width: 10%;
+      height: auto;
+      background-color:white;
+      color: black;
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      -webkit-user-drag: none;
+      -webkit-tap-highlight-color: transparent;  }
+
+
+
+  .mandatoryIcon{
+    color:#dc3545;
+  }
+
+  .milestoneIcon{
+    color:blue;
+  }
+
+  .center {
+    position: absolute;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+  .accordion {
+    background-color: rgb(235, 235, 134);
+      }
+
+  .done {
+     color:rgb(124, 122, 122);
+      }
+
+
+      .MobileContent {
+
+        display:block;
+        text-align: "center";
+   
+    }
+   
+   @media screen and (max-width: 768px) {
+   
+    .MobileContent {
+    
+        display: none;
+        text-align:center;
+    }
+
+    .form-control {
+      display: block;
+      width: 100%;
+      height: calc(1.5em + 0.75rem + 2px);
+      padding: 0.375rem 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #4d5154;
+      background-color: #ffffff;
+      background-clip: padding-box;
+      border: 1px solid #eef0f3;
+      border-radius: 0.25rem;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  
+  
+   
+   }

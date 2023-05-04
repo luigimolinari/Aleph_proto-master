@@ -1,0 +1,217 @@
+<div class="centraleoperatorinew">
+
+    <br />
+
+    <div class="container">
+        <div class="formboxpanel">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+                    <div class="my-4">
+                        <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab"
+                                    aria-controls="home" aria-selected="false">CREA nuovo Documento</a>
+                            </li>
+                        </ul>
+						
+						<h6 *ngIf="id_documento_flusso!=undefined">
+						Il documento sarà creato a partire dal modello sottostante
+						</h6>
+						<br>
+
+                        <form [formGroup]="form">
+
+                            <div *ngIf="id_documento_flusso==undefined" class="form-group">
+                                <label for="file" class="btn btn-light btn-fileUpload">
+                                    <span class="fas fa-folder-open">
+                                        <fa-icon [icon]="faFolderOpen"></fa-icon>
+                                    </span>
+                                    Carica
+                                </label>
+                                <div class="fileName" *ngIf="file!=undefined">{{file.name}}</div>
+                                <div class="fileName" *ngIf="file==undefined">Nessun file selezionato</div>
+                                <input hidden type="file" id="file" name="file" (change)="onFileSelect($event)"
+                                    class="form-control" />
+                                <div *ngIf="!fileUploaded" class="alert alert-danger">
+                                    Il file è obbligatorio
+                                </div>
+
+                            </div>
+
+                            <div class="form-row">
+
+                                <div class="form-group col-md-4">
+                                    <label for="workflow">ID workflow</label>
+                                    <input disabled [(ngModel)]="workflow" formControlName="workflow" type="text"
+                                        id="workflow" class="form-control" required />
+                                    <div *ngIf="form.controls['workflow'].invalid && (form.controls['workflow'].dirty || form.controls['workflow'].touched)"
+                                        class="alert alert-danger">
+                                        Il workflow è obbligatorio
+                                        <div *ngIf="form.controls['workflow'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label for="procedura">ID procedura</label>
+                                    <input disabled type="text" [(ngModel)]="procedura" formControlName="procedura"
+                                        class="form-control" id="procedura" required />
+                                    <div *ngIf="form.controls['procedura'].invalid && (form.controls['procedura'].dirty || form.controls['procedura'].touched)"
+                                        class="alert alert-danger">
+                                        La procedura è obbligatoria
+                                        <div *ngIf="form.controls['procedura'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label for="operatore">ID operatore</label>
+                                    <input disabled type="text" [(ngModel)]="operatore" formControlName="operatore"
+                                        id="operatore" class="form-control" required />
+                                    <div *ngIf="form.controls['operatore'].invalid && (form.controls['operatore'].dirty || form.controls['operatore'].touched)"
+                                        class="alert alert-danger">
+                                        L'operatore è obbligatorio
+                                        <div *ngIf="form.controls['operatore'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="descrizione">Descrizione</label>
+                                <input type="text" [(ngModel)]="descrizione" formControlName="descrizione"
+                                    class="form-control" id="descrizione" required />
+                                <div *ngIf="form.controls['descrizione'].invalid && (form.controls['descrizione'].dirty || form.controls['descrizione'].touched)"
+                                    class="alert alert-danger">
+                                    La descrizione è obbligatoria
+                                    <div *ngIf="form.controls['descrizione'].errors.required">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="note">Note</label>
+                                <input type="text" class="form-control" [(ngModel)]="note" formControlName="note"
+                                    id="note" />
+                            </div>
+                           
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="giorno">Giorno</label>
+                                    <input disabled ="true" type="date" class="form-control" [(ngModel)]="giorno"
+                                        formControlName="giorno" id="giorno" required />
+                                    <div *ngIf="form.controls['giorno'].invalid && (form.controls['giorno'].dirty || form.controls['giorno'].touched)"
+                                        class="alert alert-danger">
+                                        Il giorno è obbligatorio
+                                        <div *ngIf="form.controls['giorno'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="ora">Ora</label>
+                                    <input disabled ="true" type="time" class="form-control" [(ngModel)]="ora" formControlName="ora"
+                                        id="ora" required />
+                                    <div *ngIf="form.controls['ora'].invalid && (form.controls['ora'].dirty || form.controls['ora'].touched)"
+                                        class="alert alert-danger">
+                                        L'ora è obbligatoria
+                                        <div *ngIf="form.controls['ora'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="validazione">Richiesta validazione</label>
+                                <select id="validazione" class="form-control" [(ngModel)]="validazione"
+                                    formControlName="validazione" required>
+                                    <option label="Si">1</option>
+                                    <option label="No">0</option>
+                                </select>
+                                <div *ngIf="form.controls['validazione'].invalid && (form.controls['validazione'].dirty || form.controls['validazione'].touched)"
+                                    class="alert alert-danger">
+                                    Richiesta validazione è obbligatorio
+                                    <div *ngIf="form.controls['validazione'].errors.required">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div *ngIf="validazione==1">
+
+                                <div class="form-group">
+                                    <label for="gruppo_procedura">Seleziona il gruppo</label>
+                                    <select id="gruppo_procedura" class="form-control" [(ngModel)]="gruppo_procedura" #t (change)="selected(t.value)"
+                                        formControlName="gruppo_procedura">
+                                        <option >----</option>
+                                        <option *ngFor="let item of listGroup" [value]="item.id">{{item.nome_gruppo}}</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label style="color:white">Filtra operatore</mat-label>
+                                        <input #inputOp matInput placeholder="Nome Cognome"[(ngModel)]="findOp" formControlName="findOp">
+                                    </mat-form-field>
+                                </div>
+                                
+                                <div class="example-container">
+                                    <div class="labContainer">
+										<label>Operatori Gruppo</label>
+									</div>	
+                                    <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo"
+                                        [cdkDropListConnectedTo]="[doneList]" class="example-list todo_list"
+                                        (cdkDropListDropped)="drop($event)">
+                                        <div class="example-box" *ngFor="let item of filtra_op(inputOp)" cdkDrag [cdkDragData]="item"  (mousedown)="enter(item)">{{item.nome}}
+                                            {{item.cognome}} - {{item.ruolo}}</div>
+                                    </div>
+                                </div>
+
+                                <div class="example-container">
+									
+									<div class="labContainer">
+										<label>Firmatari</label>
+										<div class="">
+											              
+												<mat-checkbox class="example-margin" [(ngModel)]="controlAllGroup" [ngModelOptions]="{standalone: true}" (change)="selectAll($event.checked)" >Tutti gli operatori</mat-checkbox>									
+											              
+												<mat-checkbox class="right example-margin" [(ngModel)]="controlOrder" [ngModelOptions]="{standalone: true}" (change)="toOrder($event.checked)" >Rispetta l'ordine</mat-checkbox>
+											
+										</div>
+									</div>
+
+                                    <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done"
+                                        [cdkDropListConnectedTo]="[todoList]" class="example-list col-md-12 done_list"
+                                        (cdkDropListDropped)="drop($event)">
+                                        <div class="example-box" *ngFor="let item of done" cdkDrag [cdkDragData]="item"  (mousedown)="enter(item)">{{item.nome}}
+                                            {{item.cognome}} - {{item.ruolo}}</div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <button type="Submit" class="btn btn-success" (click)="Trasmetti();">Trasmetti
+                                documento</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+			<br>
+			<div *ngIf="id_documento_flusso!=undefined" class="e_container">
+				<app-editor [doc_flusso] = "id_documento_flusso" doc_read = "true" short_template = "true"></app-editor>
+			</div>
+		</div>
+
+    </div>
+</div>
+
+<div *ngIf="loading" class="loadingspinner_container">
+    <img class="loadingspinner" src="../assets/img/loadingspinner.gif">
+</div>
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+  </div>

@@ -1,0 +1,58 @@
+.chip-list {
+    width: 100%;
+  }
+  .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+
+  .accordion {
+    background-color: rgb(235, 235, 134);
+      }
+
+  .done {
+     color:rgb(124, 122, 122);
+      }
+
+
+      .MobileContent {
+
+        display:flex;
+        text-align: "center";
+   
+    }
+   
+   @media screen and (max-width: 768px) {
+   
+    .MobileContent {
+    
+        display: none;
+        text-align:center;
+    }
+   
+   }
+
+   .step_icon{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    text-align: center;
+    color:white;
+    display:inline-block;
+   }
+   .step_on{
+    background: #3f51b5;
+   }
+   .step_off{
+    background: rgb(122, 122, 122);
+   }
+
+   .line-wrapper{
+    width: 100px;
+    vertical-align: middle;
+    display: inline-block;
+    margin: auto;
+   }
+
+   hr{
+     border-color:rgb(122, 122, 122);
+   }

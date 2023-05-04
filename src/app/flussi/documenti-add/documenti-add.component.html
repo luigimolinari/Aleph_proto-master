@@ -1,0 +1,93 @@
+<div class="centraledocumenti">
+  <br />
+  <div class="container">
+    <div class="formboxpanel">
+
+
+      <mat-horizontal-stepper #stepper class="stepper">
+        <mat-step [stepControl]="firstFormGroup" label="Nome documento">
+          <br /><br />
+
+          <form [formGroup]="firstFormGroup">
+            <br /><br />
+            <label>Nome documento</label>
+            <input placeholder="Inserire il nome" formControlName="nome_doc" class="form-control" required>
+            <br />
+
+            <hr class="my-4" />
+            <div>
+              <button mat-button matStepperNext class="btn btn-success">Successivo</button>
+            </div>
+          </form>
+
+          <br /><br /><br /><br />
+          <br /><br /><br /><br />
+
+        </mat-step>
+
+        <mat-step [stepControl]="secondFormGroup" label="Tipo documento">
+		 <br /><br />
+          <form [formGroup]="secondFormGroup">
+		   <br /><br />
+            <label>Tipo documento</label>
+            <input formControlName="tipo_doc" placeholder="Inserire la tipologia" class="form-control" required>
+            <br />
+
+            <hr class="my-4" />
+            <div>
+              <button mat-button matStepperPrevious class="btn btn-success">Precedente</button>&nbsp;
+              <button mat-button matStepperNext class="btn btn-success">Successivo</button>
+            </div>
+          </form>
+
+          <br /><br /><br /><br />
+          <br /><br /><br /><br />
+
+        </mat-step>
+
+        <mat-step label="Allega modelli" >
+		 <br /><br />
+          <form [formGroup]="thirdFormGroup">
+            <br /><br />
+            <div class="row">
+              <div class="form-group col-2">
+                <label for="file" class="btn btn-light btn-fileUpload">
+                  <span class="fas fa-folder-open">
+                    <fa-icon [icon]="faFolderOpen"></fa-icon>
+                  </span>
+                  Carica
+                </label>
+                <input hidden type="file" id="file" name="file" (change)="onFileSelect($event)" class="form-control" multiple/>
+
+              </div>
+              <div class="col list-container">
+                Lista file caricati
+                <mat-card *ngFor="let e of fileCollection; let i = index">
+                  <span class="material-icons material-icon-delete" type="button" (click)="deleteElFromList(i,e.keyName)">
+                    delete
+                  </span>&nbsp;
+                  {{e.keyName}}
+                </mat-card>
+              </div>
+            </div>
+
+            <br />
+            <hr class="my-4" />
+            <div>
+              <button mat-button matStepperPrevious class="btn btn-success">Precedente</button>&nbsp;
+              <button mat-button class="btn btn-warning" (click)="verifica()">Registra</button>
+            </div>
+          </form>
+
+          <br /><br /><br /><br />
+          <br /><br /><br /><br />
+
+        </mat-step>
+      </mat-horizontal-stepper>
+    </div>
+  </div>
+</div>
+
+<div class="footer_pages">
+  <img src='assets/img/logo_aleph_medium.png'>
+</div>

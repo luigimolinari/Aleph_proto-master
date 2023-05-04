@@ -1,0 +1,109 @@
+<div class="centraleformselect">
+  <br />
+  <div class="container">
+    <div class="formboxpanelportal">
+      <div class="central">
+      <mat-accordion class="accordion">
+          <mat-expansion-panel class="accordion" (opened)="panelOpenState = true"
+                               (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                  <mat-panel-title>
+                  <span class="material-icons">
+                      support_agent
+                      </span>
+                  </mat-panel-title>
+                  <mat-panel-description>
+                  
+                  </mat-panel-description>
+              </mat-expansion-panel-header>
+              <p>
+                  Come ultima cosa, definisci header, legenda e immagine di testata per il tuo form. 
+              </p>
+          </mat-expansion-panel>
+      </mat-accordion>
+      <br />
+      <div class="MobileContent">
+            
+         
+          <mat-label class="done"><img src="assets/img/step1off.png" />
+              Crea i campi
+            </mat-label>
+   
+      <img src="assets/img/linea.png"/>
+      <img src="assets/img/step2off.png" />
+      <mat-label class="done">  Valorizza le Select
+     </mat-label>
+
+      <img src="assets/img/linea.png" />
+      <img src="assets/img/step3off.png" /> 
+      <mat-label class="done">    Assegna il form </mat-label>
+     
+      <img src="assets/img/linea.png" />
+        <img src="assets/img/step4on.png" />
+          Termina
+     
+
+
+
+
+
+      
+  </div>
+      <br />
+      <mat-progress-bar mode="determinate" value="95"></mat-progress-bar>
+      <form [formGroup]="form" > <br /><br /> <br /><br />
+          <div class="form-row">
+              <div class="form-group col-md-12">
+                  <label for="nome">Messaggio sull'header del tuo form</label>
+                  <input  [(ngModel)]="header" formControlName="header"  type="text" id="header"  class="form-control"  required />
+                  <div *ngIf="form.controls['header'].invalid && (form.controls['header'].dirty || form.controls['header'].touched)" class="alert alert-danger">
+                     L'header è obbligatorio
+                      <div *ngIf="form.controls['header'].errors.required">
+                     
+                    </div>
+                  </div>
+              </div>
+                     
+                  </div>
+                  <div class="form-row">
+                      <div class="form-group col-md-12">
+                          <label for="nome">Legenda del tuo form</label>
+                          <textarea rows="4" [(ngModel)]="legenda" class="form-control" formControlName="legenda" required></textarea>
+                          <div *ngIf="form.controls['legenda'].invalid && (form.controls['legenda'].dirty || form.controls['legenda'].touched)" class="alert alert-danger">
+                             La legenda è obbligatoria
+                              <div *ngIf="form.controls['header'].errors.required">
+                             
+                            </div>
+                          </div>
+                      </div>
+                      Scegli l'immagine della testata<br />
+                      <div class="boxthumbs">
+                      
+                      <img src="assets/img_portal/img1small.jpg" />&nbsp;<input type="radio" [(ngModel)]="immagine" formControlName="immagine" value="img1"> &nbsp;&nbsp; <img src="assets/img_portal/img2small.jpg" />&nbsp;<input type="radio"  [(ngModel)]="immagine"  formControlName="immagine"  value="img2">&nbsp;&nbsp;
+                      <img src="assets/img_portal/img3small.jpg" />&nbsp;<input type="radio"  [(ngModel)]="immagine" formControlName="immagine"  value="img3"> &nbsp;&nbsp; <img src="assets/img_portal/img4small.jpg" />&nbsp;<input type="radio"  [(ngModel)]="immagine" formControlName="immagine"  value="img4">
+                     
+                    <br /><br />
+                      <img src="assets/img_portal/img5small.jpg" />&nbsp;<input type="radio" [(ngModel)]="immagine" formControlName="immagine" value="img5"> &nbsp;&nbsp; <img src="assets/img_portal/img6small.jpg" />&nbsp;<input type="radio"  [(ngModel)]="immagine" formControlName="immagine" value="img6">&nbsp;&nbsp;
+                      <img src="assets/img_portal/img7small.jpg" />&nbsp;<input type="radio"  [(ngModel)]="immagine" formControlName="immagine"  value="img7"> &nbsp;&nbsp; <img src="assets/img_portal/img8small.jpg" />&nbsp;<input type="radio" [(ngModel)]="immagine" formControlName="immagine"  value="img8">
+                    
+                    </div>
+                             
+                          </div>
+                          <br /><br />
+                  <button class="btn btn-warning"  (click)="Trasmetti();">Salva</button>
+</form>
+             
+</div>
+</div>
+</div>
+</div>
+
+<!-- <div class="footer_table_container_small">
+  <video autoplay muted loop id="VideoFooter" class="video-container_footer_table">
+    <source src="assets/video/video_footer.mp4" type="video/mp4">
+  </video>
+</div>
+<div class="footer_table_small">
+  <h1>Aleph</h1>
+  <p> <img src='assets/img/logo_aleph_medium.png'></p>
+</div> -->

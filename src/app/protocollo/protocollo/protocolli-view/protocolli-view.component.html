@@ -1,0 +1,86 @@
+<div class="protobg">
+    <br> <br>
+    <div class="filter_container">
+        <br>
+        <form [formGroup]="FilterForm">
+            <div class="filter_table row">
+                <mat-form-field class="full-width col-md-2 col-sm-12" appearance="fill">
+                    <mat-label>Numero</mat-label>
+                    <input type="number" min="0" matInput formControlName="numero" (change)="ctrl_input()">
+                </mat-form-field>
+
+                <mat-form-field class="full-width col-md-2 col-sm-12" appearance="fill" >
+                    <mat-label>Da Numero</mat-label>
+                    <input type="number" min="0" matInput formControlName="da_numero" (change)="ctrl_input()">
+                </mat-form-field>
+
+                <mat-form-field class="full-width col-md-2 col-sm-12" appearance="fill">
+                    <mat-label>A Numero</mat-label>
+                    <input type="number" min="0" matInput formControlName="a_numero" (change)="ctrl_input()">
+                </mat-form-field>
+
+                <mat-form-field class="full-width col-md-6 col-sm-12" appearance="fill">
+                    <mat-label>Dt. Protocollo</mat-label>
+                    <mat-date-range-input [rangePicker]="picker" (click)="picker.open()" (keydown)="$event.preventDefault();">
+                        <input matStartDate placeholder="Dt. Inizio " formControlName = "dt_inizio">
+                        <input matEndDate placeholder="Dt. Fine" formControlName = "dt_fine">
+                      </mat-date-range-input>                            
+                      <mat-datepicker-toggle class="toggle_hidden" matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-date-range-picker #picker></mat-date-range-picker>
+                </mat-form-field>
+
+                <mat-form-field class="full-width col-md-6 col-sm-12" appearance="fill">
+                    <mat-label>Oggetto</mat-label>
+                    <input matInput formControlName="oggetto">
+                </mat-form-field>
+
+                <mat-form-field class="full-width col-md-6 col-sm-12" appearance="fill">
+                    <mat-label>Mittente</mat-label>
+                    <input matInput formControlName="mittente">
+                </mat-form-field>
+
+                <mat-form-field class="full-width col-md-6 col-sm-12" appearance="fill">
+                    <mat-label>Destinatario</mat-label>
+                    <input matInput formControlName="destinatario">
+                </mat-form-field>
+
+                <mat-form-field class="full-width col-md-6 col-sm-12" appearance="fill">
+                    <mat-label>Assegnatario</mat-label>
+                    <input matInput formControlName="assegnatario">
+                </mat-form-field>
+
+
+                
+
+                <div class="td-button-container col-md-12 col-sm-12 right">
+                    <div class="button-container">
+                        <button class="search_button" mat-fab color="info" aria-label="Cerca" (click)=search()>
+                            <mat-icon>search</mat-icon>
+                        </button>
+                        <button class="reset_button" style="padding:0px" mat-fab color="info"
+                            aria-label="Pulisici i campi di ricerca" (click)=clear()
+                            title="Pulisici i campi di ricerca">
+                            <mat-icon class="top">
+                                <fa-icon [icon]="faEraser" class="faicon"></fa-icon>
+                            </mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+
+    <br>
+
+    </div>
+    <app-aleph-table [tableData]="data_filtered" [tableColumns]="customersTableColumns" [listActions]="listActions"
+        [titleActions]="titleActions" tableCase="general" [isFilterable]="false" [isPageable]="true"
+        [paginationSizes]="[5,10,15,20]" [defaultPageSize]="5" (viewAction)="viewMethod($event)"></app-aleph-table>
+    <br><br><br><br><br><br><br><br><br><br><br>
+
+    <!-- <div class="footer_small">
+        <img src='assets/img/logo_aleph_very_small.png'>
+    </div> -->
+</div>
+

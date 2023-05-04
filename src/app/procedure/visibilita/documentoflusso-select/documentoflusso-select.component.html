@@ -1,0 +1,78 @@
+<div class="centralevisibilita">
+  <br />
+    <div class="container">
+      <div class="formboxpanel">
+       
+  
+          <mat-accordion class="accordion">
+               <mat-expansion-panel class="accordion" (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <span class="material-icons">
+                    support_agent
+                    </span>
+                  </mat-panel-title>
+                <mat-panel-description>
+                 
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <p>Ora è necessario scegliere la tipologia documentale tra quelle previste dal workflow associato al flusso realizzato dalla procedura selezionata.  Utilizza il campo di ricerca per digitare parte della 
+                  descrizione del documento, e scegli tra i risultati proposti dal menù a tendina quello su cui intendi lavorare.
+              </p>
+            </mat-expansion-panel>
+          </mat-accordion>
+  <br />
+  <div class="MobileContent">
+    <mat-label class="done">
+      <img src="assets/img/step1off.png" /> Scegli la procedura
+    </mat-label>
+    <img src="assets/img/linea.png" />
+    
+    
+        <img src="assets/img/step2on.png" /> Scegli il documento
+    
+    
+    <img src="assets/img/linea.png" />
+    
+    <mat-label class="done">
+        <img src="assets/img/step3off.png" />Assegna Privilegi
+    </mat-label>&nbsp;
+  </div>
+    <br />
+    <mat-progress-bar mode="determinate" value="60"></mat-progress-bar> <br /><br /><br />
+  <form class="example-form">
+    <input type="text"
+           name="doc"
+           #doc
+           placeholder="Cerca la tipologia di documento per descrizione"
+           [formControl]="control"
+           [matAutocomplete]="auto"
+           class="form-control"
+           aria-readonly="true"
+           (keydown)="SetControl(0)" >
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let documento of filtereddocs | async" [value]="documento" (click)="SetControl(1);">
+        {{documento}}
+      </mat-option>
+    </mat-autocomplete><br />
+
+    <button mat-button class="btn btn-warning"  [routerLink]="['/proceduraselect']" [queryParams]="{procedura:procedura}" > 
+        <span class="material-icons">arrow_back</span>
+        Indietro
+      </button>&nbsp;
+      
+      <button mat-button class="btn btn-success" [routerLink]="['/visibilitaadd']"  [queryParams]="{procedura:procedura, documento:doc.value}" [disabled]="valido=='disabled'"> 
+        Prosegui
+        <span class="material-icons">arrow_forward</span>
+      </button>&nbsp;
+  &nbsp;
+  </form>
+  <br  /><br /><br /><br  /><br /><br /><br /><br />
+  </div>
+      </div>
+          </div>
+  
+    <div class="footer_pages">
+      <img src='assets/img/logo_aleph_medium.png'>
+           </div>

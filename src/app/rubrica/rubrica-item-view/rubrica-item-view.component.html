@@ -1,0 +1,145 @@
+<div class="centralerubrica">
+    <br />
+    <div class="container">
+        <div class="formboxpanel">
+            <div class="central">   
+                <br />
+                   <ul _ngcontent-ajd-c288="" id="myTab" role="tablist" class="nav nav-tabs mb-4">
+                    <li _ngcontent-ajd-c288="" class="nav-item"><a _ngcontent-ajd-c288="" id="home-tab"
+                            data-toggle="tab" href="" role="tab" aria-controls="home" aria-selected="false"
+                            class="nav-link active">Voce in rubrica</a></li>
+                </ul>     
+                <div class="sezione"> <fa-icon [icon]="faUserTie"></fa-icon> Dati generali</div>  
+                <hr class="separatore" />       
+                <form class="my_form" [formGroup]="form">                   
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Azienda</mat-label>
+                        <input matInput formControlName="azienda" readonly>
+                    </mat-form-field>
+
+
+                    <mat-form-field class="example-full-width" appearance="fill" >
+                        <mat-label>Struttura</mat-label>
+                        <input matInput formControlName="struttura" readonly>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Nome</mat-label>
+                        <input matInput formControlName="nome">
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Cognome</mat-label>
+                        <input matInput formControlName="cognome" readonly>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>CF</mat-label>
+                        <input matInput formControlName="CF" readonly>
+                    </mat-form-field>
+                </form>
+                <div class="sezione"><fa-icon [icon]="faAddressBook"></fa-icon> Indirizzi </div>
+                <hr class="separatore" />  
+                &nbsp;
+                <button type="button" class="btn btn-warning"
+                (click)="aggiungiIndirizzo(id_rubrica)">
+                <fa-icon [icon]="faAddressBook"></fa-icon> Aggiungi indirizzo
+                </button><br /><br />
+                <div *ngFor="let indirizzo of indirizzi" class="sezione">
+                  <mat-form-field>
+                    <mat-label>Toponimo</mat-label>
+                    <input matInput value={{indirizzo.toponimo}}>
+                  </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Indirizzo</mat-label>
+                        <input matInput value={{indirizzo.indirizzo}}>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>CAP</mat-label>
+                        <input matInput value={{indirizzo.CAP}}>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Comune</mat-label>
+                        <input matInput value={{indirizzo.comune}}>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Provincia</mat-label>
+                        <input matInput value={{indirizzo.provincia}}>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Stato</mat-label>
+                        <input matInput value={{indirizzo.stato}}>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Posizione</mat-label>
+                        <input matInput value={{indirizzo.posizione}}>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Telefono1  <fa-icon [icon]="faPhone"></fa-icon></mat-label>
+                        <input matInput value={{indirizzo.tel1}}>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Telefono2 <fa-icon [icon]="faPhone"></fa-icon></mat-label>
+                        <input matInput value={{indirizzo.tel2}}>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Telefono3 <fa-icon [icon]="faPhone"></fa-icon></mat-label>
+                        <input matInput value={{indirizzo.tel3}}>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Telefono4 <fa-icon [icon]="faPhone"></fa-icon></mat-label>
+                        <input matInput value={{indirizzo.tel4}}>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Telefono5 <fa-icon [icon]="faPhone"></fa-icon></mat-label>
+                        <input matInput value={{indirizzo.tel5}}>
+                      </mat-form-field>
+                      &nbsp;                 <button type="button" class="btn btn-success" (click)="EditAction(indirizzo.id)">
+                        <fa-icon [icon]="faEdit" ></fa-icon>
+                      </button>
+                      &nbsp;                 <button type="button" class="btn btn-danger" (click)="DeleteAction(indirizzo.id)">
+                        <fa-icon [icon]="faTrash" ></fa-icon>
+                      </button>
+                    </div>
+                    <br />
+                    <div class="sezione"> <fa-icon [icon]="faAddressBook"></fa-icon> Contatti</div>     
+                    <hr class="separatore" />  
+                    &nbsp;
+                    <button type="button" class="btn btn-warning"
+                    (click)="aggiungiContatto(id_rubrica)">
+                    <fa-icon [icon]="faEnvelope"></fa-icon> Aggiungi contatto
+                    </button><br /><br />
+                    <div  *ngIf="ncontatti=='si'">
+                        <div *ngFor="let contatto of contatti"> 
+                            <mat-form-field>
+                                <mat-label>Tipo contatto </mat-label>
+                                <input matInput value={{contatto.tipo_contatto}}>
+                              </mat-form-field>
+                              <mat-form-field>
+                                <mat-label>Tipo contatto </mat-label>
+                                <input matInput value={{contatto.descrizione}}>
+                              </mat-form-field>
+                              &nbsp;                 <button type="button" class="btn btn-success" (click)="EditContactAction(contatto.id)">
+                                <fa-icon [icon]="faEdit" ></fa-icon>
+                              </button>
+                              &nbsp;                 <button type="button" class="btn btn-danger" (click)="DeleteContactAction(contatto.id)">
+                                <fa-icon [icon]="faTrash" ></fa-icon>
+                              </button>
+                        <br />
+                    </div>
+                </div>
+                <br />
+                        <button _ngcontent-ajd-c474="" (click)="back();" class="btn btn-gray">Indietro</button>&nbsp;
+               <br /><br /> <br /><br />
+                <br /><br />
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+    </div>

@@ -1,0 +1,76 @@
+<div class="centraleworkflow"><br /><br />
+    <div class="container">
+        <div class="formboxpanel">
+            <div *ngIf="nome_flusso!=''">
+                <i class="fa fa-2x">
+                    <fa-icon [icon]="faNetworkWired"></fa-icon>
+                </i>
+                &nbsp;&nbsp;Flusso: {{nome_flusso}}
+            </div>
+
+           <br />
+
+            <button mat-button class="btn btn-back" (click)="back()">
+                <span class="material-icons">
+                    arrow_back
+                </span>
+            </button>
+
+            <br /><br />
+
+            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab" aria-controls="home"
+                        aria-selected="false">
+                        Gruppo di lavoro
+                    </a>
+                </li>
+            </ul><br>
+            <div class="ripple_container">
+                
+                    <div matRipple *ngFor="let el of gruppo_di_lavoro" class=" example-ripple-container gruppo-lavoro mat-elevation-z4">
+                        <h6>{{el.nome.toUpperCase()}} {{el.cognome.toUpperCase()}}</h6>          
+                        <div class="size12">{{el.ruolo}}</div>
+                        <div class="size12">{{el.profilo}}</div>           
+                        <div class ="customOpacity" *ngIf="el.req_ord != null">___________</div>
+                        <div *ngIf="el.req_ord != null"> 
+                            <div class="size12">  <fa-icon class="fa-lg faSignature" [icon]="faSignature"></fa-icon>&nbsp; Firmatario</div>
+                            <div *ngIf="el.req_ord != 0" class="size10"> (# {{req_ord}})</div>
+                            <div *ngIf="el.req_ord == 0" class="size10"> (nessun ordine di firma)</div>
+                        </div>
+                    </div>
+                
+
+            </div>
+            <br /><br />
+
+            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab" aria-controls="home"
+                        aria-selected="false">
+                        Gruppo di validazione
+                    </a>
+                </li>
+            </ul><br>
+
+
+            <div class="ripple_container">
+                <br />
+                    <div matRipple *ngFor="let el of gruppo_di_validazione" class=" example-ripple-container mat-elevation-z4">
+                        <h6>{{el.nome.toUpperCase()}} {{el.cognome.toUpperCase()}}</h6>          
+                        <div class="size12">{{el.ruolo}}</div>
+                        <div class="size12">{{el.profilo}}</div>  
+                        <div *ngIf="el.req_ord != null">
+                            <div class ="customOpacity" >___________</div>
+                            <div class="size12">  <fa-icon class="fa-lg faSignature" [icon]="faSignature"></fa-icon>&nbsp; Firmatario</div>
+                            <div *ngIf="el.req_ord != 0" class="size10"> (# {{req_ord}})</div>
+                            <div *ngIf="el.req_ord == 0" class="size10"> (nessun ordine di firma)</div>
+                        </div>         
+                        
+                    </div>
+                    <br /> <br />
+
+            </div>
+        </div>
+    </div>
+</div>

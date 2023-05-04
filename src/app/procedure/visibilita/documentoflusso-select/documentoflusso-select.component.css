@@ -1,0 +1,32 @@
+.chip-list {
+    width: 100%;
+  }
+  .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+
+  .accordion {
+    background-color: rgb(235, 235, 134);
+      }
+
+  .done {
+     color:rgb(124, 122, 122);
+      }
+
+
+      .MobileContent {
+
+        display:block;
+        text-align: "center";
+   
+    }
+   
+   @media screen and (max-width: 768px) {
+   
+    .MobileContent {
+    
+        display: none;
+        text-align:center;
+    }
+   
+   }

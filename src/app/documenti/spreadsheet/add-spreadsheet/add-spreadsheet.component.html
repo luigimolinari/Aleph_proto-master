@@ -1,0 +1,57 @@
+<div class="centralespreadsheet">
+    <br />
+    <div class="container">
+      <div class="formboxpanel">
+  
+  
+        <mat-horizontal-stepper #stepper class="stepper">
+          <mat-step [stepControl]="firstFormGroup" label="Nome documento">
+            <br /><br />
+  
+            <form [formGroup]="firstFormGroup">
+              <br /><br />
+              <label>Nome documento</label>
+              <input placeholder="Inserire il nome" formControlName="nome_doc" class="form-control" required>
+              <br />
+  
+              <hr class="my-4" />
+              <div>
+                <button mat-button matStepperNext class="btn btn-success">Successivo</button>
+              </div>
+            </form>
+  
+            <br /><br /><br /><br />
+            <br /><br /><br /><br />
+  
+          </mat-step>
+  
+          <mat-step [stepControl]="secondFormGroup" label="Tipo documento">
+           <br /><br />
+            <form [formGroup]="secondFormGroup">
+             <br /><br />
+              <label>Descrizione documento</label>
+              <input formControlName="tipo_doc" placeholder="Inserire la descrizione" class="form-control" required>
+              <br />
+  
+              <hr class="my-4" />
+              <div>
+                <button mat-button matStepperPrevious class="btn btn-success">Precedente</button>&nbsp;
+                <button mat-button matStepperNext class="btn btn-warning" (click)="verifica()">Salva e vai all'editor</button>
+              </div>
+            </form>
+  
+            <br /><br /><br /><br />
+            <br /><br /><br /><br />
+  
+          </mat-step>
+  
+          <!--mat-step disabled=true label="Edita documento" >
+          </mat-step-->
+        </mat-horizontal-stepper>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+  </div>

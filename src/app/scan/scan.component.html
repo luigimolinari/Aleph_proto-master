@@ -1,0 +1,65 @@
+<div class="centralescanner">
+    <br>
+        <div class="col-md-12 example-button-container">
+            <button mat-fab color="accent" (click)="scanImage()">
+                <mat-icon>scanner</mat-icon>
+            </button>
+    
+            &nbsp;
+    
+            <button *ngIf="storedFiles.length != 0" mat-fab color="primary" (click)="submit()">
+                <mat-icon>send</mat-icon>
+            </button>
+    
+            &nbsp;
+            
+        </div>
+    
+        <br>
+        <div class="container">
+            <div class="formboxpanel">
+                <div class="row file_conteiner">
+                    <div *ngFor="let el of storedFiles, let i = index" class="col-sm-4 text-center">
+                        <div class="right">
+                            <mat-icon class="delete_el" (click)="deleteElFromList(i)">close</mat-icon>
+                        </div>
+                        <img [src]="el.src" [data-file]="el.name" class='selFile' title='Click to remove'><br />
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="scandetail" [hidden]="!scandetail_show">
+    
+    
+            <div style="max-height:1200px;overflow:scroll;">
+                <canvas id="myCanvas"></canvas>
+            </div>
+    
+    
+        </div>
+    
+    
+    
+        <!-- <div class="modal fade dalert" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        Connection Failed
+                    </div>
+                    <div class="modal-body">
+                        No Scan app application found in your machine please download,install and open first then refresh
+                        the
+                        browser.
+    
+                        prova commit
+                        <a href="~/SrcFile/Scan_App_SetUp.msi" download>Download Files</a>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    
+        <div class="footer_pages">
+            <img src='assets/img/logo_aleph_medium.png'>
+        </div>
+    </div>

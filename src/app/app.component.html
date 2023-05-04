@@ -1,0 +1,82 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img src="assets/img/logo_aleph.png" width="40" height="40" class="d-inline-block align-top" alt="Aleph"> Aleph</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      
+      <!-- <li class="nav-item active">{{CreaMenu()}}
+
+      </li> -->
+
+      <li *ngIf="logingOk" class="nav-item dropdown"><a class="btn btn-primary dropdown-toggle" role="button" href="#"
+          id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="./background">
+            <fa-icon [icon]="faHome"></fa-icon>&nbsp; Home
+          </a>
+          <a *ngIf="tipo_op=='admin' || tipo_op=='poweruser'" class="dropdown-item" routerLink="./amministrazione">
+            <fa-icon [icon]="faAtlas"></fa-icon>&nbsp; Amministrazione
+          </a>
+          <a *ngIf="tipo_op=='admin' || tipo_op=='poweruser' || tipo_op=='rup'" class="dropdown-item"
+            routerLink="./flussi">
+            <fa-icon [icon]="faProjectDiagram"></fa-icon> Generazione flussi
+          </a>
+           <a *ngIf="tipo_op=='admin' || tipo_op=='poweruser' || tipo_op=='rup'" class="dropdown-item"
+            routerLink="./procedure">
+            <fa-icon [icon]="faFileSignature"></fa-icon> Gestione procedure
+          </a> 
+
+           <div *ngIf="tipo_op=='admin' || tipo_op=='poweruser' || tipo_op=='rup'" class="dropdown-divider"></div>
+           <a *ngIf="tipo_op=='admin' || tipo_op=='poweruser' || tipo_op=='rup'" class="dropdown-item"  routerLink="./userforms"><fa-icon [icon]="faFileCode"></fa-icon> &nbsp;Form utenti</a>
+            
+           <div *ngIf="tipo_op=='admin' || tipo_op=='poweruserproto' || tipo_op=='protocollo'" class="dropdown-divider">
+          </div>
+          <a class="dropdown-item" routerLink="./protoadmin">
+            <fa-icon [icon]="faFingerprint"></fa-icon> Protocollo
+          </a>
+          <a class="dropdown-item" routerLink="./protocolliview">
+            <fa-icon [icon]="faWindowMaximize"></fa-icon> Protocolli-view
+          </a>
+          <a class="dropdown-item" *ngIf="tipo_op=='admin' || tipo_op=='poweruser' || tipo_op=='rup'"
+            routerLink="./protopec">
+            <fa-icon [icon]="faEnvelope"></fa-icon> PEC
+          </a>
+          <div class="dropdown-divider">
+          </div>
+          <a class="dropdown-item" routerLink="./webcamtest">
+            <fa-icon [icon]="faVideo"></fa-icon> Webcam
+          </a>
+          <a class="dropdown-item" routerLink="./protoscan">
+            <fa-icon [icon]="faCopy"></fa-icon> Scan
+          </a> 
+
+          < <a class="dropdown-item"  routerLink="./scantest"><fa-icon [icon]="faArchive"></fa-icon> Scan Test</a> 
+
+           <div *ngIf="tipo_op=='admin' || tipo_op=='poweruser' || tipo_op=='rup'" class="dropdown-divider"></div>
+          <a class="dropdown-item" routerLink="./archivio">
+            <fa-icon [icon]="faArchive"></fa-icon> Archivio
+          </a> -->
+          <div *ngIf="tipo_op=='admin' || tipo_op=='poweruser' || tipo_op=='rup'" class="dropdown-divider"></div>
+          <a class="dropdown-item" routerLink="./webbuilder">
+            <fa-icon [icon]="faWindowMaximize"></fa-icon> Web Builder
+          </a> 
+
+        </div>
+      </li>
+    </ul>
+
+    <!-- PULSANTE PER IL LOGOUT -->
+    <div *ngIf="logingOk" class="form-inline my-2 my-lg-0">
+      <app-logout nome={{name}}></app-logout>
+    </div>
+    <!-- PULSANTE PER IL LOGIN -->
+    <div *ngIf="!logingOk" class="form-inline my-2 my-lg-0">
+      <app-login *ngIf="!logingOk" (loginAction)="loginMethod($event)"></app-login>
+    </div>
+  </div>
+</nav>
+<router-outlet> </router-outlet>

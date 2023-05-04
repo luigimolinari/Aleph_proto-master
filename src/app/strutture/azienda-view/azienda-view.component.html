@@ -1,0 +1,96 @@
+<div class="centraleaziende">
+    <br />
+<div class="container">
+    <div class="formboxpanel">
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+           <div class="my-4">
+            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab" aria-controls="home" aria-selected="false">Azienda</a>
+                </li>
+            </ul>
+            <form *ngFor="let group of aziende" [formGroup]="form" >
+                <div class="row mt-5 align-items-center">
+                  
+                    <div class="col">
+                        <div class="row align-items-center">
+                            <div class="col-md-7">
+                                <h4 class="mb-1">{{group.nome}}</h4>
+                               </div>
+                        </div>
+                      
+                    </div>
+                </div>
+              
+                <hr class="my-4" />
+                
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="nome">Nome</label>
+                        <input  [(ngModel)]="nome" formControlName="nome"  type="text" id="nome"  class="form-control"  readonly />
+                        <div *ngIf="form.controls['nome'].invalid && (form.controls['nome'].dirty || form.controls['nome'].touched)" class="alert alert-danger">
+                            Il nome è obbligatorio
+                            <div *ngIf="form.controls['nome'].errors.required">
+                           
+                          </div>
+                        </div>
+                    </div>
+
+                   
+
+
+                    <div class="form-group col-md-6">
+                        <label for="cognome">Sede</label>
+                        <input type="text"  [(ngModel)]="sede" formControlName="sede"  id="sede" class="form-control"  readonly />
+                        <div *ngIf="form.controls['sede'].invalid && (form.controls['sede'].dirty || form.controls['sede'].touched)" class="alert alert-danger">
+                            La sede è obbligatoria
+                            <div *ngIf="form.controls['sede'].errors.required">
+                            </div>
+                        </div>
+                 </div>
+                </div>
+                <div class="form-group">
+                    <label for="cf">P.IVA</label>
+                    <input type="text"  [(ngModel)]="piva" formControlName="piva" class="form-control" id="piva" readonly />
+                    <div *ngIf="form.controls['piva'].invalid && (form.controls['piva'].dirty || form.controls['piva'].touched)" class="alert alert-danger">
+                        La P.IVA è obbligatoria
+                        <div *ngIf="form.controls['piva'].errors.required">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="pec">PEC</label>
+                        <input  [(ngModel)]="pec" formControlName="pec"  type="text" id="pec"  class="form-control"  readonly />
+                        
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="mail">Mail</label>
+                        <input type="text"  [(ngModel)]="mail" formControlName="mail"  id="mail" class="form-control"  readonly />
+                 </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono">Telefono</label>
+                    <input type="text"  [(ngModel)]="telefono" formControlName="telefono" class="form-control" id="telefono" readonly />
+                </div>
+
+
+<br /><br /><br /><br /><br /><br /><br />
+             
+                
+        </form>
+           </div>
+        </div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+         </div>
+

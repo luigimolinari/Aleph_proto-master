@@ -1,0 +1,81 @@
+/*old --------------- procedure-attive*/
+
+/* app-procedure-attive{
+    position:absolute;
+    width:100%;
+    left:0px;
+    overflow-y: auto;
+    height: 70%;
+} */
+
+/*scrollbar width */
+/* app-procedure-attive::-webkit-scrollbar {
+    width: 7px;
+} */
+  
+/*scrollbar Track */
+/* app-procedure-attive::-webkit-scrollbar-track {
+    background: transparent; 
+} */
+   
+/*scrollbar Handle */
+/* app-procedure-attive::-webkit-scrollbar-thumb {
+    background: #e9ecef; 
+    border-radius: 10px;
+} */
+  
+/*scrollbar Handle on hover */
+/* app-procedure-attive::-webkit-scrollbar-thumb:hover {
+    background: #d0d3d5; 
+} */
+
+/*nuovo --------------- scrivania*/
+
+app-scrivania,app-gestione-scrivania, app-new-pratica, app-pratiche-avviate, app-pratiche-lavora, app-pratiche-valida{
+  position:absolute;
+  width:100%;
+  left:0px;
+  overflow-y: auto;
+  /* height: 70%; */
+  height: 80%;
+  /*per non coprire il btn toogle*/
+  margin-top: 40px;
+}
+
+app-sidenav{
+  position: absolute;
+  width: 100%;
+  left: 0px;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+/*scrollbar width */
+app-scrivania::-webkit-scrollbar {
+  width: 7px;
+}
+
+/*scrollbar Track */
+app-scrivania::-webkit-scrollbar-track {
+  background: transparent; 
+}
+ 
+/*scrollbar Handle */
+app-scrivania::-webkit-scrollbar-thumb {
+  background: #e9ecef; 
+  background: transparent; 
+  border-radius: 10px;
+}
+
+/*scrollbar Handle on hover */
+app-scrivania::-webkit-scrollbar-thumb:hover {
+  background: #d0d3d5; 
+}
+
+video{
+  object-fit: cover;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  left: 0;
+}

@@ -1,0 +1,29 @@
+<br />
+<button type="button" class="btn btn-success btn-success-add" [routerLink]="['/flussiadd']" >CREA nuovo flusso</button> &nbsp;
+<br /><br />
+
+<app-aleph-table 
+			        [tableData]="data" [tableColumns]="customersTableColumns" [listActions]="listActions"
+			        tableCase="flussi-view"
+              [isFilterable]="true"
+              [isPageable]="true"
+              [paginationSizes]="[5,10]"
+              [defaultPageSize]="5"
+              (viewAction) = "viewMethod($event)"
+              (editAction) = "editMethod($event)"
+              (workflowAction) = "workflowMethod($event)"
+              (tempiAction) = "tempiMethod($event)"
+              (deleteAction) = "deleteMethod($event)"
+></app-aleph-table>
+
+<br><br><br><br><br><br><br><br>
+
+<div class="footer_table_container">
+  <video autoplay muted loop id="VideoFooter" class="video-container_footer_table">
+    <source src="assets/video/footer.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div class="footer_small">
+<img src="assets/img/logo_aleph_very_small.png" alt="logo aleph"/>
+  </div>

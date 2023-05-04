@@ -1,0 +1,82 @@
+<div class="protobg">
+  <br />
+<div class="container">
+  <app-sidenav 
+[id_user] = "id_user" 
+[mode] = "mode"  
+[open] = "open"
+(menuItemSelection)="test_event($event)"
+(fullStateEvent)="full_state_event($event)">
+</app-sidenav>
+  <div class="formboxpanel">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+               <div class="my-4">
+
+    <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab" aria-controls="home" aria-selected="false"><fa-icon [icon]="faFingerprint"></fa-icon> &nbsp;PROTOCOLLO {{url3}}</a>
+        </li>
+    </ul>
+
+
+
+    <fa-icon [icon]="faFileContract"></fa-icon><br />
+Il protocollo {{url3}} è stato correttamente registrato.
+
+<br />
+<br />
+<br />
+<div>
+  
+    <fa-icon [icon]="faBarcode"></fa-icon><br />
+<ngx-extended-pdf-viewer
+  [src]="urlpdf"
+  [showToolbar]="true"
+  [showSidebarButton]="false"
+  [showFindButton]="false"
+  [showPagingButtons]="false"
+  [showZoomButtons]="false"
+  [showPresentationModeButton]="false"
+  [showOpenFileButton]="false"
+  [showPrintButton]="true"
+  [showDownloadButton]="true"
+  [showBookmarkButton]="false"
+  [showSecondaryToolbarButton]="false"
+  [showRotateButton]="false"
+  [showHandToolButton]="false"
+  [showScrollingButton]="false"
+  [showSpreadButton]="false"
+  [showPropertiesButton]="false"
+  [useBrowserLocale]="true" height="250px" width="100px" zoom="100%">
+</ngx-extended-pdf-viewer>
+</div>
+  <br />
+<fa-icon [icon]="faPaste"></fa-icon><br />
+<button type="button" class="btn btn-secondary btn-sm btn-block" (click)="addclone()">    <fa-icon [icon]="faClone"></fa-icon> Clona intero protocollo</button>
+<button type="button" class="btn btn-secondary btn-sm btn-block" (click)="addclonearchivio()">    <fa-icon [icon]="faBookmark"></fa-icon> Clona dati di archivio</button>
+<br />
+<mat-icon>scanner</mat-icon><br />
+<button type="button" class="btn btn-secondary btn-sm btn-block" (click)="protoscan()">   <mat-icon>scanner</mat-icon> Acquisisci via scanner</button>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</div></div></div>
+</div></div></div>

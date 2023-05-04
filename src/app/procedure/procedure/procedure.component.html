@@ -1,0 +1,79 @@
+
+    <link rel="stylesheet" href="./procedure.component.css">
+    <div class="footer_splash"></div>
+    <video autoplay muted loop id="myVideo" style="width:100%">
+        <source src="assets/video/video_procedure.mp4" type="video/mp4">
+        </video>
+
+            
+<div class="container bootstrap snippets bootdey" style="z-index:-1;">
+    <div class="row justify-content-center" style="   
+    margin-top:-50%;
+    bottom: 0;
+    left:0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    width: 100%;
+    padding: 40px;
+    overflow: auto;">
+
+		
+
+		<div class="panelContainer col-md-2 col-sm-6 col-xs-12">
+            <div class="panel panel-dark panel-colorful">
+                <div class="panel-body text-center">
+                	<p class="text-uppercase mar-btm text-sm">Gestione Procedure</p>
+                	<i class="fa fa-users fa-5x"><fa-icon [icon]="faBriefCase"></fa-icon></i>
+                	<hr>
+                	<p class="h2 text-thin"></p>
+                	<small><button type="button" class="btn btn-outline-secondary" [routerLink]="['/procedureview']" >Accedi</button></small>
+                </div>
+            </div>
+        </div>
+        <div class="panelContainer col-md-2 col-sm-6 col-xs-12">
+        	<div class="panel panel-danger panel-colorful">
+        		<div class="panel-body text-center">
+                    <p class="text-uppercase mar-btm text-sm">Gestione Fascicoli</p>
+                   
+        			<i class="fa fa-comment fa-5x"><fa-icon [icon]="faFolderOpen"></fa-icon></i>
+        			<hr>
+        			<p class="h2 text-thin"></p>
+        			<small><button type="button" class="btn btn-danger" [routerLink]="['/fascicoli']">Accedi</button></small>
+        		</div>
+        	</div>
+        </div>
+        <div class="panelContainer col-md-2 col-sm-6 col-xs-12">
+        	<div class="panel panel-primary panel-colorful">
+        		<div class="panel-body text-center">
+        			<p class="text-uppercase mar-btm text-sm">Gestione Gruppi</p>
+        			<i class="fa fa-shopping-cart fa-5x"><fa-icon [icon]="faUsersCog"></fa-icon></i>
+        			<hr>
+        			<p class="h2 text-thin"></p>
+        			<small><button type="button" class="btn btn-primary" [routerLink]="['/gruppi']" >Accedi</button></small>
+        		</div>
+        	</div>
+        </div>
+		<!--div class="panelContainer col-md-2 col-sm-6 col-xs-12">
+        	<div class="panel panel-colorful panel-gruppifascicolo">
+        		<div class="panel-body text-center">
+        			<p class="text-uppercase mar-btm text-sm">Gestione Gruppi Fascicolo</p>
+        			<i class="fa fa-shopping-cart fa-5x"><fa-icon [icon]="faUsersCog"></fa-icon></i>
+        			<hr>
+        			<p class="h2 text-thin"></p>
+        			<small><button type="button" class="btn btn-gruppifascicolo" [routerLink]="['/gruppifascicolo']" >Accedi</button></small>
+        		</div>
+        	</div>
+        </div-->
+        <div class="panelContainer col-md-2 col-sm-6 col-xs-12">
+        	<div class="panel panel-info panel-colorful">
+        		<div class="panel-body text-center">
+        			<p class="text-uppercase mar-btm text-sm">Visibilità Documenti</p>
+        			<i class="fa fa-dollar fa-5x"><fa-icon [icon]="faEye"></fa-icon></i>
+        			<hr>
+        			<p class="h2 text-thin"></p>
+        			<small><button type="button" class="btn btn-info" [routerLink]="['/proceduraselect']">Accedi</button></small>
+        		</div>
+        	</div>
+        </div>        
+	</div>
+</div>

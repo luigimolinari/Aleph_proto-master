@@ -1,0 +1,191 @@
+.example-ripple-container {
+    margin:auto;
+    min-width: 200px;
+    min-height: 180px;
+    margin-bottom: 10px;
+    padding: 20px;
+    text-align: left;
+    max-width:500px;
+    height: auto;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;
+    color: cornflowerblue;
+    /*background: linear-gradient(#3e598ad6, #6495edf5), url(/../../../assets/img/bg14.jpg);
+    background-size: 100% auto;
+    background-position-y: 50%;*/
+    background:rgba(255, 255, 255, 0.932);
+  }
+
+  @media screen and (max-width: 500px) {
+    .example-ripple-container{
+      background-size: 100% 100%;
+      }
+  }
+ 
+  .mandatoryIcon{
+    color:#b70012;
+  }
+
+  .milestoneIcon{
+    color:#f44336;
+  }
+
+  .center {
+    position: absolute;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+  .accordion {
+    background-color: rgb(235, 235, 134);
+      }
+
+  .done {
+     color:rgb(124, 122, 122);
+      }
+
+
+      .MobileContent {
+
+        display:block;
+        text-align: "center";
+   
+    }
+   
+   @media screen and (max-width: 768px) {
+   
+    .MobileContent {
+    
+        display: none;
+        text-align:center;
+    }
+   
+   }
+
+   .centered{
+       text-align:center;
+       margin-top:5px;
+       margin-bottom:5px;
+   }
+   .right{
+       text-align:right;
+       margin-top:5px;
+       margin-bottom:5px;
+   }
+
+   .btn-trasparent{
+       background: transparent;
+   }
+
+   fa-icon{
+       color:cornflowerblue   }
+
+   .matBadge{
+       margin-right: 2vw;
+       margin-top:10px;
+   }
+
+
+
+.disabledRipple{
+    background:transparent;
+    background-color: #d3d3d363;
+    color: #343a40;
+}
+/*
+.formRipple{
+    border: 15px solid;
+    border-color: #d64d4d;
+}
+*/
+.container{
+    height:100vh;
+}
+
+.stepIcon{
+  display: inline-block;
+  color:#f8f9fa;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  margin-bottom: 2px;
+  margin-right: 5px;
+  padding-top:13px;
+}
+
+.docStepIcon{
+  background-color: #ff4081; 
+  border-radius: 50%;
+  
+}
+
+.formStepIcon{ 
+  background-color: navy;
+}
+
+.gatewayStepIcon{
+  transform:rotate(45deg);
+  background-color: #dc3545;
+}
+
+.alert-mex{
+  color:lightcoral;
+  margin-bottom:5px;
+}
+.state-mex{
+  color:darkslategray;
+  font-size:13px;
+}
+
+.btn-mex.btn-mex:hover,.btn-mex:active,.btn-mex:focus{
+  border: hidden;
+  outline:0;
+  background-color: white;
+  color: rgba(255, 255, 255, 0.685);
+}
+.btn-mex{
+  margin-left: 0px;
+  border: hidden;
+  background-color: white;
+  min-width:50px; 
+  border-radius: 50%;
+  padding: 0px;
+  margin: 0px;
+  width: 50px;
+  min-width: 50px;
+}
+.material-icons-mex{
+	color:cornflowerblue;
+	margin-left: 0px;
+	cursor:pointer;
+}
+.mat-menu-item{
+   outline:none;
+}
+
+.mat-menu-content{
+    background-color: white;
+}
+
+.form_img{
+  width: 100%;
+  height: 110px;
+  margin: auto;
+}
+
+.loadingspinner_container{
+  width: 100%;
+  position: absolute;
+  top:30%;
+  text-align: center;
+}
+
+.loadingspinner{
+ margin:auto;
+}

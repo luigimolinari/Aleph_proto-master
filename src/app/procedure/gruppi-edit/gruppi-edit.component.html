@@ -1,0 +1,92 @@
+
+<div class="centralegruppiprocedure">
+    <br />
+<div class="container">
+    <div class="formboxpanel">
+
+  <mat-horizontal-stepper #stepper class="stepper" >
+
+    <!--mat-step label="Procedura"><br /><br  />
+      <form >
+        <ng-template matStepLabel>Procedura</ng-template>
+       
+          <mat-label>Seleziona la procedura</mat-label>
+          
+          <input matInput type="text"
+           name="proc"
+           placeholder="Cerca la procedura per descrizione"
+           [formControl]="procedura"
+           [matAutocomplete]="autoProc"
+           class="form-control"
+           aria-readonly="true"
+           (keydown)="ControlProc(0)">
+          <mat-autocomplete #autoProc="matAutocomplete">
+            <mat-option *ngFor="let procedura of filteredProcedure | async" [value]="procedura" (click)="ControlProc(1)">
+              {{procedura}}
+            </mat-option>
+          </mat-autocomplete><br />
+        <br />
+        <hr class="my-4" />
+        <div>
+          <button mat-button matStepperNext class="btn btn-success" [disabled]="validoProc!=''" >Successivo</button>
+        </div>
+      </form>
+
+      <br /><br  /><br /><br  />      <br /><br  /><br /><br  />
+    </mat-step-->
+
+    <mat-step [stepControl]="secondFormGroup" label="Tipo gruppo">
+      <form ><br /><br  />
+        <!--mat-form-field-->
+          <mat-label>Seleziona il tipo di gruppo</mat-label>
+          
+          <input matInput type="text"
+           name="tipo"
+           placeholder="Cerca la tipologia di gruppo per descrizione"
+           [formControl]="tipogruppo"
+           [matAutocomplete]="autoTipo"
+           class="form-control"
+           aria-readonly="true"
+           (keydown)="ControlTipo(0)">
+          <mat-autocomplete #autoTipo="matAutocomplete">
+            <mat-option *ngFor="let tipo of filteredTipi | async" [value]="tipo" (click)="ControlTipo(1)">
+              {{tipo}}
+            </mat-option>
+          </mat-autocomplete><br />
+        <!--/mat-form-field--><br />
+        <hr class="my-4" />
+        <div>
+          <!--button mat-button matStepperPrevious class="btn btn-success">Precedente</button-->&nbsp;
+          <button mat-button matStepperNext class="btn btn-success" [disabled]="validoTipo!=''">Successivo</button>
+        </div>
+      </form>
+      <br /><br  /><br /><br  />      <br /><br  /><br /><br>
+    </mat-step>
+
+    <mat-step label="Nome Gruppo">
+      <form [formGroup]="thirdFormGroup"><br /><br  />
+        <ng-template matStepLabel>Nome gruppo</ng-template>
+        <!--mat-form-field-->
+          <mat-label>Nome gruppo</mat-label>
+          <input matInput placeholder="Inserire il nome del gruppo" formControlName="nome_gruppo"  class="form-control" required>
+        <!--/mat-form-field--><br />
+            <hr class="my-4" />
+            <div>
+              <button mat-button matStepperPrevious class="btn btn-success">Precedente</button>&nbsp;
+              <button mat-button  class="btn btn-warning" (click)="trasmetti()">Registra</button>
+            </div>
+          </form>
+      <div>
+        
+       
+      </div>
+      <br /><br  /><br /><br  />      <br /><br  /><br /><br>
+    </mat-step>
+
+  </mat-horizontal-stepper>
+
+
+  </div></div></div>
+  <div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+  </div>

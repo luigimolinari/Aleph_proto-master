@@ -1,0 +1,1081 @@
+<div class="protobg">
+    <app-sidenav *ngIf="loggedIn" [id_user]="id_user" [mode]="mode" [open]="open"
+        (menuItemSelection)="test_event($event)" (fullStateEvent)="full_state_event($event)">
+    </app-sidenav>
+    <div
+        [ngClass]="{'large_margin': margin_class=='large_margin','medium_margin': margin_class=='medium_margin','small_margin': margin_class=='small_margin'}">
+        <div class="container">
+
+            <div class="formboxpanel">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+                        <div class="my-4">
+                            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab"
+                                        aria-controls="home" aria-selected="false">
+                                        <fa-icon [icon]="faFingerprint"></fa-icon> &nbsp; CREA nuovo Protocollo
+                                    </a>
+                                </li>
+                            </ul>
+                            <br>
+                            <div class="right">
+                                <span class="material-icons matbtn" (click)="enUploadClone()">
+                                    content_copy
+                                </span>&nbsp;
+                                <br>
+                                <mat-form-field *ngIf="enable_upload_clone" class="example-full-width"
+                                    appearance="fill">
+                                    <mat-label style="color:white">Cerca protocollo da clonare</mat-label>
+                                    <input matInput type="text" name="clone" #clone [formControl]="controlCloni"
+                                        [matAutocomplete]="autoclone" class="input-right col-md-6 col-sm-12"
+                                        aria-readonly="true">
+                                    <mat-autocomplete #autoclone="matAutocomplete"
+                                        (optionSelected)="selectedClone($event)">
+                                        <mat-option *ngFor="let clone of filteredCloni | async" [value]="clone">
+                                            {{clone}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+                            </div>
+
+                            <br>
+
+                            <form [formGroup]="form">
+
+
+                                <fa-icon [icon]="faTerminal"></fa-icon> &nbsp;
+
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="Serie">
+                                            Serie</label>
+                                        <select id="serie" class="form-control" formControlName="serie"
+                                            (change)="Scegliflusso();" (change)="CreaInterfaccia();">
+                                            <option></option>
+                                            <option *ngFor="let serie of series" label="{{serie.descrizione}}">
+                                                {{serie.id}}
+                                            </option>
+                                        </select>
+
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="Flusso">
+                                            Flusso</label>
+                                        <select id="flusso" class="form-control" formControlName="flusso"
+                                            (change)="CreaInterfaccia();">
+                                            <option></option>
+                                            <option *ngFor="let flussoption of flussoptions" label="{{flussoption}}">
+                                                {{flussoption}}
+                                            </option>
+                                        </select>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="Inbox">
+                                            Inbox</label>
+                                        <select id="inbox" class="form-control" formControlName="inbox"
+                                            (change)="CreaInterfaccia();">
+                                            <option></option>
+                                            <option *ngFor="let inboxproto of inboxprotoall"
+                                                label="{{inboxproto.descrizione}}">{{inboxproto.id}}</option>
+                                        </select>
+
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for="Tipo">
+                                            Categoria</label>
+                                        <select id="tipo" class="form-control" formControlName="tipo"
+                                            (change)="CreaInterfaccia();">
+                                            <option></option>
+                                            <option *ngFor="let tipoproto of tipoprotocolli"
+                                                label="{{tipoproto.descrizione}}">{{tipoproto.id}}</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+
+
+                                <div *ngIf="nointerface=='si'" class="_blank">
+                                    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                                </div>
+
+                                <div
+                                    *ngIf="tipointerface=='Ingresso' || tipointerface=='Uscita' || tipointerface =='Interno'">
+
+                                    <!-- Ingresso: 
+                                         Mittenti poi destinatari 
+                                    -->
+                                    <div *ngIf="tipointerface=='Ingresso'">
+
+                                        <fa-icon [icon]="faAddressCard"></fa-icon> &nbsp;
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <label for="mittente">Mittenti*</label> &nbsp;&nbsp; <fa-icon
+                                                    [icon]="faPlusSquare" (click)="aggiungiVoce(); popolAziende()">
+                                                </fa-icon>
+                                                &nbsp;&nbsp; <fa-icon [icon]="faMinusSquare" (click)="togliVoce();">
+                                                </fa-icon>
+                                                &nbsp;&nbsp;
+
+
+                                                <mat-form-field class="mittenti-chip-list" appearance="legacy">
+                                                    <mat-chip-list #chipList>
+                                                        <mat-chip *ngFor="let addmitt of mittenti"
+                                                            [selectable]="selectable" [removable]="removable"
+                                                            (removed)="remove(addmitt)" [readonly]="readonly">
+                                                            {{addmitt.name}}
+
+                                                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+
+                                                        </mat-chip>
+                                                        <input hidden [matChipInputFor]="chipList"
+                                                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                                            readonly="readonly" [matChipInputAddOnBlur]="addOnBlur"
+                                                            (matChipInputTokenEnd)="add($event)"
+                                                            formControlName="mittenti">
+                                                    </mat-chip-list>
+                                                </mat-form-field>
+
+                                                <div *ngIf="aggiungirubrica=='no'">
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-12">
+                                                            <select id="rubricatipo" class="form-control"
+                                                                formControlName="rubricatipo"
+                                                                (change)="PopolaVociRubrica()">
+                                                                <optgroup label="Rubrica Generale">
+                                                                    <option
+                                                                        *ngIf="form.controls.flusso.value == 'Interno'">
+                                                                        interno</option>
+                                                                    <option>generale</option>
+                                                                </optgroup>
+                                                                <optgroup label="Aziende/Enti">
+                                                                    <option>aziende/enti</option>
+                                                                    <option>strutture aziende/enti</option>
+                                                                    <option>dipendenti aziende/enti</option>
+                                                                </optgroup>
+                                                                <optgroup label="Altre Rubriche">
+                                                                    <option *ngFor="let vocetipo of protorubricatipo"
+                                                                        label="{{vocetipo.tipo}}">{{vocetipo.id}}
+                                                                    </option>
+                                                                </optgroup>
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <span *ngIf="labelricerca=='strutture'">
+                                                        <input type="text" name="cercaruber" #cercaruber
+                                                            placeholder="Cerca la struttura per nome azienda o descrizione struttura"
+                                                            [formControl]="control" [matAutocomplete]="auto"
+                                                            class="form-control" aria-readonly="true"
+                                                            (keypress)="SetControl(0)">
+                                                    </span>
+
+                                                    <span *ngIf="labelricerca!='strutture'">
+                                                        <input type="text" name="cercaruber" #cercaruber
+                                                            placeholder="Cerca il mittente per nome, cognome o ragione sociale"
+                                                            [formControl]="control" [matAutocomplete]="auto"
+                                                            class="form-control" aria-readonly="true"
+                                                            (keypress)="SetControl(0)">
+                                                    </span>
+                                                    <mat-autocomplete #auto="matAutocomplete">
+                                                        <mat-option *ngFor="let voce of filteredVoci | async"
+                                                            [value]="voce" (click)="SetControl(1)"
+                                                            (click)="Aggiungichip(voce)" (click)="control.setValue('')">
+                                                            {{voce}}
+                                                        </mat-option>
+                                                    </mat-autocomplete>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="aggiungirubrica=='si'">
+
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="nome">Nome*</label>
+                                                    <input type="text" formControlName="nomeinput" class="form-control"
+                                                        id="nomeinput" />
+                                                </div>
+
+                                                <div class="form-group col-md-6">
+                                                    <label for="cognome">Cognome*</label>
+                                                    <input type="text" formControlName="cognomeinput"
+                                                        class="form-control" id="cognomeinput" />
+
+                                                </div>
+
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="Indirizzo">Indirizzo*</label>
+                                                    <input type="text" class="form-control"
+                                                        formControlName="indirizzoinput" id="indirizzoinput" />
+
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="Comune">Comune*</label>
+                                                    <input type="text" class="form-control"
+                                                        formControlName="comuneinput" id="comuneinput" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="Provincia">Provincia*</label>
+                                                    <input type="text" class="form-control"
+                                                        formControlName="provinciainput" id="provinciainput" />
+
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="Stato">Stato*</label>
+                                                    <input type="text" class="form-control" formControlName="statoinput"
+                                                        id="statoinput" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="CAP">CAP*</label>
+                                                    <input type="text" class="form-control" formControlName="capinput"
+                                                        id="capinput" />
+
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="idAzienda">Azienda</label>
+                                                    <select id="aziendainput" class="form-control"
+                                                        formControlName="aziendainput">
+                                                        <option></option>
+                                                        <option *ngFor="let miazienda of mieaziende"
+                                                            label="{{miazienda.denominazione}}">{{miazienda.id}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <button type="button" class="btn btn-outline-primary"
+                                                    (click)="Aggiungivolante()">Aggiungi Voce <fa-icon
+                                                        [icon]="faAddressCard">
+                                                    </fa-icon> &nbsp;</button>&nbsp;&nbsp;
+
+                                                <button type="button" class="btn btn-outline-success"
+                                                    (click)="Salvavolante()">Aggiungi e Memorizza <fa-icon
+                                                        [icon]="faAddressBook"></fa-icon> &nbsp;</button>
+                                            </div>
+                                        </div>
+
+                                        <hr class="separatore" />
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <fa-icon [icon]="faUserTie"></fa-icon> &nbsp;<br />
+                                                <label for="destinatario">Destinatari*</label>&nbsp;&nbsp;
+                                                <mat-form-field class="mittenti-chip-list" appearance="legacy">
+                                                    <mat-chip-list #chipListdesti aria-label="Fruit selection">
+                                                        <mat-chip *ngFor="let addesti of destinatari"
+                                                            [selectable]="selectable" [removable]="removable"
+                                                            (removed)="removedesti(addesti)" [readonly]="readonly">
+                                                            {{addesti.name}}
+
+                                                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+
+                                                        </mat-chip>
+
+                                                        <input hidden [matChipInputFor]="chipListdesti"
+                                                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                                            readonly="readonly" [matChipInputAddOnBlur]="addOnBlur"
+                                                            (matChipInputTokenEnd)="addesti($event)"
+                                                            formControlName="destinatari">
+                                                    </mat-chip-list>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="form-group col-md-3">
+                                                <select id="serie" class="form-control" formControlName="destinatipo"
+                                                    (change)="PopolaDestinatari(false)">
+                                                    <option>strutture</option>
+                                                    <option>operatori</option>
+                                                    <option>simbolici</option>
+                                                </select>
+
+                                            </div>
+                                            <div class="form-group col-md-9">
+
+
+                                                <input type="text" name="cercadestina" #cercadestina
+                                                    placeholder="Cerca il destinatario per nome, cognome o struttura"
+                                                    [formControl]="controldesti" [matAutocomplete]="autodesti"
+                                                    class="form-control" aria-readonly="true"
+                                                    (keypress)="SetControldesti(0)">
+                                                <mat-autocomplete #autodesti="matAutocomplete">
+                                                    <mat-option *ngFor="let destinatario of filteredDestinatari | async"
+                                                        [value]="destinatario" (click)="SetControldesti(1)"
+                                                        (click)="Aggiungichipdesti(destinatario)"
+                                                        (click)="cercadestina.value=''"
+                                                        (click)="Aggiungichipassedesti(destinatario)">
+                                                        {{destinatario}}
+                                                    </mat-option>
+                                                </mat-autocomplete>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <!-- Uscita: 
+                                         Destinatari poi mittenti 
+                                    -->
+                                    <div *ngIf="tipointerface=='Uscita'">
+
+                                        <fa-icon [icon]="faAddressCard"></fa-icon> &nbsp;
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <label for="mittente">Destinatari*</label> &nbsp;&nbsp; <fa-icon
+                                                    [icon]="faPlusSquare" (click)="aggiungiVoce(); popolAziende()">
+                                                </fa-icon>
+                                                &nbsp;&nbsp; <fa-icon [icon]="faMinusSquare" (click)="togliVoce();">
+                                                </fa-icon>
+                                                &nbsp;&nbsp;
+
+
+                                                <mat-form-field class="mittenti-chip-list" appearance="legacy">
+                                                    <mat-chip-list #chipList>
+                                                        <mat-chip *ngFor="let addesti of destinatari"
+                                                            [selectable]="selectable" [removable]="removable"
+                                                            (removed)="removedesti(addesti)" [readonly]="readonly">
+                                                            {{addesti.name}}
+
+                                                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+
+                                                        </mat-chip>
+                                                        <input hidden [matChipInputFor]="chipList"
+                                                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                                            readonly="readonly" [matChipInputAddOnBlur]="addOnBlur"
+                                                            (matChipInputTokenEnd)="addesti($event)"
+                                                            formControlName="destinatari">
+                                                    </mat-chip-list>
+                                                </mat-form-field>
+
+                                                <div *ngIf="aggiungirubrica=='no'">
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-12">
+                                                            <select id="rubricatipo" class="form-control"
+                                                                formControlName="rubricatipo"
+                                                                (change)="PopolaVociRubrica()">
+                                                                <optgroup label="Rubrica Generale">
+                                                                    <!-- Voce INTERNO attiva solo per flussi Interni -->
+                                                                    <option
+                                                                        *ngIf="form.controls.flusso.value == 'Interno'">
+                                                                        interno</option>
+                                                                    <option>generale</option>
+                                                                </optgroup>
+                                                                <optgroup label="Aziende/Enti">
+                                                                    <option>aziende/enti</option>
+                                                                    <option>strutture aziende/enti</option>
+                                                                    <option>dipendenti aziende/enti</option>
+                                                                </optgroup>
+                                                                <optgroup label="Altre Rubriche">
+                                                                    <option *ngFor="let vocetipo of protorubricatipo"
+                                                                        label="{{vocetipo.tipo}}">{{vocetipo.id}}
+                                                                    </option>
+                                                                </optgroup>
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <span *ngIf="labelricerca=='strutture'">
+                                                        <input type="text" name="cercaruber" #cercaruber
+                                                            placeholder="Cerca la struttura per nome azienda o descrizione struttura"
+                                                            [formControl]="control" [matAutocomplete]="auto"
+                                                            class="form-control" aria-readonly="true"
+                                                            (keypress)="SetControl(0)">
+                                                    </span>
+
+                                                    <span *ngIf="labelricerca!='strutture'">
+                                                        <input type="text" name="cercaruber" #cercaruber
+                                                            placeholder="Cerca il destinatario per nome, cognome o ragione sociale"
+                                                            [formControl]="control" [matAutocomplete]="auto"
+                                                            class="form-control" aria-readonly="true"
+                                                            (keypress)="SetControl(0)">
+                                                    </span>
+                                                    <mat-autocomplete #auto="matAutocomplete">
+                                                        <mat-option *ngFor="let voce of filteredVoci | async"
+                                                            [value]="voce" (click)="SetControl(1)"
+                                                            (click)="Aggiungichipdesti(voce)"
+                                                            (click)="control.setValue('')">
+                                                            {{voce}}
+                                                        </mat-option>
+                                                    </mat-autocomplete>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div *ngIf="aggiungirubrica=='si'">
+
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="nome">Nome*</label>
+                                                    <input type="text" formControlName="nomeinput" class="form-control"
+                                                        id="nomeinput" />
+                                                </div>
+
+                                                <div class="form-group col-md-6">
+                                                    <label for="cognome">Cognome*</label>
+                                                    <input type="text" formControlName="cognomeinput"
+                                                        class="form-control" id="cognomeinput" />
+
+                                                </div>
+
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="Indirizzo">Indirizzo*</label>
+                                                    <input type="text" class="form-control"
+                                                        formControlName="indirizzoinput" id="indirizzoinput" />
+
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="Comune">Comune*</label>
+                                                    <input type="text" class="form-control"
+                                                        formControlName="comuneinput" id="comuneinput" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="Provincia">Provincia*</label>
+                                                    <input type="text" class="form-control"
+                                                        formControlName="provinciainput" id="provinciainput" />
+
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="Stato">Stato*</label>
+                                                    <input type="text" class="form-control" formControlName="statoinput"
+                                                        id="statoinput" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="CAP">CAP*</label>
+                                                    <input type="text" class="form-control" formControlName="capinput"
+                                                        id="capinput" />
+
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="idAzienda">Azienda</label>
+                                                    <select id="aziendainput" class="form-control"
+                                                        formControlName="aziendainput">
+                                                        <option></option>
+                                                        <option *ngFor="let miazienda of mieaziende"
+                                                            label="{{miazienda.denominazione}}">{{miazienda.id}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <button type="button" class="btn btn-outline-primary"
+                                                    (click)="Aggiungivolante()">Aggiungi Voce <fa-icon
+                                                        [icon]="faAddressCard">
+                                                    </fa-icon> &nbsp;</button>&nbsp;&nbsp;
+
+                                                <button type="button" class="btn btn-outline-success"
+                                                    (click)="Salvavolante()">Aggiungi e Memorizza <fa-icon
+                                                        [icon]="faAddressBook"></fa-icon> &nbsp;</button>
+                                            </div>
+                                        </div>
+
+                                        <hr class="separatore" />
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <fa-icon [icon]="faUserTie"></fa-icon> &nbsp;<br />
+                                                <label for="destinatario">Mittenti*</label>&nbsp;&nbsp;
+                                                <mat-form-field class="mittenti-chip-list" appearance="legacy">
+                                                    <mat-chip-list #chipList>
+                                                        <mat-chip *ngFor="let addmitt of mittenti"
+                                                            [selectable]="selectable" [removable]="removable"
+                                                            (removed)="remove(addmitt)" [readonly]="readonly">
+                                                            {{addmitt.name}}
+
+                                                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+
+                                                        </mat-chip>
+
+                                                        <input hidden [matChipInputFor]="chipList"
+                                                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                                            readonly="readonly" [matChipInputAddOnBlur]="addOnBlur"
+                                                            (matChipInputTokenEnd)="add($event)"
+                                                            formControlName="mittenti">
+                                                    </mat-chip-list>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="form-group col-md-3">
+                                                <select id="serie" class="form-control" formControlName="mittipo"
+                                                    (change)="PopolaMittenti(false)">
+                                                    <option>strutture</option>
+                                                    <option>operatori</option>
+                                                    <option>simbolici</option>
+                                                </select>
+
+                                            </div>
+                                            <div class="form-group col-md-9">
+
+
+                                                <input type="text" name="cercamitt" #cercamitt
+                                                    placeholder="Cerca il mittente per nome, cognome o struttura"
+                                                    [formControl]="controlmitt" [matAutocomplete]="automitt"
+                                                    class="form-control" aria-readonly="true"
+                                                    (keypress)="SetControlmitt(0)">
+                                                <mat-autocomplete #automitt="matAutocomplete">
+                                                    <mat-option *ngFor="let mittente of filteredMittenti | async"
+                                                        [value]="mittente" (click)="SetControlmitt(1)"
+                                                        (click)="Aggiungichipmitt(mittente)"
+                                                        (click)="cercamitt.value=''"
+                                                        (click)="Aggiungichipassemitt(mittente)">
+                                                        {{mittente}}
+                                                    </mat-option>
+                                                </mat-autocomplete>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <!-- Interno: 
+                                         Mittenti poi destinatari solo interni
+                                    -->
+                                    <div *ngIf="tipointerface=='Interno'">
+
+                                        <fa-icon [icon]="faAddressCard"></fa-icon> &nbsp;
+
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <fa-icon [icon]="faUserTie"></fa-icon> &nbsp;<br />
+                                                <label for="destinatario">Mittenti*</label>&nbsp;&nbsp;
+                                                <mat-form-field class="mittenti-chip-list" appearance="legacy">
+                                                    <mat-chip-list #chipList>
+                                                        <mat-chip *ngFor="let addmitt of mittenti"
+                                                            [selectable]="selectable" [removable]="removable"
+                                                            (removed)="remove(addmitt)" [readonly]="readonly">
+                                                            {{addmitt.name}}
+
+                                                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+
+                                                        </mat-chip>
+
+                                                        <input hidden [matChipInputFor]="chipList"
+                                                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                                            readonly="readonly" [matChipInputAddOnBlur]="addOnBlur"
+                                                            (matChipInputTokenEnd)="add($event)"
+                                                            formControlName="mittenti">
+                                                    </mat-chip-list>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="form-group col-md-3">
+                                                <select id="serie" class="form-control" formControlName="mittipo"
+                                                    (change)="PopolaMittenti(true)">
+                                                    <option>strutture</option>
+                                                    <option>operatori</option>
+                                                  
+                                                </select>
+
+                                            </div>
+                                            <div class="form-group col-md-9">
+
+
+                                                <input type="text" name="cercamitt" #cercamitt
+                                                    placeholder="Cerca il mittente per nome, cognome o struttura"
+                                                    [formControl]="controlmitt" [matAutocomplete]="automitt"
+                                                    class="form-control" aria-readonly="true"
+                                                    (keypress)="SetControlmitt(0)">
+                                                <mat-autocomplete #automitt="matAutocomplete">
+                                                    <mat-option *ngFor="let mittente of filteredMittenti | async"
+                                                        [value]="mittente" (click)="SetControlmitt(1)"
+                                                        (click)="Aggiungichipmitt(mittente)"
+                                                        (click)="cercamitt.value=''"
+                                                        >
+                                                        {{mittente}}
+                                                    </mat-option>
+                                                </mat-autocomplete>
+
+                                            </div>
+
+                                        </div>
+                                     
+
+
+                                        <hr class="separatore" />
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <fa-icon [icon]="faUserTie"></fa-icon> &nbsp;<br />
+                                                <label for="destinatario">Destinatari*</label>&nbsp;&nbsp;
+                                                <mat-form-field class="mittenti-chip-list" appearance="legacy">
+                                                    <mat-chip-list #chipListdesti aria-label="Fruit selection">
+                                                        <mat-chip *ngFor="let addesti of destinatari"
+                                                            [selectable]="selectable" [removable]="removable"
+                                                            (removed)="removedesti(addesti)" [readonly]="readonly">
+                                                            {{addesti.name}}
+
+                                                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+
+                                                        </mat-chip>
+
+                                                        <input hidden [matChipInputFor]="chipListdesti"
+                                                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                                            readonly="readonly" [matChipInputAddOnBlur]="addOnBlur"
+                                                            (matChipInputTokenEnd)="addesti($event)"
+                                                            formControlName="destinatari">
+                                                    </mat-chip-list>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="form-group col-md-3">
+                                                <select id="serie" class="form-control" formControlName="destinatipo"
+                                                    (change)="PopolaDestinatari(true)">
+                                                    <option>strutture</option>
+                                                    <option>operatori</option>
+                            
+                                                </select>
+
+                                            </div>
+                                            <div class="form-group col-md-9">
+
+
+                                                <input type="text" name="cercadestina" #cercadestina
+                                                    placeholder="Cerca il destinatario per nome, cognome o struttura"
+                                                    [formControl]="controldesti" [matAutocomplete]="autodesti"
+                                                    class="form-control" aria-readonly="true"
+                                                    (keypress)="SetControldesti(0)">
+                                                <mat-autocomplete #autodesti="matAutocomplete">
+                                                    <mat-option *ngFor="let destinatario of filteredDestinatari | async"
+                                                        [value]="destinatario" (click)="SetControldesti(1)"
+                                                        (click)="Aggiungichipdesti(destinatario)"
+                                                        (click)="cercadestina.value=''"
+                                                        (click)="Aggiungichipassedesti(destinatario)">
+                                                        {{destinatario}}
+                                                    </mat-option>
+                                                </mat-autocomplete>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <hr class="separatore" />
+                                    <fa-icon [icon]="faBook"></fa-icon> &nbsp; &nbsp;
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="Oggetto">Oggetto*</label>
+                                            <input type="text" class="form-control" id="oggetto"
+                                                formControlName="oggetto" required />
+                                            <div *ngIf="form.controls['oggetto'].invalid && (form.controls['oggetto'].dirty || form.controls['oggetto'].touched)"
+                                                class="alert alert-danger">
+                                                L'oggetto è obbligatorio
+                                                <div *ngIf="form.controls['oggetto'].errors.required">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label *ngIf="tipointerface=='Ingresso'" for="data_arrivo">Data
+                                                arrivo*</label>
+                                            <label *ngIf="tipointerface=='Uscita' || tipointerface=='Interno'"
+                                                for="data_arrivo">Data</label>
+                                            <input type="date" class="form-control" id="data_arrivo"
+                                                formControlName="data_arrivo" required />
+                                            <div *ngIf="form.controls['data_arrivo'].invalid && (form.controls['data_arrivo'].dirty || form.controls['data_arrivo'].touched)"
+                                                class="alert alert-danger">
+                                                La data arrivo è obbligatoria
+                                                <div *ngIf="form.controls['data_arrivo'].errors.required">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            <label *ngIf="tipointerface=='Ingresso'" for="orario">Ora arrivo*</label>
+                                            <label *ngIf="tipointerface=='Uscita' || tipointerface == 'Interno'"
+                                                for="orario">Ora* </label>
+                                            <input type="time" class="form-control" id="orario" formControlName="orario"
+                                                required />
+                                            <div *ngIf="form.controls['orario'].invalid && (form.controls['orario'].dirty || form.controls['orario'].touched)"
+                                                class="alert alert-danger">
+                                                L'ora è obbligatoria
+                                                <div *ngIf="form.controls['orario'].errors.required">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label for="Descrizione">Descrizione*</label>
+                                            <input type="text" class="form-control" id="descrizione"
+                                                formControlName="descrizione" />
+
+
+                                        </div>
+                                    </div>
+                                    <!-- 
+                                        N. prot e Data prot:
+                                        - mittente se il protocollo è in ingresso
+                                        - destinatario se il protocollo è in uscita
+                                     -->
+                                    <div class="form-row" *ngIf="tipointerface=='Ingresso' || tipointerface =='Interno'">
+                                        <div class="form-group col-md-6">
+                                            <label for="protomittente">N. prot. Mittente</label>
+                                            <input type="text" class="form-control" id="protomittente"
+                                                formControlName="protomittente" />
+                                        </div>
+
+                                        <div class="form-group col-md-6">
+                                            <label for="dataprotomittente">Data prot. Mittente</label>
+                                            <input type="date" class="form-control" id="dataprotomittente"
+                                                formControlName="dataprotomittente" />
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-9">
+                                            <label for="Note">Note</label>
+                                            <input type="text" class="form-control" id="note" formControlName="note" />
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="n_allegati">Numero Allegati*</label>
+                                            <input type="number" min="0" class="form-control" id="n_allegati"
+                                                formControlName="n_allegati" (change)="descriviallegati()" />
+                                            <div *ngIf="form.controls['n_allegati'].invalid && (form.controls['n_allegati'].dirty || form.controls['n_allegati'].touched)"
+                                                class="alert alert-danger">
+                                                Il n. di allegati è un dato obbligatorio
+                                                <div *ngIf="form.controls['n_allegati'].errors.required">
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+
+                                        <div *ngIf="appendiallegati=='si'" class="form-group col-md-12">
+                                            <span *ngFor="let number_allegato of numbers_allegati">
+                                                <label for="desc_allegati">Descrizione allegato
+                                                    {{number_allegato+1}}*</label>
+                                                <input type="text" class="form-control"
+                                                    name="descall{{number_allegato+1}}"
+                                                    id="descall{{number_allegato+1}}" />
+                                            </span>
+                                            <br />
+                                            <!-- pulsante salva disattivato, funzione spostata su protocolla
+                                            <button type="button" class="btn btn-outline-success"
+                                                (click)="Salvaallegati()">Salva gli allegati <fa-icon
+                                                    [icon]="faBookReader">
+                                                </fa-icon> &nbsp;</button>
+                                                -->
+                                        </div>
+                                    </div>
+                                    <hr class="separatore" />
+                                    <fa-icon [icon]="faShieldAlt"></fa-icon><br />
+                                    Riservatezza*:
+                                    <span *ngIf="riservatezza=='normale'">
+                                        <fa-icon [icon]="faEye"></fa-icon>
+                                    </span> <span *ngIf="riservatezza!='normale'">
+                                        <fa-icon [icon]="faEye" style="color: grey"
+                                            (click)="cambiariservatezza('normale');"></fa-icon>
+                                    </span> &nbsp; <span *ngIf="riservatezza=='riservato'">
+                                        <fa-icon [icon]="faEyeSlash"></fa-icon>
+                                    </span> <span *ngIf="riservatezza!='riservato'">
+                                        <fa-icon [icon]="faEyeSlash" style="color: grey"
+                                            (click)="cambiariservatezza('riservato');"></fa-icon>
+                                    </span> &nbsp; <span *ngIf="riservatezza=='ristretto'">
+                                        <fa-icon [icon]="faLowVision"></fa-icon>
+                                    </span> <span *ngIf="riservatezza!='ristretto'">
+                                        <fa-icon [icon]="faLowVision" style="color: grey"
+                                            (click)="cambiariservatezza('ristretto');"></fa-icon>
+                                    </span> &nbsp;<br />
+
+                                    <div *ngIf="riservatezza=='riservato'">
+                                        <select id="riservatipo" name="riservatipo" class="form-control"
+                                            formControlName="riservatipo">
+                                            <option selected="selected"></option>
+                                            <option *ngFor="let riservatotipo of protoriservatotipo"
+                                                [value]="riservatotipo.id">
+                                                {{riservatotipo.motivazione}}</option>
+                                        </select>
+                                    </div>
+                                    <div *ngIf="riservatezza=='ristretto'">
+                                        <select id="ristrettotipo" name="ristrettotipo" class="form-control"
+                                            formControlName="ristrettotipo">
+                                            <option selected="selected"></option>
+                                            <option *ngFor="let ristrettotipo of protoristrettotipo"
+                                                [value]="ristrettotipo.id">
+                                                {{ristrettotipo.motivazione}}</option>
+                                        </select>
+                                    </div>
+
+
+                                    <hr class="separatore" />
+                                    <fa-icon [icon]="faBookmark"></fa-icon> &nbsp;<br />
+                                    <label for="titolario">Archivio*</label>
+                                    <input type="text" name="titolario" #titolario
+                                        placeholder="Cerca nel titolario aziendale" [formControl]="controltito"
+                                        [matAutocomplete]="autotito" class="form-control" aria-readonly="true"
+                                        (keypress)="SetControltito(0)" formControlName="archivio" required>
+                                    <mat-autocomplete #autotito="matAutocomplete">
+                                        <mat-option *ngFor="let tito of filteredVocitito | async" [value]="tito"
+                                            (click)="SetControltito(1)">
+                                            {{tito}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+
+
+
+
+                                    <hr class="separatore" />
+                                    <!-- Se il flusso è in ingresso gli assegnatari sono popolati di default con i destinatari -->
+                                    <div *ngIf="tipointerface=='Ingresso' || tipointerface== 'Interno'">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <fa-icon [icon]="faUserTag"></fa-icon> &nbsp;<br />
+                                                <label for="assegnatario">Assegnatari*</label> &nbsp;&nbsp;
+                                                <mat-form-field class="mittenti-chip-list" appearance="legacy">
+                                                    <mat-chip-list #chipListasse aria-label="Fruit selection">
+                                                        <mat-chip *ngFor="let addass of assegnatari"
+                                                            [selectable]="selectable" [removable]="removable"
+                                                            (removed)="removeasse(addass)" [readonly]="readonly">
+                                                            {{addass.name}}
+
+                                                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+
+                                                        </mat-chip>
+
+                                                        <input hidden [matChipInputFor]="chipListasse"
+                                                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                                            readonly="readonly" [matChipInputAddOnBlur]="addOnBlur"
+                                                            (matChipInputTokenEnd)="addasse($event)"
+                                                            formControlName="assegnatari">
+                                                    </mat-chip-list>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="form-group col-md-3">
+                                                <select id="serie" class="form-control" formControlName="assegnatipo"
+                                                    (change)="PopolaAssegnatari()">
+                                                    <option>strutture</option>
+                                                    <option>operatori</option>
+                                                </select>
+
+                                            </div>
+                                            <div class="form-group col-md-9">
+
+
+                                                <input type="text" name="cercassegna" #cercassegna
+                                                    placeholder="Cerca l'assegnatario per nome, cognome o struttura"
+                                                    [formControl]="controllasse" [matAutocomplete]="autoasse"
+                                                    class="form-control" aria-readonly="true"
+                                                    (keypress)="SetControlasse(0)">
+                                                <mat-autocomplete #autoasse="matAutocomplete">
+                                                    <mat-option *ngFor="let assegnatario of filteredAssegnatari | async"
+                                                        [value]="assegnatario" (click)="SetControlasse(1)"
+                                                        (click)="Aggiungichipasse(assegnatario)"
+                                                        (click)="cercassegna.value=''">
+                                                        {{assegnatario}}
+                                                    </mat-option>
+                                                </mat-autocomplete>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!-- Se il flusso è in uscita gli assegnatari sono popolati con i mittenti -->
+                                    <div *ngIf="tipointerface=='Uscita'">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-12">
+                                                <fa-icon [icon]="faUserTag"></fa-icon> &nbsp;<br />
+                                                <label for="assegnatario">Assegnatari</label> &nbsp;&nbsp;
+                                                <mat-form-field class="mittenti-chip-list" appearance="legacy">
+                                                    <mat-chip-list #chipListasse aria-label="Fruit selection">
+                                                        <mat-chip *ngFor="let addass of assegnatari"
+                                                            [selectable]="selectable" [removable]="removable"
+                                                            (removed)="removeasse(addass)" [readonly]="readonly">
+                                                            {{addass.name}}
+
+                                                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+
+                                                        </mat-chip>
+
+                                                        <input hidden [matChipInputFor]="chipListasse"
+                                                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                                            readonly="readonly" [matChipInputAddOnBlur]="addOnBlur"
+                                                            (matChipInputTokenEnd)="addasse($event)"
+                                                            formControlName="assegnatari">
+                                                    </mat-chip-list>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="form-group col-md-3">
+                                                <select id="serie" class="form-control" formControlName="assegnatipo"
+                                                    (change)="PopolaAssegnatari()">
+                                                    <option>strutture</option>
+                                                    <option>operatori</option>
+                                                </select>
+
+                                            </div>
+                                            <div class="form-group col-md-9">
+
+
+                                                <input type="text" name="cercassegna" #cercassegna
+                                                    placeholder="Cerca l'assegnatario per nome, cognome o struttura"
+                                                    [formControl]="controllasse" [matAutocomplete]="autoasse"
+                                                    class="form-control" aria-readonly="true"
+                                                    (keypress)="SetControlasse(0)">
+                                                <mat-autocomplete #autoasse="matAutocomplete">
+                                                    <mat-option *ngFor="let assegnatario of filteredAssegnatari | async"
+                                                        [value]="assegnatario" (click)="SetControlasse(1)"
+                                                        (click)="Aggiungichipasse(assegnatario)"
+                                                        (click)="cercassegna.value=''">
+                                                        {{assegnatario}}
+                                                    </mat-option>
+                                                </mat-autocomplete>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <hr class="separatore" />
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <fa-icon [icon]="faGlasses"></fa-icon> <br />
+                                            Cc
+                                            <mat-form-field class="mittenti-chip-list" appearance="legacy">
+                                                <mat-chip-list #chipListcopie aria-label="Fruit selection">
+                                                    <mat-chip *ngFor="let addcopia of copiaconoscenza"
+                                                        [selectable]="selectable" [removable]="removable"
+                                                        (removed)="removecopia(addcopia)" [readonly]="readonly">
+                                                        {{addcopia.name}}
+
+                                                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+
+                                                    </mat-chip>
+
+                                                    <input hidden [matChipInputFor]="chipListcopie"
+                                                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                                        readonly="readonly" [matChipInputAddOnBlur]="addOnBlur"
+                                                        (matChipInputTokenEnd)="addcopie($event)"
+                                                        formControlName="copiaconoscenza">
+                                                </mat-chip-list>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            <select id="serie" class="form-control" formControlName="copiatipo"
+                                                (change)="PopolaCopie()">
+                                                <option>strutture</option>
+                                                <option>operatori</option>
+                                            </select>
+
+                                        </div>
+                                        <div class="form-group col-md-9">
+
+
+                                            <input type="text" name="cercacopie" #cercacopie
+                                                placeholder="Cerca i Cc per nome, cognome o struttura"
+                                                [formControl]="controlcopia" [matAutocomplete]="autocopie"
+                                                class="form-control" aria-readonly="true"
+                                                (keypress)="SetControlcopia(0)">
+                                            <mat-autocomplete #autocopie="matAutocomplete">
+                                                <mat-option *ngFor="let copiaconoscenza of filteredCopie | async"
+                                                    [value]="copiaconoscenza" (click)="SetControlcopia(1)"
+                                                    (click)="Aggiungichipcopia(copiaconoscenza)"
+                                                    (click)="cercacopie.value=''">
+                                                    {{copiaconoscenza}}
+                                                </mat-option>
+                                            </mat-autocomplete>
+
+                                        </div>
+
+                                    </div>
+
+                                    <hr class="separatore" />
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <fa-icon [icon]="faAsterisk"></fa-icon>
+                                            Protocollo di riferimento
+                                            <mat-form-field class="mittenti-chip-list" appearance="legacy">
+                                                <mat-chip-list #chipListprotoref aria-label="Protocollo di riferimento">
+                                                    <mat-chip *ngFor="let p of protoref" [selectable]="selectable"
+                                                        [removable]="removable" (removed)="removeprotoref(p)"
+                                                        [readonly]="readonly">
+                                                        {{p.name}}
+
+                                                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+
+                                                    </mat-chip>
+
+                                                    <input hidden [matChipInputFor]="chipListprotoref"
+                                                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                                        readonly="readonly" [matChipInputAddOnBlur]="addOnBlur"
+                                                        (matChipInputTokenEnd)="addprotoref($event)"
+                                                        formControlName="protoref">
+                                                </mat-chip-list>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <select id="protoreftipo" class="form-control"
+                                                formControlName="protoreftipo" (change)="PopolaProtoref()">
+                                                <option>Ingresso</option>
+                                                <option>Uscita</option>
+                                                <option>Interno</option>
+                                            </select>
+
+                                        </div>
+                                        <div class="form-group col-md-9">
+
+
+                                            <input type="text" name="cercaprotoref" #cercaprotoref
+                                                placeholder="Cerca i protocolli per codice o descrizione"
+                                                [formControl]="controlprotoref" [matAutocomplete]="autoprotoref"
+                                                class="form-control" aria-readonly="true"
+                                                (keypress)="SetControlprotoref(0)">
+                                            <mat-autocomplete #autoprotoref="matAutocomplete">
+                                                <mat-option *ngFor="let protocolloref of filteredProtoref | async"
+                                                    [value]="protocolloref" (click)="SetControlprotoref(1)"
+                                                    (click)="Aggiungichipprotoref(protocolloref)"
+                                                    (click)="cercaprotoref.value=''">
+                                                    {{protocolloref}}
+                                                </mat-option>
+                                            </mat-autocomplete>
+
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <button type="Submit" class="btn btn-success" (click)="Protocolla();"
+                                        #pulsanteprotocolla>
+                                        <fa-icon [icon]="faFingerprint"></fa-icon> Protocolla
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,86 @@
+.example-ripple-container {
+    cursor: pointer;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+    width: 70%;
+    height: auto;
+    background-color:cornflowerblue;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .example-ripple-container:nth-child(even) {
+    background-color:cornflowerblue;
+  }
+
+ 
+  /** Styles to make the demo look better. */
+  .example-ripple-checkbox {
+    margin: 6px 12px 6px 0;
+    font-size: small;
+    padding-top: 20px;
+  }
+
+  .example-ripple-select {
+    cursor: pointer;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+    width: 70%;
+    height: auto;
+    background-color:rgb(52, 138, 75);
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;  }
+ 
+  .mandatoryIcon{
+    color:#dc3545;
+  }
+
+  .milestoneIcon{
+    color:blue;
+  }
+
+  .center {
+    position: absolute;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+  .accordion {
+    background-color: rgb(235, 235, 134);
+      }
+
+  .done {
+     color:rgb(124, 122, 122);
+      }
+
+
+      .MobileContent {
+
+        display:block;
+        text-align: "center";
+   
+    }
+   
+   @media screen and (max-width: 768px) {
+   
+    .MobileContent {
+    
+        display: none;
+        text-align:center;
+    }
+   
+   }
+
+   .dynamicForm{
+    color:orange;
+}

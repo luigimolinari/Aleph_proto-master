@@ -1,0 +1,338 @@
+<div class="centralemail">
+    <br />
+    <!--div *ngIf="isDataLoaded" class="container"-->
+    <div [hidden]="!isDataLoaded" class="container">
+  
+      <div class="formboxpanel">
+        <div class="sender_btn">
+          <button class="btn btn-info btn-sender" (click)="write_pec()">
+            Scrivi
+          </button>&nbsp;
+          <button [disabled]="pec_list.length==0" class="btn btn-success btn-sender" (click)="prendi_in_carico()">
+            Prendi in carico
+          </button>&nbsp;
+          <button class="btn btn-warning btn-sender" [matMenuTriggerFor]="menu">Rilascia</button>&nbsp;
+          <mat-menu #menu="matMenu">
+            <button [disabled]="pec_list.length==0" mat-menu-item (click)="rilascia_carico_single()">Rilascia
+              selezionate</button>
+            <button mat-menu-item (click)="rilascia_carico_all()">Rilascia tutto</button>
+            <button mat-menu-item (click)="reset_carico()">Reset presa in carico</button>
+          </mat-menu>
+          <button [disabled]="pec_list.length!=1 || !enable_associa" class="btn btn-turquoise btn-sender"
+            (click)="associa_request()">
+            Associa
+          </button>&nbsp;
+  
+        </div>
+        <div class="col-md-12 right">
+          <span class="material-icons refresh_icon" (click)="refresh()">
+            refresh
+          </span>
+        </div>
+        <br>
+       
+        <div class="mat-elevation-z8 mailContainer">
+          <br>
+  
+          <div class="filterContainer">
+            <mat-form-field>
+              <mat-label>Filter</mat-label>
+              <input matInput (keyup)="applyFilter($event)" #input>
+            </mat-form-field>
+          </div>
+  
+          <br><br>
+          <div class="tableContainer">
+            <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort (matSortChange)="sortTable($event)">
+  
+              <ng-container matColumnDef="azione_seleziona">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Seleziona</th>
+                <td mat-cell *matCellDef="let element">
+                  <!-- <mat-checkbox *ngIf="!element.in_carico" (change)="checkbox_selection_event(element,$event.checked)"> -->
+                  <mat-checkbox (click)="expand(element)" (change)="checkbox_selection_event(element,$event.checked)">
+                  </mat-checkbox>
+                  <!-- [disabled]="pec_selected != 0 && element.message_id != id_selected" -->
+                </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="data">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Data </th>
+                <td mat-cell *matCellDef="let element" (click)="expand(element)"> {{element.data | date:'dd/MM/yyyy
+                  H:mm'}} </td>
+              </ng-container>
+  
+  
+              <ng-container matColumnDef="sender">
+                <th mat-header-cell *matHeaderCellDef> Mittente </th>
+                <td mat-cell *matCellDef="let element" (click)="expand(element)"> {{element.realmittente}} </td>
+              </ng-container>
+  
+  
+              <ng-container matColumnDef="oggetto">
+                <th mat-header-cell *matHeaderCellDef> Oggetto </th>
+                <td mat-cell *matCellDef="let element" (click)="expand(element)"> {{element.oggetto}} <span
+                    *ngIf="element.allegati != null && element.allegati.length!=0"
+                    class="material-icons material-icons-att attachment">attachment</span>
+                </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="azione_protocollo">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Protocolla</th>
+                <td mat-cell *matCellDef="let element" (click)="expand(element)">
+                  <mat-checkbox *ngIf="element.en_check && element.in_carico"
+                    (change)="checkbox_event(element,$event.checked)"></mat-checkbox>
+                </td>
+              </ng-container>
+  
+              <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+              <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+                  <div class="example-element-detail"
+                    [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+  
+                    <div class="example-element-description">
+                      <br><br>
+                      <div>
+                        <b>Subject:</b> {{element.subject}} <span class="material-icons" role="button"
+                          (click)="showInfoControl()">expand_more</span>
+                      </div>
+                      <div *ngIf="showInfo" class="mexInfo">
+                        <br>
+                        <div class="col-md-12"><b>Da:</b> {{element.senderaddress}} </div>
+                        <div class="col-md-12"><b>A:</b> {{element.toaddress}}</div>
+                        <div class="col-md-12"><b>Data:</b> {{element.data | date:'dd/MM/yyyy H:mm'}}</div>
+                        <div class="col-md-12"><b>Oggetto:</b> {{element.oggetto}}</div>
+                      </div>
+                      <br>
+  
+                      <div [innerHTML]="element.testo"> </div>
+  
+                      <div class="attachDivider">_____________________________________</div>
+                      <div class="attachTitle">Allegati</div>
+                      <br>
+                      <div class="row">
+                        <div class="attachDiv col-md-2" *ngFor="let allegato of element.allegati, let i = index">
+                          <img class="attachIcon" [src]="allegato.pathIcon" role="button"
+                            (click)="downloadFile(allegato.path)">
+                          <div class="attachName">{{allegato.nome}}</div>
+                        </div>
+                      </div>
+                      <br>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+  
+              <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+              <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
+                [class.example-expanded-row]="expandedElement === element">
+              </tr>
+              <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+            </table>
+          </div>
+  
+          <mat-paginator [pageSizeOptions]="[5,10,20,30,50]" showFirstLastButtons>
+          </mat-paginator>
+  
+        </div>
+  
+  
+  
+  
+        <div *ngIf="pec_selected!=0" class="col-md-12">
+          <form [formGroup]="myProtocolloForm">
+  
+            <hr class="my-4" />
+  
+            <label for="Inbox">
+              Inbox</label>
+            <select id="inbox" class="form-control" formControlName="inbox">
+              <option></option>
+              <option *ngFor="let inboxproto of inboxprotoall" label="{{inboxproto.descrizione}}">{{inboxproto.id}}
+              </option>
+            </select>
+            <br>
+            <fa-icon [icon]="faBookmark"></fa-icon> &nbsp;
+            <label for="titolario">Archivio</label>
+            <input type="text" name="titolario" #cercaruber placeholder="Cerca nel titolario aziendale"
+              [formControl]="controltito" [matAutocomplete]="autotito" class="form-control" aria-readonly="true"
+              >
+            <mat-autocomplete #autotito="matAutocomplete">
+              <mat-option *ngFor="let tito of filteredVocitito | async" [value]="tito">
+                {{tito}}
+              </mat-option>
+            </mat-autocomplete>
+            <br><br>
+  
+  
+            <fa-icon [icon]="faShieldAlt"></fa-icon><br />
+            Riservatezza
+            <span *ngIf="riservatezza=='normale'">
+              <fa-icon [icon]="faEye"></fa-icon>
+            </span> <span *ngIf="riservatezza!='normale'">
+              <fa-icon [icon]="faEye" style="color: grey" (click)="cambiariservatezza('normale');"></fa-icon>
+            </span> &nbsp; <span *ngIf="riservatezza=='riservato'">
+              <fa-icon [icon]="faEyeSlash"></fa-icon>
+            </span> <span *ngIf="riservatezza!='riservato'">
+              <fa-icon [icon]="faEyeSlash" style="color: grey" (click)="cambiariservatezza('riservato');"></fa-icon>
+            </span> &nbsp; <span *ngIf="riservatezza=='ristretto'">
+              <fa-icon [icon]="faLowVision"></fa-icon>
+            </span> <span *ngIf="riservatezza!='ristretto'">
+              <fa-icon [icon]="faLowVision" style="color: grey" (click)="cambiariservatezza('ristretto');"></fa-icon>
+            </span> &nbsp;<br />
+            <div *ngIf="riservatezza=='riservato'">
+              <select id="riservatipo" name="riservatipo" class="form-control" formControlName="riservatipo">
+                <option selected="selected"></option>
+                <option *ngFor="let riservatotipo of protoriservatotipo" [value]="riservatotipo.id">
+                  {{riservatotipo.motivazione}}</option>
+              </select>
+            </div>
+            <div *ngIf="riservatezza=='ristretto'">
+              <select id="ristrettotipo" name="ristrettotipo" class="form-control" formControlName="ristrettotipo">
+                <option selected="selected"></option>
+                <option *ngFor="let ristrettotipo of protoristrettotipo" [value]="ristrettotipo.id">
+                  {{ristrettotipo.motivazione}}</option>
+              </select>
+            </div>
+            <br><br>
+  
+            <div *ngIf="pec_selected==1" class="form-row">
+              <div class="col-md-12">
+                <label for="mittente">Mittenti</label> &nbsp;&nbsp;
+              </div>
+              <mat-form-field class="mittenti-chip-list" appearance="legacy">
+                <mat-chip-list #chipList>
+                  <mat-chip *ngFor="let addmitt of mittenti; let i_chip = index" [selectable]="selectable"
+                    [removable]="removable && i_chip!=0" (removed)="remove_chip(addmitt,mittenti)" [readonly]="readonly">
+                    {{addmitt.name}}
+  
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+  
+                  </mat-chip>
+                  <input class="white_input" [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add_chip($event.value,mittenti,myProtocolloForm.controls.mittenti)" formControlName="mittenti">
+                </mat-chip-list>
+              </mat-form-field>
+            </div>
+  
+            <div *ngIf="pec_selected==1" class="form-row">
+              <div class="col-md-12">
+                <label for="oggetto">Oggetto</label> &nbsp;&nbsp;
+              </div>
+              <mat-form-field appearance="legacy">
+                <input matInput class="white_input" formControlName="oggetto" type="text">
+              </mat-form-field>
+            </div>
+  
+            <br>
+  
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <fa-icon [icon]="faUserTag"></fa-icon> &nbsp;
+                <label for="assegnatario">Assegnatari</label>
+  
+  
+                <mat-form-field class="mittenti-chip-list" appearance="legacy">
+                  <mat-chip-list #chipListasse aria-label="Fruit selection">
+                    <mat-chip *ngFor="let addass of assegnatari" [selectable]="selectable" [removable]="removable"
+                      (removed)="remove_chip(addass, assegnatari)" [readonly]="readonly">
+                      {{addass.name}}
+  
+                      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+  
+                    </mat-chip>
+  
+                    <input hidden [matChipInputFor]="chipListasse" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                      readonly="readonly" [matChipInputAddOnBlur]="addOnBlur">
+                  </mat-chip-list>
+                </mat-form-field>
+              </div>
+  
+              <div class="form-group col-md-3">
+                <select id="serie" class="form-control" [(ngModel)]="assegnatipo" formControlName="assegnatipo"
+                  (change)="PopolaAssegnatari()">
+                  <option>strutture</option>
+                  <option>operatori</option>
+                </select>
+  
+              </div>
+              <div class="form-group col-md-9">
+  
+                <input type="text" name="cercassegna" #cercassegna
+                  placeholder="Cerca l'assegnatario per nome, cognome o struttura" [formControl]="controllasse"
+                  [matAutocomplete]="autoasse" class="form-control" aria-readonly="true">
+                <mat-autocomplete #autoasse="matAutocomplete">
+                  <mat-option *ngFor="let assegnatario of filteredAssegnatari | async" [value]="assegnatario"
+                    (click)="add_chip(assegnatario, assegnatari,controllasse)">
+                    {{assegnatario}}
+                  </mat-option>
+                </mat-autocomplete>
+  
+              </div>
+  
+            </div>
+  
+  
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <fa-icon [icon]="faGlasses"></fa-icon> <br />
+                Cc
+                <mat-form-field class="mittenti-chip-list" appearance="legacy">
+                  <mat-chip-list #chipListcopie>
+                    <mat-chip *ngFor="let addcopia of copiaconoscenza" [selectable]="selectable" [removable]="removable"
+                      (removed)="remove_chip(addcopia,copiaconoscenza)" [readonly]="readonly">
+                      {{addcopia.name}}
+  
+                      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+  
+                    </mat-chip>
+  
+                    <input hidden [matChipInputFor]="chipListcopie" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                      readonly="readonly" [matChipInputAddOnBlur]="addOnBlur">
+                  </mat-chip-list>
+                </mat-form-field>
+  
+              </div>
+  
+              <div class="form-group col-md-3">
+                <select id="serie" class="form-control" [(ngModel)]="copiatipo" formControlName="copiatipo"
+                  (change)="PopolaCopie()">
+                  <option>strutture</option>
+                  <option>operatori</option>
+                </select>
+  
+              </div>
+              <div class="form-group col-md-9">
+  
+  
+                <input type="text" name="cercacopie" #cercacopie placeholder="Cerca i Cc per nome, cognome o struttura"
+                  [formControl]="controlcopia" [matAutocomplete]="autocopie" class="form-control" aria-readonly="true"
+                  >
+                <mat-autocomplete #autocopie="matAutocomplete">
+                  <mat-option *ngFor="let cc of filteredCopie | async" [value]="cc"
+                    (click)="add_chip(cc, copiaconoscenza, controlcopia)"
+                    (click)="cercacopie.value=''">
+                    {{cc}}
+                  </mat-option>
+                </mat-autocomplete>
+  
+              </div>
+  
+            </div>
+          </form>
+        </div> <!-- pec -->
+        <br><br>
+        <div class="center"><button *ngIf="to_protocollo.length!=0" class="btn btn-primary btn-sender"
+            (click)="protocolla()">Protocolla</button></div>
+  
+      </div>
+    </div>
+    <div class="footer_pages">
+      <img src='assets/img/logo_aleph_medium.png'>
+    </div>
+  </div>
+  
+  <div *ngIf="loading" class="loadingspinner_container">
+    <img class="loadingspinner" src="../assets/img/loadingspinner.gif">
+  </div>

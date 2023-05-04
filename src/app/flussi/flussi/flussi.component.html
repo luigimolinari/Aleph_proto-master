@@ -1,0 +1,97 @@
+
+    <link rel="stylesheet" href="./flussi.component.css">
+    <div class="footer_splash"></div>
+    <video autoplay muted loop id="myVideo" style="width:100%">
+        <source src="assets/video/video_flussi.mp4" type="video/mp4">
+        </video>
+
+            
+<div class="container bootstrap snippets bootdey" style="z-index:-1;">
+    <div class="row justify-content-center" style="  
+    margin-top:-50%;
+    bottom: 0;
+    left:0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    width: 100%;
+    padding: 40px;
+    overflow: auto;">
+
+		<div *ngIf="diagnosticState=='disabled'" class="col-md-12 col-sm-12 col-xs-12 text-center" >								
+			<div class="panel panel-colorful warningMex">
+				<i class="fa fa-comment fa-2x"><fa-icon [icon]="faExclamationTriangle"></fa-icon></i>
+			Attenzione: per aggiungere un nuovo workflow è necessario che siano stati definiti almeno una tipologia di documentale e almeno un flusso - 
+			<small><button type="button" class="btn btn-diagnostic" [routerLink]="['/diagnosticFlussi']">Clicca qui</button></small>		
+		</div>
+	</div>
+
+		<div *ngIf = "tipo_op != 'rup'" class="panelContainer col-md-2 col-sm-6 col-xs-12">
+            <div class="panel panel-dark panel-colorful">
+                <div class="panel-body text-center">
+                	<p class="text-uppercase mar-btm text-sm">Gestione Flussi</p>
+                	<i class="fa fa-users fa-5x"><fa-icon [icon]="faNetworkWired"></fa-icon></i>
+                	<hr>
+                	<p class="h2 text-thin"></p>
+                	<small><button type="button" class="btn btn-outline-secondary" [routerLink]="['/flussiview']" >Accedi</button></small>
+                </div>
+            </div>
+        </div>
+        <div class="panelContainer col-md-2 col-sm-6 col-xs-12">
+        	<div class="panel panel-danger panel-colorful">
+        		<div class="panel-body text-center">
+                    <p class="text-uppercase mar-btm text-sm">Gestione Documenti</p>
+                   
+        			<i class="fa fa-comment fa-5x"><fa-icon [icon]="faFileContract"></fa-icon></i>
+        			<hr>
+        			<p class="h2 text-thin"></p>
+        			<small><button type="button" class="btn btn-danger" [routerLink]="['/documenti']">Accedi</button></small>
+        		</div>
+        	</div>
+        </div>
+		<div class="panelContainer col-md-2 col-sm-6 col-xs-12">
+        	<div class="panel panel-form panel-colorful">
+        		<div class="panel-body text-center">
+                    <p class="text-uppercase mar-btm text-sm">Gestione Form</p>
+                   
+        			<i class="fa fa-comment fa-5x"><fa-icon [icon]="faCode"></fa-icon></i>
+        			<hr>
+        			<p class="h2 text-thin"></p>
+        			<small><button type="button" class="btn btn-danger" [routerLink]="['/forms']">Accedi</button></small>
+        		</div>
+        	</div>
+        </div>
+        <div *ngIf = "tipo_op != 'rup'" class="panelContainer col-md-2 col-sm-6 col-xs-12">
+        	<div class="panel panel-primary panel-colorful">
+        		<div class="panel-body text-center">
+        			<p class="text-uppercase mar-btm text-sm">Gestione Workflow</p>
+        			<i class="fa fa-shopping-cart fa-5x"><fa-icon [icon]="faList"></fa-icon></i>
+        			<hr>
+        			<p class="h2 text-thin"></p>
+        			<small><button type="button" class="btn btn-primary" [routerLink]="['/flussiselect']" disabled = {{diagnosticState}} >Accedi</button></small>
+        		</div>
+        	</div>
+        </div>
+       <!--  <div *ngIf = "tipo_op != 'rup'"  class="panelContainer col-md-2 col-sm-6 col-xs-12">
+        	<div class="panel panel-info panel-colorful">
+        		<div class="panel-body text-center">
+        			<p class="text-uppercase mar-btm text-sm">Tipologie Gruppi</p>
+        			<i class="fa fa-dollar fa-5x"><fa-icon [icon]="faLayerGroup"></fa-icon></i>
+        			<hr>
+        			<p class="h2 text-thin"></p>
+        			<small><button type="button" class="btn btn-info" [routerLink]="['/tipogruppo']">Accedi</button></small>
+        		</div>
+        	</div>
+        </div>  -->
+		<!-- <div *ngIf = "tipo_op != 'rup'" class="panelContainer col-md-2 col-sm-6 col-xs-12">
+        	<div class="panel panel-tipoatti panel-colorful">
+        		<div class="panel-body text-center">
+        			<p class="text-uppercase mar-btm text-sm">Tipologie Atti</p>
+        			<i class="fa fas fa-stamp fa-5x"><fa-icon [icon]="faStamp"></fa-icon></i>
+        			<hr>
+        			<p class="h2 text-thin"></p>
+        			<small><button type="button" class="btn btn-tipoatti" [routerLink]="['/tipoatti']">Accedi</button></small>
+        		</div>
+        	</div>
+        </div>        --> 
+	</div>
+</div>

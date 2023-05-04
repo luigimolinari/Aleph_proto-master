@@ -1,0 +1,479 @@
+<div class="centraleuserform" style="background-size: cover; height:100vh; background-image: url('assets/img_portal/{{sfondo}}.jpg');">
+    <br />
+    <div class="container">
+       <div class="formboxpanel">
+          <div class="row justify-content-center">
+             <div *ngFor="let valori of campi" class="col-12 col-lg-10 col-xl-8 mx-auto">
+                <div class="my-4">
+                   <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                      <li class="nav-item">
+                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab"
+                            aria-controls="home" aria-selected="false">{{valori.nome}}</a>
+                      </li>
+                   </ul>
+                   <form [formGroup]="form">
+                      <div class="row mt-5 align-items-center">
+ 
+                      </div>
+ 
+                      <hr class="my-4" />
+
+                      <div class="form-row" >
+                          <div *ngIf="id_pratica == undefined" class="form-group col-md-12">
+                            <label for="nome_pratica">Nome pratica</label>
+                            <input [(ngModel)]="nome_pratica" formControlName="nome_pratica" type="text" id="nome_pratica"
+                            class="form-control" required />
+                            <div
+                            *ngIf="form.controls['nome_pratica'].invalid && (form.controls['nome_pratica'].dirty || form.controls['nome_pratica'].touched)"
+                            class="alert alert-danger">
+                            Il campo è obbligatorio
+                            <div *ngIf="form.controls['nome_pratica'].errors.required">
+
+                            </div>
+                            </div>
+                        </div>
+
+                     </div>
+                     <hr>
+ 
+                      <div *ngIf="valori.tipocampo1=='Select'" class="form-row" id="1">
+                         <div class="form-group col-md-12">
+                            <label for="campo1">{{valori.campo1}}</label>
+                            <select id="campo1" class="form-control" [(ngModel)]="campo1" formControlName="campo1">
+                               <option></option>
+                               <option *ngFor="let option1 of select1">{{option1.valore}}</option>
+                            </select>
+ 
+                         </div>
+                      </div>
+ 
+ 
+                      <div *ngIf="valori.tipocampo1=='Input testo'" class="form-row" id="1">
+                         <div class="form-group col-md-12">
+                            <label for="campo1">{{valori.campo1}}</label>
+                            <input [(ngModel)]="campo1" formControlName="campo1" type="text" id="campo1"
+                               class="form-control" required />
+                            <div
+                               *ngIf="form.controls['campo1'].invalid && (form.controls['campo1'].dirty || form.controls['campo1'].touched)"
+                               class="alert alert-danger">
+                               Il campo è obbligatorio
+                               <div *ngIf="form.controls['campo1'].errors.required">
+ 
+                               </div>
+                            </div>
+ 
+                         </div>
+                      </div>
+ 
+ 
+                      <div *ngIf="valori.tipocampo1=='Data'" class="form-row" id="1">
+                         <div class="form-group col-md-12">
+                            <label for="campo1">{{valori.campo1}}</label>
+                            <input [(ngModel)]="campo1" formControlName="campo1" type="date" id="campo1"
+                               class="form-control" required />
+                            <div
+                               *ngIf="form.controls['campo1'].invalid && (form.controls['campo1'].dirty || form.controls['campo1'].touched)"
+                               class="alert alert-danger">
+                               Il campo è obbligatorio
+                               <div *ngIf="form.controls['campo1'].errors.required">
+ 
+                               </div>
+                            </div>
+ 
+                         </div>
+                      </div>
+ 
+ 
+                      <div *ngIf="valori.tipocampo1=='SiNo'" class="form-row" id="1"><label
+                            for="campo1">{{valori.campo1}}</label>
+                         <div class="boxcheck">
+                            <mat-checkbox class="example-margin" [(ngModel)]="campo1" formControlName="campo1"
+                               type="text" id="campo1" value="si">{{valori.campo1}}</mat-checkbox> &nbsp;&nbsp;
+                         </div>
+                      </div>
+ 
+ 
+ 
+                      <div *ngIf="valori.tipocampo2=='Select'" class="form-row" id="2">
+                         <div class="form-group col-md-12">
+                            <label for="campo2">{{valori.campo2}}</label>
+                            <select id="campo2" class="form-control" [(ngModel)]="campo2" formControlName="campo2">
+                               <option></option>
+                               <option *ngFor="let option2 of select2">{{option2.valore}}</option>
+                            </select>
+ 
+                         </div>
+                      </div>
+ 
+ 
+                      <div *ngIf="valori.tipocampo2=='Input testo'" class="form-row" id="2">
+                         <div class="form-group col-md-12">
+                            <label for="campo2">{{valori.campo2}}</label>
+                            <input [(ngModel)]="campo2" formControlName="campo2" type="text" id="campo2"
+                               class="form-control" />
+ 
+                         </div>
+                      </div>
+ 
+                      <div *ngIf="valori.tipocampo2=='Data'" class="form-row" id="2">
+                         <div class="form-group col-md-12">
+                            <label for="campo2">{{valori.campo2}}</label>
+                            <input [(ngModel)]="campo2" formControlName="campo2" type="date" id="campo2"
+                               class="form-control" />
+ 
+ 
+                         </div>
+                      </div>
+                      <br *ngIf="valori.tipocampo2=='SiNo'" />
+                      <div *ngIf="valori.tipocampo2=='SiNo'" class="form-row" id="2"><label
+                            for="campo2">{{valori.campo2}}</label>
+                         <div class="boxcheck">
+                            <mat-checkbox class="example-margin" [(ngModel)]="campo2" formControlName="campo2"
+                               type="text" id="campo2" value="si">{{valori.campo2}}</mat-checkbox> &nbsp;&nbsp;
+                         </div>
+                      </div>
+ 
+ 
+                      <div *ngIf="valori.tipocampo3=='Select'" class="form-row" id="3">
+                         <div class="form-group col-md-12">
+                            <label for="campo3">{{valori.campo3}}</label>
+                            <select id="campo3" class="form-control" [(ngModel)]="campo3" formControlName="campo3">
+                               <option></option>
+                               <option *ngFor="let option3 of select3">{{option3.valore}}</option>
+                            </select>
+ 
+                         </div>
+                      </div>
+ 
+ 
+                      <div *ngIf="valori.tipocampo3=='Input testo'" class="form-row" id="3">
+                         <div class="form-group col-md-12">
+                            <label for="campo3">{{valori.campo3}}</label>
+                            <input [(ngModel)]="campo3" formControlName="campo3" type="text" id="campo3"
+                               class="form-control" />
+ 
+                         </div>
+                      </div>
+ 
+                      <div *ngIf="valori.tipocampo3=='Data'" class="form-row" id="3">
+                         <div class="form-group col-md-12">
+                            <label for="campo3">{{valori.campo3}}</label>
+                            <input [(ngModel)]="campo3" formControlName="campo3" type="date" id="campo3"
+                               class="form-control" />
+ 
+ 
+                         </div>
+                      </div>
+ 
+                      <br *ngIf="valori.tipocampo3=='SiNo'" />
+                      <div *ngIf="valori.tipocampo3=='SiNo'" class="form-row" id="3"><label
+                            for="campo3">{{valori.campo3}}</label>
+                         <div class="boxcheck">
+                            <mat-checkbox class="example-margin" [(ngModel)]="campo3" formControlName="campo3"
+                               type="text" id="campo3" value="si">{{valori.campo3}}</mat-checkbox> &nbsp;&nbsp;
+                         </div>
+                      </div>
+ 
+ 
+                      <div *ngIf="valori.tipocampo4=='Select'" class="form-row" id="4">
+                         <div class="form-group col-md-12">
+                            <label for="campo4">{{valori.campo4}}</label>
+                            <select id="campo4" class="form-control" [(ngModel)]="campo4" formControlName="campo4">
+                               <option></option>
+                               <option *ngFor="let option4 of select4">{{option4.valore}}</option>
+                            </select>
+ 
+                         </div>
+                      </div>
+ 
+ 
+                      <div *ngIf="valori.tipocampo4=='Input testo'" class="form-row" id="4">
+                         <div class="form-group col-md-12">
+                            <label for="campo4">{{valori.campo4}}</label>
+                            <input [(ngModel)]="campo4" formControlName="campo4" type="text" id="campo4"
+                               class="form-control" />
+ 
+                         </div>
+                      </div>
+ 
+                      <div *ngIf="valori.tipocampo4=='Data'" class="form-row" id="4">
+                         <div class="form-group col-md-12">
+                            <label for="campo4">{{valori.campo4}}</label>
+                            <input [(ngModel)]="campo4" formControlName="campo4" type="date" id="campo4"
+                               class="form-control" />
+ 
+ 
+                         </div>
+                      </div>
+ 
+                      <br *ngIf="valori.tipocampo4=='SiNo'" />
+                      <div *ngIf="valori.tipocampo4=='SiNo'" class="form-row" id="4"><label
+                            for="campo4">{{valori.campo4}}</label>
+                         <div class="boxcheck">
+                            <mat-checkbox class="example-margin" [(ngModel)]="campo4" formControlName="campo4"
+                               type="text" id="campo4" value="si">{{valori.campo4}}</mat-checkbox> &nbsp;&nbsp;
+                         </div>
+                      </div>
+ 
+ 
+ 
+                      <div *ngIf="valori.tipocampo5=='Select'" class="form-row" id="5">
+                         <div class="form-group col-md-12">
+                            <label for="campo5">{{valori.campo5}}</label>
+                            <select id="campo5" class="form-control" [(ngModel)]="campo5" formControlName="campo5">
+                               <option></option>
+                               <option *ngFor="let option5 of select5">{{option5.valore}}</option>
+                            </select>
+ 
+                         </div>
+                      </div>
+ 
+ 
+                      <div *ngIf="valori.tipocampo5=='Input testo'" class="form-row" id="5">
+                         <div class="form-group col-md-12">
+                            <label for="campo5">{{valori.campo5}}</label>
+                            <input [(ngModel)]="campo5" formControlName="campo5" type="text" id="campo5"
+                               class="form-control" />
+ 
+                         </div>
+                      </div>
+ 
+                      <div *ngIf="valori.tipocampo5=='Data'" class="form-row" id="5">
+                         <div class="form-group col-md-12">
+                            <label for="campo5">{{valori.campo5}}</label>
+                            <input [(ngModel)]="campo5" formControlName="campo5" type="date" id="campo5"
+                               class="form-control" />
+ 
+ 
+                         </div>
+                      </div>
+ 
+                      <br *ngIf="valori.tipocampo5=='SiNo'" />
+                      <div *ngIf="valori.tipocampo5=='SiNo'" class="form-row" id="5"><label
+                            for="campo5">{{valori.campo5}}</label>
+                         <div class="boxcheck">
+                            <mat-checkbox class="example-margin" [(ngModel)]="campo5" formControlName="campo5"
+                               type="text" id="campo5" value="si">{{valori.campo5}}</mat-checkbox> &nbsp;&nbsp;
+                         </div>
+                      </div>
+ 
+ 
+                      <div *ngIf="valori.tipocampo6=='Select'" class="form-row" id="6">
+                         <div class="form-group col-md-12">
+                            <label for="campo6">{{valori.campo6}}</label>
+                            <select id="campo6" class="form-control" [(ngModel)]="campo6" formControlName="campo6">
+                               <option></option>
+                               <option *ngFor="let option6 of select6">{{option6.valore}}</option>
+                            </select>
+ 
+                         </div>
+                      </div>
+ 
+ 
+                      <div *ngIf="valori.tipocampo6=='Input testo'" class="form-row" id="6">
+                         <div class="form-group col-md-12">
+                            <label for="campo6">{{valori.campo6}}</label>
+                            <input [(ngModel)]="campo6" formControlName="campo6" type="text" id="campo6"
+                               class="form-control" />
+ 
+                         </div>
+                      </div>
+ 
+                      <div *ngIf="valori.tipocampo6=='Data'" class="form-row" id="6">
+                         <div class="form-group col-md-12">
+                            <label for="campo6">{{valori.campo6}}</label>
+                            <input [(ngModel)]="campo6" formControlName="campo6" type="date" id="campo6"
+                               class="form-control" />
+ 
+ 
+                         </div>
+                      </div>
+ 
+                      <br *ngIf="valori.tipocampo6=='SiNo'" />
+                      <div *ngIf="valori.tipocampo6=='SiNo'" class="form-row" id="6"><label
+                            for="campo6">{{valori.campo6}}</label>
+                         <div class="boxcheck">
+                            <mat-checkbox class="example-margin" [(ngModel)]="campo6" formControlName="campo6"
+                               type="text" id="campo6" value="si">{{valori.campo6}}</mat-checkbox> &nbsp;&nbsp;
+                         </div>
+                      </div>
+ 
+ 
+                      <div *ngIf="valori.tipocampo7=='Select'" class="form-row" id="7">
+                         <div class="form-group col-md-12">
+                            <label for="campo7">{{valori.campo7}}</label>
+                            <select id="campo7" class="form-control" [(ngModel)]="campo7" formControlName="campo7">
+                               <option></option>
+                               <option *ngFor="let option7 of select7">{{option7.valore}}</option>
+                            </select>
+ 
+                         </div>
+                      </div>
+ 
+ 
+                      <div *ngIf="valori.tipocampo7=='Input testo'" class="form-row" id="7">
+                         <div class="form-group col-md-12">
+                            <label for="campo7">{{valori.campo7}}</label>
+                            <input [(ngModel)]="campo7" formControlName="campo7" type="text" id="campo7"
+                               class="form-control" />
+ 
+                         </div>
+                      </div>
+ 
+                      <div *ngIf="valori.tipocampo7=='Data'" class="form-row" id="7">
+                         <div class="form-group col-md-12">
+                            <label for="campo7">{{valori.campo7}}</label>
+                            <input [(ngModel)]="campo7" formControlName="campo7" type="date" id="campo7"
+                               class="form-control" />
+ 
+ 
+                         </div>
+                      </div>
+ 
+                      <br *ngIf="valori.tipocampo7=='SiNo'" />
+                      <div *ngIf="valori.tipocampo7=='SiNo'" class="form-row" id="7"><label
+                            for="campo7">{{valori.campo7}}</label>
+                         <div class="boxcheck">
+                            <mat-checkbox class="example-margin" [(ngModel)]="campo7" formControlName="campo7"
+                               type="text" id="campo7" value="si">{{valori.campo7}}</mat-checkbox> &nbsp;&nbsp;
+                         </div>
+                      </div>
+ 
+ 
+ 
+ 
+                      <div *ngIf="valori.tipocampo8=='Select'" class="form-row" id="8">
+                         <div class="form-group col-md-12">
+                            <label for="campo8">{{valori.campo8}}</label>
+                            <select id="campo8" class="form-control" [(ngModel)]="campo8" formControlName="campo8">
+                               <option></option>
+                               <option *ngFor="let option8 of select8">{{option8.valore}}</option>
+                            </select>
+ 
+                         </div>
+                      </div>
+ 
+ 
+                      <div *ngIf="valori.tipocampo8=='Input testo'" class="form-row" id="8">
+                         <div class="form-group col-md-12">
+                            <label for="campo8">{{valori.campo8}}</label>
+                            <input [(ngModel)]="campo8" formControlName="campo8" type="text" id="campo8"
+                               class="form-control" />
+ 
+                         </div>
+                      </div>
+ 
+                      <div *ngIf="valori.tipocampo8=='Data'" class="form-row" id="8">
+                         <div class="form-group col-md-12">
+                            <label for="campo8">{{valori.campo8}}</label>
+                            <input [(ngModel)]="campo8" formControlName="campo8" type="date" id="campo8"
+                               class="form-control" />
+ 
+ 
+                         </div>
+                      </div>
+ 
+                      <br *ngIf="valori.tipocampo8=='SiNo'" />
+                      <div *ngIf="valori.tipocampo8=='SiNo'" class="form-row" id="8"><label
+                            for="campo8">{{valori.campo8}}</label>
+                         <div class="boxcheck">
+                            <mat-checkbox class="example-margin" [(ngModel)]="campo8" formControlName="campo8"
+                               type="text" id="campo8" value="si">{{valori.campo8}}</mat-checkbox> &nbsp;&nbsp;
+                         </div>
+                      </div>
+ 
+ 
+                      <div *ngIf="valori.tipocampo9=='Select'" class="form-row" id="9">
+                         <div class="form-group col-md-12">
+                            <label for="campo9">{{valori.campo9}}</label>
+                            <select id="campo9" class="form-control" [(ngModel)]="campo9" formControlName="campo9">
+                               <option></option>
+                               <option *ngFor="let option9 of select9">{{option9.valore}}</option>
+                            </select>
+ 
+                         </div>
+                      </div>
+ 
+ 
+                      <div *ngIf="valori.tipocampo9=='Input testo'" class="form-row" id="9">
+                         <div class="form-group col-md-12">
+                            <label for="campo9">{{valori.campo9}}</label>
+                            <input [(ngModel)]="campo9" formControlName="campo9" type="text" id="campo9"
+                               class="form-control" />
+ 
+                         </div>
+                      </div>
+ 
+                      <div *ngIf="valori.tipocampo9=='Data'" class="form-row" id="9">
+                         <div class="form-group col-md-12">
+                            <label for="campo9">{{valori.campo9}}</label>
+                            <input [(ngModel)]="campo9" formControlName="campo9" type="date" id="campo9"
+                               class="form-control" />
+ 
+ 
+                         </div>
+                      </div>
+ 
+                      <br *ngIf="valori.tipocampo9=='SiNo'" />
+                      <div *ngIf="valori.tipocampo9=='SiNo'" class="form-row" id="9"><label
+                            for="campo9">{{valori.campo9}}</label>
+                         <div class="boxcheck">
+                            <mat-checkbox class="example-margin" [(ngModel)]="campo9" formControlName="campo9"
+                               type="text" id="campo9" value="si">{{valori.campo9}}</mat-checkbox> &nbsp;&nbsp;
+                         </div>
+                      </div>
+ 
+                      <div *ngIf="valori.tipocampo10=='Select'" class="form-row" id="10">
+                         <div class="form-group col-md-12">
+                            <label for="campo10">{{valori.campo10}}</label>
+                            <select id="campo10" class="form-control" [(ngModel)]="campo10" formControlName="campo10">
+                               <option></option>
+                               <option *ngFor="let option10 of select10">{{option10.valore}}</option>
+                            </select>
+ 
+                         </div>
+                      </div>
+ 
+ 
+                      <div *ngIf="valori.tipocampo10=='Input testo'" class="form-row" id="10">
+                         <div class="form-group col-md-12">
+                            <label for="campo10">{{valori.campo10}}</label>
+                            <input [(ngModel)]="campo10" formControlName="campo10" type="text" id="campo10"
+                               class="form-control" />
+ 
+                         </div>
+                      </div>
+ 
+                      <div *ngIf="valori.tipocampo10=='Data'" class="form-row" id="10">
+                         <div class="form-group col-md-12">
+                            <label for="campo10">{{valori.campo10}}</label>
+                            <input [(ngModel)]="campo10" formControlName="campo10" type="date" id="campo10"
+                               class="form-control" />
+ 
+ 
+                         </div>
+                      </div>
+ 
+                      <br
+                         *ngIf="valori.tipocampo10=='SiNo'" />
+ 
+                      <div *ngIf="valori.tipocampo10=='SiNo'" class="form-row" id="10"><label
+                            for="campo10">{{valori.campo10}}</label>
+                         <div class="boxcheck">
+                            <mat-checkbox class="example-margin" [(ngModel)]="campo10" formControlName="campo10"
+                               type="text" id="campo10" value="si">{{valori.campo10}}</mat-checkbox> &nbsp;&nbsp;
+                         </div>
+                      </div>
+                      <button [hidden]="disabled" type="Submit" class="btn btn-success" (click)="Trasmetti();">Avvia pratica</button>
+ 
+                   </form>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+ 
+ <div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+ </div>

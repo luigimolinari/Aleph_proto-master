@@ -1,0 +1,102 @@
+<mat-sidenav-container>
+    <mat-sidenav class="side-nav mat-elevation-z8" [ngClass]="{'slim-side-nav': (!full)}" #sidenav [mode]="mode" [(opened)]="open">
+        <mat-nav-list>
+            <div class="right" [ngClass]="{'left': (!full)}" *ngIf="sidenav.mode === 'side'">
+                <button type="button" *ngIf="!full" mat-icon-button (click)="reduce_sidenav()">
+                    <mat-icon>
+                        keyboard_arrow_right
+                    </mat-icon>
+                </button>
+                <button type="button" *ngIf="full" mat-icon-button (click)="reduce_sidenav()">
+                    <mat-icon>
+                        keyboard_arrow_left
+                    </mat-icon>
+                </button>
+            </div>
+
+            
+            
+                <div (click)="invia('scrivania')">
+                    <button type="button" mat-icon-button>
+                        <mat-icon>
+                            dashboard
+                        </mat-icon>
+                    </button>
+                    <div class="icon_label" *ngIf="full">Scrivania</div>
+                </div>
+                <div (click)="invia('cerca')">
+                    <button type="button" mat-icon-button>
+                        <mat-icon>
+                            search
+                        </mat-icon>
+                    </button>
+                    <div class="icon_label" *ngIf="full">Cerca</div>
+                </div>       
+                <div (click)="invia('new_pratica')">
+                    <button type="button" mat-icon-button>
+                        <mat-icon>
+                            note_add
+                        </mat-icon>
+                    </button>
+                    <div class="icon_label" *ngIf="full" >Nuova Pratica</div>
+                </div>     
+                <div (click)="invia('pratiche_avviate')">
+                    <button type="button" mat-icon-button>
+                        <mat-icon>
+                            play_circle_outline
+                        </mat-icon>
+                    </button>
+                    <div class="icon_label" *ngIf="full" >Pratiche Avviate</div>
+                </div>   
+                <div (click)="invia('pratiche_lavora')">
+                    <button type="button" mat-icon-button>
+                        <mat-icon>
+                            build_circle
+                        </mat-icon>
+                    </button>
+                    <div class="icon_label" *ngIf="full" >Lavora alla pratica</div>
+                </div>  
+                <div (click)="invia('pratiche_valida')">
+                    <button type="button" mat-icon-button>
+                        <mat-icon>
+                            check_circle
+                        </mat-icon>
+                    </button>
+                    <div class="icon_label" *ngIf="full" >Valida la pratica</div>
+                </div>       
+                <div (click)="invia('gestisci')">
+                    <button type="button" mat-icon-button>
+                        <mat-icon>
+                            settings
+                        </mat-icon>
+                    </button>
+                    <div class="icon_label" *ngIf="full" >Gestisci</div>
+                </div>
+
+                <div (click)="invia('clona')">
+                    <button type="button" mat-icon-button>
+                        <mat-icon>
+                            content_copy
+                        </mat-icon>
+                    </button>
+                    <div class="icon_label" *ngIf="full" >Clona</div>
+                </div>
+
+                <!-- footer-->
+                <div class="side-nav-footer">
+                    <h1 *ngIf="full">Aleph</h1>
+                    <p> <img  [ngClass]="{'slim-logo': (!full)}" src='assets/img/logo_aleph_medium.png'></p>
+                </div>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content class="side-nav-content mat-elevation-z8">
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+
+<button type="button" *ngIf="sidenav.mode === 'over'" mat-icon-button (click)="open_sidenav()">
+    <mat-icon>
+        menu
+    </mat-icon>
+</button>

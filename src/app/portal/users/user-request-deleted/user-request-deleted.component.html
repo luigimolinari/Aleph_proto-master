@@ -1,0 +1,27 @@
+<br />
+<button type="button" class="btn btn-success btn-success-add" [routerLink]="['/userportalform']"  [queryParams]="{id_form:id_form}"><fa-icon [icon]="faEdit"></fa-icon> COMPILA nuovo form</button> &nbsp;<button type="button" class="btn btn-primary btn-success-add" [routerLink]="['/userrequest']"  [queryParams]="{id_form:id_form, nome_tab: nome_tab}"> <fa-icon [icon]="faEye"></fa-icon> VEDI form compilati</button>
+<br /><br />
+
+<app-aleph-table 
+        [tableData]="data" [tableColumns]="customersTableColumns" [listActions]="listActions"
+        tableCase="general"
+        [isFilterable]="true"
+        [isPageable]="true"
+        [paginationSizes]="[5,10]"
+        [defaultPageSize]="5"
+        (viewAction) = "viewMethod($event)"
+        (restoreFormAction) = "restoreformMethod($event)"
+
+ style=" text-decoration: line-through;"></app-aleph-table>
+
+<br><br><br><br><br><br><br><br>
+
+<div class="footer_table_container">
+  <video autoplay muted loop id="VideoFooter" class="video-container_footer_table">
+    <source src="assets/video/footer.mp4" type="video/mp4">
+  </video>
+</div>
+
+<div class="footer_small">
+<img src="assets/img/logo_aleph_very_small.png" alt="logo aleph"/>
+  </div>

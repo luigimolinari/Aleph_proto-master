@@ -1,0 +1,44 @@
+
+
+<video autoplay muted loop id="myVideo" style="width:100%">
+  <source src="assets/video/video.mp4" type="video/mp4">
+</video>
+
+<!-- <app-sidenav *ngIf = "loggedIn"
+  [id_user] = "id_user" 
+  [mode] = "mode"  
+  [open] = "open"
+  (menuItemSelection)="test_event($event)"
+  (fullStateEvent)="full_state_event($event)">
+</app-sidenav> -->
+
+<!-- scivania -->
+<app-procedure-attive *ngIf = "loggedIn && vedi=='scrivania'"
+  [id_user] = "id_user"
+  [marginLeft] = "marginLeft">
+</app-procedure-attive>
+
+<!-- avvia una nuova pratica -->
+<app-new-pratica *ngIf="loggedIn && vedi=='new_pratica'"
+[marginLeft] = "marginLeft">
+</app-new-pratica>
+
+<!-- elenco delle pratiche avviate dall'opertore loggato -->
+<app-pratiche-avviate *ngIf="loggedIn && vedi=='pratiche_avviate'"
+  [marginLeft] = "marginLeft">
+</app-pratiche-avviate>
+
+<!-- lavora a una pratica -->
+<app-pratiche-lavora *ngIf="loggedIn && vedi=='pratiche_lavora'"
+  [marginLeft] = "marginLeft">
+</app-pratiche-lavora>
+
+<!-- valida una pratica -->
+<app-pratiche-valida *ngIf="loggedIn && vedi=='pratiche_valida'"
+  [marginLeft] = "marginLeft">
+</app-pratiche-valida>
+
+<!-- imposta scrivania -->
+<app-gestione-scrivania *ngIf="loggedIn && vedi=='gestisci'">
+</app-gestione-scrivania>
+

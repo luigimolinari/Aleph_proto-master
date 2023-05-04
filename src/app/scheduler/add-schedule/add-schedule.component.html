@@ -1,0 +1,116 @@
+<div class="centralescheduler">
+    <br />
+<div class="container">
+    <div class="formboxpanel">
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+           <div class="my-4">
+            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab" aria-controls="home" aria-selected="false">NUOVO Appuntamento</a>
+                </li>
+            </ul>
+            <form [formGroup]="form" >
+                <div class="row mt-5 align-items-center">
+                                       <div class="col">
+                        <div class="row align-items-center">
+                            <div class="col-md-7">
+                               </div>
+                        </div>
+                      
+                    </div>
+                </div>
+              
+                <hr class="my-4" />
+                             <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="nome">Oggetto:</label>
+                        <input  [(ngModel)]="oggetto" formControlName="oggetto"  type="text" id="oggetto"  class="form-control"  required />
+                        <div *ngIf="form.controls['oggetto'].invalid && (form.controls['oggetto'].dirty || form.controls['oggetto'].touched)" class="alert alert-danger">
+                            Il nome è obbligatorio
+                            <div *ngIf="form.controls['oggetto'].errors.required">
+                           
+                          </div>
+                        </div>
+                    </div>
+
+                   
+
+
+                  
+                </div>
+                <div class="form-group">
+                    <label for="cf">Inizio</label>
+                    <input
+                    class="form-control"
+                    type="text"
+                    mwlFlatpickr
+                    #mwlFlatpickr
+                    formControlName="giorno" 
+                    [(ngModel)]="giorno"
+                    [altInput]="true"
+                    [convertModelValue]="true"
+                    [options]="luigi"
+                    dateFormat="Y-m-dTH:i"
+                    altFormat="F j, Y H:i"
+                    placeholder="Non settato"
+                  />
+                </div>
+
+                <div class="form-group">
+                    <label for="cf">Fine</label>
+                    <input
+                    class="form-control"
+                    type="text"
+                    mwlFlatpickr
+                    #mwlFlatpickr
+                    [(ngModel)]="giorno_fine"
+                    formControlName="giorno_fine" 
+                    [altInput]="true"
+                    [convertModelValue]="true"
+                    [options]="luigi"
+                    dateFormat="Y-m-dTH:i"
+                    altFormat="F j, Y H:i"
+                    placeholder="Non settato"
+                  />
+                </div>
+ 
+                <hr class="my-4" />
+                <fa-icon [icon]="faFolder"></fa-icon>
+
+                <div class="form-group">
+                    <label for="cf">Scegli procedura</label>
+                <select id="attivo" class="form-control"  [(ngModel)]="id_procedura" formControlName="id_procedura"  >
+                    <option selected="selected"></option>
+                    <option  *ngFor="let group of data" label={{group.nome_procedura}}>{{group.id}}</option>
+                    
+</select>
+</div>
+
+<div class="form-group">
+    <label for="cf">Notifica il gruppo</label> &nbsp;
+    <input type="checkbox" id="notifica"  [(ngModel)]="notifica" formControlName="notifica" name="notifica" value="1"> &nbsp;  &nbsp;
+     <fa-icon [icon]="faMobileAlt"></fa-icon>&nbsp; Ricorda con SMS
+     <input type="checkbox" id="sms"  [(ngModel)]="sms" formControlName="sms" name="sms" value="1">
+     &nbsp;  &nbsp;
+     <fa-icon [icon]="faAt"></fa-icon>&nbsp; Ricorda con mail
+     <input type="checkbox" id="mail" [(ngModel)]="mail" formControlName="mail"  name="scales" value="1">
+</div>
+               
+
+
+                <button type="Submit" class="btn btn-success" (click)="Trasmetti();">Registra appuntamento</button>
+           
+        </form>
+        <br /><br /><br /><br /><br /><br /><br /><br />
+           </div>
+        </div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+         </div>
+

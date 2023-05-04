@@ -1,0 +1,28 @@
+<div class="centraledocumenti">
+	<div class="document-editor">
+
+		<div *ngIf="!disableToolbar" class="row">
+			<div class="document-editor__toolbar"></div>
+		</div>
+		<div id="id_document-editor__editable-container" class="document-editor__editable-container" #editor_container>
+			<div id="content_wrapper" class="content_wrapper">
+				<div id="margin_wrapper" class="margin_wrapper">
+					<div id="content" class="document-editor__editable">
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div *ngIf="!short_template">
+			<br><br><br><br><br><br>
+		</div>
+	</div>
+
+	<div *ngIf="loading" class="loadingspinner_container">
+		<img class="loadingspinner" src="../assets/img/loadingspinner.gif">
+	</div>
+
+	<div *ngIf="!short_template" class="footer_pages">
+		<img src='assets/img/logo_aleph_medium.png'>
+	</div>
+</div>

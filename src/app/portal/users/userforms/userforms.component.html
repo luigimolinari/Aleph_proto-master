@@ -1,0 +1,29 @@
+<div class="centraleformusers">
+<div class="footer_table_container_small">
+    <video autoplay muted loop id="VideoFooter" class="video-container_footer_table">
+      <source src="assets/video/video_footer.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="footer_table_small">
+    <h1>Aleph</h1>
+    <p> <img src='assets/img/logo_aleph_medium.png'></p>
+  </div>
+ 
+  <div class="ripple_container">
+    <br />
+        <div matRipple *ngFor="let form of campi" class=" example-ripple-container mat-elevation-z4"
+         [routerLink]="['/portaldispatcher']" [queryParams]="{id_form:form.id_form, nome_tab:form.nome_tab}">
+          <h6><img src="assets/img_portal/{{form.immagine}}_head.jpg"></h6>
+            <h5>{{form.header}}</h5>
+         
+            <br>
+            <h6>{{form.legenda}}</h6>
+            <br>
+            <p class ="customOpacity">___________</p>
+            <br>
+            <p class="rightText"><i class="fa"><fa-icon [icon]="faEye"></fa-icon></i>&nbsp;</p>
+            <p class="leftText"><img src="assets/img/logo_aleph.png" width="30" height="30" alt="Aleph"></p>
+        </div>
+        <br /> <br />
+</div>
+</div>

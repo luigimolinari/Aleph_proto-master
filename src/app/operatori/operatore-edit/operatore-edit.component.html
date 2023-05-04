@@ -1,0 +1,271 @@
+<div class="centraleoperatorinew">
+    <br />
+    <div class="container">
+        <div class="formboxpanel">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+                    <div class="my-4">
+                        <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="" role="tab"
+                                    aria-controls="home" aria-selected="false">MODIFICA Operatore</a>
+                            </li>
+                        </ul>
+                        <form *ngFor="let group of user" [formGroup]="form">
+                            <div class="row mt-5 align-items-center">
+                                <div class="col-md-3 text-center mb-5">
+                                    <div class="avatar avatar-xl">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="..."
+                                            class="avatar-img rounded-circle" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-7">
+                                            <h4 class="mb-1">{{group.cognome}}, {{group.nome}}</h4>
+                                            <p class="small mb-3"><span class="badge badge-dark">{{group.profilo}}
+                                                    {{group.ruolo}}</span></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <hr class="my-4" />
+                            <fa-icon [icon]="faUser"></fa-icon> &nbsp; <fa-icon [icon]="faEdit"></fa-icon>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="nome">Nome</label>
+                                    <input [(ngModel)]="nome" formControlName="nome" type="text" id="nome"
+                                        class="form-control" required />
+                                    <div *ngIf="form.controls['nome'].invalid && (form.controls['nome'].dirty || form.controls['nome'].touched)"
+                                        class="alert alert-danger">
+                                        Il nome è obbligatorio
+                                        <div *ngIf="form.controls['nome'].errors.required">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="form-group col-md-6">
+                                    <label for="cognome">Cognome</label>
+                                    <input type="text" [(ngModel)]="cognome" formControlName="cognome" id="cognome"
+                                        class="form-control" required />
+                                    <div *ngIf="form.controls['cognome'].invalid && (form.controls['cognome'].dirty || form.controls['cognome'].touched)"
+                                        class="alert alert-danger">
+                                        Il cognome è obbligatorio
+                                        <div *ngIf="form.controls['cognome'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="cf">CF</label>
+                                <input type="text" [(ngModel)]="cf" formControlName="cf" class="form-control" id="cf"
+                                    required />
+                                <div *ngIf="form.controls['cf'].invalid && (form.controls['cf'].dirty || form.controls['cf'].touched)"
+                                    class="alert alert-danger">
+                                    Il CF è obbligatorio
+                                    <div *ngIf="form.controls['cf'].errors.required">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="luogo">Luogo Nascita</label>
+                                <input type="text" [(ngModel)]="luogo_nascita" formControlName="luogo_nascita"
+                                    class="form-control" id="luogo_nascita" required />
+                                <div *ngIf="form.controls['luogo_nascita'].invalid && (form.controls['luogo_nascita'].dirty || form.controls['luogo_nascita'].touched)"
+                                    class="alert alert-danger">
+                                    Il luogo nascita è obbligatorio
+                                    <div *ngIf="form.controls['luogo_nascita'].errors.required">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="nascita">Data di Nascita</label>
+                                    <input type="text" [(ngModel)]="data_nascita" formControlName="data_nascita"
+                                        class="form-control" id="data_nascita" required />
+                                    <div *ngIf="form.controls['data_nascita'].invalid && (form.controls['data_nascita'].dirty || form.controls['data_nascita'].touched)"
+                                        class="alert alert-danger">
+                                        La data nascita è obbligatorio
+                                        <div *ngIf="form.controls['data_nascita'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="sesso">Sesso</label>
+                                    <select id="sesso" class="form-control" [(ngModel)]="sesso" formControlName="sesso">
+                                        <option label="{{group.sesso}}" [selected]="true">{{group.sesso}}</option>
+                                        <option>M</option>
+                                        <option>F</option>
+                                    </select>
+
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="Prov">Prov
+                                        Nascita</label>
+                                    <input type="text" class="form-control" [(ngModel)]="prov_nascita"
+                                        formControlName="prov_nascita" id="prov_nascita" required />
+                                    <div *ngIf="form.controls['prov_nascita'].invalid && (form.controls['prov_nascita'].dirty || form.controls['prov_nascita'].touched)"
+                                        class="alert alert-danger">
+                                        La provincia nascita è obbligatoria
+                                        <div *ngIf="form.controls['prov_nascita'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-4" />
+                            <fa-icon [icon]="faHouseUser"></fa-icon>&nbsp; <fa-icon [icon]="faEdit"></fa-icon>
+                            <div class="form-group">
+                                <label for="Indirizzo">Indirizzo residenza</label>
+                                <input type="text" class="form-control" [(ngModel)]="indirizzo_residenza"
+                                    formControlName="indirizzo_residenza" id="indirizzo_residenza" required />
+                                <div *ngIf="form.controls['indirizzo_residenza'].invalid && (form.controls['indirizzo_residenza'].dirty || form.controls['indirizzo_residenza'].touched)"
+                                    class="alert alert-danger">
+                                    L'indirizzo residenza è obbligatorio
+                                    <div *ngIf="form.controls['indirizzo_residenza'].errors.required">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="Comune">Comune Residenza</label>
+                                    <input type="text" class="form-control" [(ngModel)]="comune_residenza"
+                                        formControlName="comune_residenza" id="comune_residenza" required />
+                                    <div *ngIf="form.controls['comune_residenza'].invalid && (form.controls['comune_residenza'].dirty || form.controls['comune_residenza'].touched)"
+                                        class="alert alert-danger">
+                                        Il comune di residenza è obbligatorio
+                                        <div *ngIf="form.controls['comune_residenza'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="Prov">Prov
+                                        Residenza</label>
+                                    <input type="text" class="form-control" [(ngModel)]="prov_residenza"
+                                        formControlName="prov_residenza" id="prov_residenza" required />
+                                    <div *ngIf="form.controls['prov_residenza'].invalid && (form.controls['prov_residenza'].dirty || form.controls['prov_residenza'].touched)"
+                                        class="alert alert-danger">
+                                        La provincia di residenza è obbligatoria
+                                        <div *ngIf="form.controls['prov_residenza'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-4" />
+                            <fa-icon [icon]="faBuilding"></fa-icon> &nbsp;<fa-icon [icon]="faEdit"></fa-icon>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="User">User</label>
+                                    <input type="text" class="form-control" id="nomeutente" [(ngModel)]="nomeutente"
+                                        formControlName="nomeutente" required />
+                                    <div *ngIf="form.controls['nomeutente'].invalid && (form.controls['nomeutente'].dirty || form.controls['nomeutente'].touched)"
+                                        class="alert alert-danger">
+                                        Il nome utente è obbligatorio
+                                        <div *ngIf="form.controls['nomeutente'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="Tipo">
+                                        Tipo</label>
+                                    <select id="tipo" class="form-control" [(ngModel)]="tipo" formControlName="tipo">
+                                        <option [selected]="true" label="{{group.tipologia}}" [selected]="true">
+                                            {{group.id_tipo}}</option>
+                                        <option *ngFor="let tipooperatore of tipooperatori"
+                                            label="{{tipooperatore.tipo}}">{{tipooperatore.id}}</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="Ruolo">Ruolo</label>
+                                    <input type="text" class="form-control" id="ruolo" [(ngModel)]="ruolo"
+                                        formControlName="ruolo" required />
+                                    <div *ngIf="form.controls['ruolo'].invalid && (form.controls['ruolo'].dirty || form.controls['ruolo'].touched)"
+                                        class="alert alert-danger">
+                                        Il ruolo è obbligatorio
+                                        <div *ngIf="form.controls['ruolo'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="Profilo">Profilo</label>
+                                    <input type="text" class="form-control" id="profilo" [(ngModel)]="profilo"
+                                        formControlName="profilo" required />
+                                    <div *ngIf="form.controls['profilo'].invalid && (form.controls['profilo'].dirty || form.controls['profilo'].touched)"
+                                        class="alert alert-danger">
+                                        Il profilo è obbligatorio
+                                        <div *ngIf="form.controls['profilo'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="form-group col-md-6">
+                                    <label for="Azienda">Azienda</label>
+                                    <select id="azienda" class="form-control" [(ngModel)]="azienda"
+                                        formControlName="azienda" (change)="ControlAzienda()">
+                                        <option id="init_azienda" label="{{group.azienda}}" [selected]="true">{{group.id_azienda}}
+                                        </option>
+                                        <option *ngFor="let azienda of aziende" label="{{azienda.nome}}">{{azienda.id}}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="struttura">Struttura</label>
+                                    <select id="struttura" class="form-control" [(ngModel)]="struttura"
+                                        formControlName="struttura">
+                                        <option id="init_struttura" label="{{group.struttura}}" [selected]="true">{{group.id_struttura}}
+                                        </option>
+                                        <option *ngFor="let struttura of strutture" label="{{struttura.nome}}">
+                                            {{struttura.id}}
+                                        </option>
+                                    </select>
+                                </div>
+
+
+
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="Email">Email</label>
+                                    <input type="text" class="form-control" id="email" [(ngModel)]="email"
+                                        formControlName="email" required />
+                                    <div *ngIf="form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)"
+                                        class="alert alert-danger">
+                                        La mail è obbligatoria
+                                        <div *ngIf="form.controls['email'].errors.required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="Telefono">Telefono</label>
+                                    <input type="text" class="form-control" id="telefono" [(ngModel)]="telefono"
+                                        formControlName="telefono" />
+                                    <!--div *ngIf="form.controls['telefono'].invalid && (form.controls['telefono'].dirty || form.controls['telefono'].touched)" class="alert alert-danger">
+                            Il telefono è obbligatorio
+                              <div *ngIf="form.controls['telefono'].errors.required">
+                              </div>
+                    </div-->
+                                </div>
+                            </div>
+                            <button type="Submit" class="btn btn-success" (click)="Trasmetti();">Trasmetti
+                                modifiche</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+</div>

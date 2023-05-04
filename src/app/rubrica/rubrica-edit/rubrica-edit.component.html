@@ -1,0 +1,59 @@
+<div class="centralerubrica">
+    <br />
+    <div class="container">
+        <div class="formboxpanel">
+            <div class="central">
+
+                <br />
+                <ul _ngcontent-ajd-c288="" id="myTab" role="tablist" class="nav nav-tabs mb-4">
+                    <li _ngcontent-ajd-c288="" class="nav-item"><a _ngcontent-ajd-c288="" id="home-tab"
+                            data-toggle="tab" href="" role="tab" aria-controls="home" aria-selected="false"
+                            class="nav-link active">Modifica voce in rubrica</a></li>
+                </ul>
+
+                <form class="my_form" [formGroup]="form">
+
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Azienda</mat-label>
+                        <mat-select formControlName="azienda" [disabled]="disable_azienda" #azienda (selectionChange)="CambiaAzienda(azienda.value)"  required>
+                            <mat-option *ngFor="let a of aziende" [value]="a.id">{{a.denominazione}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Struttura</mat-label>
+                        <mat-select formControlName="struttura" >
+                            <mat-option *ngFor="let e of strutture" [value]="e.id">{{e.nome}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width" appearance="fill" required>
+                        <mat-label>Nome</mat-label>
+                        <input matInput formControlName="nome">
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width" appearance="fill" required>
+                        <mat-label>Cognome</mat-label>
+                        <input matInput formControlName="cognome">
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width" appearance="fill" required>
+                        <mat-label>CF</mat-label>
+                        <input matInput formControlName="CF">
+                    </mat-form-field>
+                </form>
+
+                <button _ngcontent-ajd-c474="" (click)="back();" class="btn btn-gray">Indietro</button>&nbsp;
+                <button class="btn btn-warning" (click)="Trasmetti();">Salva</button> <br /><br /> <br /><br />
+                <br /><br />
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="footer_pages">
+    <img src='assets/img/logo_aleph_medium.png'>
+    </div>
