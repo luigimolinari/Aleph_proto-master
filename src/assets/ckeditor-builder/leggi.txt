@@ -1,0 +1,1 @@
+..\src\assets\ckeditor-builder\ckeditor.js -> file sorgente

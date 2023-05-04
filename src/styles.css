@@ -1,0 +1,409 @@
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+@import '~flatpickr/dist/themes/dark.css';
+.footer {
+    position: fixed;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    width: 100%;
+    padding: 20px;
+    overflow: auto;
+  }
+
+  .footer_splash {
+    position: fixed;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    width: 100%;
+    height: 60%;
+    padding: 20px;
+    overflow: auto;
+  }
+
+
+  .footer_table {
+    position: sticky;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    width: 100%;
+    height: 30%;
+    padding: 20px;
+    overflow: hidden;
+  }
+
+  
+  @media screen and (max-width: 1668px) {
+  
+  .footer_table_container {
+  
+    display: none;
+   
+  }
+
+  .footer_small {
+  
+    display: block;
+   
+  }
+  
+  }
+
+  @media screen and (min-width: 1668px) {
+  
+    .footer_table_container {
+    
+      display: block;
+     
+    }
+  
+    .footer_small {
+    
+      display: none;
+     
+    }
+    
+    }
+
+  
+
+  .footer_small {
+    position: sticky;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    width: 100%;
+    height: 7%;
+    padding: 5px;
+    overflow: hidden;
+  }
+  
+  .footer_table_small {
+    position: fixed;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    width: 100%;
+    height: 20%;
+    padding: 20px;
+    overflow: hidden;
+  }
+  
+  .footer_table_container {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    height: 30%;
+
+    overflow: hidden;
+  }
+
+  .footer_table_container_small {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 20%;
+
+    overflow: hidden;
+  }
+
+  .video-container_footer_table {
+    width: 100%;
+    overflow: hidden;
+    position: sticky;
+}
+  .centraleoperatorinew {
+    background-image:url(assets/img/bg2.jpg);
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .centraleoperativita{
+    background-image:url(assets/img/bg23.jpg);
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .centralefirma{
+    background-image:url(assets/img/bg24.jpg);
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .centraleaziende {
+    background-image:url(assets/img/bg13.jpg);
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .centraletipi {
+    background-image:url(assets/img/bg17.jpg);
+    background-size: cover;
+    height: 100vh;
+  }
+  
+  .centralevisibilita {
+    background-image:url(assets/img/bg16.jpg);
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .centraletipogruppo {
+    background-image:url(assets/img/bg15.jpg);
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .centraleflussi {
+    background-image:url(assets/img/bg14.jpg);
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .centraleprocedura {
+    background-image:url(assets/img/bg20.jpg);
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .centraleorganigramma {
+    background-image:url(assets/img/bg20.jpg);
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .centralediagnostica {
+    background-image:url(assets/img/bg19.jpg);
+    background-size: cover;
+    height: 100vh;
+  }
+
+
+  .centraledocumenti {
+    background-image:url(assets/img/bg18.jpg);
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .centraleworkflow {
+    background-image:url(assets/img/bg11.jpg);
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .centralefascicoli {
+    background-image:url(assets/img/bg21.jpg);
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .centralestrutture {
+    background-image:url(assets/img/bg23.jpg);
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .centraleorganigramma {
+    background-image:url(assets/img/bg11.jpg);
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .centralemail{
+    background-image:url(assets/img/bg7.jpg);
+      background-size: cover;
+      height: 100vh;  
+    }
+    
+     .centrale_lettura_mess{
+    background-image:url(assets/img/bg30.jpg);
+      background-size: cover;
+      height: 100vh;  
+    }
+
+    .centrale_archivio{
+      background-image:url(assets/img/bg41.jpg);
+      background-size: cover;
+      height: 100vh;  
+      }
+    
+  
+
+  .formbox {
+    background: rgba(0, 0, 0, 0.7);
+    color: #f1f1f1;
+    width: 100%;
+    height:80%;
+    overflow: auto;
+    padding: 20px;
+
+  }
+
+  .formboxpanel {
+    background: rgba(0, 0, 0, 0.7);
+    color: #f1f1f1;
+    width: 100%;
+    height:100%;
+    overflow: auto;
+    padding: 20px;
+
+  }
+  .formpanel {
+    margin: auto;
+    width: 50%;
+    padding: 20px;
+    background-color:rgb(236, 233, 233);
+    color: black !important;
+    border-radius: 5px;
+  }
+  .footer_pages {
+    position: fixed;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.5);
+    color: #080202;
+    width: 100%;
+    padding: 10px;
+  }
+
+  @media screen and (max-width: 1668px) {
+  
+    .footer_pages {
+    
+      display: none;
+     
+    }
+  
+    .footer_small{
+
+      display: block;
+
+    }
+
+    }
+  
+    @media screen and (min-width: 1668px) {
+  
+      .footer_pages {
+      
+        display: block;
+       
+      }
+    
+      .footer_small{
+  
+        display: none;
+  
+      }
+  
+      }
+
+  .centralescheduler {
+    background-image:url(assets/img/bg25.jpg);
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .centraletipoatti{
+    background-image:url(assets/img/bg29.jpg);
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .centralegruppiprocedure{
+    background-image:url(assets/img/bg27.jpg);
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .centraleprototables {
+    background-image:url(assets/img/bg43.jpg);
+    background-size: cover;
+    height: 100vh;
+  }
+
+  
+  .centraleprotorubrica {
+    background-image:url(assets/img/bg45.jpg);
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .centralerubrica{
+    background-image:url(assets/img/bg45.jpg);
+    background-size: cover;
+    height: 100vh;
+  }
+
+
+  .centraletitolario {
+    background-image:url(assets/img/bg44.jpg);
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .centraleprotocollo {
+    background-image:url(assets/img/bg46.jpg);
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .centraleform {
+    background-image:url(assets/img/bg32.jpg);
+    background-size: cover;
+    min-height: 100vh;
+  } 
+
+  .protobg{
+    background-image:url(assets/img/bg48.jpg);
+    background-size: cover;
+
+}
+
+  
+  
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.ck.ck-editor__editable_inline>:first-child{
+  margin-top: 0px!important;
+}
+
+.image.image-style-align-right {
+  display: block!important;
+  margin-block-start: 0px!important;
+  margin-block-end: 0px!important;
+  margin-left: 0px!important;
+  margin-right: 0px!important;
+  margin-inline-start: 0px!important;;
+  margin-inline-end: 0px!important;
+}
+.image.image-style-align-left {
+  display: block!important;
+  margin-block-start: 0px!important;
+  margin-block-end: 0px!important;
+  margin-left: 0px!important;
+  margin-right: 0px!important;
+  margin-inline-start: 0px!important;;
+  margin-inline-end: 0px!important;
+}
+
+body {
+  line-height: 24px!important;
+}
+/*mpdf non consente l'overflow quindi lo impedisco anche lato aleph*/
+#content>p
+{
+  overflow: hidden;
+}
+.right{
+  text-align: right;
+}
+.left{
+  text-align: left;
+}
+.center{
+  text-align: center;
+}

@@ -1,0 +1,47 @@
+/** giorgia **/
+
+cartella di riferimento: C:\Progetti\CKEditor
+
+Errori
+1) prima di npm run build è necessario lanciare npm install se non ancora fatto, altrimenti l'errore sarà :
+"webpack" non è riconosciuto come comando interno o esterno,
+ un programma eseguibile o un file batch.
+
+/**************** procedura *******/
+
+NB: se si usa il build, nel progetto angular l'unica installazione deve essere:
+npm install --save @ckeditor/ckeditor5-angular
+(e, di conseguenza, sarà in automatico installata anche la sua dipendenza: watchdog)
+se si usa il build, non è necessario installare ckeditor5 nè i suoi plugin a livello di progetto
+
+1) la cosa più semplice è creare il build direttamente usando il costruttore online (online builder):
+
+https://ckeditor.com/ckeditor-5/online-builder/
+
+- per i miei sviluppi sono partita dalla base DecoupledEditor -
+si scelgono tutti i plugin disponibili e di interesse
+
+2) l'operazione precedente permetterà di scaricare una cartella che contiene le directory BUILD e SRC: src è la cartella  che contiene il file ckeditor.js da editare;
+BUILD è la cartella che contiene il file ckeditor.js da caricare nel progetto angular (in assets)
+
+3) qualora si debbano sviluppare dei plugins personalizzati (ad esempio, per aggiungere btn nella toolbar) bisognerà editare il fil ckeditor.js sorgente
+Per editare è necessatio lanciare il comando
+npm install
+(che crearà la cartella node_modules installando tutte le dipendenze)
+e, dopo l'eidting e il salvataggio del file ckeditor.js src, il comando
+npm run build
+(che genererà il nuovo build-ckeditor.js da copiare nella cartella assets del nostro progetto)
+
+Per sviluppare dei plugins seguire la guida:
+https://ckeditor.com/docs/ckeditor5/latest/framework/guides/creating-simple-plugin.html
+ricordando di inserire, nell'elenco builtinPlugins, la dichiarazione del plugin creato
+
+LATO ANGULAR	
+Questa è la guida di riferimento
+https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/frameworks/angular.html
+dopo aver installato il modulo (npm install --save @ckeditor/ckeditor5-angular)
+e averlo dichiarato nel app-module (import { CKEditorModule } from '@ckeditor/ckeditor5-angular')
+basterà, all'interno del componente che utilizza l'editor, richiamare il build di riferimento:
+import * as CustomEditor from '../../../assets/ckeditor.js';
+NESSUN altro import è necessario! è deve essere evitato per evitare errori di duplicazione.
+
