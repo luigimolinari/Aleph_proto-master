@@ -7,7 +7,7 @@ import { NavigationExtras } from '@angular/router';
 import { faNetworkWired, faSortAlphaUp } from '@fortawesome/free-solid-svg-icons';
 import { TreeNode } from 'primeng/api';
 import { MessageService } from 'primeng/api';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-tempi-flusso',
@@ -15,11 +15,14 @@ import { MessageService } from 'primeng/api';
   providers: [MessageService],
   styleUrls: ['./tempi-flusso.component.css', './organigramma.component.scss']
 })
+
+
+
 export class TempiFlussoComponent implements OnInit {
 
-  
+ 
 
-
+  form: FormGroup;
   showModal = false;
 
 
@@ -40,7 +43,15 @@ export class TempiFlussoComponent implements OnInit {
   nodopadre: any;
   selectedChild: any;
   selectedChildId: any;
-  constructor(private http: HttpClient, private apiService: ApiService, private route: ActivatedRoute, private router: Router, private messageService: MessageService) {
+  giorniscelti: any;
+  nodo2scelto: any;
+  mostrapulsante: any;
+  selezionatitutti: any;
+  selezionato: number;
+  menu: any;
+  operatore: any;
+  constructor(private fb: FormBuilder, private http: HttpClient, private apiService: ApiService, private route: ActivatedRoute, private router: Router, private messageService: MessageService) {
+    this.operatore = localStorage.getItem('ID');
 
     this.route.queryParams.subscribe(
       params => {
@@ -60,7 +71,17 @@ export class TempiFlussoComponent implements OnInit {
   }
 
   ngOnInit(){
- 
+    this.form = this.fb.group({
+      id_flusso: ['', Validators.required],
+      id_nodo1: ['', Validators.required],
+      id_nodo2: ['', Validators.required],
+      sliderValue: ['', Validators.required],
+      allarme: ['']
+    });
+
+    this.form.patchValue({
+      id_flusso: this.flusso
+      });
   }
   //valori ed etichetta slider
   formatLabel = (value: number): string => {
@@ -71,11 +92,17 @@ export class TempiFlussoComponent implements OnInit {
     return `${value}`;
   }
   toggleModal(id, nome_nodo, label_nodo){
+    this.menu="no";
+    this.mostrapulsante="no";
+    this.selezionatitutti="si";
     this.showModal = !this.showModal;
     this.identificativo=id;
+    this.form.patchValue({
+      id_nodo1: this.identificativo
+      });
     this.nome_nodo=nome_nodo;
     this.label_nodo=label_nodo;
-    
+    this.resettadati();    
   }
 
 
@@ -138,5 +165,55 @@ export class TempiFlussoComponent implements OnInit {
   back() {
     this.router.navigate(['/flussiview']);
   }
+  verificadati(){
+    this.selezionato=this.selectedChildId;
+    if(this.selezionato>0){
+    this.selezionatitutti="no";
+    }
+    this.menu="si";
+    this.giorniscelti=this.form.get('sliderValue').value;
+    this.form.patchValue({
+      id_nodo2: this.selectedChildId
+      });
+    this.nodo2scelto=this.form.get('id_nodo2').value;
+    if(this.giorniscelti>0 && this.nodo2scelto>0 && this.selectedChildId>0){
+      this.mostrapulsante="si";
+    }else{
+      this.mostrapulsante="no";
+    }
+  }
 
+  resettadati(){
+    this.giorniscelti='';
+    this.nodo2scelto='';
+    this.selectedChildId='';
+    this.form.patchValue({
+      sliderValue: ''
+      });
+  }
+  submit() {
+    console.log(this.form.value);
+   // if (this.form.valid) {
+      this.apiService.AddTempiPratica(this.form.value,this.operatore).subscribe((dati) => {
+        if (dati['esito_codice'] == "1") {
+          if (confirm("Tempi correttamente registrati")) {
+            this.router.navigate(['/flussiview']);
+          }
+        }
+        else {
+          if (dati['esito_codice'] == "2") {
+          alert("Errore, esiste già un tempo assegnato ai due nodi selezionati");
+          } else{
+            alert("Attenzione. Impossibile registrare i tempi")
+          }
+        }
+      });
+  /*  } else {
+      alert("Attenzione. Non tutti i campi obbligatori hanno un valore valido");
+    }*/
+  }
+  riattivanodi(){
+    this.selezionatitutti="si";
+    this.menu="no";
+  }
 }

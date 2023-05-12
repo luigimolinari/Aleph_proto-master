@@ -27,27 +27,36 @@
               
             <div *ngIf="showModal">
                 <div class="modal">
-                  <div class="modal-body">
+                  <div class="modal-body"><span class="check"><mat-icon> format_list_numbered</mat-icon> Primo step: </span>
                     <mat-card *ngIf="showModal" class="card-style">
                       <mat-card-title><img src="assets/img/logo_aleph_very_small.png" alt="logo_aleph" /></mat-card-title>
                       <hr />
                       {{label_nodo}}:{{nome_nodo}}
-                      <mat-slider min="0" max="100000" step="1000" tickInterval="10000" thumbLabel>
-                      </mat-slider>
                     </mat-card>
-                    <div *ngIf="nodopadre?.children">
+                    <div *ngIf="nodopadre?.children"><br /><span class="check"><mat-icon> format_list_numbered_rtl</mat-icon> Scegli secondo step cliccando sul nome:  </span>                
                       <ng-container *ngTemplateOutlet="childrenTemplate; context: { $implicit: nodopadre.children }"></ng-container>
-                      <ng-template #childrenTemplate let-children>
-
-                        <div *ngFor="let child of children" >
-                            <br />
-                            <mat-card class="card-style-child" [ngClass]="{'selected': child === selectedChild}" (click)="selectedChild = child; selectedChildId = child.id">
+                      <ng-template #childrenTemplate let-children>                             
+                        <br />
+                        <div *ngFor="let child of children" >     
+                            <div *ngIf="child.id===selezionato && menu=='si'"  ><mat-icon class="check" matTooltip="Open menu" style="cursor: pointer;" (click)="riattivanodi()">menu</mat-icon></div> 
+                            <mat-card *ngIf="child.id===selezionato || selezionatitutti=='si'" class="card-style-child" [selectedChildId]="selectChildId" [ngClass]="{'selected': child === selectedChild}" (click)="selectedChild = child; selectedChildId = child.id; verificadati()">
                                 {{child.id}}: {{child.title}}
                               </mat-card>
       
                           <ng-container *ngTemplateOutlet="childrenTemplate; context: { $implicit: child.children }"></ng-container>
                         </div>
                       </ng-template>
+                      <form [formGroup]="form"> 
+                        <div style="display: none;"> <mat-form-field> <mat-label>Id Flusso</mat-label> <input matInput formControlName="id_flusso"> </mat-form-field> </div> 
+                        <div style="display: none;"> <mat-form-field> <mat-label>Id Nodo 1</mat-label> <input matInput formControlName="id_nodo1"></mat-form-field> </div> 
+                        <div style="display: none;"> <mat-form-field> <mat-label>Id Nodo 2</mat-label> <input matInput formControlName="id_nodo2"> </mat-form-field> </div> 
+                        <br />
+                        <mat-checkbox formControlName="allarme" class="check"><mat-icon>alarm</mat-icon> Allarme</mat-checkbox>
+                        <br /><span class="check"><mat-icon>calendar_today</mat-icon>Giorni: </span>
+                        <mat-slider min="0" max="365" step="1" tickInterval="1" thumbLabel formControlName="sliderValue" (change)="verificadati()"> </mat-slider>
+                        <button *ngIf="mostrapulsante=='si'" mat-raised-button (click)="submit()">Registra tempi</button>
+                        
+                        </form>
                     </div>
                   </div>
                   <div class="modal-footer">

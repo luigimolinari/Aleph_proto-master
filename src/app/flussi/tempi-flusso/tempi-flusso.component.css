@@ -182,11 +182,15 @@ hr.divLegend{
     }
 
     .selected {
-      background-color: yellow;
+      background-color: #FFA500	;
     }
 
   mat-slider {
     width: 300px;
+  }
+  
+  .check{
+    color:black;
   }
 
 
