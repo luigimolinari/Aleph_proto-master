@@ -3496,4 +3496,13 @@ this.formData.append("localStorage", JSON.stringify(this.readLocalStorage()));
     this.formData.append('operatore', operatore);
     return this.httpClient.post(this.url + 'ADD_tempi_pratica.php', this.formData);
   }
+
+  public GetTempiPratica(id_pratica, operatore) {
+    this.formData = new FormData();
+    this.formData.append("apiKey", this.API_KEY);
+    this.formData.append("localStorage", JSON.stringify(this.readLocalStorage()));
+    this.formData.append('id_pratica', id_pratica);
+    this.formData.append('operatore', operatore);
+    return this.httpClient.post(this.url + 'GET_tempi_pratica.php', this.formData);
+  }
 }

@@ -19,13 +19,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 export class TempiFlussoComponent implements OnInit {
-
- 
-
   form: FormGroup;
   showModal = false;
-
-
   flusso: any;
   nome_flusso: any;
   tipo: any;
@@ -43,6 +38,7 @@ export class TempiFlussoComponent implements OnInit {
   nodopadre: any;
   selectedChild: any;
   selectedChildId: any;
+  selectedChildNome: any;
   giorniscelti: any;
   nodo2scelto: any;
   mostrapulsante: any;
@@ -50,6 +46,7 @@ export class TempiFlussoComponent implements OnInit {
   selezionato: number;
   menu: any;
   operatore: any;
+  tempipratica:any;
   constructor(private fb: FormBuilder, private http: HttpClient, private apiService: ApiService, private route: ActivatedRoute, private router: Router, private messageService: MessageService) {
     this.operatore = localStorage.getItem('ID');
 
@@ -67,14 +64,32 @@ export class TempiFlussoComponent implements OnInit {
    
       this.apiService.getWorkflowComplex(this.flusso).subscribe((workflow:any) => {
           this.steps=workflow;
+          console.log(this.steps);
     }, error => console.error(error));
+  }
+
+
+  //qui definisco la modale che riporta i tempi già inseriti
+  modaltempiVisible = false;
+
+  openModalTempi() {
+    this.modaltempiVisible = true;
+    this.apiService.GetTempiPratica(this.flusso, this.operatore).subscribe((tempi:any) => {
+      this.tempipratica=tempi;
+}, error => console.error(error));
+  }
+
+  closeModalTempi() {
+    this.modaltempiVisible = false;
   }
 
   ngOnInit(){
     this.form = this.fb.group({
       id_flusso: ['', Validators.required],
       id_nodo1: ['', Validators.required],
+      nome_nodo1: ['', Validators.required],
       id_nodo2: ['', Validators.required],
+      nome_nodo2: ['', Validators.required],
       sliderValue: ['', Validators.required],
       allarme: ['']
     });
@@ -98,7 +113,8 @@ export class TempiFlussoComponent implements OnInit {
     this.showModal = !this.showModal;
     this.identificativo=id;
     this.form.patchValue({
-      id_nodo1: this.identificativo
+      id_nodo1: this.identificativo,
+      nome_nodo1: nome_nodo
       });
     this.nome_nodo=nome_nodo;
     this.label_nodo=label_nodo;
@@ -173,10 +189,11 @@ export class TempiFlussoComponent implements OnInit {
     this.menu="si";
     this.giorniscelti=this.form.get('sliderValue').value;
     this.form.patchValue({
-      id_nodo2: this.selectedChildId
+      id_nodo2: this.selectedChildId,
+      nome_nodo2: this.selectedChildNome
       });
     this.nodo2scelto=this.form.get('id_nodo2').value;
-    if(this.giorniscelti>0 && this.nodo2scelto>0 && this.selectedChildId>0){
+    if(this.giorniscelti>0 && this.nodo2scelto>0 && this.selectedChildId>0 && this.selectedChildNome!=''){
       this.mostrapulsante="si";
     }else{
       this.mostrapulsante="no";
@@ -187,8 +204,10 @@ export class TempiFlussoComponent implements OnInit {
     this.giorniscelti='';
     this.nodo2scelto='';
     this.selectedChildId='';
+    this.selectedChildNome='';
     this.form.patchValue({
-      sliderValue: ''
+      sliderValue: '',
+      nome_nodo2: ''
       });
   }
   submit() {

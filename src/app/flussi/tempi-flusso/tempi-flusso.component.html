@@ -23,8 +23,10 @@
                     arrow_back
                 </span>
             </button>
+            <button (click)="openModalTempi()">Apri la modale</button>
             <br><br>
               
+            <!-- qui la modale per l'inserimento di nuovi tempi -->
             <div *ngIf="showModal">
                 <div class="modal">
                   <div class="modal-body"><span class="check"><mat-icon> format_list_numbered</mat-icon> Primo step: </span>
@@ -39,7 +41,7 @@
                         <br />
                         <div *ngFor="let child of children" >     
                             <div *ngIf="child.id===selezionato && menu=='si'"  ><mat-icon class="check" matTooltip="Open menu" style="cursor: pointer;" (click)="riattivanodi()">menu</mat-icon></div> 
-                            <mat-card *ngIf="child.id===selezionato || selezionatitutti=='si'" class="card-style-child" [selectedChildId]="selectChildId" [ngClass]="{'selected': child === selectedChild}" (click)="selectedChild = child; selectedChildId = child.id; verificadati()">
+                            <mat-card *ngIf="child.id===selezionato || selezionatitutti=='si'" class="card-style-child" [selectedChildId]="selectChildId" [ngClass]="{'selected': child === selectedChild}" (click)="selectedChild = child; selectedChildId = child.id; selectedChildNome = child.title; verificadati()">
                                 {{child.id}}: {{child.title}}
                               </mat-card>
       
@@ -49,7 +51,9 @@
                       <form [formGroup]="form"> 
                         <div style="display: none;"> <mat-form-field> <mat-label>Id Flusso</mat-label> <input matInput formControlName="id_flusso"> </mat-form-field> </div> 
                         <div style="display: none;"> <mat-form-field> <mat-label>Id Nodo 1</mat-label> <input matInput formControlName="id_nodo1"></mat-form-field> </div> 
+                        <div style="display: none;"> <mat-form-field> <mat-label>Nome Nodo 1</mat-label> <input matInput formControlName="nome_nodo1"></mat-form-field> </div> 
                         <div style="display: none;"> <mat-form-field> <mat-label>Id Nodo 2</mat-label> <input matInput formControlName="id_nodo2"> </mat-form-field> </div> 
+                        <div style="display: none;"> <mat-form-field> <mat-label>Nome Nodo 2</mat-label> <input matInput formControlName="nome_nodo2"></mat-form-field> </div> 
                         <br />
                         <mat-checkbox formControlName="allarme" class="check"><mat-icon>alarm</mat-icon> Allarme</mat-checkbox>
                         <br /><span class="check"><mat-icon>calendar_today</mat-icon>Giorni: </span>
@@ -64,7 +68,23 @@
                   </div>
                 </div>
               </div>
-        
+              <br /><br />
+
+              <!-- qui la modale per la visualizzazione dei tempi inseriti -->
+              <div *ngIf="modaltempiVisible" class="modal"> 
+                <div class="modal"> 
+                    <div class="modal-body">
+                        <span class="check"><mat-icon> format_list_numbered</mat-icon> 
+                            Tempi registrati: </span> 
+                <div *ngFor="let tempo of tempipratica"> 
+            <mat-card class="card-style"> 
+            <mat-card-title><img src="assets/img/logo_aleph_very_small.png" alt="logo_aleph" /></mat-card-title> 
+        <hr /> {{tempo.nome_step1}} -> {{tempo.nome_step2}} = {{tempo.massimo}} </mat-card> 
+    </div> 
+</div> 
+<div class="modal-footer">
+<button mat-button class="btn btn-close" (click)="closeModalTempi()">Chiudi</button> </div> </div>
+</div>
             <br /><br />
         
 
