@@ -23,7 +23,7 @@
                     arrow_back
                 </span>
             </button>
-            <button (click)="openModalTempi()">Apri la modale</button>
+            <mat-icon matTooltip="Open menu" style="cursor: pointer;" (click)="openModalTempi()">alarm</mat-icon> Guarda tempi assegnati
             <br><br>
               
             <!-- qui la modale per l'inserimento di nuovi tempi -->
@@ -79,7 +79,9 @@
                 <div *ngFor="let tempo of tempipratica"> 
             <mat-card class="card-style"> 
             <mat-card-title><img src="assets/img/logo_aleph_very_small.png" alt="logo_aleph" /></mat-card-title> 
-        <hr /> {{tempo.nome_step1}} -> {{tempo.nome_step2}} = {{tempo.massimo}} </mat-card> 
+        <hr /> {{tempo.nome_step1}} -> {{tempo.nome_step2}} = {{tempo.massimo}} 
+        <div><br /><button class="btn btn-danger" (click)="eliminatempo(tempo.id)"><mat-icon>delete_forever</mat-icon></button></div>
+    </mat-card> 
     </div> 
 </div> 
 <div class="modal-footer">

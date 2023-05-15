@@ -47,8 +47,10 @@ export class TempiFlussoComponent implements OnInit {
   menu: any;
   operatore: any;
   tempipratica:any;
+  privilegio: any;
   constructor(private fb: FormBuilder, private http: HttpClient, private apiService: ApiService, private route: ActivatedRoute, private router: Router, private messageService: MessageService) {
     this.operatore = localStorage.getItem('ID');
+    this.privilegio = localStorage.getItem('tipo_op');
 
     this.route.queryParams.subscribe(
       params => {
@@ -239,4 +241,19 @@ export class TempiFlussoComponent implements OnInit {
     this.selezionatitutti="si";
     this.menu="no";
   }
+
+  eliminatempo(id){
+    if (confirm("Stai per eliminare i tempi dei nodi selezionati")) {
+      this.apiService.DeleteTempiPratica(id).subscribe((dati) => {
+        if (dati['Esito'] === 'si') {
+             alert('Operazione eseguita con successo');
+              this.router.navigate(['/flussiview']);
+        } else {
+          alert('Qualcosa è andato storto, operazione annullata');
+        }
+
+
+      });
+    }
+}
 }
