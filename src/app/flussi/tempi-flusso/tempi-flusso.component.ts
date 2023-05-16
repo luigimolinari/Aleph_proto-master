@@ -241,8 +241,6 @@ export class TempiFlussoComponent implements OnInit {
     this.selezionatitutti="si";
     this.menu="no";
   }
-  
-
   eliminatempo(id){
     if (confirm("Stai per eliminare i tempi dei nodi selezionati")) {
       this.apiService.DeleteTempiPratica(id).subscribe((dati) => {
@@ -252,8 +250,6 @@ export class TempiFlussoComponent implements OnInit {
         } else {
           alert('Qualcosa è andato storto, operazione annullata');
         }
-
-
       });
     }
 }
