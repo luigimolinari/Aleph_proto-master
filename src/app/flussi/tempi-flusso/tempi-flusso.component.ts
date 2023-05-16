@@ -225,7 +225,7 @@ export class TempiFlussoComponent implements OnInit {
           alert("Errore, esiste già un tempo assegnato ai due nodi selezionati");
           }
           else if (dati['esito_codice'] == "3"){
-            alert("Errore, il tempo massimo per i nodi selezionati è incoerente con il tempo massimo scelto per altri nodi");
+            alert("Errore, il tempo massimo indicato per i nodi selezionati è incoerente con il tempo massimo scelto per altri nodi");
           }
           else{
             alert("Attenzione. Impossibile registrare i tempi")
