@@ -201,7 +201,6 @@ export class TempiFlussoComponent implements OnInit {
       this.mostrapulsante="no";
     }
   }
-
   resettadati(){
     this.giorniscelti='';
     this.nodo2scelto='';
