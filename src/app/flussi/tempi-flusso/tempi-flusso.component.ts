@@ -241,6 +241,7 @@ export class TempiFlussoComponent implements OnInit {
     this.selezionatitutti="si";
     this.menu="no";
   }
+  
 
   eliminatempo(id){
     if (confirm("Stai per eliminare i tempi dei nodi selezionati")) {
